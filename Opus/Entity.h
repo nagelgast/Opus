@@ -8,7 +8,7 @@
 #include <typeindex>
 #include <vector>
 
-#include "../Opus/Opus.h"
+#include "Opus.h"
 
 namespace sf
 {

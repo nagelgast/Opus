@@ -6,7 +6,7 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <initializer_list>
 
-#include "../Opus/SFMLWindow.h"
+#include "SFMLWindow.h"
 
 struct Key;
 

@@ -3,8 +3,8 @@
 #include "FireballSkill.h"
 #include "PlayerController.h"
 #include "PlayerSkillHandler.h"
-#include "Shape.h"
-#include "SpriteRenderer.h"
+#include "../Opus/Shape.h"
+#include "../Opus/SpriteRenderer.h"
 
 Player::Player() : Entity()
 {

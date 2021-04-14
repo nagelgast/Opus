@@ -3,7 +3,7 @@
 #include <memory>
 #include <vector>
 
-#include "../Opus/Opus.h"
+#include "Opus.h"
 
 class BaseTime;
 class BaseRenderer;

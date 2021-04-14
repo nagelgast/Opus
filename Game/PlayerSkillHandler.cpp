@@ -1,8 +1,8 @@
 #include "PlayerSkillHandler.h"
 
-#include "Entity.h"
+#include "../Opus/Entity.h"
 #include "FireballSkill.h"
-#include "Input.h"
+#include "../Opus/Input.h"
 
 PlayerSkillHandler::PlayerSkillHandler(FireballSkill& active_skill) : active_skill_(active_skill)
 {

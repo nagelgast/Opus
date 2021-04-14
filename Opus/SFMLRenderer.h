@@ -3,7 +3,7 @@
 #include "BaseRenderer.h"
 #include <SFML/Graphics.hpp>
 
-#include "../Opus/SFMLWindow.h"
+#include "SFMLWindow.h"
 
 class Camera;
 class Entity;

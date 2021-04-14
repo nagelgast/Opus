@@ -179,10 +179,6 @@
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="Game.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="bitmap1.bmp" />
     <Image Include="Sprites\chars\gabe\gabe-idle-run.png" />
     <Image Include="Sprites\frames\knight_f_idle_anim_f0.png" />
   </ItemGroup>

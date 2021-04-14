@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Entity.h"
+#include "../Opus/Entity.h"
 
 class Player final :
     public Entity

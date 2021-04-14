@@ -36,78 +36,6 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Game\Camera.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\RenderType.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\ShapeRenderer.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\SpriteRenderer.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\ColliderComponent.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Collision.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Color.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Game.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Key.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Physics.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Shape.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Component.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Entity.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\EntityController.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Input.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\Vector2.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\BaseEntityRenderer.h">
-      <Filter>Header Files\Core\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\BaseInputHandler.h">
-      <Filter>Header Files\Core\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\BaseRenderer.h">
-      <Filter>Header Files\Core\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\BaseTime.h">
-      <Filter>Header Files\Core\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\SFMLEntityRenderer.h">
-      <Filter>Header Files\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\SFMLRenderer.h">
-      <Filter>Header Files\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\SFMLInputHandler.h">
-      <Filter>Header Files\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Game\SFMLTime.h">
-      <Filter>Header Files\Core\Platform</Filter>
-    </ClInclude>
     <ClInclude Include="BaseWindow.h">
       <Filter>Header Files\Core\Abstract</Filter>
     </ClInclude>
@@ -117,58 +45,130 @@
     <ClInclude Include="Opus.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="SFMLEntityRenderer.h">
+      <Filter>Header Files\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLInputHandler.h">
+      <Filter>Header Files\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLRenderer.h">
+      <Filter>Header Files\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="SFMLTime.h">
+      <Filter>Header Files\Core\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEntityRenderer.h">
+      <Filter>Header Files\Core\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseInputHandler.h">
+      <Filter>Header Files\Core\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseRenderer.h">
+      <Filter>Header Files\Core\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTime.h">
+      <Filter>Header Files\Core\Abstract</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityController.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Physics.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderType.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeRenderer.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="dllmain.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SFMLWindow.cpp">
+      <Filter>Source Files\Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLEntityRenderer.cpp">
+      <Filter>Source Files\Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLInputHandler.cpp">
+      <Filter>Source Files\Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLRenderer.cpp">
+      <Filter>Source Files\Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="SFMLTime.cpp">
+      <Filter>Source Files\Core\Platform</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityController.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Physics.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeRenderer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2.cpp">
+      <Filter>Source Files\Core</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Game\Camera.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\ColliderComponent.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\Collision.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\Entity.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\EntityController.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\Game.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\Physics.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\ShapeRenderer.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\SpriteRenderer.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\Vector2.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\SFMLEntityRenderer.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\SFMLInputHandler.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\SFMLRenderer.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Game\SFMLTime.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
-    </ClCompile>
-    <ClCompile Include="SFMLWindow.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
+    <ClCompile Include="dllmain.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

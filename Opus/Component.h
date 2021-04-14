@@ -2,7 +2,7 @@
 
 #include "Entity.h"
 
-class __declspec(dllexport) Component
+class OPUS_API Component
 {
 public:
 	virtual void Start() {}

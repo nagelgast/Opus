@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Component.h"
+#include "../Opus/Component.h"
 
 class FireballSkill;
 

@@ -1,9 +1,9 @@
 #include "FireballSkill.h"
 
-#include "ColliderComponent.h"
-#include "Entity.h"
+#include "../Opus/ColliderComponent.h"
+#include "../Opus/Entity.h"
 #include "Fireball.h"
-#include "Input.h"
+#include "../Opus/Input.h"
 
 void FireballSkill::Trigger(const PlayerSkillHandler& psh)
 {

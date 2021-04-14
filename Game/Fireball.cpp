@@ -1,10 +1,10 @@
 #include "Fireball.h"
 
-#include "ColliderComponent.h"
-#include "Input.h"
+#include "../Opus/ColliderComponent.h"
+#include "../Opus/Input.h"
 #include "Projectile.h"
-#include "ShapeRenderer.h"
-#include "Shape.h"
+#include "../Opus/ShapeRenderer.h"
+#include "../Opus/Shape.h"
 
 Fireball::Fireball(const Vector2& start_pos, const Vector2& target_pos) : Entity()
 {

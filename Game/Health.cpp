@@ -1,9 +1,9 @@
 #include "Health.h"
 
-#include "Entity.h"
+#include "../Opus/Entity.h"
 #include "HealthBar.h"
-#include "ShapeRenderer.h"
-#include "Shape.h"
+#include "../Opus/ShapeRenderer.h"
+#include "../Opus/Shape.h"
 
 Health::Health(int max_health) : current_health_(max_health), max_health_(max_health)
 {

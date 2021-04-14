@@ -5,7 +5,7 @@
 #include "SFMLInputHandler.h"
 #include "SFMLRenderer.h"
 #include "SFMLTime.h"
-#include "../Opus/SFMLWindow.h"
+#include "SFMLWindow.h"
 
 Game::Game(const int width, const int height, const int fps_limit, const int fixed_update_ms, const std::string title) :
 	window_(std::make_shared<SFMLWindow>(width, height, fps_limit, title)),

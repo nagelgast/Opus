@@ -8,9 +8,8 @@
 #include "BaseTime.h"
 #include "EntityController.h"
 
-//#include "BaseWindow.h"
-#include "../Opus/BaseWindow.h"
-#include "../Opus/Opus.h"
+#include "BaseWindow.h"
+#include "Opus.h"
 
 class Game
 {

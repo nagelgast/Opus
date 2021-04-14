@@ -1,6 +1,6 @@
-#include "Camera.h"
+#include "../Opus/Camera.h"
 #include "Enemy.h"
-#include "Game.h"
+#include "../Opus/Game.h"
 #include "Player.h"
 #include "Wall.h"
 

@@ -1,8 +1,8 @@
 #include "Wall.h"
 
-#include "ColliderComponent.h"
-#include "Shape.h"
-#include "ShapeRenderer.h"
+#include "../Opus/ColliderComponent.h"
+#include "../Opus/Shape.h"
+#include "../Opus/ShapeRenderer.h"
 
 Wall::Wall() : Entity()
 {

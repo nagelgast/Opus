@@ -2,10 +2,10 @@
 
 #include <cmath>
 
-#include "Collision.h"
-#include "Entity.h"
-#include "Input.h"
-#include "Physics.h"
+#include "../Opus/Collision.h"
+#include "../Opus/Entity.h"
+#include "../Opus/Input.h"
+#include "../Opus/Physics.h"
 
 PlayerController::PlayerController(const float walk_speed, const float run_speed) :
 	walk_speed_(walk_speed), run_speed_(run_speed)

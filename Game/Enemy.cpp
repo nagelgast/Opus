@@ -1,8 +1,8 @@
 #include "Enemy.h"
 
-#include "Shape.h"
+#include "../Opus/Shape.h"
 #include "Health.h"
-#include "SpriteRenderer.h"
+#include "../Opus/SpriteRenderer.h"
 
 Enemy::Enemy()
 {

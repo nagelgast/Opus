@@ -2,7 +2,7 @@
 
 #include "Component.h"
 #include "Vector2.h"
-#include "../Opus/Opus.h"
+#include "Opus.h"
 
 class Camera : public Component
 {
