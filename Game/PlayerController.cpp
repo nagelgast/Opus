@@ -25,7 +25,7 @@ void PlayerController::Update()
 
 	if(input.move.held)
 	{
-		target_pos_ = input.mouse_pos;
+		target_pos_ = input.mouse_world_pos;
 		direct_control_ = false;
 	}
 

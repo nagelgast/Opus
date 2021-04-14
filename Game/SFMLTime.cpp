@@ -1,6 +1,6 @@
 #include "SFMLTime.h"
 
-SFMLTime::SFMLTime(int fixed_time_step) :
+SFMLTime::SFMLTime(const int fixed_time_step) :
 fixed_time_step_(sf::milliseconds(fixed_time_step)), clock_(), elapsed_time_(), delta_time_(), update_delay_(), fixed_time_step_ticks_()
 {
 }

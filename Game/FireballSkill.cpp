@@ -8,5 +8,5 @@
 void FireballSkill::Trigger(const PlayerSkillHandler& psh)
 {
 	const auto player_pos = psh.entity_->GetPosition();
-	psh.entity_->AddEntity(Fireball(player_pos, psh.entity_->GetInput().mouse_pos));
+	psh.entity_->AddEntity(Fireball(player_pos, psh.entity_->GetInput().mouse_world_pos));
 }

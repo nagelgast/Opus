@@ -7,7 +7,7 @@ class SFMLTime final:
     public BaseTime
 {
 public:
-    SFMLTime(int fixed_time_step);
+	explicit SFMLTime(int fixed_time_step);
 
     float GetDeltaTime() const override;
     float GetTimeSinceStartup() const override;

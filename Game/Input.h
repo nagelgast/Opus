@@ -14,6 +14,7 @@ struct Input
 	Key move;
 	Key run;
 
-	Vector2 mouse_pos;
+	Vector2 mouse_screen_pos;
+	Vector2 mouse_world_pos;
 };
 

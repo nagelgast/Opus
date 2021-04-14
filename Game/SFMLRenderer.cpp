@@ -1,40 +1,44 @@
 #include "SFMLRenderer.h"
 
+
+#include "Camera.h"
 #include "Entity.h"
 #include "SFMLEntityRenderer.h"
-#include "BaseCamera.h"
-#include "SFMLCamera.h"
-
 
 SFMLRenderer::SFMLRenderer(sf::RenderWindow& window) : window_(window)
 {
-	view_ = window.getDefaultView();
 }
 
 void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) const
 {
 	window_.clear();
-	window_.setView(view_);
+	if(camera_.expired())
+	{
+		window_.setView(window_.getDefaultView());
+	}
+	else
+	{
+		const auto camera = camera_.lock();
+		window_.setView(sf::View(camera->entity_->GetPosition(), static_cast<sf::Vector2f>(window_.getSize())));
+	}
+	
 	for (const auto& entity : entities)
 	{
 		if (entity->HasRenderer())
 		{
-			auto entity_renderer = static_cast<SFMLEntityRenderer*>(entity->GetRenderer());
+			// Static cast is used for performance. If the engine was initialized correctly the cast is guaranteed to succeed.
+			const auto* entity_renderer = static_cast<SFMLEntityRenderer*>(entity->GetRenderer());  // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
 			window_.draw(*entity_renderer);
 		}
 	}
 	window_.display();
 }
 
-void SFMLRenderer::SetCamera(BaseCamera& camera)
+void SFMLRenderer::SetCamera(const std::shared_ptr<Camera>& camera)
 {
-	view_ = sf::View(camera.GetPosition(), {1024,768});
+	camera_ = camera;
 }
 
-std::unique_ptr<BaseCamera> SFMLRenderer::CreateCamera() const
-{
-	return std::make_unique<SFMLCamera>();
-}
 
 std::unique_ptr<BaseEntityRenderer> SFMLRenderer::CreateEntityRendererInstance() const
 {

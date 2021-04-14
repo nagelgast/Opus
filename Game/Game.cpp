@@ -1,5 +1,6 @@
 #include "Game.h"
 
+#include "Camera.h"
 #include "Enemy.h"
 #include "Player.h"
 #include "Wall.h"
@@ -11,7 +12,13 @@ Game::Game(BaseRenderer& renderer, BaseInputHandler& input_handler, BaseTime& ti
 
 void Game::Initialize()
 {
-	auto player = entity_controller_.AddEntity(Player());
+	const auto player = entity_controller_.AddEntity(Player());
+
+	auto main_camera = entity_controller_.AddEntity(Entity());
+	auto camera = main_camera->AddComponent(Camera());
+	camera->SetTarget(player);
+	renderer_.SetCamera(camera);
+	
 	entity_controller_.AddEntity(Wall());
 	auto wall = entity_controller_.AddEntity(Wall());
 	wall->SetPosition(300, 500);

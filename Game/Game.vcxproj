@@ -159,7 +159,6 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthBar.cpp" />
-    <ClCompile Include="SFMLCamera.cpp" />
     <ClCompile Include="SFMLEntityRenderer.cpp" />
     <ClCompile Include="SFMLInputHandler.cpp" />
     <ClCompile Include="main.cpp" />
@@ -176,7 +175,6 @@
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BaseCamera.h" />
     <ClInclude Include="BaseEntityRenderer.h" />
     <ClInclude Include="BaseInputHandler.h" />
     <ClInclude Include="BaseTime.h" />
@@ -184,7 +182,6 @@
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="RenderType.h" />
-    <ClInclude Include="SFMLCamera.h" />
     <ClInclude Include="SFMLEntityRenderer.h" />
     <ClInclude Include="SFMLTime.h" />
     <ClInclude Include="ShapeRenderer.h" />

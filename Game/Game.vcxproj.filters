@@ -117,9 +117,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SFMLCamera.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -222,12 +219,6 @@
       <Filter>Header Files\Core\Platform</Filter>
     </ClInclude>
     <ClInclude Include="SFMLRenderer.h">
-      <Filter>Header Files\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseCamera.h">
-      <Filter>Header Files\Core\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="SFMLCamera.h">
       <Filter>Header Files\Core\Platform</Filter>
     </ClInclude>
     <ClInclude Include="RenderType.h">
