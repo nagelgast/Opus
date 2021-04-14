@@ -4,11 +4,11 @@
 
 enum class Shape;
 
-class __declspec(dllexport) ShapeRenderer :
+class OPUS_API ShapeRenderer :
     public Component
 {
 public:
-    ShapeRenderer(const Shape shape, float r, float g, float b, float a);
+    ShapeRenderer(const Shape shape, float r, float g, float b, float a, bool in_world_space = true);
     void Start() override;
 private:
     Shape shape_;
@@ -16,5 +16,6 @@ private:
     float g_;
     float b_;
     float a_;
+	bool in_world_space_;
 };
 

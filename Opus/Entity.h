@@ -28,10 +28,15 @@ public:
 	OPUS_API ~Entity();
 
 	OPUS_API void Start(EntityController* ec);
-
+	
 	OPUS_API void Update();
 	OPUS_API void Destroy();
 
+	template <typename T> std::shared_ptr<T> AddComponent()
+	{
+		return AddComponent(T());
+	}
+	
 	template <typename T> std::shared_ptr<T> AddComponent(T c)
 	{
 		auto c_ptr = std::make_shared<T>(c);
