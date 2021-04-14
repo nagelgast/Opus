@@ -3,7 +3,7 @@
 #include "Component.h"
 #include "Vector2.h"
 
-class Camera : public Component
+class __declspec(dllexport) Camera : public Component
 {
 public:
 	void Update() override;

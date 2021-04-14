@@ -2,7 +2,7 @@
 
 #include "Entity.h"
 
-class Component
+class __declspec(dllexport) Component
 {
 public:
 	virtual void Start() {}

@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "SFMLEntityRenderer.h"
 
 #include "Entity.h"
@@ -53,7 +54,8 @@ void SFMLEntityRenderer::SetShape(const Shape shape, float r, float g, float b, 
 
 void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	const auto& draw_pos = entity_->GetPosition() - entity_->GetOrigin();
+	const auto& corner = entity_->GetPosition() - entity_->GetOrigin();
+	const sf::Vector2f draw_pos = {corner.x, corner.y};
 	//DrawBox(target, states, draw_pos, scale_, sf::Color::Magenta);
 
 	if (drawable_shape_)

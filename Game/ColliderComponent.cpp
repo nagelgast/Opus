@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "ColliderComponent.h"
 
 #include "Physics.h"

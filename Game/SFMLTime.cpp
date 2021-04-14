@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "SFMLTime.h"
 
 SFMLTime::SFMLTime(const int fixed_time_step) :

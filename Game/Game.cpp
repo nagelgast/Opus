@@ -1,45 +1,39 @@
+#include "pch.h"
 #include "Game.h"
 
-#include "Camera.h"
-#include "Enemy.h"
-#include "Player.h"
-#include "Wall.h"
+#include "Entity.h"
+#include "SFMLInputHandler.h"
+#include "SFMLRenderer.h"
+#include "SFMLTime.h"
+#include "../Opus/SFMLWindow.h"
 
-
-Game::Game(BaseRenderer& renderer, BaseInputHandler& input_handler, BaseTime& time) : renderer_(renderer), input_handler_(input_handler), time_(time), entity_controller_(renderer, time, input_handler_.GetInput())
+Game::Game(const int width, const int height, const int fps_limit, const int fixed_update_ms, const std::string title) :
+	window_(std::make_shared<SFMLWindow>(width, height, fps_limit, title)),
+	renderer_(std::make_unique<SFMLRenderer>(window_)),
+	input_handler_(std::make_unique<SFMLInputHandler>(window_)),
+	time_(std::make_unique<SFMLTime>(fixed_update_ms)),
+	entity_controller_(*renderer_, *time_, input_handler_->GetInput())
 {
 }
 
-void Game::Initialize()
+void Game::Run()
 {
-	const auto player = entity_controller_.AddEntity(Player());
-
-	auto main_camera = entity_controller_.AddEntity(Entity());
-	auto camera = main_camera->AddComponent(Camera());
-	camera->SetTarget(player);
-	renderer_.SetCamera(camera);
-	
-	entity_controller_.AddEntity(Wall());
-	auto wall = entity_controller_.AddEntity(Wall());
-	wall->SetPosition(300, 500);
-
-	auto enemy = entity_controller_.AddEntity(Enemy());
-	enemy->SetPosition(500, 100);
-}
-
-void Game::Tick()
-{
-	HandleInput();
-
-	time_.Tick();
-
-	for (auto i = 0; i < time_.GetFixedTimeStepTicks(); i++)
+	while (window_->IsOpen())
 	{
-		FixedUpdate();
-	}
+		window_->HandleEvents();
 
-	UpdateEntities();
-	HandleOutput();
+		HandleInput();
+
+		time_->Tick();
+
+		for (auto i = 0; i < time_->GetFixedTimeStepTicks(); i++)
+		{
+			FixedUpdate();
+		}
+
+		Update();
+		HandleOutput();
+	}
 }
 
 void Game::Exit()
@@ -49,7 +43,7 @@ void Game::Exit()
 
 void Game::HandleInput() const
 {
-	input_handler_.UpdateInput();
+	input_handler_->UpdateInput();
 }
 
 void Game::FixedUpdate()
@@ -57,7 +51,7 @@ void Game::FixedUpdate()
 	// Nothing implemented to use this yet
 }
 
-void Game::UpdateEntities()
+void Game::Update()
 {
 	auto entities = entity_controller_.GetEntities();
 	for (const auto& entity : entities)
@@ -68,5 +62,5 @@ void Game::UpdateEntities()
 
 void Game::HandleOutput()
 {
-	renderer_.Render(entity_controller_.GetEntities());
+	renderer_->Render(entity_controller_.GetEntities());
 }

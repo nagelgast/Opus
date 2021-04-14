@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "ShapeRenderer.h"
 
 #include "BaseEntityRenderer.h"

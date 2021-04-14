@@ -8,7 +8,7 @@ class BaseRenderer;
 class Entity;
 struct Input;
 
-class EntityController
+class __declspec(dllexport) EntityController
 {
 public:
 	explicit EntityController(const BaseRenderer& renderer, const BaseTime& time, const Input& input);

@@ -1,4 +1,7 @@
+#include "pch.h"
 #include "Entity.h"
+
+#include <SFML/Graphics/Transformable.hpp>
 
 #include "BaseRenderer.h"
 #include "BaseEntityRenderer.h"
@@ -9,8 +12,14 @@
 
 #include "BaseTime.h"
 
-Entity::Entity(Entity& e) : Transformable(e), layer_(e.layer_), shape_(e.shape_), ec_(e.ec_), components_(e.components_)
+Entity::Entity()
 {
+	transformable_ = new sf::Transformable();
+}
+
+Entity::Entity(Entity& e) : layer_(e.layer_), shape_(e.shape_), ec_(e.ec_), components_(e.components_)
+{
+	transformable_ = new sf::Transformable();
 	for (const auto& component : components_)
 	{
 		component.second->entity_ = this;
@@ -19,6 +28,7 @@ Entity::Entity(Entity& e) : Transformable(e), layer_(e.layer_), shape_(e.shape_)
 
 Entity::~Entity()
 {
+	delete transformable_;
 	components_.clear();
 }
 
@@ -32,7 +42,7 @@ void Entity::Start(EntityController* ec)
 
 	if (renderer_)
 	{
-		auto scale = getScale();
+		auto scale = transformable_->getScale();
 		renderer_->SetSize(scale.x, scale.y);
 	}
 }
@@ -72,8 +82,8 @@ const Input& Entity::GetInput() const
 
 void Entity::SetSize(float width, float height)
 {
-	setScale(width, height);
-	setOrigin(width / 2.f, height / 2.f);
+	transformable_->setScale(width, height);
+	transformable_->setOrigin(width / 2.f, height / 2.f);
 
 	if (renderer_)
 	{
@@ -88,17 +98,18 @@ void Entity::SetShape(Shape shape)
 
 Vector2 Entity::GetPosition() const
 {
-	return getPosition();
+	const auto position = transformable_->getPosition();
+	return {position.x, position.y};
 }
 
 void Entity::SetPosition(float x, float y)
 {
-	setPosition(x, y);
+	transformable_->setPosition(x, y);
 }
 
 void Entity::SetPosition(Vector2 position)
 {
-	setPosition(position.x, position.y);
+	transformable_->setPosition(position.x, position.y);
 }
 
 BaseEntityRenderer* Entity::CreateRenderer()
@@ -108,19 +119,20 @@ BaseEntityRenderer* Entity::CreateRenderer()
 	return renderer_.get();
 }
 
-bool Entity::HasRenderer()
+bool Entity::HasRenderer() const
 {
 	return renderer_ != nullptr;
 }
 
-void Entity::Move(Vector2 offset)
+void Entity::Move(const Vector2 offset) const
 {
-	move(offset.x, offset.y);
+	transformable_->move(offset.x, offset.y);
 }
 
 Vector2 Entity::GetOrigin() const
 {
-	return getOrigin();
+	const auto origin = transformable_->getOrigin();
+	return {origin.x, origin.y};
 }
 
 BaseEntityRenderer* Entity::GetRenderer() const
@@ -130,5 +142,6 @@ BaseEntityRenderer* Entity::GetRenderer() const
 
 Vector2 Entity::GetScale() const
 {
-	return getScale();
+	const auto scale = transformable_->getScale();
+	return {scale.x, scale.y};
 }

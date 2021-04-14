@@ -3,7 +3,7 @@
 #include "Component.h"
 #include <string>
 
-class SpriteRenderer : public Component
+class __declspec(dllexport) SpriteRenderer : public Component
 {
 public:
 	SpriteRenderer(std::string path, int left, int top, int width, int height);

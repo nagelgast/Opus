@@ -1,9 +1,8 @@
-#include <SFML/Graphics.hpp>
-
+#include "Camera.h"
+#include "Enemy.h"
 #include "Game.h"
-#include "SFMLRenderer.h"
-#include "SFMLInputHandler.h"
-#include "SFMLTime.h"
+#include "Player.h"
+#include "Wall.h"
 
 const int kScreenWidth = 1024;
 const int kScreenHeight = 768;
@@ -12,31 +11,28 @@ const int kFixedTimeStepMs = 2;
 
 int main()
 {
-	auto* window = new sf::RenderWindow(sf::VideoMode(kScreenWidth, kScreenHeight), "Game");
-	window->setFramerateLimit(kFpsLimit);
+	auto* game = new Game(kScreenWidth, kScreenHeight, kFpsLimit, kFixedTimeStepMs, "Game");
 
-	auto* renderer = new SFMLRenderer(*window);
-	auto* input_handler = new SFMLInputHandler(*window);
-	auto* time = new SFMLTime(kFixedTimeStepMs);
-
-	auto* game = new Game(*renderer, *input_handler, *time);
-	game->Initialize();
-
-	while (window->isOpen())
+	// Load in starting entities
 	{
-		sf::Event event{};
-		while (window->pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-			{
-				window->close();
-			}
-		}
+		const auto player = game->entity_controller_.AddEntity(Player());
 
-		game->Tick();
+		auto main_camera = game->entity_controller_.AddEntity(Entity());
+		auto camera = main_camera->AddComponent(Camera());
+		camera->SetTarget(player);
+		game->renderer_->SetCamera(camera);
+
+		game->entity_controller_.AddEntity(Wall());
+		auto wall = game->entity_controller_.AddEntity(Wall());
+		wall->SetPosition(300, 500);
+
+		auto enemy = game->entity_controller_.AddEntity(Enemy());
+		enemy->SetPosition(500, 100);
 	}
 
-	game->Exit();
+	game->Run();
 
+	game->Exit();
+	
 	return 0;
 }

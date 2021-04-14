@@ -3,14 +3,16 @@
 #include "BaseRenderer.h"
 #include <SFML/Graphics.hpp>
 
+#include "../Opus/SFMLWindow.h"
+
 class Camera;
 class Entity;
 
 class SFMLRenderer final : public BaseRenderer
 {
 public:
-	explicit SFMLRenderer(sf::RenderWindow&);
-	
+	explicit SFMLRenderer(std::shared_ptr<SFMLWindow> window);
+	SFMLRenderer(std::shared_ptr<BaseWindow> window);
 	void Render(const std::vector<std::shared_ptr<Entity>>& entities) const override;
 	void SetCamera(const std::shared_ptr<Camera>& camera) override;
 

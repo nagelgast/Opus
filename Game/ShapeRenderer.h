@@ -4,7 +4,7 @@
 
 enum class Shape;
 
-class ShapeRenderer :
+class __declspec(dllexport) ShapeRenderer :
     public Component
 {
 public:

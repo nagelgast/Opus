@@ -1,6 +1,6 @@
 #pragma once
 
-struct Key
+struct __declspec(dllexport) Key
 {
 	bool pressed = false;
 	bool released = false;

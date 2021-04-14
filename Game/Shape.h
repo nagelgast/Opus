@@ -1,6 +1,6 @@
 #pragma once
 
-enum class Shape
+enum class __declspec(dllexport) Shape
 {
 	kCircle,
 	kSquare,

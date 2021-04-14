@@ -6,7 +6,7 @@ class Vector2;
 class Entity;
 enum class Shape;
 
-class BaseEntityRenderer
+class __declspec(dllexport) BaseEntityRenderer
 {
 public:
 	virtual void SetSize(float width, float height) = 0;

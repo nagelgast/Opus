@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "Physics.h"
 
 #include "Collision.h"
@@ -104,7 +105,7 @@ Collision Physics::HandleCircleSquareCollision(const Entity& circle, Entity& squ
 	const auto closest_y = std::min(square_bottom_right.y, std::max(square_top_left.y, circle_pos.y));
 
 	const Vector2 closest_pos = {closest_x, closest_y};
-
+	
 	const auto ray_to_nearest = (closest_pos - circle_pos);
 	const auto distance = ray_to_nearest.GetLength();
 	if(distance <= circle_radius)

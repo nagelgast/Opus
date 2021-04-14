@@ -8,17 +8,20 @@
 #include <typeindex>
 #include <vector>
 
-#include <SFML/Graphics/Transformable.hpp>
+namespace sf
+{
+	class Transformable;
+}
 
 class Vector2;
 class EntityController;
 class Component;
 struct Input;
 
-class Entity : sf::Transformable
+class __declspec(dllexport) Entity
 {
 public:
-	Entity() = default;
+	Entity();
 	Entity(Entity&);
 	~Entity();
 
@@ -59,7 +62,7 @@ public:
 	Vector2 GetPosition() const;
 	void SetPosition(float x, float y);
 	void SetPosition(Vector2 position);
-	void Move(Vector2 offset);
+	void Move(Vector2 offset) const;
 	Vector2 GetOrigin() const;
 	Vector2 GetScale() const;
 
@@ -70,11 +73,11 @@ public:
 
 	BaseEntityRenderer* CreateRenderer();
 	BaseEntityRenderer* GetRenderer() const;
-	bool HasRenderer();
+	bool HasRenderer() const;
 
 private:
 	EntityController* ec_ = nullptr;
-
-	std::unique_ptr<BaseEntityRenderer> renderer_;
-	std::map<std::type_index, std::shared_ptr<Component>> components_;
+	sf::Transformable* transformable_{};
+	std::unique_ptr<BaseEntityRenderer> renderer_{};
+	std::map<std::type_index, std::shared_ptr<Component>> components_{};
 };

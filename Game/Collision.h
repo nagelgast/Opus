@@ -3,7 +3,7 @@
 class Vector2;
 class Entity;
 
-struct Collision
+struct __declspec(dllexport) Collision
 {
 	Collision() = default;
 	Collision(Entity*, const Vector2*);

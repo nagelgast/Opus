@@ -21,33 +21,32 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{27bf62e2-3325-4b71-9cfc-b04ee8348334}</ProjectGuid>
-    <RootNamespace>Game</RootNamespace>
+    <ProjectGuid>{665cfcac-ca6d-4b9d-9363-dda6f3849396}</ProjectGuid>
+    <RootNamespace>Opus</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>Game</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -87,18 +86,18 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;OPUS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
-      <LanguageStandard>Default</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>D:\SFML-2.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalLibraryDirectories>D:\SFML-2.5.1\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main-d.lib;sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,32 +106,35 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;OPUS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>
-      </AdditionalIncludeDirectories>
-      <LanguageStandard>Default</LanguageStandard>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <AdditionalIncludeDirectories>D:\SFML-2.5.1\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>
-      </AdditionalLibraryDirectories>
-      <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+      <EnableUAC>false</EnableUAC>
+      <AdditionalLibraryDirectories>D:\SFML-2.5.1\lib</AdditionalLibraryDirectories>
+      <AdditionalDependencies>sfml-main.lib;sfml-graphics.lib;sfml-window.lib;sfml-system.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;OPUS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -141,55 +143,72 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;OPUS_EXPORTS;_WINDOWS;_USRDLL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableUAC>false</EnableUAC>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="Fireball.cpp" />
-    <ClCompile Include="FireballSkill.cpp" />
-    <ClCompile Include="Health.cpp" />
-    <ClCompile Include="HealthBar.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerController.cpp" />
-    <ClCompile Include="PlayerSkillHandler.cpp" />
-    <ClCompile Include="Projectile.cpp" />
-    <ClCompile Include="Wall.cpp" />
+    <ClInclude Include="..\Game\BaseEntityRenderer.h" />
+    <ClInclude Include="..\Game\BaseInputHandler.h" />
+    <ClInclude Include="..\Game\BaseRenderer.h" />
+    <ClInclude Include="..\Game\BaseTime.h" />
+    <ClInclude Include="..\Game\Camera.h" />
+    <ClInclude Include="..\Game\ColliderComponent.h" />
+    <ClInclude Include="..\Game\Collision.h" />
+    <ClInclude Include="..\Game\Color.h" />
+    <ClInclude Include="..\Game\Component.h" />
+    <ClInclude Include="..\Game\Entity.h" />
+    <ClInclude Include="..\Game\EntityController.h" />
+    <ClInclude Include="..\Game\Game.h" />
+    <ClInclude Include="..\Game\Input.h" />
+    <ClInclude Include="..\Game\Key.h" />
+    <ClInclude Include="..\Game\Physics.h" />
+    <ClInclude Include="..\Game\RenderType.h" />
+    <ClInclude Include="..\Game\SFMLEntityRenderer.h" />
+    <ClInclude Include="..\Game\SFMLInputHandler.h" />
+    <ClInclude Include="..\Game\SFMLRenderer.h" />
+    <ClInclude Include="..\Game\SFMLTime.h" />
+    <ClInclude Include="..\Game\Shape.h" />
+    <ClInclude Include="..\Game\ShapeRenderer.h" />
+    <ClInclude Include="..\Game\SpriteRenderer.h" />
+    <ClInclude Include="..\Game\Vector2.h" />
+    <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="framework.h" />
+    <ClInclude Include="pch.h" />
+    <ClInclude Include="SFMLWindow.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Health.h" />
-    <ClInclude Include="HealthBar.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="Fireball.h" />
-    <ClInclude Include="FireballSkill.h" />
-    <ClInclude Include="resource.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerSkillHandler.h" />
-    <ClInclude Include="Projectile.h" />
-    <ClInclude Include="Skill.h" />
-    <ClInclude Include="PlayerController.h" />
-    <ClInclude Include="Wall.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Game.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="bitmap1.bmp" />
-    <Image Include="Sprites\chars\gabe\gabe-idle-run.png" />
-    <Image Include="Sprites\frames\knight_f_idle_anim_f0.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Opus\Opus.vcxproj">
-      <Project>{665cfcac-ca6d-4b9d-9363-dda6f3849396}</Project>
-    </ProjectReference>
+    <ClCompile Include="..\Game\Camera.cpp" />
+    <ClCompile Include="..\Game\ColliderComponent.cpp" />
+    <ClCompile Include="..\Game\Collision.cpp" />
+    <ClCompile Include="..\Game\Entity.cpp" />
+    <ClCompile Include="..\Game\EntityController.cpp" />
+    <ClCompile Include="..\Game\Game.cpp" />
+    <ClCompile Include="..\Game\Physics.cpp" />
+    <ClCompile Include="..\Game\SFMLEntityRenderer.cpp" />
+    <ClCompile Include="..\Game\SFMLInputHandler.cpp" />
+    <ClCompile Include="..\Game\SFMLRenderer.cpp" />
+    <ClCompile Include="..\Game\SFMLTime.cpp" />
+    <ClCompile Include="..\Game\ShapeRenderer.cpp" />
+    <ClCompile Include="..\Game\SpriteRenderer.cpp" />
+    <ClCompile Include="..\Game\Vector2.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="pch.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SFMLWindow.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
