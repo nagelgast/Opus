@@ -114,6 +114,9 @@
     <ClInclude Include="SFMLWindow.h">
       <Filter>Header Files\Core\Platform</Filter>
     </ClInclude>
+    <ClInclude Include="Opus.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dllmain.cpp">

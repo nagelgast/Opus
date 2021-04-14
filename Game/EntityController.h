@@ -3,24 +3,24 @@
 #include <memory>
 #include <vector>
 
+#include "../Opus/Opus.h"
+
 class BaseTime;
 class BaseRenderer;
 class Entity;
 struct Input;
 
-class __declspec(dllexport) EntityController
+class EntityController
 {
 public:
-	explicit EntityController(const BaseRenderer& renderer, const BaseTime& time, const Input& input);
-	void DestroyEntity(Entity& entity);
-	std::shared_ptr<Entity> AddEntity(Entity&& e);
-	std::vector<std::shared_ptr<Entity>>& GetEntities();
+	OPUS_API explicit EntityController(const BaseRenderer& renderer, const BaseTime& time, const Input& input);
+	OPUS_API void DestroyEntity(Entity& entity);
+	OPUS_API std::shared_ptr<Entity> AddEntity(Entity&& e);
+	OPUS_API std::vector<std::shared_ptr<Entity>>& GetEntities();
 
-	const BaseRenderer& GetRenderer() const;
-	const BaseTime& GetTime() const;
-	const Input& GetInput() const;
-	
-
+	__declspec(dllexport) const BaseRenderer& GetRenderer() const;
+	__declspec(dllexport) const BaseTime& GetTime() const;
+	__declspec(dllexport) const Input& GetInput() const;
 private:
 	std::vector<std::shared_ptr<Entity>> entities_;
 	const BaseRenderer& renderer_;

@@ -10,15 +10,15 @@
 
 //#include "BaseWindow.h"
 #include "../Opus/BaseWindow.h"
+#include "../Opus/Opus.h"
 
-class __declspec(dllexport) Game
+class Game
 {
 public:
-	explicit Game(int width, int height, int fps_limit, int fixed_update_ms, std::string title);
-	explicit Game(BaseRenderer& renderer, BaseInputHandler& input_handler, BaseTime& time);
+	OPUS_API explicit Game(int width, int height, int fps_limit, int fixed_update_ms, std::string title);
 
-	void Run();
-	void Exit();
+	OPUS_API void Run();
+	OPUS_API void Exit();
 
 	std::shared_ptr<BaseWindow> window_;
 	std::unique_ptr<BaseRenderer> renderer_;
@@ -30,5 +30,4 @@ private:
 	void FixedUpdate();
 	void Update();
 	void HandleOutput();
-
 };

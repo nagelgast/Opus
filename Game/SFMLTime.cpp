@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "SFMLTime.h"
 
+#include <SFML/System/Time.hpp>
+
 SFMLTime::SFMLTime(const int fixed_time_step) :
 fixed_time_step_(sf::milliseconds(fixed_time_step)), clock_(), elapsed_time_(), delta_time_(), update_delay_(), fixed_time_step_ticks_()
 {
@@ -18,7 +20,7 @@ float SFMLTime::GetTimeSinceStartup() const
 
 int SFMLTime::GetFixedTimeStepTicks() const
 {
-    return 0.0f;
+    return fixed_time_step_ticks_;
 }
 
 void SFMLTime::Tick()

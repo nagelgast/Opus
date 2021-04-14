@@ -8,6 +8,8 @@
 #include <typeindex>
 #include <vector>
 
+#include "../Opus/Opus.h"
+
 namespace sf
 {
 	class Transformable;
@@ -18,17 +20,17 @@ class EntityController;
 class Component;
 struct Input;
 
-class __declspec(dllexport) Entity
+class Entity
 {
 public:
-	Entity();
-	Entity(Entity&);
-	~Entity();
+	OPUS_API Entity();
+	OPUS_API Entity(Entity&);
+	OPUS_API ~Entity();
 
-	void Start(EntityController* ec);
+	OPUS_API void Start(EntityController* ec);
 
-	void Update();
-	void Destroy();
+	OPUS_API void Update();
+	OPUS_API void Destroy();
 
 	template <typename T> std::shared_ptr<T> AddComponent(T c)
 	{
@@ -51,29 +53,29 @@ public:
 		return nullptr;
 	}
 
-	std::shared_ptr<Entity> AddEntity(Entity&& e) const;
-	std::vector<std::shared_ptr<Entity>>& GetEntities() const;
-	float GetDeltaTime() const;
-	const Input& GetInput() const;
+	OPUS_API std::shared_ptr<Entity> AddEntity(Entity&& e) const;
+	OPUS_API std::vector<std::shared_ptr<Entity>>& GetEntities() const;
+	OPUS_API float GetDeltaTime() const;
+	OPUS_API const Input& GetInput() const;
 
 
 	// TODO Handle with transform component
-	void SetSize(float width, float height);
-	Vector2 GetPosition() const;
-	void SetPosition(float x, float y);
-	void SetPosition(Vector2 position);
-	void Move(Vector2 offset) const;
-	Vector2 GetOrigin() const;
-	Vector2 GetScale() const;
+	OPUS_API void SetSize(float width, float height);
+	OPUS_API Vector2 GetPosition() const;
+	OPUS_API void SetPosition(float x, float y);
+	OPUS_API void SetPosition(Vector2 position);
+	OPUS_API void Move(Vector2 offset) const;
+	OPUS_API Vector2 GetOrigin() const;
+	OPUS_API Vector2 GetScale() const;
 
 	// TODO Handle with collider component
-	void SetShape(Shape shape);
+	OPUS_API void SetShape(Shape shape);
 	int layer_ = 0;
 	Shape shape_ = Shape::kCircle;
 
-	BaseEntityRenderer* CreateRenderer();
-	BaseEntityRenderer* GetRenderer() const;
-	bool HasRenderer() const;
+	OPUS_API BaseEntityRenderer* CreateRenderer();
+	OPUS_API BaseEntityRenderer* GetRenderer() const;
+	OPUS_API bool HasRenderer() const;
 
 private:
 	EntityController* ec_ = nullptr;

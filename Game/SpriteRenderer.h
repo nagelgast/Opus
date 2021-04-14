@@ -3,11 +3,11 @@
 #include "Component.h"
 #include <string>
 
-class __declspec(dllexport) SpriteRenderer : public Component
+class SpriteRenderer : public Component
 {
 public:
-	SpriteRenderer(std::string path, int left, int top, int width, int height);
-	void Start() override;
+	OPUS_API SpriteRenderer(std::string path, int left, int top, int width, int height);
+	OPUS_API void Start() override;
 private:
 	std::string path_;
 	int left_;
