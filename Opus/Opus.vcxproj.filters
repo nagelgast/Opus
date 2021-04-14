@@ -28,6 +28,15 @@
     <Filter Include="Header Files\Core\Platform">
       <UniqueIdentifier>{cdccb073-85a9-4e52-9525-46b61c192705}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Core\Components">
+      <UniqueIdentifier>{9f930dd6-a5a6-4d19-a429-f60f3ccab73d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Components">
+      <UniqueIdentifier>{ad229ba1-a147-47e7-86c9-5121893999c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Core\Data">
+      <UniqueIdentifier>{efd87597-8167-49ef-b7e9-bf6c866662b0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -72,18 +81,6 @@
     <ClInclude Include="Vector2.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Camera.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderComponent.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
@@ -96,26 +93,38 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Key.h">
-      <Filter>Header Files\Core</Filter>
-    </ClInclude>
     <ClInclude Include="Physics.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
-    <ClInclude Include="RenderType.h">
-      <Filter>Header Files\Core</Filter>
+    <ClInclude Include="Camera.h">
+      <Filter>Header Files\Core\Components</Filter>
     </ClInclude>
-    <ClInclude Include="Shape.h">
-      <Filter>Header Files\Core</Filter>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>Header Files\Core\Components</Filter>
     </ClInclude>
     <ClInclude Include="ShapeRenderer.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Header Files\Core\Components</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
-      <Filter>Header Files\Core</Filter>
+      <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="Color.h">
+      <Filter>Header Files\Core\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Header Files\Core\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>Header Files\Core\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Key.h">
+      <Filter>Header Files\Core\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape.h">
+      <Filter>Header Files\Core\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderType.h">
+      <Filter>Header Files\Core\Data</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -134,15 +143,6 @@
     <ClCompile Include="SFMLTime.cpp">
       <Filter>Source Files\Core\Platform</Filter>
     </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="ColliderComponent.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -155,12 +155,6 @@
     <ClCompile Include="Physics.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
-    <ClCompile Include="ShapeRenderer.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Source Files\Core</Filter>
-    </ClCompile>
     <ClCompile Include="Vector2.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
@@ -169,6 +163,18 @@
     </ClCompile>
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Source Files\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ColliderComponent.cpp">
+      <Filter>Source Files\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapeRenderer.cpp">
+      <Filter>Source Files\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Source Files\Core\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
