@@ -14,12 +14,11 @@
 
 Entity::Entity()
 {
-	transformable_ = new sf::Transformable();
+	transformable_ = std::make_unique<sf::Transformable>();
 }
 
-Entity::Entity(Entity& e) : layer_(e.layer_), shape_(e.shape_), ec_(e.ec_), components_(e.components_)
+Entity::Entity(Entity& e) : layer_(e.layer_), shape_(e.shape_), ec_(e.ec_), transformable_(std::move(e.transformable_)), components_(e.components_)
 {
-	transformable_ = new sf::Transformable();
 	for (const auto& component : components_)
 	{
 		component.second->entity_ = this;
@@ -28,7 +27,6 @@ Entity::Entity(Entity& e) : layer_(e.layer_), shape_(e.shape_), ec_(e.ec_), comp
 
 Entity::~Entity()
 {
-	delete transformable_;
 	components_.clear();
 }
 
@@ -42,7 +40,7 @@ void Entity::Start(EntityController* ec)
 
 	if (renderer_)
 	{
-		auto scale = transformable_->getScale();
+		const auto scale = transformable_->getScale();
 		renderer_->SetSize(scale.x, scale.y);
 	}
 }

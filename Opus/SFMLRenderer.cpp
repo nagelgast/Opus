@@ -5,7 +5,7 @@
 #include "Entity.h"
 #include "SFMLEntityRenderer.h"
 
-SFMLRenderer::SFMLRenderer(std::shared_ptr<BaseWindow> window) : window_(static_cast<SFMLWindow&>(*window).GetWindow())
+SFMLRenderer::SFMLRenderer(const std::shared_ptr<BaseWindow>& window) : window_(dynamic_cast<SFMLWindow&>(*window).GetWindow())
 {
 }
 

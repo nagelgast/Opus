@@ -79,7 +79,7 @@ public:
 
 private:
 	EntityController* ec_ = nullptr;
-	sf::Transformable* transformable_{};
-	std::unique_ptr<BaseEntityRenderer> renderer_{};
+	std::unique_ptr<sf::Transformable> transformable_;
+	std::unique_ptr<BaseEntityRenderer> renderer_;
 	std::map<std::type_index, std::shared_ptr<Component>> components_{};
 };
