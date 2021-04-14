@@ -37,6 +37,7 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 
 void SFMLRenderer::SetCamera(const std::shared_ptr<Camera>& camera)
 {
+	// TODO For some reason, this tanks debugging speed???
 	camera_ = camera;
 }
 
