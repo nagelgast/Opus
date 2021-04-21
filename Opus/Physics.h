@@ -6,7 +6,7 @@ class Entity;
 class Vector2;
 struct Collision;
 
-class __declspec(dllexport) Physics
+class Physics
 {
 public:
 	static Collision HandleCollision(Collider& c, int layer);

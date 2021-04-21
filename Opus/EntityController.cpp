@@ -22,6 +22,11 @@ void EntityController::DestroyEntity(Entity& entity)
 	entities_.erase(std::remove(entities_.begin(), entities_.end(), value), entities_.end());
 }
 
+std::shared_ptr<Entity> EntityController::CreateEntity()
+{
+	return AddEntity(Entity());
+}
+
 std::shared_ptr<Entity> EntityController::AddEntity(Entity&& e)
 {
 	auto entity = std::make_shared<Entity>(e);

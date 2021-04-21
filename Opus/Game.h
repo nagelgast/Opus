@@ -9,7 +9,6 @@
 #include "EntityController.h"
 
 #include "BaseWindow.h"
-#include "CollisionSystem.h"
 #include "Opus.h"
 
 class Game
@@ -20,14 +19,18 @@ public:
 	OPUS_API void Run();
 	OPUS_API void Exit();
 
+	OPUS_API Entity& GetRoot();
+	
 	std::shared_ptr<BaseWindow> window_;
 	std::unique_ptr<BaseRenderer> renderer_;
 	std::unique_ptr<BaseInputHandler> input_handler_;
 	std::unique_ptr<BaseTime> time_;
-	EntityController entity_controller_;
 private:
 	void HandleInput() const;
 	void FixedUpdate();
 	void Update();
 	void HandleOutput();
+
+	EntityController entity_controller_;
+	std::shared_ptr<Entity> root_;
 };

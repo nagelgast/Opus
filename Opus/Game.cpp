@@ -14,6 +14,7 @@ Game::Game(const int width, const int height, const int fps_limit, const int fix
 	time_(std::make_unique<SFMLTime>(fixed_update_ms)),
 	entity_controller_(*renderer_, *time_, input_handler_->GetInput())
 {
+	root_ = entity_controller_.CreateEntity();
 }
 
 void Game::Run()
@@ -41,6 +42,11 @@ void Game::Run()
 void Game::Exit()
 {
 
+}
+
+Entity& Game::GetRoot()
+{
+	return *root_;
 }
 
 void Game::HandleInput() const
