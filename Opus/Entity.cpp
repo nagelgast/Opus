@@ -15,7 +15,7 @@ Entity::Entity()
 	transform_ = AddComponent<Transform>();
 }
 
-Entity::Entity(Entity& e) : layer_(e.layer_), shape_(e.shape_), ec_(e.ec_), transform_(std::move(e.transform_)), components_(e.components_)
+Entity::Entity(Entity& e) : ec_(e.ec_), transform_(std::move(e.transform_)), components_(e.components_)
 {
 	for (const auto& component : components_)
 	{
@@ -79,11 +79,6 @@ const Input& Entity::GetInput() const
 Transform& Entity::GetTransform()
 {
 	return *transform_;
-}
-
-void Entity::SetShape(Shape shape)
-{
-	shape_ = shape;
 }
 
 BaseEntityRenderer* Entity::CreateRenderer()

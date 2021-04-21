@@ -1,21 +1,24 @@
 #include "pch.h"
 #include "Physics.h"
 
+#include "Collider.h"
 #include "Collision.h"
 #include "Entity.h"
 #include "Shape.h"
 #include "Vector2.h"
 #include "Transform.h"
 
-Collision Physics::HandleCollision(Entity& e, const int layer)
+Collision Physics::HandleCollision(Collider& c, const int layer)
 {
-	auto& entities = e.GetEntities();
+	auto& entities = c.entity_->GetEntities();
 
 	for (const auto& entity : entities)
 	{
-		if (entity->layer_ == layer)
+		//TODO Fix really slow
+		auto col = entity->GetComponent<Collider>();
+		if (col != nullptr && col->layer_ == layer)
 		{
-			const auto collision = HandleCollision(e, *entity);
+			const auto collision = HandleCollision(c, *col);
 			if(collision.hit)
 			{
 				return collision;
@@ -26,20 +29,20 @@ Collision Physics::HandleCollision(Entity& e, const int layer)
 	return {};
 }
 
-Collision Physics::HandleCollision(Entity& entity, Entity& other)
+Collision Physics::HandleCollision(Collider& player, Collider& other)
 {
-	const auto is_circle1 = entity.shape_ == Shape::kCircle;
+	const auto is_circle1 = player.shape_ == Shape::kCircle;
 	const auto is_circle2 = other.shape_ == Shape::kCircle;
 
-	const auto& t1 = entity.GetTransform();
-	auto t2 = other.GetTransform();
+	const auto& t1 = player.entity_->GetTransform();
+	auto t2 = other.entity_->GetTransform();
 	if(is_circle1 && is_circle2)
 	{
 		const auto collision = CheckCircleCollision(t1, t2);
 		if(collision)
 		{
-			auto displacement = ResolveCircleCollision(t1, t2);
-			return Collision{&other, &displacement};
+			const auto displacement = ResolveCircleCollision(t1, t2);
+			return Collision{other.entity_, displacement};
 		}
 	}
 	if(!is_circle1 && !is_circle2)
@@ -47,8 +50,8 @@ Collision Physics::HandleCollision(Entity& entity, Entity& other)
 		const auto collision = CheckSquareCollision(t1, t2);
 		if(collision)
 		{
-			auto displacement = ResolveSquareCollision(t1, t2);
-			return Collision{&other, &displacement};
+			const auto displacement = ResolveSquareCollision(t1, t2);
+			return Collision{other.entity_, displacement};
 		}
 	}
 	if(is_circle1 && !is_circle2)
@@ -116,7 +119,7 @@ Collision Physics::HandleCircleSquareCollision(const Transform& circle, Transfor
 	{
 		const auto displacement = ray_to_nearest/distance * (circle_radius - distance);
 		
-		auto c = Collision(square.entity_, &displacement);
+		auto c = Collision(square.entity_, displacement);
 		return c;
 	}
 

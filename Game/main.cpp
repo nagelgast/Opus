@@ -5,7 +5,7 @@
 #include "Wall.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/Transform.h"
-
+#include "../Opus/Shape.h"
 
 const int kScreenWidth = 1024;
 const int kScreenHeight = 768;
@@ -30,14 +30,12 @@ int main()
 		
 		Entity health_globe {};
 		health_globe.AddComponent(ShapeRenderer(Shape::kCircle, 1,0,0,1, false));
-		health_globe.SetShape(Shape::kCircle);
 		health_globe.GetTransform().SetPosition(margin, kScreenHeight-margin);
 		health_globe.GetTransform().SetSize(100, 100);
 		game->entity_controller_.AddEntity(std::move(health_globe));
 
 		Entity mana_globe {};
 		mana_globe.AddComponent(ShapeRenderer(Shape::kCircle, 0, 0, 1, 1, false));
-		mana_globe.SetShape(Shape::kCircle);
 		mana_globe.GetTransform().SetPosition(kScreenWidth-margin, kScreenHeight - margin);
 		mana_globe.GetTransform().SetSize(100, 100);
 		game->entity_controller_.AddEntity(std::move(mana_globe));

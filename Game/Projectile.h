@@ -1,15 +1,17 @@
 #pragma once
 
+#include "../Opus/Collider.h"
 #include "../Opus/Component.h"
 #include "../Opus/Vector2.h"
 
 class Projectile final : public Component
 {
 public:
-	Projectile(int damage, const Vector2& direction, float speed, float max_distance);
+	Projectile(Collider& collider, int damage, const Vector2& direction, float speed, float max_distance);
 	void Update() override;
 
 private:
+	Collider& collider_;
 	Vector2 direction_;
 	int damage_;
 	float speed_;

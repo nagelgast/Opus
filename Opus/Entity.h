@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Shape.h"
-
 #include <memory>
 #include <map>
 #include <typeindex>
@@ -61,10 +59,6 @@ public:
 
 	OPUS_API Transform& GetTransform();
 
-	// TODO Handle with collider component
-	OPUS_API void SetShape(Shape shape);
-	int layer_ = 0;
-	Shape shape_ = Shape::kCircle;
 
 	OPUS_API BaseEntityRenderer* CreateRenderer();
 	OPUS_API BaseEntityRenderer* GetRenderer() const;

@@ -23,6 +23,7 @@ public:
 	const Input& GetInput() const;
 private:
 	std::vector<std::shared_ptr<Entity>> entities_;
+	std::vector<std::shared_ptr<Entity>> physics_entities;
 	const BaseRenderer& renderer_;
 	const BaseTime& time_;
 	const Input& input_;

@@ -1,6 +1,6 @@
 #include "FireballSkill.h"
 
-#include "../Opus/ColliderComponent.h"
+#include "../Opus/Collider.h"
 #include "../Opus/Entity.h"
 #include "Fireball.h"
 #include "../Opus/Input.h"

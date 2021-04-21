@@ -1,4 +1,5 @@
 #pragma once
+#include "Collider.h"
 
 class Transform;
 class Entity;
@@ -8,8 +9,8 @@ struct Collision;
 class __declspec(dllexport) Physics
 {
 public:
-	static Collision HandleCollision(Entity& e, int layer);
-	static Collision HandleCollision(Entity& entity, Entity& other);
+	static Collision HandleCollision(Collider& c, int layer);
+	static Collision HandleCollision(Collider& player, Collider& other);
 	static bool CheckCircleCollision(const Transform& t1, const Transform& t2);
 	static bool CheckSquareCollision(const Transform& t1, const Transform& t2);
 	static Collision HandleCircleSquareCollision(const Transform& circle, Transform& square);
