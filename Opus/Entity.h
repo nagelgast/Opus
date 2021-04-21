@@ -25,6 +25,7 @@ public:
 	OPUS_API void Start(EntityController* ec);
 	
 	OPUS_API void Update();
+	void FixedUpdate();
 	OPUS_API void Destroy();
 
 	OPUS_API std::shared_ptr<Collider> AddComponent(const Collider& c);
@@ -61,6 +62,7 @@ public:
 	OPUS_API std::shared_ptr<Entity> AddEntity(Entity&& e) const;
 	OPUS_API std::vector<std::shared_ptr<Entity>>& GetEntities() const;
 	OPUS_API float GetDeltaTime() const;
+	OPUS_API float GetFixedDeltaTime() const;
 	OPUS_API const Input& GetInput() const;
 
 	OPUS_API Transform& GetTransform() const;

@@ -13,9 +13,9 @@ PlayerController::PlayerController(const float walk_speed, const float run_speed
 {
 }
 
-void PlayerController::Update()
+void PlayerController::FixedUpdate()
 {
-	const auto dt = entity_->GetDeltaTime();
+	const auto dt = entity_->GetFixedDeltaTime();
 	const auto& input = entity_->GetInput();
 
 	const auto speed = dt * (input.run.held ? run_speed_ : walk_speed_);

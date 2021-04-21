@@ -63,10 +63,19 @@ void Entity::Update()
 	{
 		component.second->Update();
 	}
-	
+
+	// TODO Handle in entity controller
 	if(destroyed_)
 	{
 		ec_->DestroyEntity(*this);
+	}
+}
+
+void Entity::FixedUpdate()
+{
+	for (const auto& component : components_)
+	{
+		component.second->FixedUpdate();
 	}
 }
 
@@ -94,6 +103,11 @@ std::vector<std::shared_ptr<Entity>>& Entity::GetEntities() const
 float Entity::GetDeltaTime() const
 {
 	return ec_->GetTime().GetDeltaTime();
+}
+
+float Entity::GetFixedDeltaTime() const
+{
+	return ec_->GetTime().GetFixedDeltaTime();
 }
 
 const Input& Entity::GetInput() const

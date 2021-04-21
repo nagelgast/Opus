@@ -10,6 +10,7 @@ public:
 	explicit SFMLTime(int fixed_time_step);
 
     float GetDeltaTime() const override;
+    float GetFixedDeltaTime() const override;
     float GetTimeSinceStartup() const override;
     int GetFixedTimeStepTicks() const override;
     void Tick() override;

@@ -13,6 +13,12 @@ float SFMLTime::GetDeltaTime() const
     return delta_time_.asSeconds();
 }
 
+float SFMLTime::GetFixedDeltaTime() const
+{
+	return fixed_time_step_.asSeconds();
+}
+
+
 float SFMLTime::GetTimeSinceStartup() const
 {
     return elapsed_time_.asSeconds();
