@@ -6,8 +6,11 @@
 class OPUS_API Collider : public Component
 {
 public:
-	explicit Collider(int layer, Shape shape);
+	explicit Collider(int layer, Shape shape, bool fixed);
+	
+	void OnCollision();
 
-	int layer_ = 0;
-	Shape shape_ = Shape::kCircle;
+	int layer_;
+	Shape shape_;
+	bool fixed_;
 };

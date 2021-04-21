@@ -7,6 +7,7 @@
 
 #include "Opus.h"
 
+class Collider;
 class Transform;
 class BaseEntityRenderer;
 class Vector2;
@@ -26,6 +27,9 @@ public:
 	OPUS_API void Update();
 	OPUS_API void Destroy();
 
+	OPUS_API std::shared_ptr<Collider> AddComponent(const Collider& c);
+
+	
 	template <typename T> std::shared_ptr<T> AddComponent()
 	{
 		return AddComponent(T());
@@ -35,11 +39,13 @@ public:
 	{
 		auto c_ptr = std::make_shared<T>(c);
 		c_ptr->entity_ = this;
+
 		components_[std::type_index(typeid(*c_ptr))] = c_ptr;
 
 		return c_ptr;
 	}
 
+	
 	template <typename T> std::shared_ptr<T> GetComponent()
 	{
 		const std::type_index index(typeid(T));
@@ -57,7 +63,7 @@ public:
 	OPUS_API float GetDeltaTime() const;
 	OPUS_API const Input& GetInput() const;
 
-	OPUS_API Transform& GetTransform();
+	OPUS_API Transform& GetTransform() const;
 
 
 	OPUS_API BaseEntityRenderer* CreateRenderer();
@@ -68,5 +74,7 @@ private:
 	EntityController* ec_ = nullptr;
 	std::shared_ptr<Transform> transform_;
 	std::unique_ptr<BaseEntityRenderer> renderer_;
+
+	std::shared_ptr<Collider> collider_;
 	std::map<std::type_index, std::shared_ptr<Component>> components_{};
 };

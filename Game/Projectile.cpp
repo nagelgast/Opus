@@ -32,14 +32,14 @@ void Projectile::Update()
 		entity_->Destroy();
 	}
 
-	auto collision = Physics::HandleCollision(collider_, 2);
-	if(collision.hit)
-	{
-		auto health = collision.other->GetComponent<Health>();
-		if (health)
-		{
-			health->TakeDamage(damage_);
-		}
-		entity_->Destroy();
-	}
+	//auto collision = Physics::HandleCollision(collider_, 2);
+	//if(collision.hit)
+	//{
+	//	auto health = collision.other->GetComponent<Health>();
+	//	if (health)
+	//	{
+	//		health->TakeDamage(damage_);
+	//	}
+	//	entity_->Destroy();
+	//}
 }

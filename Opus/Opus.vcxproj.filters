@@ -16,26 +16,29 @@
     <Filter Include="Source Files\Core">
       <UniqueIdentifier>{1edb9f83-54c8-4cc8-84ae-c3e09f7f1b31}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\Platform">
-      <UniqueIdentifier>{7a274063-c3e0-4195-a4c1-9945577ecdb9}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Core">
       <UniqueIdentifier>{4c7908a8-27fb-47d2-b930-9c97bb8a9622}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\Abstract">
-      <UniqueIdentifier>{229e19cc-2581-45ed-9b20-659f9d9fc604}</UniqueIdentifier>
+    <Filter Include="Header Files\Systems">
+      <UniqueIdentifier>{0cd38c2a-a76e-449d-8517-1366fae93c99}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\Platform">
-      <UniqueIdentifier>{cdccb073-85a9-4e52-9525-46b61c192705}</UniqueIdentifier>
+    <Filter Include="Source Files\Systems">
+      <UniqueIdentifier>{b131132d-7d28-42c8-836f-467f74df55ea}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Core\Components">
+    <Filter Include="Source Files\Components">
       <UniqueIdentifier>{9f930dd6-a5a6-4d19-a429-f60f3ccab73d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\Components">
+    <Filter Include="Source Files\Platform">
+      <UniqueIdentifier>{7a274063-c3e0-4195-a4c1-9945577ecdb9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Components">
       <UniqueIdentifier>{ad229ba1-a147-47e7-86c9-5121893999c6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Core\Data">
+    <Filter Include="Header Files\Data">
       <UniqueIdentifier>{efd87597-8167-49ef-b7e9-bf6c866662b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Platform">
+      <UniqueIdentifier>{cdccb073-85a9-4e52-9525-46b61c192705}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -45,38 +48,23 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="BaseWindow.h">
-      <Filter>Header Files\Core\Abstract</Filter>
-    </ClInclude>
     <ClInclude Include="SFMLWindow.h">
-      <Filter>Header Files\Core\Platform</Filter>
+      <Filter>Header Files\Platform</Filter>
     </ClInclude>
     <ClInclude Include="Opus.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="SFMLEntityRenderer.h">
-      <Filter>Header Files\Core\Platform</Filter>
+      <Filter>Header Files\Platform</Filter>
     </ClInclude>
     <ClInclude Include="SFMLInputHandler.h">
-      <Filter>Header Files\Core\Platform</Filter>
+      <Filter>Header Files\Platform</Filter>
     </ClInclude>
     <ClInclude Include="SFMLRenderer.h">
-      <Filter>Header Files\Core\Platform</Filter>
+      <Filter>Header Files\Platform</Filter>
     </ClInclude>
     <ClInclude Include="SFMLTime.h">
-      <Filter>Header Files\Core\Platform</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseEntityRenderer.h">
-      <Filter>Header Files\Core\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseInputHandler.h">
-      <Filter>Header Files\Core\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseRenderer.h">
-      <Filter>Header Files\Core\Abstract</Filter>
-    </ClInclude>
-    <ClInclude Include="BaseTime.h">
-      <Filter>Header Files\Core\Abstract</Filter>
+      <Filter>Header Files\Platform</Filter>
     </ClInclude>
     <ClInclude Include="Vector2.h">
       <Filter>Header Files\Core</Filter>
@@ -97,54 +85,72 @@
       <Filter>Header Files\Core</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Header Files\Core\Components</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="ShapeRenderer.h">
-      <Filter>Header Files\Core\Components</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="SpriteRenderer.h">
-      <Filter>Header Files\Core\Components</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Color.h">
-      <Filter>Header Files\Core\Data</Filter>
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h">
-      <Filter>Header Files\Core\Data</Filter>
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>Header Files\Core\Data</Filter>
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
     <ClInclude Include="Key.h">
-      <Filter>Header Files\Core\Data</Filter>
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
     <ClInclude Include="Shape.h">
-      <Filter>Header Files\Core\Data</Filter>
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
     <ClInclude Include="RenderType.h">
-      <Filter>Header Files\Core\Data</Filter>
+      <Filter>Header Files\Data</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>Header Files\Core\Components</Filter>
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
     <ClInclude Include="Collider.h">
-      <Filter>Header Files\Core\Components</Filter>
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionSystem.h">
+      <Filter>Header Files\Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseEntityRenderer.h">
+      <Filter>Header Files\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseInputHandler.h">
+      <Filter>Header Files\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseRenderer.h">
+      <Filter>Header Files\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseTime.h">
+      <Filter>Header Files\Platform</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseWindow.h">
+      <Filter>Header Files\Platform</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFMLWindow.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
+      <Filter>Source Files\Platform</Filter>
     </ClCompile>
     <ClCompile Include="SFMLEntityRenderer.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
+      <Filter>Source Files\Platform</Filter>
     </ClCompile>
     <ClCompile Include="SFMLInputHandler.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
+      <Filter>Source Files\Platform</Filter>
     </ClCompile>
     <ClCompile Include="SFMLRenderer.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
+      <Filter>Source Files\Platform</Filter>
     </ClCompile>
     <ClCompile Include="SFMLTime.cpp">
-      <Filter>Source Files\Core\Platform</Filter>
+      <Filter>Source Files\Platform</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>Source Files\Core</Filter>
@@ -168,19 +174,22 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>Source Files\Core\Components</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="ShapeRenderer.cpp">
-      <Filter>Source Files\Core\Components</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
-      <Filter>Source Files\Core\Components</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Source Files\Core\Components</Filter>
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Collider.cpp">
-      <Filter>Source Files\Core\Components</Filter>
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionSystem.cpp">
+      <Filter>Source Files\Systems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

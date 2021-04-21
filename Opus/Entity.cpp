@@ -15,7 +15,11 @@ Entity::Entity()
 	transform_ = AddComponent<Transform>();
 }
 
-Entity::Entity(Entity& e) : ec_(e.ec_), transform_(std::move(e.transform_)), components_(e.components_)
+Entity::Entity(Entity& e)
+:	ec_(e.ec_),
+	transform_(std::move(e.transform_)),
+	collider_(e.collider_),
+	components_(e.components_)
 {
 	for (const auto& component : components_)
 	{
@@ -25,6 +29,11 @@ Entity::Entity(Entity& e) : ec_(e.ec_), transform_(std::move(e.transform_)), com
 
 Entity::~Entity()
 {
+	if(ec_ && collider_)
+	{
+		ec_->collision_system_.RemoveCollider(collider_);
+	}
+	
 	components_.clear();
 }
 
@@ -36,6 +45,11 @@ void Entity::Start(EntityController* ec)
 		component.second->Start();
 	}
 
+	if (collider_)
+	{
+		ec_->collision_system_.AddCollider(collider_);
+	}
+	
 	if (renderer_)
 	{
 		const auto scale = transform_->GetScale();
@@ -54,6 +68,12 @@ void Entity::Update()
 void Entity::Destroy()
 {
 	ec_->DestroyEntity(*this);
+}
+
+std::shared_ptr<Collider> Entity::AddComponent(const Collider& c)
+{
+	collider_ = AddComponent<Collider>(c);
+	return collider_;
 }
 
 std::shared_ptr<Entity> Entity::AddEntity(Entity&& e) const
@@ -76,7 +96,7 @@ const Input& Entity::GetInput() const
 	return ec_->GetInput();
 }
 
-Transform& Entity::GetTransform()
+Transform& Entity::GetTransform() const
 {
 	return *transform_;
 }

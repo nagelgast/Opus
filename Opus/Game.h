@@ -9,12 +9,13 @@
 #include "EntityController.h"
 
 #include "BaseWindow.h"
+#include "CollisionSystem.h"
 #include "Opus.h"
 
 class Game
 {
 public:
-	OPUS_API explicit Game(int width, int height, int fps_limit, int fixed_update_ms, std::string title);
+	OPUS_API explicit Game(int width, int height, int fps_limit, int fixed_update_ms, const std::string& title);
 
 	OPUS_API void Run();
 	OPUS_API void Exit();

@@ -8,7 +8,7 @@
 Wall::Wall() : Entity()
 {
 	AddComponent(ShapeRenderer(Shape::kSquare, 1, 1, 1, 1));
-	AddComponent(Collider(2, Shape::kSquare));
+	AddComponent(Collider(0, Shape::kSquare, true));
 	GetTransform().SetSize(100,100);
 	GetTransform().SetPosition(500, 500);
 }

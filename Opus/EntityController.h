@@ -3,6 +3,8 @@
 #include <memory>
 #include <vector>
 
+
+#include "CollisionSystem.h"
 #include "Opus.h"
 
 class BaseTime;
@@ -21,9 +23,11 @@ public:
 	const BaseRenderer& GetRenderer() const;
 	const BaseTime& GetTime() const;
 	const Input& GetInput() const;
+
+	CollisionSystem collision_system_;
 private:
 	std::vector<std::shared_ptr<Entity>> entities_;
-	std::vector<std::shared_ptr<Entity>> physics_entities;
+
 	const BaseRenderer& renderer_;
 	const BaseTime& time_;
 	const Input& input_;

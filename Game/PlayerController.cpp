@@ -5,12 +5,10 @@
 #include "../Opus/Collision.h"
 #include "../Opus/Entity.h"
 #include "../Opus/Input.h"
-#include "../Opus/Physics.h"
 #include "../Opus/Transform.h"
 
-PlayerController::PlayerController(Collider& collider, const float walk_speed, const float run_speed)
-:	collider_(collider),
-	walk_speed_(walk_speed),
+PlayerController::PlayerController(const float walk_speed, const float run_speed)
+:	walk_speed_(walk_speed),
 	run_speed_(run_speed)
 {
 }
@@ -65,11 +63,4 @@ void PlayerController::Update()
 	movement.x *= speed;
 	movement.y *= speed;
 	entity_->GetTransform().Move(movement);
-
-	// Check for collisions
-	const auto collision = Physics::HandleCollision(collider_, 2);
-	if(collision.hit)
-	{
-		entity_->GetTransform().Move(-collision.displacement);
-	}
 }
