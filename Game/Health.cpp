@@ -4,6 +4,7 @@
 #include "HealthBar.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/Shape.h"
+#include "../Opus/Transform.h"
 
 Health::Health(int max_health) : current_health_(max_health), max_health_(max_health)
 {
@@ -13,7 +14,7 @@ void Health::Start()
 {
 	auto reference = entity_->GetComponent<Health>();
 	Entity health_bar;
-	health_bar.SetSize(50, 10);
+	health_bar.GetTransform().SetSize(50, 10);
 	health_bar.AddComponent(HealthBar(reference, {0,-30}));
 	health_bar.AddComponent(ShapeRenderer(Shape::kSquare, 1, 0, 0, 0.5f));
 	entity_->AddEntity(std::move(health_bar));

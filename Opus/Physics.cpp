@@ -5,8 +5,9 @@
 #include "Entity.h"
 #include "Shape.h"
 #include "Vector2.h"
+#include "Transform.h"
 
-Collision Physics::HandleCollision(const Entity& e, const int layer)
+Collision Physics::HandleCollision(Entity& e, const int layer)
 {
 	auto& entities = e.GetEntities();
 
@@ -25,31 +26,34 @@ Collision Physics::HandleCollision(const Entity& e, const int layer)
 	return {};
 }
 
-Collision Physics::HandleCollision(const Entity& entity, Entity& other)
+Collision Physics::HandleCollision(Entity& entity, Entity& other)
 {
 	const auto is_circle1 = entity.shape_ == Shape::kCircle;
 	const auto is_circle2 = other.shape_ == Shape::kCircle;
+
+	const auto& t1 = entity.GetTransform();
+	auto t2 = other.GetTransform();
 	if(is_circle1 && is_circle2)
 	{
-		const auto collision = CheckCircleCollision(entity, other);
+		const auto collision = CheckCircleCollision(t1, t2);
 		if(collision)
 		{
-			auto displacement = ResolveCircleCollision(entity, other);
+			auto displacement = ResolveCircleCollision(t1, t2);
 			return Collision{&other, &displacement};
 		}
 	}
 	if(!is_circle1 && !is_circle2)
 	{
-		const auto collision = CheckSquareCollision(entity, other);
+		const auto collision = CheckSquareCollision(t1, t2);
 		if(collision)
 		{
-			auto displacement = ResolveSquareCollision(entity, other);
+			auto displacement = ResolveSquareCollision(t1, t2);
 			return Collision{&other, &displacement};
 		}
 	}
 	if(is_circle1 && !is_circle2)
 	{
-		return HandleCircleSquareCollision(entity, other);
+		return HandleCircleSquareCollision(t1, t2);
 	}
 	if (!is_circle1 && is_circle2)
 	{
@@ -59,13 +63,13 @@ Collision Physics::HandleCollision(const Entity& entity, Entity& other)
 	return {};
 }
 
-bool Physics::CheckCircleCollision(const Entity& e1, const Entity& e2)
+bool Physics::CheckCircleCollision(const Transform& t1, const Transform& t2)
 {
-	const auto pos1 = e1.GetPosition();
-	const auto pos2 = e2.GetPosition();
+	const auto pos1 = t1.GetPosition();
+	const auto pos2 = t2.GetPosition();
 
-	const auto r1 = e1.GetScale().x / 2.f;
-	const auto r2 = e2.GetScale().x / 2.f;
+	const auto r1 = t1.GetScale().x / 2.f;
+	const auto r2 = t2.GetScale().x / 2.f;
 
 	const auto delta = pos1 - pos2;
 	const auto distance_squared = delta.x * delta.x + delta.y * delta.y;
@@ -75,13 +79,13 @@ bool Physics::CheckCircleCollision(const Entity& e1, const Entity& e2)
 	return distance_squared <= radii_squared;
 }
 
-bool Physics::CheckSquareCollision(const Entity& e1, const Entity& e2)
+bool Physics::CheckSquareCollision(const Transform& t1, const Transform& t2)
 {
-	const auto p1 = e1.GetPosition() - e1.GetOrigin();
-	const auto s1 = e1.GetScale();
+	const auto p1 = t1.GetPosition() - t1.GetOrigin();
+	const auto s1 = t1.GetScale();
 
-	const auto p2 = e2.GetPosition() - e2.GetOrigin();
-	const auto s2 = e2.GetScale();
+	const auto p2 = t2.GetPosition() - t2.GetOrigin();
+	const auto s2 = t2.GetScale();
 
 	if (p1.x > p2.x + s2.x) return false;
 	if (p1.x + s1.x < p2.x) return false;
@@ -91,7 +95,7 @@ bool Physics::CheckSquareCollision(const Entity& e1, const Entity& e2)
 	return true;
 }
 
-Collision Physics::HandleCircleSquareCollision(const Entity& circle, Entity& square)
+Collision Physics::HandleCircleSquareCollision(const Transform& circle, Transform& square)
 {
 	const auto circle_pos = circle.GetPosition();
 	const auto circle_radius = circle.GetScale().x/2.f;
@@ -112,32 +116,32 @@ Collision Physics::HandleCircleSquareCollision(const Entity& circle, Entity& squ
 	{
 		const auto displacement = ray_to_nearest/distance * (circle_radius - distance);
 		
-		auto c = Collision(&square, &displacement);
+		auto c = Collision(square.entity_, &displacement);
 		return c;
 	}
 
 	return {};
 }
 
-Vector2 Physics::ResolveCircleCollision(const Entity& e1, const Entity& e2)
+Vector2 Physics::ResolveCircleCollision(const Transform& t1, const Transform& t2)
 {
-	const auto p1 = e1.GetPosition();
-	const auto p2 = e2.GetPosition();
+	const auto p1 = t1.GetPosition();
+	const auto p2 = t2.GetPosition();
 	const auto delta = p1 - p2;
 	const auto distance = sqrtf(delta.x * delta.x + delta.y * delta.y);
-	const auto overlap = distance - e1.GetScale().x / 2.f - e2.GetScale().x / 2.f;
+	const auto overlap = distance - t1.GetScale().x / 2.f - t2.GetScale().x / 2.f;
 	const auto displacement = delta * overlap / distance;
 
-	return Vector2(displacement);
+	return Vector2 {displacement};
 }
 
-Vector2 Physics::ResolveSquareCollision(const Entity& e1, const Entity& e2)
+Vector2 Physics::ResolveSquareCollision(const Transform& t1, const Transform& t2)
 {
-	const auto p1 = e1.GetPosition() - e1.GetOrigin();
-	const auto s1 = e1.GetScale();
+	const auto p1 = t1.GetPosition() - t1.GetOrigin();
+	const auto s1 = t1.GetScale();
 
-	const auto p2 = e2.GetPosition() - e2.GetOrigin();
-	const auto s2 = e2.GetScale();
+	const auto p2 = t2.GetPosition() - t2.GetOrigin();
+	const auto s2 = t2.GetScale();
 
 	const auto depth_left = p1.x + s1.x - p2.x;
 	const auto depth_right = p1.x - (p2.x + s2.x);

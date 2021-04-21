@@ -1,12 +1,14 @@
 #include "pch.h"
 #include "Camera.h"
 
+#include "Transform.h"
+
 void Camera::Update()
 {
 	if(!target_.expired())
 	{
 		const auto target = target_.lock();
-		entity_->SetPosition(target->GetPosition() + offset_);
+		entity_->GetTransform().SetPosition(target->GetTransform().GetPosition() + offset_);
 	}
 }
 

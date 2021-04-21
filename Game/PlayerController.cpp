@@ -6,6 +6,7 @@
 #include "../Opus/Entity.h"
 #include "../Opus/Input.h"
 #include "../Opus/Physics.h"
+#include "../Opus/Transform.h"
 
 PlayerController::PlayerController(const float walk_speed, const float run_speed) :
 	walk_speed_(walk_speed), run_speed_(run_speed)
@@ -19,7 +20,7 @@ void PlayerController::Update()
 
 	const auto speed = dt * (input.run.held ? run_speed_ : walk_speed_);
 	
-	const auto pos = entity_->GetPosition();
+	const auto pos = entity_->GetTransform().GetPosition();
 
 	Vector2 movement;
 
@@ -61,12 +62,12 @@ void PlayerController::Update()
 
 	movement.x *= speed;
 	movement.y *= speed;
-	entity_->Move(movement);
+	entity_->GetTransform().Move(movement);
 
 	// Check for collisions
 	const auto collision = Physics::HandleCollision(*entity_, 2);
 	if(collision.hit)
 	{
-		entity_->Move(-*collision.displacement);
+		entity_->GetTransform().Move(-*collision.displacement);
 	}
 }

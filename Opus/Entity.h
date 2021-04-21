@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Shape.h"
-#include "BaseEntityRenderer.h"
 
 #include <memory>
 #include <map>
@@ -10,11 +9,8 @@
 
 #include "Opus.h"
 
-namespace sf
-{
-	class Transformable;
-}
-
+class Transform;
+class BaseEntityRenderer;
 class Vector2;
 class EntityController;
 class Component;
@@ -63,15 +59,7 @@ public:
 	OPUS_API float GetDeltaTime() const;
 	OPUS_API const Input& GetInput() const;
 
-
-	// TODO Handle with transform component
-	OPUS_API void SetSize(float width, float height);
-	OPUS_API Vector2 GetPosition() const;
-	OPUS_API void SetPosition(float x, float y);
-	OPUS_API void SetPosition(Vector2 position);
-	OPUS_API void Move(Vector2 offset) const;
-	OPUS_API Vector2 GetOrigin() const;
-	OPUS_API Vector2 GetScale() const;
+	OPUS_API Transform& GetTransform();
 
 	// TODO Handle with collider component
 	OPUS_API void SetShape(Shape shape);
@@ -84,7 +72,7 @@ public:
 
 private:
 	EntityController* ec_ = nullptr;
-	std::unique_ptr<sf::Transformable> transformable_;
+	std::shared_ptr<Transform> transform_;
 	std::unique_ptr<BaseEntityRenderer> renderer_;
 	std::map<std::type_index, std::shared_ptr<Component>> components_{};
 };

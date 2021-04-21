@@ -126,6 +126,9 @@
     <ClInclude Include="RenderType.h">
       <Filter>Header Files\Core\Data</Filter>
     </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>Header Files\Core\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SFMLWindow.cpp">
@@ -174,6 +177,9 @@
       <Filter>Source Files\Core\Components</Filter>
     </ClCompile>
     <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Source Files\Core\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
       <Filter>Source Files\Core\Components</Filter>
     </ClCompile>
   </ItemGroup>

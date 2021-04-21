@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "Shape.h"
 #include "Vector2.h"
+#include "Transform.h"
 
 void SFMLEntityRenderer::SetSize(float width, float height)
 {
@@ -54,7 +55,7 @@ void SFMLEntityRenderer::SetShape(const Shape shape, float r, float g, float b, 
 
 void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	const auto& corner = entity_->GetPosition() - entity_->GetOrigin();
+	const auto& corner = entity_->GetTransform().GetPosition() - entity_->GetTransform().GetOrigin();
 	const sf::Vector2f draw_pos = {corner.x, corner.y};
 	//DrawBox(target, states, draw_pos, scale_, sf::Color::Magenta);
 

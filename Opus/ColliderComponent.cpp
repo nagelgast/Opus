@@ -5,5 +5,5 @@
 
 bool ColliderComponent::CheckCollision(const ColliderComponent& collider) const
 {
-	return Physics::CheckCircleCollision(*entity_, *collider.entity_);
+	return Physics::CheckCircleCollision(entity_->GetTransform(), collider.entity_->GetTransform());
 }

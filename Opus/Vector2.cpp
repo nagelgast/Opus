@@ -62,3 +62,11 @@ Vector2 Vector2::operator/(const float right) const
 {
 	return {x/right, y/right};
 }
+
+Vector2 Vector2::operator+=(const Vector2& right)
+{
+	x += right.x;
+	y += right.y;
+
+	return *this;
+}
