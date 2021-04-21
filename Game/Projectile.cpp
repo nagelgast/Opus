@@ -6,9 +6,8 @@
 #include "Health.h"
 #include "../Opus/Transform.h"
 
-Projectile::Projectile(Collider& collider, int damage, const Vector2& direction, const float speed, const float max_distance)
-:	collider_(collider),
-	direction_(direction),
+Projectile::Projectile(int damage, const Vector2& direction, const float speed, const float max_distance)
+:	direction_(direction),
 	damage_(damage),
 	speed_(speed),
 	max_distance_(max_distance)
@@ -31,15 +30,14 @@ void Projectile::Update()
 	{
 		entity_->Destroy();
 	}
+}
 
-	//auto collision = Physics::HandleCollision(collider_, 2);
-	//if(collision.hit)
-	//{
-	//	auto health = collision.other->GetComponent<Health>();
-	//	if (health)
-	//	{
-	//		health->TakeDamage(damage_);
-	//	}
-	//	entity_->Destroy();
-	//}
+void Projectile::OnCollision(const Collider& other)
+{
+	auto health = other.entity_->GetComponent<Health>();
+	if (health)
+	{
+		health->TakeDamage(damage_);
+	}
+	entity_->Destroy();
 }

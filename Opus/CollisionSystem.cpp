@@ -42,8 +42,8 @@ void CollisionSystem::HandleCollision(Collider& c1, Collider& c2) const
 		c2.entity_->GetTransform().Move(collision.displacement / 2.f);
 	}
 		
-	c1.OnCollision();
-	c2.OnCollision();
+	c1.Collide(c2);
+	c2.Collide(c1);
 }
 
 void CollisionSystem::AddCollider(const std::shared_ptr<Collider>& collider)

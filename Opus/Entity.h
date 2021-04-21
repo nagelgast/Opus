@@ -69,6 +69,8 @@ public:
 	OPUS_API BaseEntityRenderer* CreateRenderer();
 	OPUS_API BaseEntityRenderer* GetRenderer() const;
 	OPUS_API bool HasRenderer() const;
+	
+	void OnCollision(const Collider& other);
 
 private:
 	EntityController* ec_ = nullptr;
@@ -77,4 +79,6 @@ private:
 
 	std::shared_ptr<Collider> collider_;
 	std::map<std::type_index, std::shared_ptr<Component>> components_{};
+
+	bool destroyed_ = false;
 };

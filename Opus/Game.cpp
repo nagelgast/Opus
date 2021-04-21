@@ -26,7 +26,9 @@ void Game::Run()
 
 		time_->Tick();
 
-		for (auto i = 0; i < time_->GetFixedTimeStepTicks(); i++)
+		const auto fixed_ticks = time_->GetFixedTimeStepTicks();
+		
+		for (auto i = 0; i < fixed_ticks; i++)
 		{
 			FixedUpdate();
 		}

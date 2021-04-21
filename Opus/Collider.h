@@ -7,8 +7,7 @@ class OPUS_API Collider : public Component
 {
 public:
 	explicit Collider(int layer, Shape shape, bool fixed);
-	
-	void OnCollision();
+	void Collide(const Collider& other) const;
 
 	int layer_;
 	Shape shape_;

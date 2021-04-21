@@ -6,6 +6,7 @@ Collider::Collider(int layer, Shape shape, bool fixed) : layer_(layer), shape_(s
 {
 }
 
-void Collider::OnCollision()
+void Collider::Collide(const Collider& other) const
 {
+	entity_->OnCollision(other);
 }
