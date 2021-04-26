@@ -19,17 +19,19 @@ public:
 	OPUS_API void Run();
 	OPUS_API void Exit();
 
-	OPUS_API Entity& GetRoot();
-	
-	std::shared_ptr<BaseWindow> window_;
-	std::unique_ptr<BaseRenderer> renderer_;
-	std::unique_ptr<BaseInputHandler> input_handler_;
-	std::unique_ptr<BaseTime> time_;
+	OPUS_API Entity& GetRoot() const;
+	OPUS_API void SetCamera(const std::shared_ptr<Camera>& camera) const;
 private:
 	void HandleInput() const;
 	void FixedUpdate();
 	void Update();
 	void HandleOutput();
+
+	std::shared_ptr<BaseWindow> window_;
+	std::unique_ptr<BaseRenderer> renderer_;
+	std::unique_ptr<BaseInputHandler> input_handler_;
+	std::unique_ptr<BaseTime> time_;
+
 
 	EntityController entity_controller_;
 	std::shared_ptr<Entity> root_;

@@ -9,7 +9,7 @@
 Enemy::Enemy()
 {
 	AddComponent(SpriteRenderer("Sprites/mobs/slime-blue.png", 0, 8, 16, 16));
-	AddComponent(Collider(0, Shape::kSquare, false));
+	AddComponent(Collider(0, Shape::kSquare, false, false));
 	GetTransform().SetSize(32,32);
 
 	AddComponent(Health(100));

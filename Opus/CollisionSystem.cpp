@@ -23,25 +23,28 @@ void CollisionSystem::FixedUpdate()
 
 void CollisionSystem::HandleCollision(Collider& c1, Collider& c2) const
 {
-	if (c1.layer_ != c2.layer_) return;
+	if (c1.GetLayer() != c2.GetLayer()) return;
 	
 	const auto collision = Physics::HandleCollision(c1, c2);
 	if (!collision.hit) return;
+
+	if(!c1.IsTrigger() && !c2.IsTrigger())
+	{
+		if (c2.IsFixed())
+		{
+			c1.entity_->GetTransform().Move(-collision.displacement);
+		}
+		else if (c1.IsFixed())
+		{
+			c2.entity_->GetTransform().Move(collision.displacement);
+		}
+		else
+		{
+			c1.entity_->GetTransform().Move(-collision.displacement / 2.f);
+			c2.entity_->GetTransform().Move(collision.displacement / 2.f);
+		}
+	}
 	
-	if (c2.fixed_)
-	{
-		c1.entity_->GetTransform().Move(-collision.displacement);
-	}
-	else if (c1.fixed_)
-	{
-		c2.entity_->GetTransform().Move(collision.displacement);
-	}
-	else
-	{
-		c1.entity_->GetTransform().Move(-collision.displacement / 2.f);
-		c2.entity_->GetTransform().Move(collision.displacement / 2.f);
-	}
-		
 	c1.Collide(c2);
 	c2.Collide(c1);
 }

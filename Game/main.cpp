@@ -24,7 +24,7 @@ int main()
 		Entity main_camera {};
 		auto camera = main_camera.AddComponent<Camera>();
 		camera->SetTarget(player);
-		game->renderer_->SetCamera(camera);
+		game->SetCamera(camera);
 		root.AddEntity(std::move(main_camera));
 
 		const auto margin = 120;
@@ -43,10 +43,10 @@ int main()
 
 
 		root.AddEntity(Wall());
-		auto wall = root.AddEntity(Wall());
+		const auto wall = root.AddEntity(Wall());
 		wall->GetTransform().SetPosition(300, 500);
 
-		auto enemy = root.AddEntity(Enemy());
+		const auto enemy = root.AddEntity(Enemy());
 		enemy->GetTransform().SetPosition(500, 100);
 	}
 

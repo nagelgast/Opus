@@ -16,7 +16,7 @@ Collision Physics::HandleCollision(Collider& c, const int layer)
 	{
 		//TODO Fix really slow
 		auto col = entity->GetComponent<Collider>();
-		if (col != nullptr && col->layer_ == layer)
+		if (col != nullptr && col->GetLayer() == layer)
 		{
 			const auto collision = HandleCollision(c, *col);
 			if(collision.hit)
@@ -31,8 +31,8 @@ Collision Physics::HandleCollision(Collider& c, const int layer)
 
 Collision Physics::HandleCollision(Collider& player, Collider& other)
 {
-	const auto is_circle1 = player.shape_ == Shape::kCircle;
-	const auto is_circle2 = other.shape_ == Shape::kCircle;
+	const auto is_circle1 = player.GetShape() == Shape::kCircle;
+	const auto is_circle2 = other.GetShape() == Shape::kCircle;
 
 	const auto& t1 = player.entity_->GetTransform();
 	auto t2 = other.entity_->GetTransform();

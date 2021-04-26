@@ -44,9 +44,14 @@ void Game::Exit()
 
 }
 
-Entity& Game::GetRoot()
+Entity& Game::GetRoot() const
 {
 	return *root_;
+}
+
+void Game::SetCamera(const std::shared_ptr<Camera>& camera) const
+{
+	renderer_->SetCamera(camera);
 }
 
 void Game::HandleInput() const
