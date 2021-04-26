@@ -9,6 +9,8 @@ void Transform::SetSize(float width, float height)
 {
 	scale_ = {width, height};
 
+	origin_ = scale_ / 2;
+	
 	if(entity_->HasRenderer())
 	{
 		entity_->GetRenderer()->SetSize(width, height);
