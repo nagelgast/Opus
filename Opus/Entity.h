@@ -30,8 +30,9 @@ public:
 	OPUS_API void Destroy();
 
 	OPUS_API std::shared_ptr<Collider> AddComponent(const Collider& c);
+	std::shared_ptr<Entity> Instantiate() const;
 
-	
+
 	template <typename T> std::shared_ptr<T> AddComponent()
 	{
 		return AddComponent(T());
@@ -60,7 +61,7 @@ public:
 		return nullptr;
 	}
 
-	OPUS_API std::shared_ptr<Entity> AddEntity(Entity&& e) const;
+	OPUS_API std::shared_ptr<Entity> Instantiate(Entity&& e) const;
 	OPUS_API std::vector<std::shared_ptr<Entity>>& GetEntities() const;
 	OPUS_API float GetDeltaTime() const;
 	OPUS_API float GetFixedDeltaTime() const;

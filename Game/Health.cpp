@@ -16,7 +16,7 @@ void Health::Start()
 	health_bar.GetTransform().SetSize(50, 10);
 	health_bar.AddComponent(HealthBar(reference, {0,-30}));
 	health_bar.AddComponent(ShapeRenderer(Shape::kSquare, 1, 0, 0, 0.5f));
-	entity_->AddEntity(std::move(health_bar));
+	entity_->Instantiate(std::move(health_bar));
 }
 
 void Health::TakeDamage(int amount)

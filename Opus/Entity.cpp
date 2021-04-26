@@ -90,7 +90,12 @@ std::shared_ptr<Collider> Entity::AddComponent(const Collider& c)
 	return collider_;
 }
 
-std::shared_ptr<Entity> Entity::AddEntity(Entity&& e) const
+std::shared_ptr<Entity> Entity::Instantiate() const
+{
+	return ec_->CreateEntity();
+}
+
+std::shared_ptr<Entity> Entity::Instantiate(Entity&& e) const
 {
 	return ec_->AddEntity(std::move(e));
 }
