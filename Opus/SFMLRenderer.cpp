@@ -35,13 +35,6 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 	}
 
 	window_.clear();
-
-	window_.setView(window_.getDefaultView());
-	
-	for (const auto& entity_renderer : screen_entity_renderers)
-	{
-		window_.draw(*entity_renderer);
-	}
 	
 	if(!camera_.expired())
 	{
@@ -55,6 +48,12 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 		window_.draw(*entity_renderer);
 	}
 
+	window_.setView(window_.getDefaultView());
+
+	for (const auto& entity_renderer : screen_entity_renderers)
+	{
+		window_.draw(*entity_renderer);
+	}
 	
 	window_.display();
 }
