@@ -1,10 +1,9 @@
 #include "Projectile.h"
 
-#include "../Opus/Collision.h"
-#include "../Opus/Entity.h"
-#include "../Opus/Physics.h"
 #include "Health.h"
-#include "../Opus/Transform.h"
+
+#include "../Opus/Collision.h"
+#include "../Opus/Physics.h"
 
 Projectile::Projectile(int damage, const Vector2& direction, const float speed, const float max_distance)
 :	direction_(direction),

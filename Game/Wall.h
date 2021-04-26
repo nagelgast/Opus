@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Opus/Entity.h"
+#include "../Opus/Core.h"
 
 class Wall final :
 	public Entity

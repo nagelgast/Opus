@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../Opus/Entity.h"
+#include "../Opus/Core.h"
 
 class Fireball final : public Entity
 {

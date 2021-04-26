@@ -3,7 +3,6 @@
 #include "../Opus/Collider.h"
 #include "../Opus/Shape.h"
 #include "../Opus/ShapeRenderer.h"
-#include "../Opus/Transform.h"
 
 Wall::Wall() : Entity()
 {

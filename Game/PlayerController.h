@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../Opus/Component.h"
-#include "../Opus/Vector2.h"
+#include "../Opus/Core.h"
 
 class PlayerController final :
     public Component

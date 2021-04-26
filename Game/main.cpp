@@ -1,10 +1,11 @@
-#include "../Opus/Camera.h"
+
 #include "Enemy.h"
-#include "../Opus/Game.h"
 #include "Player.h"
 #include "Wall.h"
+
+#include "../Opus/Core.h"
+#include "../Opus/Camera.h"
 #include "../Opus/ShapeRenderer.h"
-#include "../Opus/Transform.h"
 #include "../Opus/Shape.h"
 
 const int kScreenWidth = 1024;

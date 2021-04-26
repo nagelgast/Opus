@@ -1,10 +1,10 @@
 #include "Enemy.h"
 
-#include "../Opus/Shape.h"
 #include "Health.h"
+
+#include "../Opus/Shape.h"
 #include "../Opus/Collider.h"
 #include "../Opus/SpriteRenderer.h"
-#include "../Opus/Transform.h"
 
 Enemy::Enemy()
 {

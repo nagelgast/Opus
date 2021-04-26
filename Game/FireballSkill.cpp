@@ -1,10 +1,8 @@
 #include "FireballSkill.h"
 
-#include "../Opus/Collider.h"
-#include "../Opus/Entity.h"
 #include "Fireball.h"
+
 #include "../Opus/Input.h"
-#include "../Opus/Transform.h"
 
 void FireballSkill::Trigger(const PlayerSkillHandler& psh)
 {

@@ -1,7 +1,6 @@
 #include "HealthBar.h"
 
 #include "../Opus/ShapeRenderer.h"
-#include "../Opus/Transform.h"
 
 HealthBar::HealthBar(const std::shared_ptr<Health>& health, const Vector2 offset) : health_(health), offset_(offset)
 {

@@ -168,6 +168,7 @@
     <ClInclude Include="CollisionSystem.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="Core.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityController.h" />
     <ClInclude Include="framework.h" />
