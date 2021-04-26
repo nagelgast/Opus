@@ -30,7 +30,7 @@ public:
 	OPUS_API void Destroy();
 
 	OPUS_API std::shared_ptr<Collider> AddComponent(const Collider& c);
-	std::shared_ptr<Entity> Instantiate() const;
+	OPUS_API std::shared_ptr<Entity> Instantiate() const;
 
 
 	template <typename T> std::shared_ptr<T> AddComponent()
@@ -78,6 +78,8 @@ public:
 	void OnCollision(const Collider& other);
 
 private:
+	void OnDestroy();
+	
 	std::string name_;
 	EntityController* ec_ = nullptr;
 	std::shared_ptr<Transform> transform_;

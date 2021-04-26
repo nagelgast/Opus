@@ -1,6 +1,7 @@
 #include "Enemy.h"
 
 #include "Health.h"
+#include "Loot.h"
 
 #include "../Opus/Shape.h"
 #include "../Opus/Collider.h"
@@ -13,4 +14,5 @@ Enemy::Enemy()
 	GetTransform().SetSize(32,32);
 
 	AddComponent(Health(100));
+	AddComponent(Loot());
 }

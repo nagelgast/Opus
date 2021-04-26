@@ -158,6 +158,7 @@
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="Loot.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="Fireball.h" />
     <ClInclude Include="FireballSkill.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Loot.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerSkillHandler.h" />

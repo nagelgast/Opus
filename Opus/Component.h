@@ -12,5 +12,6 @@ public:
 	virtual void Update() {}
 	virtual void FixedUpdate() {}
 	virtual void OnCollision(const Collider& other) {}
+	virtual void OnDestroy() {}
 	Entity* entity_ = nullptr;
 };

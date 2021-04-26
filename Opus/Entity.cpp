@@ -82,6 +82,7 @@ void Entity::FixedUpdate()
 void Entity::Destroy()
 {
 	destroyed_ = true;
+	OnDestroy();
 }
 
 std::shared_ptr<Collider> Entity::AddComponent(const Collider& c)
@@ -148,6 +149,15 @@ void Entity::OnCollision(const Collider& other)
 	{
 		component.second->OnCollision(other);
 	}
+}
+
+void Entity::OnDestroy()
+{
+	for (const auto& component : components_)
+	{
+		component.second->OnDestroy();
+	}
+
 }
 
 BaseEntityRenderer* Entity::GetRenderer() const
