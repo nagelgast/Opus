@@ -29,6 +29,11 @@ void PlayerController::FixedUpdate()
 		direct_control_ = false;
 	}
 
+	if(psh_->IsCasting())
+	{
+		return;
+	}
+
 	if(!direct_control_)
 	{
 		const auto delta = target_pos_ - pos;

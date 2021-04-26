@@ -14,8 +14,10 @@ Player::Player() : Entity()
 	const auto collider = AddComponent(Collider(1, Shape::kSquare, false, false));
 	GetTransform().SetSize(100, 100);
 
-	AddComponent(PlayerController(200, 400));
+	auto pc = AddComponent(PlayerController(200, 400));
 	auto fireball = FireballSkill();
-	const auto psh = PlayerSkillHandler(fireball);
-	AddComponent(psh);
+
+	const auto psh = AddComponent(PlayerSkillHandler(fireball));
+
+	pc->psh_ = psh;
 }

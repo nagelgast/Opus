@@ -6,5 +6,6 @@ class FireballSkill
 {
 public:
 	void Trigger(const PlayerSkillHandler&) ;
+	float GetCastTime();
 };
 

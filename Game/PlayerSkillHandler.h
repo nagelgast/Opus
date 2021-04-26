@@ -10,7 +10,9 @@ public:
 	explicit PlayerSkillHandler(FireballSkill& active_skill);
 
 	void Update() override;
+	bool IsCasting();
 
 private:
+	float remaining_cast_time_;
 	FireballSkill& active_skill_;
 };

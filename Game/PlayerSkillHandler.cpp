@@ -4,14 +4,30 @@
 
 #include "../Opus/Input.h"
 
-PlayerSkillHandler::PlayerSkillHandler(FireballSkill& active_skill) : active_skill_(active_skill)
+PlayerSkillHandler::PlayerSkillHandler(FireballSkill& active_skill)
+	: remaining_cast_time_(),
+	  active_skill_(active_skill)
 {
 }
 
 void PlayerSkillHandler::Update()
 {
-	if (entity_->GetInput().action.pressed)
+	if (remaining_cast_time_ > 0)
 	{
-		active_skill_.Trigger(*this);
+		remaining_cast_time_ -= entity_->GetDeltaTime();
+		if(remaining_cast_time_ <= 0)
+		{
+			active_skill_.Trigger(*this);
+		}
 	}
+
+	if (remaining_cast_time_ <= 0 && entity_->GetInput().action.pressed)
+	{
+		remaining_cast_time_ = active_skill_.GetCastTime();
+	}
+}
+
+bool PlayerSkillHandler::IsCasting()
+{
+	return remaining_cast_time_ > 0;
 }
