@@ -15,5 +15,7 @@ private:
 	float speed_;
 	float max_distance_;
 	float distance_traveled_ = 0.f;
+
+	bool hit_;
 };
 

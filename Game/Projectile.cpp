@@ -9,7 +9,8 @@ Projectile::Projectile(int damage, const Vector2& direction, const float speed, 
 :	direction_(direction),
 	damage_(damage),
 	speed_(speed),
-	max_distance_(max_distance)
+	max_distance_(max_distance),
+	hit_(false)
 {
 }
 
@@ -33,6 +34,9 @@ void Projectile::Update()
 
 void Projectile::OnCollision(const Collider& other)
 {
+	if(hit_) return;
+	
+	hit_ = true;
 	auto health = other.entity_->GetComponent<Health>();
 	if (health)
 	{

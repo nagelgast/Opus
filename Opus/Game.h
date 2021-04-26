@@ -20,7 +20,9 @@ public:
 	OPUS_API void Exit();
 
 	OPUS_API Entity& GetRoot() const;
-	OPUS_API void SetCamera(const std::shared_ptr<Camera>& camera) const;
+	OPUS_API void SetCamera(const std::shared_ptr<Camera>& camera);
+	OPUS_API void SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix);
+	
 private:
 	void HandleInput() const;
 	void FixedUpdate();

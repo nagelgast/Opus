@@ -120,6 +120,11 @@ Transform& Entity::GetTransform() const
 	return *transform_;
 }
 
+void Entity::SetName(const std::string& name)
+{
+	name_ = name;
+}
+
 BaseEntityRenderer* Entity::CreateRenderer()
 {
 	renderer_ = ec_->GetRenderer().CreateEntityRendererInstance();

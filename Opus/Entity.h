@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <map>
+#include <string>
 #include <typeindex>
 #include <vector>
 
@@ -67,6 +68,7 @@ public:
 
 	OPUS_API Transform& GetTransform() const;
 
+	OPUS_API void SetName(const std::string& name);
 
 	OPUS_API BaseEntityRenderer* CreateRenderer();
 	OPUS_API BaseEntityRenderer* GetRenderer() const;
@@ -75,6 +77,7 @@ public:
 	void OnCollision(const Collider& other);
 
 private:
+	std::string name_;
 	EntityController* ec_ = nullptr;
 	std::shared_ptr<Transform> transform_;
 	std::unique_ptr<BaseEntityRenderer> renderer_;

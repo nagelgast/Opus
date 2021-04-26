@@ -23,6 +23,7 @@ public:
 	const BaseTime& GetTime() const;
 	const Input& GetInput() const;
 
+	// Should be owned by Game
 	CollisionSystem collision_system_;
 private:
 	std::vector<std::shared_ptr<Entity>> entities_;

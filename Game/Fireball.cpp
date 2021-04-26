@@ -9,7 +9,7 @@
 Fireball::Fireball(const Vector2& start_pos, const Vector2& target_pos) : Entity()
 {
 	AddComponent(ShapeRenderer(Shape::kCircle, 1, 0, 0, 1));
-	const auto collider = AddComponent(Collider(0, Shape::kSquare, true, false));
+	const auto collider = AddComponent(Collider(2, Shape::kSquare, true, false));
 	GetTransform().SetSize(20,20);
 	GetTransform().SetPosition(start_pos);
 

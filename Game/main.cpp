@@ -17,11 +17,22 @@ int main()
 {
 	auto* game = new Game(kScreenWidth, kScreenHeight, kFpsLimit, kFixedTimeStepMs, "Game");
 
+
+	// TODO Add naming to layers and force symmetry
+	auto collision_matrix = std::map<int, std::vector<int>>();
+
+	collision_matrix[0] = {0, 1, 2};
+	collision_matrix[1] = {0, 1};
+	collision_matrix[2] = {0, 2};
+	
+	game->SetCollisionMatrix(collision_matrix);
+	
 	// Load in starting entities
 	{
 		const auto root = game->GetRoot();
 		const auto player = root.AddEntity(Player());
-
+		player->SetName("Player");
+		
 		Entity main_camera {};
 		auto camera = main_camera.AddComponent<Camera>();
 		camera->SetTarget(player);
@@ -43,12 +54,15 @@ int main()
 		root.AddEntity(std::move(mana_globe));
 
 
-		root.AddEntity(Wall());
-		const auto wall = root.AddEntity(Wall());
-		wall->GetTransform().SetPosition(300, 500);
+		const auto wall1 = root.AddEntity(Wall());
+		wall1->SetName("Wall1");
+		const auto wall2 = root.AddEntity(Wall());
+		wall2->GetTransform().SetPosition(300, 500);
+		wall2->SetName("Wall2");
 
 		const auto enemy = root.AddEntity(Enemy());
 		enemy->GetTransform().SetPosition(500, 100);
+		enemy->SetName("Enemy");
 	}
 
 	game->Run();

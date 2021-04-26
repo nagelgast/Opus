@@ -23,7 +23,7 @@ void CollisionSystem::FixedUpdate()
 
 void CollisionSystem::HandleCollision(Collider& c1, Collider& c2) const
 {
-	if (c1.GetLayer() != c2.GetLayer()) return;
+	if (!CheckLayerCollision(c1, c2)) return;
 	
 	const auto collision = Physics::HandleCollision(c1, c2);
 	if (!collision.hit) return;
@@ -49,6 +49,12 @@ void CollisionSystem::HandleCollision(Collider& c1, Collider& c2) const
 	c2.Collide(c1);
 }
 
+bool CollisionSystem::CheckLayerCollision(const Collider& c1, const Collider& c2) const
+{
+	auto colliding_layers = collision_matrix_.at(c1.GetLayer());
+	return std::find(colliding_layers.begin(), colliding_layers.end(), c2.GetLayer()) != colliding_layers.end();
+}
+
 void CollisionSystem::AddCollider(const std::shared_ptr<Collider>& collider)
 {
 	colliders_.push_back(collider);
@@ -58,4 +64,9 @@ void CollisionSystem::RemoveCollider(std::shared_ptr<Collider> collider)
 {
 	const auto iter = remove(colliders_.begin(), colliders_.end(), collider);
 	colliders_.erase(iter, colliders_.end());
+}
+
+void CollisionSystem::SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix)
+{
+	collision_matrix_ = collision_matrix;
 }

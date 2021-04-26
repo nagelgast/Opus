@@ -49,9 +49,14 @@ Entity& Game::GetRoot() const
 	return *root_;
 }
 
-void Game::SetCamera(const std::shared_ptr<Camera>& camera) const
+void Game::SetCamera(const std::shared_ptr<Camera>& camera)
 {
 	renderer_->SetCamera(camera);
+}
+
+void Game::SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix)
+{
+	entity_controller_.collision_system_.SetCollisionMatrix(collision_matrix);
 }
 
 void Game::HandleInput() const
