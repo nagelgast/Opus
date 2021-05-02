@@ -21,13 +21,13 @@ void PlayerSkillHandler::Update()
 		}
 	}
 
-	if (remaining_cast_time_ <= 0 && entity_->GetInput().action.pressed)
+	if (remaining_cast_time_ <= 0 && entity_->GetInput().right_mouse.pressed)
 	{
 		remaining_cast_time_ = active_skill_.GetCastTime();
 	}
 }
 
-bool PlayerSkillHandler::IsCasting()
+bool PlayerSkillHandler::IsCasting() const
 {
 	return remaining_cast_time_ > 0;
 }

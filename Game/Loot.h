@@ -8,4 +8,3 @@ class Loot :
 	void OnDestroy() override;
 	void SpawnItem();
 };
-

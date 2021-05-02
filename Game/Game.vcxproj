@@ -158,6 +158,8 @@
     <ClCompile Include="FireballSkill.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthBar.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Loot.cpp" />
     <ClCompile Include="main.cpp" />
@@ -165,7 +167,10 @@
     <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="PlayerSkillHandler.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="Targetable.cpp" />
+    <ClCompile Include="TargetingSystem.cpp" />
     <ClCompile Include="Wall.cpp" />
+    <ClCompile Include="WorldItem.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clickable.h" />
@@ -174,15 +179,21 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Fireball.h" />
     <ClInclude Include="FireballSkill.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Loot.h" />
+    <ClInclude Include="Rarity.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerSkillHandler.h" />
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="PlayerController.h" />
+    <ClInclude Include="Targetable.h" />
+    <ClInclude Include="TargetingSystem.h" />
     <ClInclude Include="Wall.h" />
+    <ClInclude Include="WorldItem.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Sprites\chars\gabe\gabe-idle-run.png" />

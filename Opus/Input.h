@@ -10,8 +10,8 @@ struct __declspec(dllexport) Input
 	Key left;
 	Key right;
 	
-	Key action;
-	Key move;
+	Key left_mouse;
+	Key right_mouse;
 	Key run;
 
 	Vector2 mouse_screen_pos;

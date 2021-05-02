@@ -3,6 +3,7 @@
 #include "FireballSkill.h"
 #include "PlayerController.h"
 #include "PlayerSkillHandler.h"
+#include "TargetingSystem.h"
 
 #include "../Opus/Shape.h"
 #include "../Opus/SpriteRenderer.h"
@@ -14,7 +15,9 @@ Player::Player() : Entity()
 	const auto collider = AddComponent(Collider(1, Shape::kSquare, false, false));
 	GetTransform().SetSize(100, 100);
 
-	auto pc = AddComponent(PlayerController(200, 400));
+	auto ts = AddComponent(TargetingSystem());
+
+	auto pc = AddComponent(PlayerController(ts, 200, 400));
 	auto fireball = FireballSkill();
 
 	const auto psh = AddComponent(PlayerSkillHandler(fireball));

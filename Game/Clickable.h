@@ -5,4 +5,7 @@
 class Clickable :
     public Component
 {
+public:
+	void Update() override;
+	void OnClick();
 };
