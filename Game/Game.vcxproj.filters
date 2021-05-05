@@ -84,12 +84,6 @@
     <ClCompile Include="WorldItem.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
-    <ClCompile Include="InventoryItem.cpp">
-      <Filter>Source Files\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="Inventory.cpp">
-      <Filter>Source Files\Items</Filter>
-    </ClCompile>
     <ClCompile Include="Targetable.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
@@ -147,12 +141,6 @@
       <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="Loot.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="InventoryItem.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Inventory.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="WorldItem.h">

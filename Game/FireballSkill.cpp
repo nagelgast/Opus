@@ -4,11 +4,13 @@
 
 #include "../Opus/Input.h"
 
-void FireballSkill::Trigger(const PlayerSkillHandler& psh)
+void FireballSkill::Trigger(PlayerSkillHandler& psh)
 {
 	const auto player_pos = psh.entity_->GetTransform().GetPosition();
-	const auto fireball = psh.entity_->Instantiate(Fireball(player_pos, psh.entity_->GetInput().mouse_world_pos));
-	fireball->SetName("Fireball");
+	// auto fireball = psh.entity_->ec_.CreateEntity<Fireball>();
+
+	// fireball->Initialize(player_pos, psh.entity_->GetInput().mouse_world_pos);
+	// fireball->SetName("Fireball");
 }
 
 float FireballSkill::GetCastTime()

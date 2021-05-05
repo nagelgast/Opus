@@ -9,7 +9,7 @@ class MouseItem final :
 	public Entity
 {
 public:
-	explicit MouseItem();
+	void Awake() override;
 	
 	bool TrySetItem(std::shared_ptr<Item> item);
 	bool HasItem() const;

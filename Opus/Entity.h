@@ -19,20 +19,22 @@ class Entity
 public:
 	Entity();
 	Entity(Entity&);
-	~Entity();
+	Entity(Entity&&) noexcept;
+	virtual ~Entity();
+	
+	Entity& operator=(Entity& other) = default;
+	Entity& operator=(Entity&& other) = default;
 
-	void Start(EntityController* ec);
+	virtual void Awake() {}
+	virtual void Start() {}
 	
 	virtual void Update() {}
 	virtual void FixedUpdate() {}
-	void UpdateComponents();
-	void FixedUpdateComponents();
 	void Destroy();
 
 	std::shared_ptr<Collider> AddComponent(const Collider& c);
 	std::shared_ptr<Entity> Instantiate() const;
-
-
+	
 	template <typename T> std::shared_ptr<T> AddComponent()
 	{
 		return AddComponent(T());
@@ -77,11 +79,14 @@ public:
 	
 	void OnCollision(const Collider& other);
 
+	EntityController* ec_ = nullptr;
 private:
 	void OnDestroy();
-	
+	void StartComponents();
+	void UpdateComponents();
+	void FixedUpdateComponents();
+
 	std::string name_;
-	EntityController* ec_ = nullptr;
 	std::shared_ptr<Transform> transform_;
 	std::unique_ptr<BaseEntityRenderer> renderer_;
 

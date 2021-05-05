@@ -37,9 +37,8 @@ Entity::~Entity()
 	components_.clear();
 }
 
-void Entity::Start(EntityController* ec)
+void Entity::StartComponents()
 {
-	ec_ = ec;
 	for (const auto& component : components_)
 	{
 		component.second->Start();
@@ -88,11 +87,6 @@ std::shared_ptr<Collider> Entity::AddComponent(const Collider& c)
 std::shared_ptr<Entity> Entity::Instantiate() const
 {
 	return ec_->CreateEntity();
-}
-
-std::shared_ptr<Entity> Entity::Instantiate(Entity&& e) const
-{
-	return ec_->AddEntity(std::move(e));
 }
 
 std::vector<std::shared_ptr<Entity>>& Entity::GetEntities() const
@@ -151,7 +145,7 @@ void Entity::OnDestroy()
 	{
 		component.second->OnDestroy();
 	}
-
+	
 }
 
 BaseEntityRenderer* Entity::GetRenderer() const

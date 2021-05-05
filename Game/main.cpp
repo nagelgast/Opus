@@ -30,37 +30,33 @@ int main()
 	// Load in starting entities
 	{
 		const auto root = game->GetRoot();
-		const auto player = root.Instantiate(Player());
+		auto player = root.ec_->CreateEntity<Player>();
 		player->SetName("Player");
-		
-		Entity main_camera {};
-		auto camera = main_camera.AddComponent<Camera>();
+
+		auto main_camera = root.Instantiate();
+		auto camera = main_camera->AddComponent<Camera>();
 		camera->SetTarget(player);
 		game->SetCamera(camera);
-		root.Instantiate(std::move(main_camera));
 
 		const auto margin = 120;
-		
-		Entity health_globe {};
-		health_globe.AddComponent(ShapeRenderer(Shape::kCircle, 1,0,0,1, false));
-		health_globe.GetTransform().SetPosition(margin, kScreenHeight-margin);
-		health_globe.GetTransform().SetSize(100, 100);
-		root.Instantiate(std::move(health_globe));
 
-		Entity mana_globe {};
-		mana_globe.AddComponent(ShapeRenderer(Shape::kCircle, 0, 0, 1, 1, false));
-		mana_globe.GetTransform().SetPosition(kScreenWidth-margin, kScreenHeight - margin);
-		mana_globe.GetTransform().SetSize(100, 100);
-		root.Instantiate(std::move(mana_globe));
+		auto health_globe = root.Instantiate();
+		health_globe->AddComponent(ShapeRenderer(Shape::kCircle, 1,0,0,1, false));
+		health_globe->GetTransform().SetPosition(margin, kScreenHeight-margin);
+		health_globe->GetTransform().SetSize(100, 100);
 
+		auto mana_globe = root.Instantiate();
+		mana_globe->AddComponent(ShapeRenderer(Shape::kCircle, 0, 0, 1, 1, false));
+		mana_globe->GetTransform().SetPosition(kScreenWidth-margin, kScreenHeight - margin);
+		mana_globe->GetTransform().SetSize(100, 100);
 
-		const auto wall1 = root.Instantiate(Wall());
+		const auto wall1 = root.ec_->CreateEntity<Wall>();
 		wall1->SetName("Wall1");
-		const auto wall2 = root.Instantiate(Wall());
+		const auto wall2 = root.ec_->CreateEntity<Wall>(); 
 		wall2->GetTransform().SetPosition(300, 500);
 		wall2->SetName("Wall2");
 
-		const auto enemy = root.Instantiate(Enemy());
+		const auto enemy = root.ec_->CreateEntity<Enemy>();
 		enemy->GetTransform().SetPosition(500, 100);
 		enemy->SetName("Enemy");
 	}

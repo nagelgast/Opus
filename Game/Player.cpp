@@ -9,7 +9,7 @@
 #include "../Opus/SpriteRenderer.h"
 #include "../Opus/Collider.h"
 
-Player::Player() : Entity()
+void Player::Awake()
 {
 	const Sprite sprite { "Sprites/chars/gabe/gabe-idle-run.png", {0, 0, 24, 24}};
 	auto sr = AddComponent(SpriteRenderer());

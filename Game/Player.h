@@ -6,6 +6,6 @@ class Player final :
     public Entity
 {
 public:
-	explicit Player();
+	void Awake() override;
 };
 

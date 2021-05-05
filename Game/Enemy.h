@@ -6,5 +6,5 @@ class Enemy final :
     public Entity
 {
 public:
-	explicit Enemy();
+	void Awake() override;
 };

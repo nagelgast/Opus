@@ -24,15 +24,7 @@ void EntityController::DestroyEntity(Entity& entity)
 
 std::shared_ptr<Entity> EntityController::CreateEntity()
 {
-	return AddEntity(Entity());
-}
-
-std::shared_ptr<Entity> EntityController::AddEntity(Entity&& e)
-{
-	auto entity = std::make_shared<Entity>(e);
-	entities_.push_back(entity);
-	entity->Start(this);
-	return entity;
+	return AddEntity(std::make_shared<Entity>());
 }
 
 // Should this call protect the entities somehow?
@@ -80,4 +72,14 @@ const BaseTime& EntityController::GetTime() const
 const Input& EntityController::GetInput() const
 {
 	return input_;
+}
+
+std::shared_ptr<Entity> EntityController::AddEntity(std::shared_ptr<Entity> entity)
+{
+	entity->ec_ = this;
+	entities_.push_back(entity);
+	entity->Awake();
+	entity->Start();
+	entity->StartComponents();
+	return entity;
 }

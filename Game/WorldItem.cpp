@@ -4,7 +4,6 @@
 
 
 
-#include "InventoryItem.h"
 #include "MouseItem.h"
 #include "Targetable.h"
 #include "TargetingSystem.h"
@@ -23,10 +22,10 @@ void WorldItem::Start()
 void WorldItem::PickUp()
 {
 	std::cout << "Test";
-	MouseItem x;
+	
 
-	if(x.TrySetItem(item_))
-	{
-		entity_->Destroy();
-	}
+	// if(x.TrySetItem(item_))
+	// {
+	// 	entity_->Destroy();
+	// }
 }

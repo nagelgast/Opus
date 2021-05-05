@@ -35,7 +35,7 @@ Collision Physics::HandleCollision(Collider& player, Collider& other)
 	const auto is_circle2 = other.GetShape() == Shape::kCircle;
 
 	const auto& t1 = player.entity_->GetTransform();
-	auto t2 = other.entity_->GetTransform();
+	auto& t2 = other.entity_->GetTransform();
 	if(is_circle1 && is_circle2)
 	{
 		const auto collision = CheckCircleCollision(t1, t2);

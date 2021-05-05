@@ -5,13 +5,17 @@
 #include "../Opus/Collision.h"
 #include "../Opus/Physics.h"
 
-Projectile::Projectile(int damage, const Vector2& direction, const float speed, const float max_distance)
-:	direction_(direction),
-	damage_(damage),
+Projectile::Projectile(int damage, const float speed, const float max_distance)
+:	damage_(damage),
 	speed_(speed),
 	max_distance_(max_distance),
 	hit_(false)
 {
+}
+
+void Projectile::SetDirection(const Vector2& direction)
+{
+	direction_ = direction;
 }
 
 void Projectile::Update()

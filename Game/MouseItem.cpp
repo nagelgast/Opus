@@ -5,7 +5,7 @@
 #include "../Opus/Input.h"
 #include "../Opus/SpriteRenderer.h"
 
-MouseItem::MouseItem()
+void MouseItem::Awake()
 {
 	renderer_ = AddComponent(SpriteRenderer());
 }

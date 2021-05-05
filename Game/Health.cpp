@@ -1,7 +1,9 @@
 #include "Health.h"
 
-#include "HealthBar.h"
 
+
+#include "HealthBar.h"
+#include "../Opus/EntityController.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/Shape.h"
 
@@ -12,11 +14,10 @@ Health::Health(int max_health) : current_health_(max_health), max_health_(max_he
 void Health::Start()
 {
 	const auto reference = entity_->GetComponent<Health>();
-	Entity health_bar;
-	health_bar.GetTransform().SetSize(50, 10);
-	health_bar.AddComponent(HealthBar(reference, {0,-30}));
-	health_bar.AddComponent(ShapeRenderer(Shape::kSquare, 1, 0, 0, 0.5f));
-	entity_->Instantiate(std::move(health_bar));
+	auto health_bar = entity_->ec_->CreateEntity();
+	health_bar->GetTransform().SetSize(50, 10);
+	health_bar->AddComponent(HealthBar(reference, {0,-30}));
+	health_bar->AddComponent(ShapeRenderer(Shape::kSquare, 1, 0, 0, 0.5f));
 }
 
 void Health::TakeDamage(int amount)

@@ -1,7 +1,8 @@
 #pragma once
 
 #include "../Opus/Core.h"
-#include "Health.h"
+
+class Health;
 
 class HealthBar final :
 	public Component

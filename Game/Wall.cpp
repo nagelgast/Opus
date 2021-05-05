@@ -4,7 +4,7 @@
 #include "../Opus/Shape.h"
 #include "../Opus/ShapeRenderer.h"
 
-Wall::Wall() : Entity()
+void Wall::Awake()
 {
 	AddComponent(ShapeRenderer(Shape::kSquare, 1, 1, 1, 1));
 	AddComponent(Collider(0, Shape::kSquare, false, true));

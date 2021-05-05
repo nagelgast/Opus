@@ -1,6 +1,5 @@
 #pragma once
 
-#include "InventoryItem.h"
 #include "Item.h"
 #include "../Opus/Core.h"
 

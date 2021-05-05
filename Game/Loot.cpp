@@ -16,15 +16,14 @@ void Loot::SpawnItem()
 	item.SetName("TestItem");
 	item.SetSprite(Sprite{ "Sprites/mobs/slime-blue.png", {0, 8, 16, 16} });
 
-	Entity world_item {};
-	world_item.SetName("WorldItem");
+	auto world_item = entity_->ec_->CreateEntity();
+	world_item->SetName("WorldItem");
 	
-	world_item.AddComponent(ShapeRenderer(Shape::kSquare, 0.5f, 0.5f, 0.5f, 1));
-	auto targetable = world_item.AddComponent(Targetable());
+	world_item->AddComponent(ShapeRenderer(Shape::kSquare, 0.5f, 0.5f, 0.5f, 1));
+	auto targetable = world_item->AddComponent(Targetable());
 
-	auto& transform = world_item.GetTransform();
+	auto& transform = world_item->GetTransform();
 	transform.SetPosition(entity_->GetTransform().GetPosition());
 	transform.SetSize(10, 10);
-	world_item.AddComponent(WorldItem(item));
-	entity_->Instantiate(std::move(world_item));
+	world_item->AddComponent(WorldItem(item));
 }

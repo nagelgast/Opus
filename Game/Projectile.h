@@ -5,7 +5,8 @@
 class Projectile final : public Component
 {
 public:
-	Projectile(int damage, const Vector2& direction, float speed, float max_distance);
+	Projectile(int damage, float speed, float max_distance);
+	void SetDirection(const Vector2& direction);
 	void Update() override;
 	void OnCollision(const Collider& other) override;
 

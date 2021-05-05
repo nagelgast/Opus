@@ -7,7 +7,7 @@
 #include "../Opus/Collider.h"
 #include "../Opus/SpriteRenderer.h"
 
-Enemy::Enemy()
+void Enemy::Awake()
 {
 	const Sprite sprite{"Sprites/mobs/slime-blue.png", {0, 8, 16, 16}};
 	auto sr = AddComponent(SpriteRenderer());

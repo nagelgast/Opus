@@ -6,5 +6,5 @@ class Wall final :
 	public Entity
 {
 public:
-	explicit Wall();
+	void Awake() override;
 };

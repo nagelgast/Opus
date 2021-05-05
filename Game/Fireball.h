@@ -2,9 +2,14 @@
 
 #include "../Opus/Core.h"
 
-class Fireball final : public Entity
+class Projectile;
+
+class Fireball final : Entity
 {
 public:
-	explicit Fireball(const Vector2& start_pos, const Vector2& target_pos);
+	void Awake() override;
+	void Initialize(const Vector2& start_pos, const Vector2& target_pos);\
+private:
+	std::shared_ptr<Projectile> projectile_;
 };
 
