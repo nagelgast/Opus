@@ -1,6 +1,6 @@
 #pragma once
 
-class __declspec(dllexport) BaseWindow
+class BaseWindow
 {
 public:
 	virtual ~BaseWindow() = default;

@@ -4,7 +4,7 @@ class Entity;
 
 #include "Vector2.h"
 
-struct __declspec(dllexport) Collision
+struct Collision
 {
 	Collision() = default;
 	Collision(Entity* const e, const Vector2& v) : hit(true), other(e), displacement(v) {}

@@ -201,7 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Opus\Opus.vcxproj">
-      <Project>{665cfcac-ca6d-4b9d-9363-dda6f3849396}</Project>
+      <Project>{9f55b023-48a5-458e-94c2-a40c5eef5fef}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

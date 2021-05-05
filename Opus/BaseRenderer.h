@@ -8,7 +8,7 @@ class Entity;
 class BaseEntityRenderer;
 class BaseCamera;
 
-class __declspec(dllexport) BaseRenderer
+class BaseRenderer
 {
 public:
 	virtual ~BaseRenderer() = default;

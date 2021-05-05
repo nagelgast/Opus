@@ -5,13 +5,13 @@
 class Transform final : public Component
 {
 public:
-	OPUS_API void SetSize(float width, float height);
-	OPUS_API Vector2 GetPosition() const;
-	OPUS_API void SetPosition(float x, float y);
-	OPUS_API void SetPosition(Vector2 position);
-	OPUS_API void Move(Vector2 offset);
-	OPUS_API Vector2 GetOrigin() const;
-	OPUS_API Vector2 GetScale() const;
+	void SetSize(float width, float height);
+	Vector2 GetPosition() const;
+	void SetPosition(float x, float y);
+	void SetPosition(Vector2 position);
+	void Move(Vector2 offset);
+	Vector2 GetOrigin() const;
+	Vector2 GetScale() const;
 private:
 	Vector2 position_;
 	Vector2 rotation_;

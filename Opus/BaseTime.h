@@ -1,6 +1,6 @@
 #pragma once
 
-class __declspec(dllexport) BaseTime
+class BaseTime
 {
 public:
 	virtual ~BaseTime() = default;

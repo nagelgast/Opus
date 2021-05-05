@@ -1,6 +1,6 @@
 #pragma once
 
-struct __declspec(dllexport) Color
+struct Color
 {
 	float r;
 	float g;

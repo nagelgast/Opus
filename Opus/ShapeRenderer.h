@@ -4,7 +4,7 @@
 
 enum class Shape;
 
-class OPUS_API ShapeRenderer :
+class ShapeRenderer :
     public Component
 {
 public:

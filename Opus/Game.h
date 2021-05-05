@@ -9,19 +9,18 @@
 #include "EntityController.h"
 
 #include "BaseWindow.h"
-#include "Opus.h"
 
 class Game
 {
 public:
-	OPUS_API explicit Game(int width, int height, int fps_limit, int fixed_update_ms, const std::string& title);
+	explicit Game(int width, int height, int fps_limit, int fixed_update_ms, const std::string& title);
 
-	OPUS_API void Run();
-	OPUS_API void Exit();
+	void Run();
+	void Exit();
 
-	OPUS_API Entity& GetRoot() const;
-	OPUS_API void SetCamera(const std::shared_ptr<Camera>& camera);
-	OPUS_API void SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix);
+	Entity& GetRoot() const;
+	void SetCamera(const std::shared_ptr<Camera>& camera);
+	void SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix);
 	
 private:
 	void HandleInput() const;

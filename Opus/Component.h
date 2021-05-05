@@ -4,7 +4,7 @@
 
 class Collider;
 
-class OPUS_API Component
+class Component
 {
 public:
 	virtual ~Component() = default;

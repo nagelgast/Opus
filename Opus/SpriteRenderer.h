@@ -1,17 +1,13 @@
 #pragma once
 
 #include "Component.h"
-#include <string>
+#include "Sprite.h"
 
 class SpriteRenderer : public Component
 {
 public:
-	OPUS_API SpriteRenderer(std::string path, int left, int top, int width, int height);
-	OPUS_API void Start() override;
+	SpriteRenderer(Sprite sprite);
+	void Start() override;
 private:
-	std::string path_;
-	int left_;
-	int top_;
-	int width_;
-	int height_;
+	Sprite sprite_;
 };

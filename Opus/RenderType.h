@@ -1,6 +1,6 @@
 #pragma once
 
-enum class __declspec(dllexport) RenderType
+enum class RenderType
 {
 	Shape,
 	Sprite,

@@ -3,7 +3,7 @@
 #include "Key.h"
 #include "Vector2.h"
 
-struct __declspec(dllexport) Input
+struct Input
 {
 	Key up;
 	Key down;

@@ -2,7 +2,7 @@
 
 struct Input;
 
-class __declspec(dllexport) BaseInputHandler
+class BaseInputHandler
 {
 public:
 	virtual ~BaseInputHandler() = default;

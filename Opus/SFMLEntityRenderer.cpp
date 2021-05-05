@@ -3,6 +3,7 @@
 
 #include "Entity.h"
 #include "Shape.h"
+#include "Sprite.h"
 #include "Vector2.h"
 #include "Transform.h"
 
@@ -17,19 +18,24 @@ void SFMLEntityRenderer::SetSize(float width, float height)
 	if (drawable_sprite_)
 	{
 		const auto& rect = drawable_sprite_->getTextureRect();
-		sf::Vector2f sprite_scale = { width / rect.width, height / rect.height };
+		const sf::Vector2f sprite_scale = {width / static_cast<int>(rect.width), height / static_cast<int>(rect.height)};
 		drawable_sprite_->setScale(sprite_scale);
 	}
 }
 
-void SFMLEntityRenderer::SetSprite(const std::string& path, int left, int top, int width, int height)
+void SFMLEntityRenderer::SetSprite(const Sprite sprite)
 {
 	texture_ = std::make_unique<sf::Texture>();
-	texture_->loadFromFile(path);
+	texture_->loadFromFile(sprite.path);
 
 	drawable_sprite_ = std::make_unique<sf::Sprite>();
 	drawable_sprite_->setTexture(*texture_);
-	drawable_sprite_->setTextureRect({ left, top, width, height });
+	drawable_sprite_->setTextureRect({
+		static_cast<int>(sprite.rect.left),
+		static_cast<int>(sprite.rect.top),
+		static_cast<int>(sprite.rect.width),
+		static_cast<int>(sprite.rect.height)
+	});
 }
 
 void SFMLEntityRenderer::SetShape(const Shape shape, float r, float g, float b, float a)
@@ -40,7 +46,7 @@ void SFMLEntityRenderer::SetShape(const Shape shape, float r, float g, float b, 
 		drawable_shape_ = std::make_unique<sf::CircleShape>(0.5f);
 		break;
 	case Shape::kSquare:
-		sf::Vector2f length = { 1, 1 };
+		sf::Vector2f length = {1, 1};
 		drawable_shape_ = std::make_unique<sf::RectangleShape>(length);
 		break;
 	}
@@ -73,7 +79,7 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 }
 
 void SFMLEntityRenderer::DrawBox(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position,
-	const sf::Vector2f& size, const sf::Color& color) const
+                                 const sf::Vector2f& size, const sf::Color& color) const
 {
 	sf::RectangleShape box;
 	box.setSize(size);

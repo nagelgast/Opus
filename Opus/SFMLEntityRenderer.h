@@ -6,12 +6,12 @@
 
 class Entity;
 
-class SFMLEntityRenderer : public BaseEntityRenderer, public sf::Drawable
+class SFMLEntityRenderer final : public BaseEntityRenderer, public sf::Drawable
 {
 public:
 	void SetSize(float width, float height) override;
 
-	void SetSprite(const std::string& path, int left, int top, int width, int height) override;
+	void SetSprite(Sprite sprite) override;
 	void SetShape(Shape shape, float r, float g, float b, float a) override;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;

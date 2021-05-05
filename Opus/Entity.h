@@ -6,12 +6,10 @@
 #include <typeindex>
 #include <vector>
 
-#include "Opus.h"
-
 class Collider;
 class Transform;
 class BaseEntityRenderer;
-class Vector2;
+struct Vector2;
 class EntityController;
 class Component;
 struct Input;
@@ -19,18 +17,18 @@ struct Input;
 class Entity
 {
 public:
-	OPUS_API Entity();
-	OPUS_API Entity(Entity&);
-	OPUS_API ~Entity();
+	Entity();
+	Entity(Entity&);
+	~Entity();
 
-	OPUS_API void Start(EntityController* ec);
+	void Start(EntityController* ec);
 	
-	OPUS_API void Update();
+	void Update();
 	void FixedUpdate();
-	OPUS_API void Destroy();
+	void Destroy();
 
-	OPUS_API std::shared_ptr<Collider> AddComponent(const Collider& c);
-	OPUS_API std::shared_ptr<Entity> Instantiate() const;
+	std::shared_ptr<Collider> AddComponent(const Collider& c);
+	std::shared_ptr<Entity> Instantiate() const;
 
 
 	template <typename T> std::shared_ptr<T> AddComponent()
@@ -61,19 +59,19 @@ public:
 		return nullptr;
 	}
 
-	OPUS_API std::shared_ptr<Entity> Instantiate(Entity&& e) const;
-	OPUS_API std::vector<std::shared_ptr<Entity>>& GetEntities() const;
-	OPUS_API float GetDeltaTime() const;
-	OPUS_API float GetFixedDeltaTime() const;
-	OPUS_API const Input& GetInput() const;
+	std::shared_ptr<Entity> Instantiate(Entity&& e) const;
+	std::vector<std::shared_ptr<Entity>>& GetEntities() const;
+	float GetDeltaTime() const;
+	float GetFixedDeltaTime() const;
+	const Input& GetInput() const;
 
-	OPUS_API Transform& GetTransform() const;
+	Transform& GetTransform() const;
 
-	OPUS_API void SetName(const std::string& name);
+	void SetName(const std::string& name);
 
-	OPUS_API BaseEntityRenderer* CreateRenderer();
-	OPUS_API BaseEntityRenderer* GetRenderer() const;
-	OPUS_API bool HasRenderer() const;
+	BaseEntityRenderer* CreateRenderer();
+	BaseEntityRenderer* GetRenderer() const;
+	bool HasRenderer() const;
 	
 	void OnCollision(const Collider& other);
 

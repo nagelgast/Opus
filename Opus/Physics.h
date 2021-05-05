@@ -3,7 +3,7 @@
 
 class Transform;
 class Entity;
-class Vector2;
+struct Vector2;
 struct Collision;
 
 class Physics

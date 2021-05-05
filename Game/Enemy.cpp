@@ -9,9 +9,10 @@
 
 Enemy::Enemy()
 {
-	AddComponent(SpriteRenderer("Sprites/mobs/slime-blue.png", 0, 8, 16, 16));
+	const Sprite sprite{"Sprites/mobs/slime-blue.png", {0, 8, 16, 16}};
+	AddComponent(SpriteRenderer(sprite));
 	AddComponent(Collider(0, Shape::kSquare, false, false));
-	GetTransform().SetSize(32,32);
+	GetTransform().SetSize(32, 32);
 
 	AddComponent(Health(100));
 	AddComponent(Loot());

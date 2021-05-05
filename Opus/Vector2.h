@@ -1,8 +1,7 @@
 #pragma once
 
-class __declspec(dllexport) Vector2
+struct Vector2
 {
-public:
 	Vector2();
 	Vector2(float, float);
 	float GetLengthSquared() const;
