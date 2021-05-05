@@ -96,6 +96,9 @@
     <ClCompile Include="TargetingSystem.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="MouseItem.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -160,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="TargetingSystem.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseItem.h">
+      <Filter>Header Files\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

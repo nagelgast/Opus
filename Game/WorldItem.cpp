@@ -5,6 +5,7 @@
 
 
 #include "InventoryItem.h"
+#include "MouseItem.h"
 #include "Targetable.h"
 #include "TargetingSystem.h"
 #include "../Opus/ShapeRenderer.h"
@@ -22,6 +23,10 @@ void WorldItem::Start()
 void WorldItem::PickUp()
 {
 	std::cout << "Test";
-	entity_->Instantiate(InventoryItem(item_));
-	entity_->Destroy();
+	MouseItem x;
+
+	if(x.TrySetItem(item_))
+	{
+		entity_->Destroy();
+	}
 }

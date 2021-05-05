@@ -12,7 +12,9 @@
 Player::Player() : Entity()
 {
 	const Sprite sprite { "Sprites/chars/gabe/gabe-idle-run.png", {0, 0, 24, 24}};
-	AddComponent(SpriteRenderer(sprite));
+	auto sr = AddComponent(SpriteRenderer());
+	sr->SetSprite(sprite);
+	
 	const auto collider = AddComponent(Collider(1, Shape::kSquare, false, false));
 	GetTransform().SetSize(100, 100);
 

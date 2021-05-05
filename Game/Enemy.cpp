@@ -10,7 +10,8 @@
 Enemy::Enemy()
 {
 	const Sprite sprite{"Sprites/mobs/slime-blue.png", {0, 8, 16, 16}};
-	AddComponent(SpriteRenderer(sprite));
+	auto sr = AddComponent(SpriteRenderer());
+	sr->SetSprite(sprite);
 	AddComponent(Collider(0, Shape::kSquare, false, false));
 	GetTransform().SetSize(32, 32);
 

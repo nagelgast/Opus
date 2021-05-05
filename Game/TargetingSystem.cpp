@@ -1,6 +1,9 @@
 #include "TargetingSystem.h"
 
-#include "../Opus/Input.h"
+void TargetingSystem::SetMouseItem(const std::shared_ptr<MouseItem>& mouse_item)
+{
+	mouse_item_ = mouse_item;
+}
 
 void TargetingSystem::Update()
 {
