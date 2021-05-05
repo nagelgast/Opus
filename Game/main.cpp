@@ -37,19 +37,19 @@ int main()
 		auto camera = main_camera->AddComponent<Camera>();
 		camera->SetTarget(player);
 		game->SetCamera(camera);
-
+		
 		const auto margin = 120;
-
+		
 		auto health_globe = root.Instantiate();
 		health_globe->AddComponent(ShapeRenderer(Shape::kCircle, 1,0,0,1, false));
 		health_globe->GetTransform().SetPosition(margin, kScreenHeight-margin);
 		health_globe->GetTransform().SetSize(100, 100);
-
+		
 		auto mana_globe = root.Instantiate();
 		mana_globe->AddComponent(ShapeRenderer(Shape::kCircle, 0, 0, 1, 1, false));
 		mana_globe->GetTransform().SetPosition(kScreenWidth-margin, kScreenHeight - margin);
 		mana_globe->GetTransform().SetSize(100, 100);
-
+		
 		const auto wall1 = root.ec_->CreateEntity<Wall>();
 		wall1->SetName("Wall1");
 		const auto wall2 = root.ec_->CreateEntity<Wall>(); 

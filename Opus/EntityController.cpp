@@ -57,6 +57,7 @@ void EntityController::Update()
 		entities_.push_back(entity);
 	}
 
+	std::vector<std::shared_ptr<Entity>> destroyed_entities;
 	for (const auto& entity : entities_)
 	{
 		entity->Update();
@@ -64,8 +65,13 @@ void EntityController::Update()
 		
 		if (entity->destroyed_)
 		{
-			DestroyEntity(*entity);
+			destroyed_entities.push_back(entity);
 		}
+	}
+
+	for (const auto& entity : destroyed_entities)
+	{
+		DestroyEntity(*entity);
 	}
 }
 

@@ -145,7 +145,6 @@ void Entity::OnDestroy()
 	{
 		component.second->OnDestroy();
 	}
-	
 }
 
 BaseEntityRenderer* Entity::GetRenderer() const
