@@ -6,11 +6,13 @@
 #include <typeindex>
 #include <vector>
 
+#include "EntityController.h"
+
 class Collider;
 class Transform;
 class BaseEntityRenderer;
 struct Vector2;
-class EntityController;
+//class EntityController;
 class Component;
 struct Input;
 

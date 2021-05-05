@@ -37,7 +37,6 @@ std::vector<std::shared_ptr<Entity>>& EntityController::GetEntities()
 
 void EntityController::FixedUpdate()
 {
-	collision_system_.FixedUpdate();
 	auto entities = GetEntities();
 	for (const auto& entity : entities)
 	{

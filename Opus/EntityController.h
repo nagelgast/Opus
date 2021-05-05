@@ -3,8 +3,6 @@
 #include <memory>
 #include <vector>
 
-#include "CollisionSystem.h"
-
 class BaseTime;
 class BaseRenderer;
 class Entity;
@@ -33,9 +31,6 @@ public:
 	const BaseRenderer& GetRenderer() const;
 	const BaseTime& GetTime() const;
 	const Input& GetInput() const;
-
-	// Should be owned by Game
-	CollisionSystem collision_system_;
 private:
 	void AddEntity(const std::shared_ptr<Entity>& entity);
 	std::vector<std::shared_ptr<Entity>> entities_;

@@ -9,6 +9,7 @@
 #include "EntityController.h"
 
 #include "BaseTime.h"
+#include "Collider.h"
 
 Entity::Entity()
 {
@@ -17,11 +18,6 @@ Entity::Entity()
 
 Entity::~Entity()
 {
-	if(ec_ && collider_)
-	{
-		ec_->collision_system_.RemoveCollider(collider_);
-	}
-	
 	components_.clear();
 }
 
@@ -30,11 +26,6 @@ void Entity::StartComponents()
 	for (const auto& component : components_)
 	{
 		component.second->Start();
-	}
-
-	if (collider_)
-	{
-		ec_->collision_system_.AddCollider(collider_);
 	}
 	
 	if (renderer_)

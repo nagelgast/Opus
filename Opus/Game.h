@@ -7,6 +7,8 @@
 #include "BaseRenderer.h"
 #include "BaseTime.h"
 #include "EntityController.h"
+#include "CollisionSystem.h"
+
 
 #include "BaseWindow.h"
 
@@ -22,6 +24,8 @@ public:
 	void SetCamera(const std::shared_ptr<Camera>& camera);
 	void SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix);
 	
+	static CollisionSystem& GetCollisionSystem();
+
 private:
 	void HandleInput() const;
 	void FixedUpdate();
@@ -33,7 +37,7 @@ private:
 	std::unique_ptr<BaseInputHandler> input_handler_;
 	std::unique_ptr<BaseTime> time_;
 
-
 	EntityController entity_controller_;
 	std::shared_ptr<Entity> root_;
+
 };

@@ -57,7 +57,14 @@ void Game::SetCamera(const std::shared_ptr<Camera>& camera)
 
 void Game::SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix)
 {
-	entity_controller_.collision_system_.SetCollisionMatrix(collision_matrix);
+	GetCollisionSystem().SetCollisionMatrix(collision_matrix);
+}
+
+CollisionSystem& Game::GetCollisionSystem()
+{
+	// TODO Find better way to handle systems
+	static CollisionSystem collision_system {};
+	return collision_system;
 }
 
 void Game::HandleInput() const
@@ -67,6 +74,7 @@ void Game::HandleInput() const
 
 void Game::FixedUpdate()
 {
+	GetCollisionSystem().FixedUpdate();
 	entity_controller_.FixedUpdate();
 }
 

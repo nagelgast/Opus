@@ -55,12 +55,12 @@ bool CollisionSystem::CheckLayerCollision(const Collider& c1, const Collider& c2
 	return std::find(colliding_layers.begin(), colliding_layers.end(), c2.GetLayer()) != colliding_layers.end();
 }
 
-void CollisionSystem::AddCollider(const std::shared_ptr<Collider>& collider)
+void CollisionSystem::AddCollider(Collider* collider)
 {
 	colliders_.push_back(collider);
 }
 
-void CollisionSystem::RemoveCollider(std::shared_ptr<Collider> collider)
+void CollisionSystem::RemoveCollider(Collider* collider)
 {
 	const auto iter = remove(colliders_.begin(), colliders_.end(), collider);
 	colliders_.erase(iter, colliders_.end());
