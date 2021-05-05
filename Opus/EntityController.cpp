@@ -24,7 +24,9 @@ void EntityController::DestroyEntity(Entity& entity)
 
 std::shared_ptr<Entity> EntityController::CreateEntity()
 {
-	return AddEntity(std::make_shared<Entity>());
+	auto entity = std::make_shared<Entity>();
+	AddEntity(entity);
+	return entity;
 }
 
 // Should this call protect the entities somehow?
@@ -46,14 +48,14 @@ void EntityController::FixedUpdate()
 
 void EntityController::Update()
 {
-	for (const auto& entity : new_entities_)
+	auto new_entities = new_entities_;
+	new_entities_.clear();
+	for (const auto& entity : new_entities)
 	{
 		entity->Start();
 		entity->StartComponents();
 		entities_.push_back(entity);
 	}
-
-	new_entities_.clear();
 
 	for (const auto& entity : entities_)
 	{
@@ -82,10 +84,9 @@ const Input& EntityController::GetInput() const
 	return input_;
 }
 
-std::shared_ptr<Entity> EntityController::AddEntity(std::shared_ptr<Entity> entity)
+void EntityController::AddEntity(const std::shared_ptr<Entity>& entity)
 {
 	entity->ec_ = this;
 	new_entities_.push_back(entity);
 	entity->Awake();
-	return entity;
 }

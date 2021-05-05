@@ -18,9 +18,11 @@ public:
 	std::shared_ptr<Entity> CreateEntity();
 
 	template <typename T>
-	std::shared_ptr<Entity> CreateEntity()
+	std::shared_ptr<T> CreateEntity()
 	{
-		return AddEntity(std::make_shared<T>());
+		auto entity = std::make_shared<T>();
+		AddEntity(entity);
+		return entity;
 	}
 
 	std::vector<std::shared_ptr<Entity>>& GetEntities();
@@ -35,7 +37,7 @@ public:
 	// Should be owned by Game
 	CollisionSystem collision_system_;
 private:
-	std::shared_ptr<Entity> AddEntity(std::shared_ptr<Entity> entity);
+	void AddEntity(const std::shared_ptr<Entity>& entity);
 	std::vector<std::shared_ptr<Entity>> entities_;
 	std::vector<std::shared_ptr<Entity>> new_entities_;
 	
