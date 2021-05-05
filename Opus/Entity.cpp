@@ -12,19 +12,7 @@
 
 Entity::Entity()
 {
-	transform_ = AddComponent<Transform>();
-}
-
-Entity::Entity(Entity& e)
-:	ec_(e.ec_),
-	transform_(std::move(e.transform_)),
-	collider_(e.collider_),
-	components_(e.components_)
-{
-	for (const auto& component : components_)
-	{
-		component.second->entity_ = this;
-	}
+	transform_ = AddComponent(Transform());
 }
 
 Entity::~Entity()

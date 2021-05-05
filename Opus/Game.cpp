@@ -15,6 +15,7 @@ Game::Game(const int width, const int height, const int fps_limit, const int fix
 	entity_controller_(*renderer_, *time_, input_handler_->GetInput())
 {
 	root_ = entity_controller_.CreateEntity();
+	root_->SetName("Root");
 }
 
 void Game::Run()

@@ -29,12 +29,12 @@ int main()
 	
 	// Load in starting entities
 	{
-		const auto root = game->GetRoot();
+		const auto& root = game->GetRoot();
 		auto player = root.ec_->CreateEntity<Player>();
 		player->SetName("Player");
 
 		auto main_camera = root.Instantiate();
-		auto camera = main_camera->AddComponent<Camera>();
+		auto camera = main_camera->AddComponent(Camera());
 		camera->SetTarget(player);
 		game->SetCamera(camera);
 		

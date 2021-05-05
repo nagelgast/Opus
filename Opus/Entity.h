@@ -18,12 +18,12 @@ class Entity
 {
 public:
 	Entity();
-	Entity(Entity&);
-	Entity(Entity&&) noexcept;
 	virtual ~Entity();
 	
-	Entity& operator=(Entity& other) = default;
-	Entity& operator=(Entity&& other) = default;
+	Entity(Entity&) = delete;
+	Entity(Entity&&) = delete;
+	Entity& operator=(Entity& other) = delete;
+	Entity& operator=(Entity&& other) = delete;
 
 	virtual void Awake() {}
 	virtual void Start() {}
@@ -34,11 +34,6 @@ public:
 
 	std::shared_ptr<Collider> AddComponent(const Collider& c);
 	std::shared_ptr<Entity> Instantiate() const;
-	
-	template <typename T> std::shared_ptr<T> AddComponent()
-	{
-		return AddComponent(T());
-	}
 	
 	template <typename T> std::shared_ptr<T> AddComponent(T c)
 	{
@@ -63,7 +58,6 @@ public:
 		return nullptr;
 	}
 
-	std::shared_ptr<Entity> Instantiate(Entity&& e) const;
 	std::vector<std::shared_ptr<Entity>>& GetEntities() const;
 	float GetDeltaTime() const;
 	float GetFixedDeltaTime() const;
