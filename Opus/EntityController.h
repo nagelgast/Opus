@@ -37,7 +37,8 @@ public:
 private:
 	std::shared_ptr<Entity> AddEntity(std::shared_ptr<Entity> entity);
 	std::vector<std::shared_ptr<Entity>> entities_;
-
+	std::vector<std::shared_ptr<Entity>> new_entities_;
+	
 	const BaseRenderer& renderer_;
 	const BaseTime& time_;
 	const Input& input_;

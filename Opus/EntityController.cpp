@@ -46,8 +46,16 @@ void EntityController::FixedUpdate()
 
 void EntityController::Update()
 {
-	auto entities = GetEntities();
-	for (const auto& entity : entities)
+	for (const auto& entity : new_entities_)
+	{
+		entity->Start();
+		entity->StartComponents();
+		entities_.push_back(entity);
+	}
+
+	new_entities_.clear();
+
+	for (const auto& entity : entities_)
 	{
 		entity->Update();
 		entity->UpdateComponents();
@@ -77,9 +85,7 @@ const Input& EntityController::GetInput() const
 std::shared_ptr<Entity> EntityController::AddEntity(std::shared_ptr<Entity> entity)
 {
 	entity->ec_ = this;
-	entities_.push_back(entity);
+	new_entities_.push_back(entity);
 	entity->Awake();
-	entity->Start();
-	entity->StartComponents();
 	return entity;
 }
