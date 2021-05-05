@@ -63,7 +63,7 @@ std::shared_ptr<Collider> Entity::AddComponent(const Collider& c)
 	return collider_;
 }
 
-std::shared_ptr<Entity> Entity::Instantiate() const
+std::shared_ptr<Entity> Entity::Instantiate()
 {
 	return ec_->CreateEntity();
 }

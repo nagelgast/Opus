@@ -14,7 +14,7 @@ Health::Health(int max_health) : current_health_(max_health), max_health_(max_he
 void Health::Start()
 {
 	const auto reference = entity_->GetComponent<Health>();
-	auto health_bar = entity_->ec_->CreateEntity();
+	auto health_bar = entity_->Instantiate();
 	health_bar->SetName("HealthBar");
 	health_bar->GetTransform().SetSize(50, 10);
 	health_bar->AddComponent(HealthBar(reference, {0,-30}));

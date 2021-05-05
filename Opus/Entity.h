@@ -35,7 +35,12 @@ public:
 	void Destroy();
 
 	std::shared_ptr<Collider> AddComponent(const Collider& c);
-	std::shared_ptr<Entity> Instantiate() const;
+	std::shared_ptr<Entity> Instantiate();
+
+	template <typename T> std::shared_ptr<T> Instantiate()
+	{
+		return ec_->CreateEntity<T>();
+	}
 	
 	template <typename T> std::shared_ptr<T> AddComponent(T c)
 	{
@@ -75,7 +80,6 @@ public:
 	
 	void OnCollision(const Collider& other);
 
-	EntityController* ec_ = nullptr;
 private:
 	void OnDestroy();
 	void StartComponents();
@@ -83,6 +87,7 @@ private:
 	void FixedUpdateComponents();
 
 	std::string name_;
+	EntityController* ec_ = nullptr;
 	std::shared_ptr<Transform> transform_;
 	std::unique_ptr<BaseEntityRenderer> renderer_;
 

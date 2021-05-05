@@ -16,7 +16,7 @@ void Loot::SpawnItem()
 	item.SetName("TestItem");
 	item.SetSprite(Sprite{ "Sprites/mobs/slime-blue.png", {0, 8, 16, 16} });
 
-	auto world_item = entity_->ec_->CreateEntity();
+	auto world_item = entity_->Instantiate();
 	world_item->SetName("WorldItem");
 	
 	world_item->AddComponent(ShapeRenderer(Shape::kSquare, 0.5f, 0.5f, 0.5f, 1));
