@@ -23,8 +23,10 @@ public:
 
 	void Start(EntityController* ec);
 	
-	void Update();
-	void FixedUpdate();
+	virtual void Update() {}
+	virtual void FixedUpdate() {}
+	void UpdateComponents();
+	void FixedUpdateComponents();
 	void Destroy();
 
 	std::shared_ptr<Collider> AddComponent(const Collider& c);
@@ -87,4 +89,6 @@ private:
 	std::map<std::type_index, std::shared_ptr<Component>> components_{};
 
 	bool destroyed_ = false;
+
+	friend class EntityController;
 };

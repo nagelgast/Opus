@@ -66,21 +66,12 @@ void Game::HandleInput() const
 
 void Game::FixedUpdate()
 {
-	entity_controller_.collision_system_.FixedUpdate();
-	auto entities = entity_controller_.GetEntities();
-	for (const auto& entity : entities)
-	{
-		entity->FixedUpdate();
-	}
+	entity_controller_.FixedUpdate();
 }
 
 void Game::Update()
 {
-	auto entities = entity_controller_.GetEntities();
-	for (const auto& entity : entities)
-	{
-		entity->Update();
-	}
+	entity_controller_.Update();
 }
 
 void Game::HandleOutput()

@@ -41,6 +41,32 @@ std::vector<std::shared_ptr<Entity>>& EntityController::GetEntities()
 	return entities_;
 }
 
+void EntityController::FixedUpdate()
+{
+	collision_system_.FixedUpdate();
+	auto entities = GetEntities();
+	for (const auto& entity : entities)
+	{
+		entity->FixedUpdate();
+		entity->FixedUpdateComponents();
+	}
+}
+
+void EntityController::Update()
+{
+	auto entities = GetEntities();
+	for (const auto& entity : entities)
+	{
+		entity->Update();
+		entity->UpdateComponents();
+		
+		if (entity->destroyed_)
+		{
+			DestroyEntity(*entity);
+		}
+	}
+}
+
 const BaseRenderer& EntityController::GetRenderer() const
 {
 	return renderer_;

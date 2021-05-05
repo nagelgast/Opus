@@ -18,7 +18,10 @@ public:
 	std::shared_ptr<Entity> CreateEntity();
 	std::shared_ptr<Entity> AddEntity(Entity&& e);
 	std::vector<std::shared_ptr<Entity>>& GetEntities();
+	void FixedUpdate();
 
+	void Update();
+	
 	const BaseRenderer& GetRenderer() const;
 	const BaseTime& GetTime() const;
 	const Input& GetInput() const;

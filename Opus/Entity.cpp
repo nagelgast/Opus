@@ -57,21 +57,15 @@ void Entity::Start(EntityController* ec)
 	}
 }
 
-void Entity::Update()
+void Entity::UpdateComponents()
 {
 	for (const auto& component : components_)
 	{
 		component.second->Update();
 	}
-
-	// TODO Handle in entity controller
-	if(destroyed_)
-	{
-		ec_->DestroyEntity(*this);
-	}
 }
 
-void Entity::FixedUpdate()
+void Entity::FixedUpdateComponents()
 {
 	for (const auto& component : components_)
 	{
