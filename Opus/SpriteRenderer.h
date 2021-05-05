@@ -6,8 +6,9 @@
 class SpriteRenderer : public Component
 {
 public:
-	SpriteRenderer(Sprite sprite);
 	void Start() override;
+	void SetSprite(const Sprite& sprite);
 private:
+	BaseEntityRenderer* renderer_ = nullptr;
 	Sprite sprite_;
 };

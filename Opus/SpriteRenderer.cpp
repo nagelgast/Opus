@@ -4,12 +4,17 @@
 #include "BaseEntityRenderer.h"
 #include "Entity.h"
 
-SpriteRenderer::SpriteRenderer(Sprite sprite) : sprite_(sprite)
-{
-}
-
 void SpriteRenderer::Start()
 {
-	auto renderer = entity_->CreateRenderer();
-	renderer->SetSprite(sprite_);
+	renderer_ = entity_->CreateRenderer();
+	renderer_->SetSprite(sprite_);
+}
+
+void SpriteRenderer::SetSprite(const Sprite& sprite)
+{
+	sprite_ = sprite;
+	if(renderer_)
+	{
+		renderer_->SetSprite(sprite);
+	}
 }
