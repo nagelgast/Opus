@@ -56,7 +56,7 @@ void PlayerController::FixedUpdate()
 		}
 		else if (target_)
 		{
-			target_->Interact();
+			target_->OnInteract();
 			target_ = nullptr;
 		}
 	}

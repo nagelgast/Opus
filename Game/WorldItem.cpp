@@ -16,7 +16,7 @@ WorldItem::WorldItem(const Item& item) : item_(std::make_shared<Item>(item))
 void WorldItem::Start()
 {
 	targetable_ = entity_->GetComponent<Targetable>();
-	targetable_->SetHandler([this] {PickUp();});
+	targetable_->OnInteract += [this] {PickUp(); };
 }
 
 void WorldItem::PickUp()

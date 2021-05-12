@@ -176,6 +176,7 @@
     <ClInclude Include="Core.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="EntityController.h" />
+    <ClInclude Include="Event.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Input.h" />

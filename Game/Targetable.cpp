@@ -6,6 +6,7 @@
 
 void Targetable::Start()
 {
+	// TODO Get this ref in a better way
 	for (auto entity : entity_->GetEntities())
 	{
 		auto ts = entity->GetComponent<TargetingSystem>();
@@ -26,20 +27,12 @@ void Targetable::Update()
 	auto pos = entity_->GetTransform().GetPosition();
 	if(abs(pos.x - m_pos.x) < dist && abs(pos.y - m_pos.y) < dist)
 	{
+		// TODO Reference to self
 		targeting_system_->SetTarget(entity_->GetComponent<Targetable>());
 	}
-	
 }
 
 void Targetable::Interact()
 {
-	if(handler_)
-	{
-		handler_();
-	}
-}
-
-void Targetable::SetHandler(std::function<void()> handler)
-{
-	handler_ = handler;
+	OnInteract();
 }

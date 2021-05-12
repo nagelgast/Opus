@@ -13,7 +13,7 @@ public:
 	void Start() override;
 	void Update() override;
 	void Interact();
-	void SetHandler(std::function<void()> handler);
+	Event OnInteract;
 private:
 	std::shared_ptr<TargetingSystem> targeting_system_;
 	std::function<void()> handler_;
