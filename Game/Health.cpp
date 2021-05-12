@@ -16,8 +16,14 @@ void Health::Start()
 	const auto reference = entity_->GetComponent<Health>();
 	auto health_bar = entity_->Instantiate();
 	health_bar->SetName("HealthBar");
-	health_bar->GetTransform().SetSize(50, 10);
-	health_bar->AddComponent(HealthBar(reference, {0,-30}));
+
+	auto& transform = health_bar->GetTransform();
+	transform.SetSize(50, 10);
+	transform.SetParent(&entity_->GetTransform());
+	transform.SetLocalPosition({ 0, -30 });
+
+	
+	health_bar->AddComponent(HealthBar(reference));
 	health_bar->AddComponent(ShapeRenderer(Shape::kSquare, 1, 0, 0, 0.5f));
 }
 

@@ -12,7 +12,6 @@ class Collider;
 class Transform;
 class BaseEntityRenderer;
 struct Vector2;
-//class EntityController;
 class Component;
 struct Input;
 
@@ -21,28 +20,41 @@ class Entity
 public:
 	Entity();
 	virtual ~Entity();
-	
+
 	Entity(Entity&) = delete;
 	Entity(Entity&&) = delete;
 	Entity& operator=(Entity& other) = delete;
 	Entity& operator=(Entity&& other) = delete;
 
-	virtual void Awake() {}
-	virtual void Start() {}
-	
-	virtual void Update() {}
-	virtual void FixedUpdate() {}
+	virtual void Awake()
+	{
+	}
+
+	virtual void Start()
+	{
+	}
+
+	virtual void Update()
+	{
+	}
+
+	virtual void FixedUpdate()
+	{
+	}
+
 	void Destroy();
 
 	std::shared_ptr<Collider> AddComponent(const Collider& c);
-	std::shared_ptr<Entity> Instantiate();
+	std::shared_ptr<Entity> Instantiate() const;
 
-	template <typename T> std::shared_ptr<T> Instantiate()
+	template <typename T>
+	std::shared_ptr<T> Instantiate()
 	{
 		return ec_->CreateEntity<T>();
 	}
-	
-	template <typename T> std::shared_ptr<T> AddComponent(T c)
+
+	template <typename T>
+	std::shared_ptr<T> AddComponent(T c)
 	{
 		auto c_ptr = std::make_shared<T>(c);
 		c_ptr->entity_ = this;
@@ -52,8 +64,9 @@ public:
 		return c_ptr;
 	}
 
-	
-	template <typename T> std::shared_ptr<T> GetComponent()
+
+	template <typename T>
+	std::shared_ptr<T> GetComponent()
 	{
 		const std::type_index index(typeid(T));
 
@@ -77,7 +90,7 @@ public:
 	BaseEntityRenderer* CreateRenderer();
 	BaseEntityRenderer* GetRenderer() const;
 	bool HasRenderer() const;
-	
+
 	void OnCollision(const Collider& other);
 
 private:
@@ -93,6 +106,7 @@ private:
 
 	std::shared_ptr<Collider> collider_;
 	std::map<std::type_index, std::shared_ptr<Component>> components_{};
+	std::vector<std::shared_ptr<Entity>> children_{};
 
 	bool destroyed_ = false;
 

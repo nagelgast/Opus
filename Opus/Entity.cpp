@@ -54,6 +54,10 @@ void Entity::FixedUpdateComponents()
 void Entity::Destroy()
 {
 	destroyed_ = true;
+	for (auto child : transform_->children_)
+	{
+		child->entity_->Destroy();
+	}
 	OnDestroy();
 }
 
@@ -63,7 +67,7 @@ std::shared_ptr<Collider> Entity::AddComponent(const Collider& c)
 	return collider_;
 }
 
-std::shared_ptr<Entity> Entity::Instantiate()
+std::shared_ptr<Entity> Entity::Instantiate() const
 {
 	return ec_->CreateEntity();
 }

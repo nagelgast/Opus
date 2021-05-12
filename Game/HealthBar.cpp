@@ -4,29 +4,27 @@
 #include "Health.h"
 #include "../Opus/ShapeRenderer.h"
 
-HealthBar::HealthBar(const std::shared_ptr<Health>& health, const Vector2 offset) : health_(health), offset_(offset)
+HealthBar::HealthBar(const std::shared_ptr<Health>& health) : health_(health)
 {
 }
 
 void HealthBar::Start()
 {
 	max_width_ = entity_->GetTransform().GetScale().x;
+	height_ = entity_->GetTransform().GetScale().y;
 }
 
 void HealthBar::Update()
 {
 	if (health_.expired())
 	{
-		entity_->Destroy();
 		return;
 	}
 
-	auto health = health_.lock();
-
+	const auto health = health_.lock();
+	
 	// TODO: Handle event-based?
-	auto height = entity_->GetTransform().GetScale().y;
-	float health_remaining = (float) health->GetHealth() / health->GetMaxHealth();
-	entity_->GetTransform().SetSize(max_width_ * health_remaining, height);
-	auto pos = health->entity_->GetTransform().GetPosition() + offset_;
-	entity_->GetTransform().SetPosition(health->entity_->GetTransform().GetPosition() + offset_);
+	auto health_remaining = static_cast<float>(health->GetHealth()) / static_cast<float>(health->GetMaxHealth());
+	health_remaining += 0.5f;
+	entity_->GetTransform().SetSize(max_width_ * health_remaining, height_);
 }

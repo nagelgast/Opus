@@ -4,8 +4,14 @@
 #include "BaseEntityRenderer.h"
 #include "Entity.h"
 
+void Transform::SetParent(Transform* transform)
+{
+	parent_ = transform;
+	parent_->children_.push_back(this);
+	RecalculateLocalPosition();
+}
 
-void Transform::SetSize(float width, float height)
+void Transform::SetSize(const float width, const float height)
 {
 	scale_ = {width, height};
 
@@ -22,19 +28,30 @@ Vector2 Transform::GetPosition() const
 	return position_;
 }
 
-void Transform::SetPosition(float x, float y)
-{
-	position_ = {x, y};
-}
-
-void Transform::SetPosition(Vector2 position)
+void Transform::SetPosition(const Vector2 position)
 {
 	position_ = position;
+	RecalculateLocalPosition();
+	
+	// TODO Should only be recalculated once at end of frame
+	RecalculateChildrenPosition();
 }
 
-void Transform::Move(Vector2 offset)
+void Transform::SetLocalPosition(Vector2 position)
 {
-	position_ += offset;
+	if(parent_)
+	{
+		SetPosition(parent_->position_ + position);
+	}
+	else
+	{
+		SetPosition(position);
+	}
+}
+
+void Transform::Move(const Vector2 offset)
+{
+	SetPosition(position_ + offset);
 }
 
 Vector2 Transform::GetOrigin() const
@@ -42,8 +59,34 @@ Vector2 Transform::GetOrigin() const
 	return origin_;
 }
 
-
 Vector2 Transform::GetScale() const
 {
 	return scale_;
+}
+
+void Transform::RecalculateLocalPosition()
+{
+	if(parent_)
+	{
+		local_position_ = position_ - parent_->position_;
+	}
+	else
+	{
+		local_position_ = position_;
+	}
+}
+
+void Transform::RecalculateChildrenPosition()
+{
+	for (const auto& child : children_)
+	{
+		child->RecalculateChildPosition();
+	}
+}
+
+void Transform::RecalculateChildPosition()
+{
+	position_ = parent_->position_ + local_position_;
+
+	RecalculateChildrenPosition();
 }

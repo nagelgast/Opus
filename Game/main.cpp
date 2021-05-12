@@ -42,22 +42,22 @@ int main()
 		
 		auto health_globe = root.Instantiate();
 		health_globe->AddComponent(ShapeRenderer(Shape::kCircle, 1,0,0,1, false));
-		health_globe->GetTransform().SetPosition(margin, kScreenHeight-margin);
+		health_globe->GetTransform().SetPosition({margin, kScreenHeight-margin});
 		health_globe->GetTransform().SetSize(100, 100);
 		
 		auto mana_globe = root.Instantiate();
 		mana_globe->AddComponent(ShapeRenderer(Shape::kCircle, 0, 0, 1, 1, false));
-		mana_globe->GetTransform().SetPosition(kScreenWidth-margin, kScreenHeight - margin);
+		mana_globe->GetTransform().SetPosition({kScreenWidth-margin, kScreenHeight - margin});
 		mana_globe->GetTransform().SetSize(100, 100);
 		
 		const auto wall1 = root.Instantiate<Wall>();
 		wall1->SetName("Wall1");
 		const auto wall2 = root.Instantiate<Wall>();
-		wall2->GetTransform().SetPosition(300, 500);
+		wall2->GetTransform().SetPosition({300, 500});
 		wall2->SetName("Wall2");
 
 		const auto enemy = root.Instantiate<Enemy>();
-		enemy->GetTransform().SetPosition(500, 100);
+		enemy->GetTransform().SetPosition({500, 100});
 		enemy->SetName("Enemy");
 	}
 
