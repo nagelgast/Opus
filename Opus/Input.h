@@ -14,6 +14,9 @@ struct Input
 	Key right_mouse;
 	Key run;
 
+	Key inventory;
+	Key close_all_ui;
+
 	Vector2 mouse_screen_pos;
 	Vector2 mouse_world_pos;
 };

@@ -164,8 +164,10 @@
     <ClCompile Include="MouseItem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="PlayerInventoryScreen.cpp" />
     <ClCompile Include="PlayerSkillHandler.cpp" />
     <ClCompile Include="Projectile.cpp" />
+    <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="Targetable.cpp" />
     <ClCompile Include="TargetingSystem.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -181,11 +183,13 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="Loot.h" />
     <ClInclude Include="MouseItem.h" />
+    <ClInclude Include="PlayerInventoryScreen.h" />
     <ClInclude Include="Rarity.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerSkillHandler.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Targetable.h" />

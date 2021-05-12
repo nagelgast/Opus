@@ -86,8 +86,10 @@ public:
 	Transform& GetTransform() const;
 
 	void SetName(const std::string& name);
+	void SetVisible(bool value);
 
 	BaseEntityRenderer* CreateRenderer();
+	bool ShouldRender() const;
 	BaseEntityRenderer* GetRenderer() const;
 	bool HasRenderer() const;
 
@@ -108,6 +110,7 @@ private:
 	std::map<std::type_index, std::shared_ptr<Component>> components_{};
 	std::vector<std::shared_ptr<Entity>> children_{};
 
+	bool visible_ = true;
 	bool destroyed_ = false;
 
 	friend class EntityController;

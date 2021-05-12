@@ -24,6 +24,9 @@ void SFMLInputHandler::UpdateInput()
 	UpdateKeyboardKey(input_.right, { sf::Keyboard::Right, sf::Keyboard::D });
 	UpdateKeyboardKey(input_.run, { sf::Keyboard::LShift});
 
+	UpdateKeyboardKey(input_.inventory, { sf::Keyboard::I});
+	UpdateKeyboardKey(input_.close_all_ui, { sf::Keyboard::Space });
+
 	UpdateKey(input_.left_mouse, sf::Mouse::isButtonPressed(sf::Mouse::Left));
 	UpdateKey(input_.right_mouse, sf::Mouse::isButtonPressed(sf::Mouse::Right));
 

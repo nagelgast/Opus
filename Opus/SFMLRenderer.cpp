@@ -18,7 +18,7 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 
 	for (const auto& entity : entities)
 	{
-		if (entity->HasRenderer())
+		if (entity->ShouldRender())
 		{
 			// Static cast is used for performance. If the engine was initialized correctly the cast is guaranteed to succeed.
 			const auto entity_renderer = static_cast<SFMLEntityRenderer*>(entity->GetRenderer());  // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)

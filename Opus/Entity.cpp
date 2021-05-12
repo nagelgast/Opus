@@ -102,11 +102,21 @@ void Entity::SetName(const std::string& name)
 	name_ = name;
 }
 
+void Entity::SetVisible(const bool value)
+{
+	visible_ = value;
+}
+
 BaseEntityRenderer* Entity::CreateRenderer()
 {
 	renderer_ = ec_->GetRenderer().CreateEntityRendererInstance();
 	renderer_->entity_ = this;
 	return renderer_.get();
+}
+
+bool Entity::ShouldRender() const
+{
+	return HasRenderer() && visible_;
 }
 
 bool Entity::HasRenderer() const

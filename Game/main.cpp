@@ -1,6 +1,7 @@
 
 #include "Enemy.h"
 #include "Player.h"
+#include "ScreenManager.h"
 #include "Wall.h"
 
 #include "../Opus/Core.h"
@@ -32,7 +33,7 @@ int main()
 		auto& root = game->GetRoot();
 		auto player = root.Instantiate<Player>();
 		player->SetName("Player");
-
+		
 		auto main_camera = root.Instantiate();
 		auto camera = main_camera->AddComponent(Camera());
 		camera->SetTarget(player);
@@ -49,6 +50,8 @@ int main()
 		mana_globe->AddComponent(ShapeRenderer(Shape::kCircle, 0, 0, 1, 1, false));
 		mana_globe->GetTransform().SetPosition({kScreenWidth-margin, kScreenHeight - margin});
 		mana_globe->GetTransform().SetSize(100, 100);
+
+		root.Instantiate<ScreenManager>();
 		
 		const auto wall1 = root.Instantiate<Wall>();
 		wall1->SetName("Wall1");
