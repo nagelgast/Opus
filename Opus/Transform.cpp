@@ -4,6 +4,7 @@
 #include "BaseEntityRenderer.h"
 #include "Entity.h"
 
+// TODO Change to ref
 void Transform::SetParent(Transform* transform)
 {
 	parent_ = transform;

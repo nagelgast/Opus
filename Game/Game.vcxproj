@@ -158,6 +158,8 @@
     <ClCompile Include="FireballSkill.cpp" />
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthBar.cpp" />
+    <ClCompile Include="Inventory.cpp" />
+    <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Loot.cpp" />
     <ClCompile Include="main.cpp" />
@@ -180,6 +182,8 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Fireball.h" />
     <ClInclude Include="FireballSkill.h" />
+    <ClInclude Include="Inventory.h" />
+    <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Loot.h" />
     <ClInclude Include="MouseItem.h" />
@@ -189,6 +193,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerSkillHandler.h" />
     <ClInclude Include="Projectile.h" />
+    <ClInclude Include="resource1.h" />
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="PlayerController.h" />
@@ -199,12 +204,16 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="Sprites\chars\gabe\gabe-idle-run.png" />
+    <Image Include="Sprites\Driftwood_Wand_inventory_icon.png" />
     <Image Include="Sprites\frames\knight_f_idle_anim_f0.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Opus\Opus.vcxproj">
       <Project>{9f55b023-48a5-458e-94c2-a40c5eef5fef}</Project>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Game.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

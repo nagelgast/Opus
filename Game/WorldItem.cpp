@@ -4,6 +4,7 @@
 
 
 
+#include "Inventory.h"
 #include "MouseItem.h"
 #include "Targetable.h"
 #include "TargetingSystem.h"
@@ -22,10 +23,15 @@ void WorldItem::Start()
 void WorldItem::PickUp()
 {
 	std::cout << "Test";
-	
 
-	// if(x.TrySetItem(item_))
-	// {
-	// 	entity_->Destroy();
-	// }
+	// TODO Improve this, geez
+	for (auto entity : entity_->GetEntities())
+	{
+		auto inventory = entity->GetComponent<Inventory>();
+		if(inventory)
+		{
+			inventory->AddItem(item_);
+			entity_->Destroy();
+		}
+	}
 }

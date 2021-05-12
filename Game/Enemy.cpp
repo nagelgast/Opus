@@ -15,6 +15,6 @@ void Enemy::Awake()
 	AddComponent(Collider(0, Shape::kSquare, false, false));
 	GetTransform().SetSize(32, 32);
 
-	AddComponent(Health(100));
+	AddComponent(Health(1));
 	AddComponent(Loot());
 }
