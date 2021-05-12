@@ -31,12 +31,12 @@ void PlayerInventoryScreen::Open()
 	else
 	{
 		is_open_ = true;
-		background_->SetVisible(true);
+		SetVisible(true);
 	}
 }
 
 void PlayerInventoryScreen::Close()
 {
 	is_open_ = false;
-	background_->SetVisible(false);
+	SetVisible(false);
 }

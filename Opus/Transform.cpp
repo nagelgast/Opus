@@ -10,6 +10,7 @@ void Transform::SetParent(Transform* transform)
 	parent_ = transform;
 	parent_->children_.push_back(this);
 	RecalculateLocalPosition();
+	entity_->RecalculateVisibility(transform);
 }
 
 void Transform::SetSize(const float width, const float height)

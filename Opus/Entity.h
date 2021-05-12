@@ -91,6 +91,8 @@ public:
 	BaseEntityRenderer* CreateRenderer();
 	bool ShouldRender() const;
 	BaseEntityRenderer* GetRenderer() const;
+	void RecalculateVisibility(Transform* parent);
+	void RecalculateChildVisibility();
 	bool HasRenderer() const;
 
 	void OnCollision(const Collider& other);
@@ -108,9 +110,9 @@ private:
 
 	std::shared_ptr<Collider> collider_;
 	std::map<std::type_index, std::shared_ptr<Component>> components_{};
-	std::vector<std::shared_ptr<Entity>> children_{};
 
 	bool visible_ = true;
+	bool parent_visible_ = true;
 	bool destroyed_ = false;
 
 	friend class EntityController;

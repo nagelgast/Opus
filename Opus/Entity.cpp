@@ -105,6 +105,8 @@ void Entity::SetName(const std::string& name)
 void Entity::SetVisible(const bool value)
 {
 	visible_ = value;
+	
+	RecalculateChildVisibility();
 }
 
 BaseEntityRenderer* Entity::CreateRenderer()
@@ -116,7 +118,7 @@ BaseEntityRenderer* Entity::CreateRenderer()
 
 bool Entity::ShouldRender() const
 {
-	return HasRenderer() && visible_;
+	return HasRenderer() && visible_ && parent_visible_;
 }
 
 bool Entity::HasRenderer() const
@@ -143,4 +145,18 @@ void Entity::OnDestroy()
 BaseEntityRenderer* Entity::GetRenderer() const
 {
 	return renderer_.get();
+}
+
+void Entity::RecalculateVisibility(Transform* parent)
+{
+	parent_visible_ = parent->entity_->visible_ && parent->entity_->parent_visible_;
+}
+
+void Entity::RecalculateChildVisibility()
+{
+	for (auto* child : transform_->children_)
+	{
+		child->entity_->RecalculateVisibility(transform_.get());
+		child->entity_->RecalculateChildVisibility();
+	}
 }
