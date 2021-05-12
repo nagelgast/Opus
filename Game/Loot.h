@@ -6,5 +6,5 @@ class Loot :
     public Component
 {
 	void OnDestroy() override;
-	void SpawnItem();
+	void SpawnItem() const;
 };

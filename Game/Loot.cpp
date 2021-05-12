@@ -1,7 +1,8 @@
 #include "Loot.h"
 
+
+#include "Interactable.h"
 #include "Item.h"
-#include "TargetingSystem.h"
 #include "WorldItem.h"
 #include "../Opus/ShapeRenderer.h"
 
@@ -10,7 +11,7 @@ void Loot::OnDestroy()
 	SpawnItem();
 }
 
-void Loot::SpawnItem()
+void Loot::SpawnItem() const
 {
 	Item item {};
 	item.SetName("TestItem");
@@ -20,10 +21,13 @@ void Loot::SpawnItem()
 	world_item->SetName("WorldItem");
 	
 	world_item->AddComponent(ShapeRenderer(Shape::kSquare, 0.5f, 0.5f, 0.5f, 1));
-	auto targetable = world_item->AddComponent(Targetable());
+	const auto interactable = world_item->AddComponent(Interactable());
+
+	const auto size = 30;
+	interactable->bounds_ = {0, 0, size, size};
 
 	auto& transform = world_item->GetTransform();
 	transform.SetPosition(entity_->GetTransform().GetPosition());
-	transform.SetSize(10, 10);
-	world_item->AddComponent(WorldItem(item));
+	transform.SetSize(size, size);
+	world_item->AddComponent(WorldItem(interactable, item));
 }

@@ -170,8 +170,7 @@
     <ClCompile Include="PlayerSkillHandler.cpp" />
     <ClCompile Include="Projectile.cpp" />
     <ClCompile Include="ScreenManager.cpp" />
-    <ClCompile Include="Targetable.cpp" />
-    <ClCompile Include="TargetingSystem.cpp" />
+    <ClCompile Include="Interactable.cpp" />
     <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WorldItem.cpp" />
   </ItemGroup>
@@ -197,8 +196,7 @@
     <ClInclude Include="ScreenManager.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="PlayerController.h" />
-    <ClInclude Include="Targetable.h" />
-    <ClInclude Include="TargetingSystem.h" />
+    <ClInclude Include="Interactable.h" />
     <ClInclude Include="Wall.h" />
     <ClInclude Include="WorldItem.h" />
   </ItemGroup>

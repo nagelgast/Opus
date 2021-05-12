@@ -1,34 +1,29 @@
 #include "WorldItem.h"
 
-#include <iostream>
+#include <utility>
 
-
-
-#include "Inventory.h"
-#include "MouseItem.h"
-#include "Targetable.h"
-#include "TargetingSystem.h"
 #include "../Opus/ShapeRenderer.h"
 
-WorldItem::WorldItem(const Item& item) : item_(std::make_shared<Item>(item))
+#include "Inventory.h"
+#include "Interactable.h"
+
+WorldItem::WorldItem(std::shared_ptr<Interactable> interactable, const Item& item) :
+	item_(std::make_shared<Item>(item)), interactable_(std::move(interactable))
 {
 }
 
 void WorldItem::Start()
 {
-	targetable_ = entity_->GetComponent<Targetable>();
-	targetable_->OnInteract += [this] {PickUp(); };
+	interactable_->OnInteract += [this] { PickUp(); };
 }
 
 void WorldItem::PickUp()
 {
-	std::cout << "Test";
-
 	// TODO Improve this, geez
 	for (auto entity : entity_->GetEntities())
 	{
 		auto inventory = entity->GetComponent<Inventory>();
-		if(inventory)
+		if (inventory)
 		{
 			inventory->AddItem(item_);
 			entity_->Destroy();

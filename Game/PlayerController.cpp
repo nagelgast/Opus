@@ -4,15 +4,12 @@
 #include "../Opus/Input.h"
 
 #include <cmath>
-#include <utility>
 
-#include "TargetingSystem.h"
+#include "Interactable.h"
 
-
-PlayerController::PlayerController(std::shared_ptr<TargetingSystem> targeting_system, const float walk_speed,
+PlayerController::PlayerController(const float walk_speed,
                                    const float run_speed)
-	: targeting_system_(std::move(targeting_system)),
-	  walk_speed_(walk_speed),
+	: walk_speed_(walk_speed),
 	  run_speed_(run_speed)
 {
 }
@@ -28,7 +25,7 @@ void PlayerController::FixedUpdate()
 
 	if (input.left_mouse.pressed)
 	{
-		target_ = targeting_system_->GetTarget();
+		target_ = Interactable::GetActiveInteractable();
 		if (target_)
 		{
 			target_pos_ = target_->entity_->GetTransform().GetPosition();

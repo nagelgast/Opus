@@ -200,5 +200,8 @@
     <ClCompile Include="Vector2.cpp">
       <Filter>Source Files\Data</Filter>
     </ClCompile>
+    <ClCompile Include="Rect.cpp">
+      <Filter>Source Files\Data</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

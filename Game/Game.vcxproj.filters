@@ -90,12 +90,6 @@
     <ClCompile Include="WorldItem.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
-    <ClCompile Include="Targetable.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetingSystem.cpp">
-      <Filter>Source Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerInventoryScreen.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
@@ -110,6 +104,9 @@
     </ClCompile>
     <ClCompile Include="InventoryItem.cpp">
       <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="Interactable.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -164,12 +161,6 @@
     <ClInclude Include="WorldItem.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
-    <ClInclude Include="Targetable.h">
-      <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetingSystem.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="MouseItem.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
@@ -187,6 +178,9 @@
     </ClInclude>
     <ClInclude Include="resource1.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Interactable.h">
+      <Filter>Header Files\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
