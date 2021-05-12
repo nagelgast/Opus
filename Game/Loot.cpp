@@ -14,7 +14,7 @@ void Loot::SpawnItem()
 {
 	Item item {};
 	item.SetName("TestItem");
-	item.SetSprite(Sprite{ "Sprites/mobs/slime-blue.png", {0, 8, 16, 16} });
+	item.SetSprite(Sprite{ "Sprites/Driftwood_Wand_inventory_icon", {0, 8, 16, 16} });
 
 	auto world_item = entity_->Instantiate();
 	world_item->SetName("WorldItem");
