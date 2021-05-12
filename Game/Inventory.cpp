@@ -8,7 +8,7 @@ void Inventory::AddItem(const std::shared_ptr<Item>& item)
 	auto entity = entity_->Instantiate();
 	auto inventory_item = entity->AddComponent(InventoryItem(item));
 	auto sr = entity->AddComponent(SpriteRenderer());
-	sr->SetSprite(item->GetSprite());
+	sr->SetSprite(item->GetSprite(), false);
 	
 	auto& transform = entity->GetTransform();
 	transform.SetSize(40, 120);

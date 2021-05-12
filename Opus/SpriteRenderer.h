@@ -7,8 +7,10 @@ class SpriteRenderer : public Component
 {
 public:
 	void Start() override;
-	void SetSprite(const Sprite& sprite);
+	void SetSprite(const Sprite& sprite, bool world_space = true);
 private:
 	BaseEntityRenderer* renderer_ = nullptr;
 	Sprite sprite_;
+
+	bool world_space_;
 };
