@@ -10,12 +10,12 @@ void MouseItem::Awake()
 	renderer_ = AddComponent(SpriteRenderer());
 }
 
-bool MouseItem::TrySetItem(std::shared_ptr<Item> item)
+bool MouseItem::TryAddItem(std::shared_ptr<Item> item)
 {
 	if(item_) return false;
 
 	item_ = std::move(item);
-	renderer_->SetSprite(item_->GetSprite());
+	renderer_->SetSprite(item_->GetSprite(), false);
 
 	return true;
 }

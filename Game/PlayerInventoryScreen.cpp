@@ -40,3 +40,8 @@ void PlayerInventoryScreen::Close()
 	is_open_ = false;
 	SetVisible(false);
 }
+
+bool PlayerInventoryScreen::IsOpen() const
+{
+	return is_open_;
+}

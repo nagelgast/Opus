@@ -11,7 +11,7 @@ class MouseItem final :
 public:
 	void Awake() override;
 	
-	bool TrySetItem(std::shared_ptr<Item> item);
+	bool TryAddItem(std::shared_ptr<Item> item);
 	bool HasItem() const;
 	void Update() override;
 private:

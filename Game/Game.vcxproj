@@ -166,6 +166,7 @@
     <ClCompile Include="MouseItem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
+    <ClCompile Include="PlayerInventory.cpp" />
     <ClCompile Include="PlayerInventoryScreen.cpp" />
     <ClCompile Include="PlayerSkillHandler.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Item.h" />
     <ClInclude Include="Loot.h" />
     <ClInclude Include="MouseItem.h" />
+    <ClInclude Include="PlayerInventory.h" />
     <ClInclude Include="PlayerInventoryScreen.h" />
     <ClInclude Include="Rarity.h" />
     <ClInclude Include="resource.h" />

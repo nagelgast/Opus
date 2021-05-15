@@ -4,8 +4,8 @@
 
 #include "../Opus/ShapeRenderer.h"
 
-#include "Inventory.h"
 #include "Interactable.h"
+#include "PlayerInventory.h"
 
 WorldItem::WorldItem(std::shared_ptr<Interactable> interactable, const Item& item) :
 	item_(std::make_shared<Item>(item)), interactable_(std::move(interactable))
@@ -22,10 +22,10 @@ void WorldItem::PickUp()
 	// TODO Improve this, geez
 	for (auto entity : entity_->GetEntities())
 	{
-		auto inventory = entity->GetComponent<Inventory>();
+		auto inventory = entity->GetComponent<PlayerInventory>();
 		if (inventory)
 		{
-			inventory->AddItem(item_);
+			inventory->PickUpItem(item_);
 			entity_->Destroy();
 		}
 	}
