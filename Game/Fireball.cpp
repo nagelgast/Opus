@@ -14,10 +14,9 @@ void Fireball::Awake()
 	projectile_ = AddComponent(Projectile(10, 200, 400));
 }
 
-void Fireball::Initialize(const Vector2& start_pos, const Vector2& target_pos)
+void Fireball::Initialize(const Vector2& target_pos)
 {
-	GetTransform().SetPosition(start_pos);
-	const auto delta = target_pos - start_pos;
+	const auto delta = target_pos - GetTransform().GetPosition();
 	const auto direction = delta.GetNormalized();
 	projectile_->SetDirection(direction);
 }

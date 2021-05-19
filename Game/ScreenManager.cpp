@@ -7,9 +7,7 @@
 
 void ScreenManager::Awake()
 {
-	player_inventory_screen_ = Instantiate<PlayerInventoryScreen>();
-	auto& transform = player_inventory_screen_->GetTransform();
-	transform.SetPosition({1024-(350/2), 768/2});
+	player_inventory_screen_ = Instantiate<PlayerInventoryScreen>({ 1024 - (350 / 2), 768 / 2 });
 	player_inventory_screen_->Close();
 }
 

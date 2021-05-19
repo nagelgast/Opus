@@ -8,16 +8,14 @@
 
 void PlayerInventoryScreen::Awake()
 {
-	background_ = Instantiate();
+	background_ = Instantiate(&GetTransform());
 	background_->AddComponent(ShapeRenderer(Shape::kSquare, 0.8f, 0.8f, 0.8f, 1, false));
 
 	auto& transform = background_->GetTransform();
-	transform.SetParent(&GetTransform());
 	transform.SetSize(350, 768);
 
-	player_inventory_ = Instantiate<Inventory>();
+	player_inventory_ = Instantiate<Inventory>(&GetTransform());
 	auto& inv_trans = player_inventory_->GetTransform();
-	inv_trans.SetParent(&GetTransform());
 	inv_trans.SetLocalPosition({0, 250});
 }
 

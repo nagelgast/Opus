@@ -1,4 +1,3 @@
-
 #include "Enemy.h"
 #include "MouseHandler.h"
 #include "Player.h"
@@ -28,9 +27,9 @@ int main()
 	collision_matrix[0] = {0, 1, 2};
 	collision_matrix[1] = {0, 1};
 	collision_matrix[2] = {0, 2};
-	
+
 	game->SetCollisionMatrix(collision_matrix);
-	
+
 	// Load in starting entities
 	{
 		auto& root = game->GetRoot();
@@ -44,21 +43,19 @@ int main()
 			camera->SetTarget(player);
 			game->SetCamera(camera);
 		}
-		
+
 		const auto margin = 120;
 
-		
+
 		{
-			auto health_globe = root.Instantiate();
-			health_globe->AddComponent(ShapeRenderer(Shape::kCircle, 1,0,0,1, false));
-			health_globe->GetTransform().SetPosition({margin, kScreenHeight-margin});
+			auto health_globe = root.Instantiate({margin, kScreenHeight - margin});
+			health_globe->AddComponent(ShapeRenderer(Shape::kCircle, 1, 0, 0, 1, false));
 			health_globe->GetTransform().SetSize(100, 100);
 		}
-		
+
 		{
-			auto mana_globe = root.Instantiate();
+			auto mana_globe = root.Instantiate({kScreenWidth - margin, kScreenHeight - margin});
 			mana_globe->AddComponent(ShapeRenderer(Shape::kCircle, 0, 0, 1, 1, false));
-			mana_globe->GetTransform().SetPosition({kScreenWidth-margin, kScreenHeight - margin});
 			mana_globe->GetTransform().SetSize(100, 100);
 		}
 
@@ -66,7 +63,7 @@ int main()
 
 		auto mouse = root.Instantiate<MouseItem>();
 		mouse->AddComponent(MouseHandler(screen_manager, player->GetComponent<PlayerController>(), mouse));
-		
+
 		{
 			auto inventory = root.Instantiate();
 			auto player_inventory = inventory->AddComponent(PlayerInventory());
@@ -77,20 +74,18 @@ int main()
 			// TODO Fix coupling
 			screen_manager->player_inventory_screen_->player_inventory_->Initialize(mouse);
 		}
-		
+
 		{
-			const auto wall1 = root.Instantiate<Wall>();
+			const auto wall1 = root.Instantiate<Wall>({500, 500});
 			wall1->SetName("Wall1");
 		}
 		{
-			const auto wall2 = root.Instantiate<Wall>();
-			wall2->GetTransform().SetPosition({300, 500});
+			const auto wall2 = root.Instantiate<Wall>({300, 500});
 			wall2->SetName("Wall2");
 		}
 
 		{
-			const auto enemy = root.Instantiate<Enemy>();
-			enemy->GetTransform().SetPosition({500, 100});
+			const auto enemy = root.Instantiate<Enemy>({500, 100});
 			enemy->SetName("Enemy");
 		}
 	}
@@ -98,6 +93,6 @@ int main()
 	game->Run();
 
 	game->Exit();
-	
+
 	return 0;
 }

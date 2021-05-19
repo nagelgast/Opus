@@ -19,24 +19,23 @@ void Inventory::Awake()
 {
 	const auto width = static_cast<float>(kInventorySlotSize * columns_);
 	const auto height = static_cast<float>(kInventorySlotSize * rows_);
-	auto background = Instantiate();
+	auto background = Instantiate(&GetTransform());
 	background->AddComponent(ShapeRenderer(Shape::kSquare, 0.2f, 0.2f, 0.2f, 1, false));
 
 	auto& background_transform = background->GetTransform();
-	background_transform.SetParent(&GetTransform());
 	background_transform.SetSize(width, height);
 
-	auto offset_x = (width - kInventorySlotSize )/2;
-	auto offset_y = (height - kInventorySlotSize )/2;
+	// TODO Replace with anchoring system
+	const auto offset_x = (width - kInventorySlotSize )/2;
+	const auto offset_y = (height - kInventorySlotSize )/2;
 	
 	for (auto row = 0; row < rows_; ++row)
 	{
 		for (auto col = 0; col < columns_; ++col)
 		{
-			const auto slot = Instantiate<InventorySlot>();
+			const auto slot = Instantiate<InventorySlot>(&GetTransform());
 			auto& slot_transform = slot->GetTransform();
 			slot_transform.SetSize(kInventorySlotSize, kInventorySlotSize);
-			slot_transform.SetParent(&GetTransform());
 			slot_transform.SetLocalPosition({col * kInventorySlotSize - offset_x, row * kInventorySlotSize - offset_y});
 		}
 	}
@@ -48,7 +47,7 @@ void Inventory::Awake()
 
 void Inventory::AddItem(const std::shared_ptr<Item>& item)
 {
-	auto entity = Instantiate();
+	auto entity = Instantiate(&GetTransform());
 	auto interactable = entity->AddComponent(Interactable());
 	interactable->bounds_ = {0, 0, 40, 120};
 
@@ -58,8 +57,6 @@ void Inventory::AddItem(const std::shared_ptr<Item>& item)
 
 	auto& transform = entity->GetTransform();
 	transform.SetSize(40, 120);
-	transform.SetParent(&GetTransform());
-	transform.SetLocalPosition({0, 0});
 
 	items_[0] = inventory_item;
 }

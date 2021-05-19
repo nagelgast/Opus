@@ -46,11 +46,29 @@ public:
 
 	std::shared_ptr<Collider> AddComponent(const Collider& c);
 	std::shared_ptr<Entity> Instantiate() const;
+	std::shared_ptr<Entity> Instantiate(const Vector2& position) const;
+	std::shared_ptr<Entity> Instantiate(Transform* parent) const;
 
 	template <typename T>
 	std::shared_ptr<T> Instantiate()
 	{
 		return ec_->CreateEntity<T>();
+	}
+
+	template <typename T>
+	std::shared_ptr<T> Instantiate(const Vector2& position)
+	{
+		auto entity = ec_->CreateEntity<T>();
+		entity->transform_->SetPosition(position);
+		return entity;
+	}
+
+	template <typename T>
+	std::shared_ptr<T> Instantiate(Transform* parent)
+	{
+		auto entity = ec_->CreateEntity<T>();
+		entity->transform_->SetParent(parent);
+		return entity;
 	}
 
 	template <typename T>

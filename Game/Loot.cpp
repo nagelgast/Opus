@@ -17,7 +17,6 @@ void Loot::SpawnItem() const
 	item.SetName("TestItem");
 	item.SetSprite(Sprite{ "Sprites/Driftwood_Wand_inventory_icon.png", {0, 0, 78, 234} });
 
-	const auto world_item = entity_->Instantiate<WorldItem>();
+	const auto world_item = entity_->Instantiate<WorldItem>(entity_->GetTransform().GetPosition());
 	world_item->item_ = std::make_shared<Item>(item);
-	world_item->GetTransform().SetPosition(entity_->GetTransform().GetPosition());
 }

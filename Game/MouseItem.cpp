@@ -44,9 +44,8 @@ bool MouseItem::TryDrop(const Vector2 position)
 
 void MouseItem::Drop(const Vector2 position)
 {
-	const auto world_item = Instantiate<WorldItem>();
+	const auto world_item = Instantiate<WorldItem>(position);
 	world_item->item_ = item_;
-	world_item->GetTransform().SetPosition(position);
 
 	item_ = nullptr;
 	renderer_->ResetSprite();

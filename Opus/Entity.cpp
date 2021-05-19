@@ -27,7 +27,7 @@ void Entity::StartComponents()
 	{
 		component.second->Start();
 	}
-	
+
 	if (renderer_)
 	{
 		const auto scale = transform_->GetScale();
@@ -72,6 +72,21 @@ std::shared_ptr<Entity> Entity::Instantiate() const
 	return ec_->CreateEntity();
 }
 
+std::shared_ptr<Entity> Entity::Instantiate(const Vector2& position) const
+{
+	auto entity = Instantiate();
+	entity->transform_->SetPosition(position);
+	return entity;
+}
+
+std::shared_ptr<Entity> Entity::Instantiate(Transform* parent) const
+{
+	auto entity = Instantiate();
+	entity->transform_->SetParent(parent);
+	entity->transform_->SetLocalPosition({0, 0});
+	return entity;
+}
+
 std::vector<std::shared_ptr<Entity>>& Entity::GetEntities() const
 {
 	return ec_->GetEntities();
@@ -105,7 +120,7 @@ void Entity::SetName(const std::string& name)
 void Entity::SetVisible(const bool value)
 {
 	visible_ = value;
-	
+
 	RecalculateChildVisibility();
 }
 

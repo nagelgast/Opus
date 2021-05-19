@@ -6,9 +6,9 @@
 void FireballSkill::Trigger(PlayerSkillHandler& psh)
 {
 	const auto player_pos = psh.entity_->GetTransform().GetPosition();
-	auto fireball = psh.entity_->Instantiate<Fireball>();
+	auto fireball = psh.entity_->Instantiate<Fireball>(player_pos);
 
-	fireball->Initialize(player_pos, psh.entity_->GetInput().mouse_world_pos);
+	fireball->Initialize(psh.entity_->GetInput().mouse_world_pos);
 	fireball->SetName("Fireball");
 }
 
