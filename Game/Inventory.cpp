@@ -40,9 +40,9 @@ void Inventory::Awake()
 		}
 	}
 
-	auto interactable = AddComponent(Interactable());
-	interactable->bounds_ = {0, 0, width, height};
-	interactable->OnPress += [this] { HandlePress(); };
+	// auto interactable = AddComponent(Interactable());
+	// interactable->bounds_ = {0, 0, width, height};
+	// interactable->OnPress += [this] { HandlePress(); };
 }
 
 void Inventory::AddItem(const std::shared_ptr<Item>& item)
