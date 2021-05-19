@@ -7,19 +7,13 @@ class Interactable final :
     public Component
 {
 public:
-	~Interactable() override;
+	Rect GetGlobalBounds();
 	
-	void Update() override;
 	Event OnHoverEnter;
 	Event OnHoverExit;
-	Event OnClick;
+	Event OnPress;
+	Event OnRelease;
 	Event OnInteract;
 	Rect bounds_;
-
-	//TODO Replace this with a system
-	static Interactable* GetActiveInteractable();
-private:
-	static Interactable* active_interactable_;
-	bool hovering_ = false;
 };
 

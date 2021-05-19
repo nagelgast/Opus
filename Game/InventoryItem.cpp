@@ -12,7 +12,7 @@ InventoryItem::InventoryItem(std::shared_ptr<Item> item) : item_(std::move(item)
 void InventoryItem::Start()
 {
 	auto interactable = entity_->GetComponent<Interactable>();
-	interactable->OnClick += [this] {PickUp(); };
+	interactable->OnPress += [this] {PickUp(); };
 }
 
 void InventoryItem::PickUp()

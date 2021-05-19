@@ -26,3 +26,14 @@ void ScreenManager::Update()
 		player_inventory_screen_->Close();
 	}
 }
+
+bool ScreenManager::CheckIsInScreenSpace(const Vector2 position) const
+{
+	// TODO Implement properly
+	if(player_inventory_screen_->IsOpen())
+	{
+		return position.x > 1024 - 350;
+	}
+	
+	return false;
+}

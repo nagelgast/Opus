@@ -12,9 +12,12 @@ public:
 	PlayerController(float walk_speed, float run_speed);
 	void FixedUpdate() override;
 
+	void SetTarget(Vector2 position);
+	void SetTarget(const std::shared_ptr<Interactable>& target);
+
 	std::shared_ptr<PlayerSkillHandler> psh_;
 private:
-	Interactable* target_ = nullptr;
+	std::shared_ptr<Interactable> target_ = nullptr;
 	Vector2 target_pos_ = {0,0};
 	float walk_speed_ = 0;
 	float run_speed_ = 0;

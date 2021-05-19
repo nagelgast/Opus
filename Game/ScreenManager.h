@@ -9,6 +9,8 @@ class ScreenManager : public Entity
 public:
 	void Awake() override;
 	void Update() override;
+
+	bool CheckIsInScreenSpace(Vector2 position) const;
+
 	std::shared_ptr<PlayerInventoryScreen> player_inventory_screen_;
-private:
 };

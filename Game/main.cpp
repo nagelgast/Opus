@@ -1,9 +1,11 @@
 
 #include "Enemy.h"
+#include "MouseHandler.h"
 #include "Player.h"
 #include "PlayerInventory.h"
 #include "ScreenManager.h"
 #include "Wall.h"
+#include "PlayerController.h"
 
 #include "../Opus/Core.h"
 #include "../Opus/Camera.h"
@@ -32,6 +34,7 @@ int main()
 	// Load in starting entities
 	{
 		auto& root = game->GetRoot();
+
 		auto player = root.Instantiate<Player>();
 		player->SetName("Player");
 
@@ -62,7 +65,8 @@ int main()
 		auto screen_manager = root.Instantiate<ScreenManager>();
 
 		auto mouse = root.Instantiate<MouseItem>();
-
+		mouse->AddComponent(MouseHandler(screen_manager, player->GetComponent<PlayerController>(), mouse));
+		
 		{
 			auto inventory = root.Instantiate();
 			auto player_inventory = inventory->AddComponent(PlayerInventory());

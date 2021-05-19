@@ -23,63 +23,40 @@ void PlayerController::FixedUpdate()
 
 	const auto pos = entity_->GetTransform().GetPosition();
 
-	if (input.left_mouse.pressed)
-	{
-		target_ = Interactable::GetActiveInteractable();
-		if (target_)
-		{
-			target_pos_ = target_->entity_->GetTransform().GetPosition();
-		}
-	}
-	else if (input.left_mouse.held && !target_)
-	{
-		target_pos_ = input.mouse_world_pos;
-		direct_control_ = false;
-	}
-
 	if (psh_->IsCasting())
 	{
 		return;
 	}
 
+	if (target_)
+	{
+		target_pos_ = target_->entity_->GetTransform().GetPosition();
+	}
+
 	Vector2 movement;
 
-	if (!direct_control_)
+	const auto delta = target_pos_ - pos;
+	if (abs(delta.x) > 2 || abs(delta.y) > 2)
 	{
-		const auto delta = target_pos_ - pos;
-		if (abs(delta.x) > 2 || abs(delta.y) > 2)
-		{
-			movement = delta.GetNormalized();
-		}
-		else if (target_)
-		{
-			target_->OnInteract();
-			target_ = nullptr;
-		}
+		movement = delta.GetNormalized();
 	}
-
-	if (input.right.held)
+	else if (target_)
 	{
-		movement.x++;
-		direct_control_ = true;
-	}
-	if (input.left.held)
-	{
-		movement.x--;
-		direct_control_ = true;
-	}
-	if (input.up.held)
-	{
-		movement.y--;
-		direct_control_ = true;
-	}
-	if (input.down.held)
-	{
-		movement.y++;
-		direct_control_ = true;
+		target_->OnInteract();
+		target_ = nullptr;
 	}
 
 	movement.x *= speed;
 	movement.y *= speed;
 	entity_->GetTransform().Move(movement);
+}
+
+void PlayerController::SetTarget(const Vector2 position)
+{
+	target_pos_ = position;
+}
+
+void PlayerController::SetTarget(const std::shared_ptr<Interactable>& target)
+{
+	target_ = target;
 }

@@ -163,6 +163,7 @@
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Loot.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MouseHandler.cpp" />
     <ClCompile Include="MouseItem.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Loot.h" />
+    <ClInclude Include="MouseHandler.h" />
     <ClInclude Include="MouseItem.h" />
     <ClInclude Include="PlayerInventory.h" />
     <ClInclude Include="PlayerInventoryScreen.h" />

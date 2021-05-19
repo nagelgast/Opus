@@ -20,6 +20,30 @@ bool MouseItem::TryAddItem(std::shared_ptr<Item> item)
 	return true;
 }
 
+bool MouseItem::TryDrop(const Vector2 position)
+{
+	if(HasItem())
+	{
+		if(can_drop_items_)
+		{
+			Drop(position);
+		}
+		else
+		{
+			// PromptDestroyItem();
+		}
+
+		return true;
+	}
+
+	return false;
+}
+
+void MouseItem::Drop(const Vector2 position)
+{
+	
+}
+
 bool MouseItem::HasItem() const
 {
 	return item_ != nullptr;
