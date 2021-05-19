@@ -15,12 +15,13 @@ public:
 	bool TryAddItem(std::shared_ptr<Item> item);
 	
 	bool TryDrop(Vector2 position);
-	void Drop(Vector2 position);
-	void Place(Inventory& inventory);
-	std::shared_ptr<Item> GetItem();
+	std::shared_ptr<Item> Take();
 	bool HasItem() const;
 	void Update() override;
 private:
+	void Drop(Vector2 position);
+	void Clear();
+	
 	std::shared_ptr<Item> item_;
 	std::shared_ptr<SpriteRenderer> renderer_;
 

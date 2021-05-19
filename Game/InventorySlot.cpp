@@ -1,10 +1,8 @@
 #include "InventorySlot.h"
 
-#include <iostream>
-
-
-
 #include "Interactable.h"
+#include "Inventory.h"
+#include "InventoryItem.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/SpriteRenderer.h"
 
@@ -26,14 +24,24 @@ void InventorySlot::Awake()
 	interactable->OnHoverExit += [this] {HandleHoverExit(); };
 }
 
-void InventorySlot::HandleHoverEnter()
+void InventorySlot::SetItem(const std::shared_ptr<InventoryItem>& item)
 {
-	highlight_->SetVisible(true);
-	std::cout << "Enter\n";
+	item_ = item;
 }
 
-void InventorySlot::HandleHoverExit()
+std::shared_ptr<InventoryItem> InventorySlot::Take()
+{
+	auto item = item_;
+	item_ = nullptr;
+	return item;
+}
+
+void InventorySlot::HandleHoverEnter() const
+{
+	highlight_->SetVisible(true);
+}
+
+void InventorySlot::HandleHoverExit() const
 {
 	highlight_->SetVisible(false);
-	std::cout << "Exit\n";
 }

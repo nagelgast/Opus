@@ -3,6 +3,7 @@
 
 #include "../Opus/Core.h"
 
+class InventorySlot;
 class MouseItem;
 class InventoryItem;
 class Item;
@@ -13,14 +14,15 @@ public:
 	void Initialize(const std::shared_ptr<MouseItem>& mouse_item);
 	void Awake() override;
 	void AddItem(const std::shared_ptr<Item>& item);
+	void AddItem(const std::shared_ptr<Item>& item, const std::shared_ptr<InventorySlot>& slot) const;
+	void HandleRelease(int index);
 
 private:
+	std::shared_ptr<InventoryItem> SpawnInventoryItem(const std::shared_ptr<Item>& item) const;
 	int rows_ = 5;
 	int columns_ = 12;
 
-	void HandlePress();
-
 	std::shared_ptr<MouseItem> mouse_item_;
 	
-	std::map<int, std::shared_ptr<InventoryItem>> items_;
+	std::vector<std::shared_ptr<InventorySlot>> slots_;
 };

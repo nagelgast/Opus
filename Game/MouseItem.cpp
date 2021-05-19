@@ -42,25 +42,11 @@ bool MouseItem::TryDrop(const Vector2 position)
 	return false;
 }
 
-void MouseItem::Drop(const Vector2 position)
+std::shared_ptr<Item> MouseItem::Take()
 {
-	const auto world_item = Instantiate<WorldItem>(position);
-	world_item->item_ = item_;
-
-	item_ = nullptr;
-	renderer_->ResetSprite();
-}
-
-void MouseItem::Place(Inventory& inventory)
-{
-	inventory.AddItem(item_);
-	item_ = nullptr;
-	renderer_->ResetSprite();
-}
-
-std::shared_ptr<Item> MouseItem::GetItem()
-{
-	return item_;
+	auto item = item_;
+	Clear();
+	return item;
 }
 
 bool MouseItem::HasItem() const
@@ -71,4 +57,18 @@ bool MouseItem::HasItem() const
 void MouseItem::Update()
 {
 	GetTransform().SetPosition(GetInput().mouse_screen_pos);
+}
+
+void MouseItem::Drop(const Vector2 position)
+{
+	const auto world_item = Instantiate<WorldItem>(position);
+	world_item->item_ = item_;
+
+	Clear();
+}
+
+void MouseItem::Clear()
+{
+	item_ = nullptr;
+	renderer_->ResetSprite();
 }
