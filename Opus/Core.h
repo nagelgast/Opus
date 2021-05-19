@@ -7,3 +7,4 @@
 
 #include "Vector2.h"
 #include "Event.h"
+#include "VectorExtensions.h"

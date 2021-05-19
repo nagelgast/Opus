@@ -147,6 +147,9 @@
     <ClInclude Include="Event.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="VectorExtensions.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

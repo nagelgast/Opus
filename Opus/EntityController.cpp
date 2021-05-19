@@ -3,6 +3,7 @@
 
 #include "BaseTime.h"
 #include "Entity.h"
+#include "VectorExtensions.h"
 
 EntityController::EntityController(const BaseRenderer& renderer, const BaseTime& time, const Input& input) : renderer_(renderer), time_(time), input_(input)
 {
@@ -19,7 +20,8 @@ void EntityController::DestroyEntity(Entity& entity)
 	});
 	if(entity_iter == entities_.end()) return;
 	const auto value = *entity_iter;
-	entities_.erase(std::remove(entities_.begin(), entities_.end(), value), entities_.end());
+
+	RemoveByValue(entities_, value);
 }
 
 std::shared_ptr<Entity> EntityController::CreateEntity()

@@ -5,6 +5,8 @@
 class Transform final : public Component
 {
 public:
+	~Transform();
+	
 	void SetParent(Transform* transform);
 	
 	void SetSize(float width, float height);

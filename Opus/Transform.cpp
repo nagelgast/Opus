@@ -2,7 +2,15 @@
 #include "Transform.h"
 
 #include "BaseEntityRenderer.h"
-#include "Entity.h"
+#include "Core.h"
+
+Transform::~Transform()
+{
+	if(parent_ && !parent_->children_.empty())
+	{
+		RemoveByValue(parent_->children_, this);
+	}
+}
 
 // TODO Change to ref
 void Transform::SetParent(Transform* transform)
