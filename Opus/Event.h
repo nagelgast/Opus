@@ -13,7 +13,7 @@ public:
 			listener();
 		}
 	}
-
+	
 	void operator+=(const std::function<void()>& listener)
 	{
 		listeners_.push_back(listener);
