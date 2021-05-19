@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Inventory.h"
 #include "../Opus/Core.h"
 
 class SpriteRenderer;
@@ -15,6 +16,8 @@ public:
 	
 	bool TryDrop(Vector2 position);
 	void Drop(Vector2 position);
+	void Place(Inventory& inventory);
+	std::shared_ptr<Item> GetItem();
 	bool HasItem() const;
 	void Update() override;
 private:

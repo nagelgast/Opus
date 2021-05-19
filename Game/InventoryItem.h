@@ -10,8 +10,5 @@ class InventoryItem :
 {
 public:
 	explicit InventoryItem(std::shared_ptr<Item> item);
-	void Start() override;
 	std::shared_ptr<Item> item_;
-private:
-	void PickUp();
 };

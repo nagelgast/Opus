@@ -1,6 +1,8 @@
 #include "MouseItem.h"
 
 
+
+#include "Inventory.h"
 #include "Item.h"
 #include "WorldItem.h"
 #include "../Opus/Input.h"
@@ -48,6 +50,18 @@ void MouseItem::Drop(const Vector2 position)
 
 	item_ = nullptr;
 	renderer_->ResetSprite();
+}
+
+void MouseItem::Place(Inventory& inventory)
+{
+	inventory.AddItem(item_);
+	item_ = nullptr;
+	renderer_->ResetSprite();
+}
+
+std::shared_ptr<Item> MouseItem::GetItem()
+{
+	return item_;
 }
 
 bool MouseItem::HasItem() const

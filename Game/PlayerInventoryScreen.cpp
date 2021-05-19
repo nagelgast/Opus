@@ -15,11 +15,10 @@ void PlayerInventoryScreen::Awake()
 	transform.SetParent(&GetTransform());
 	transform.SetSize(350, 768);
 
-	auto inventory_entity = Instantiate();
-	auto& inv_trans = inventory_entity->GetTransform();
+	player_inventory_ = Instantiate<Inventory>();
+	auto& inv_trans = player_inventory_->GetTransform();
 	inv_trans.SetParent(&GetTransform());
-	inv_trans.SetLocalPosition({50, 300});
-	player_inventory_ = inventory_entity->AddComponent(Inventory());
+	inv_trans.SetLocalPosition({10, 250});
 }
 
 void PlayerInventoryScreen::Open()
