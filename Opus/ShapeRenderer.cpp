@@ -14,4 +14,3 @@ void ShapeRenderer::Start()
 	renderer->in_world_space_ = in_world_space_;
 	renderer->SetShape(shape_, r_, g_, b_, a_);
 }
-

@@ -18,7 +18,9 @@ void SFMLEntityRenderer::SetSize(float width, float height)
 	if (drawable_sprite_)
 	{
 		const auto& rect = drawable_sprite_->getTextureRect();
-		const sf::Vector2f sprite_scale = {width / static_cast<int>(rect.width), height / static_cast<int>(rect.height)};
+		const sf::Vector2f sprite_scale = {
+			width / static_cast<int>(rect.width), height / static_cast<int>(rect.height)
+		};
 		drawable_sprite_->setScale(sprite_scale);
 	}
 }
@@ -57,6 +59,13 @@ void SFMLEntityRenderer::SetShape(const Shape shape, float r, float g, float b, 
 		static_cast<sf::Uint8>(b * 255),
 		static_cast<sf::Uint8>(a * 255)
 	));
+}
+
+void SFMLEntityRenderer::Reset()
+{
+	texture_ = nullptr;
+	drawable_sprite_ = nullptr;
+	drawable_shape_ = nullptr;
 }
 
 void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const

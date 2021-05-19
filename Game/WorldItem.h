@@ -6,11 +6,10 @@
 class Interactable;
 
 class WorldItem :
-    public Component
+    public Entity
 {
 public:
-	explicit WorldItem(std::shared_ptr<Interactable> interactable, const Item& item);
-	void Start() override;
+	void Awake() override;
 	void PickUp();
 	std::shared_ptr<Item> item_;
 private:

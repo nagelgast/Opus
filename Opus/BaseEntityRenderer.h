@@ -14,6 +14,8 @@ public:
 	virtual void SetSprite(Sprite sprite) = 0;
 	virtual void SetShape(const Shape shape, float r, float g, float b, float a) = 0;
 
+	virtual void Reset() = 0;
+
 	Entity* entity_ = nullptr;
 
 	bool in_world_space_ = true;

@@ -14,6 +14,8 @@ public:
 	void SetSprite(Sprite sprite) override;
 	void SetShape(Shape shape, float r, float g, float b, float a) override;
 
+	void Reset() override;
+
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 private:
 	void DrawBox(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const sf::Vector2f& size, const sf::Color& color) const;

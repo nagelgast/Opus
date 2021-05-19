@@ -1,32 +1,34 @@
 #include "WorldItem.h"
 
-#include <utility>
-
 #include "../Opus/ShapeRenderer.h"
 
 #include "Interactable.h"
 #include "PlayerInventory.h"
 
-WorldItem::WorldItem(std::shared_ptr<Interactable> interactable, const Item& item) :
-	item_(std::make_shared<Item>(item)), interactable_(std::move(interactable))
+void WorldItem::Awake()
 {
-}
+	SetName("WorldItem");
 
-void WorldItem::Start()
-{
-	interactable_->OnInteract += [this] { PickUp(); };
+	AddComponent(ShapeRenderer(Shape::kSquare, 0.5f, 0.5f, 0.5f, 1));
+	const auto size = 30;
+	auto interactable = AddComponent(Interactable());
+	interactable->bounds_ = { 0, 0, size, size };
+	interactable->OnInteract += [this] { PickUp(); };
+
+	auto& transform = GetTransform();
+	transform.SetSize(size, size);
 }
 
 void WorldItem::PickUp()
 {
 	// TODO Improve this, geez
-	for (auto entity : entity_->GetEntities())
+	for (const auto& entity : GetEntities())
 	{
 		auto inventory = entity->GetComponent<PlayerInventory>();
 		if (inventory)
 		{
 			inventory->PickUpItem(item_);
-			entity_->Destroy();
+			Destroy();
 		}
 	}
 }
