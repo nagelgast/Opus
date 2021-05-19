@@ -1,8 +1,5 @@
 #include "MouseItem.h"
 
-
-
-#include "Inventory.h"
 #include "Item.h"
 #include "WorldItem.h"
 #include "../Opus/Input.h"
@@ -18,7 +15,7 @@ bool MouseItem::TryAddItem(std::shared_ptr<Item> item)
 	if(item_) return false;
 
 	item_ = std::move(item);
-	renderer_->SetSprite(item_->GetSprite(), false);
+	renderer_->SetSprite(item_->sprite, false);
 
 	return true;
 }

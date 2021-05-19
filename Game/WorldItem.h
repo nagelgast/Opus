@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Item.h"
 #include "../Opus/Core.h"
 
+class Item;
 class Interactable;
 
 class WorldItem :

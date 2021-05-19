@@ -1,7 +1,6 @@
 #include "InventorySlot.h"
 
 #include "Interactable.h"
-#include "Inventory.h"
 #include "InventoryItem.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/SpriteRenderer.h"
