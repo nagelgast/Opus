@@ -18,7 +18,7 @@ void PlayerInventoryScreen::Awake()
 	player_inventory_ = Instantiate<Inventory>();
 	auto& inv_trans = player_inventory_->GetTransform();
 	inv_trans.SetParent(&GetTransform());
-	inv_trans.SetLocalPosition({10, 250});
+	inv_trans.SetLocalPosition({0, 250});
 }
 
 void PlayerInventoryScreen::Open()

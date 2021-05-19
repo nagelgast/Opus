@@ -6,6 +6,7 @@
 
 Transform::~Transform()
 {
+	// TODO Check why empty check needed
 	if(parent_ && !parent_->children_.empty())
 	{
 		RemoveByValue(parent_->children_, this);
@@ -62,6 +63,11 @@ void Transform::SetLocalPosition(Vector2 position)
 void Transform::Move(const Vector2 offset)
 {
 	SetPosition(position_ + offset);
+}
+
+void Transform::SetOrigin(const Vector2 origin)
+{
+	origin_ = origin;
 }
 
 Vector2 Transform::GetOrigin() const

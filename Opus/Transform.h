@@ -14,6 +14,7 @@ public:
 	void SetPosition(Vector2 position);
 	void SetLocalPosition(Vector2 position);
 	void Move(Vector2 offset);
+	void SetOrigin(Vector2 origin);
 	Vector2 GetOrigin() const;
 	Vector2 GetScale() const;
 private:

@@ -114,6 +114,9 @@
     <ClCompile Include="MouseHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="InventorySlot.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -194,6 +197,9 @@
     <ClInclude Include="MouseHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InventorySlot.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Sprites\frames\knight_f_idle_anim_f0.png">
@@ -203,6 +209,9 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="Sprites\Driftwood_Wand_inventory_icon.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Sprites\InvSlot.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

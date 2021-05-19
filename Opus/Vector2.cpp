@@ -9,10 +9,28 @@ Vector2::Vector2()
 	y = 0;
 }
 
+Vector2::Vector2(const int x_in, const int y_in)
+{
+	x = static_cast<float>(x_in);
+	y = static_cast<float>(y_in);
+}
+
 Vector2::Vector2(const float x_in, const float y_in)
 {
 	x = x_in;
 	y = y_in;
+}
+
+Vector2::Vector2(const int x_in, const float y_in)
+{
+	x = static_cast<float>(x_in);
+	y = y_in;
+}
+
+Vector2::Vector2(const float x_in, const int y_in)
+{
+	x = x_in;
+	y = static_cast<float>(y_in);
 }
 
 

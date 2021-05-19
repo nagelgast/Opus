@@ -3,9 +3,12 @@
 
 #include "Interactable.h"
 #include "InventoryItem.h"
+#include "InventorySlot.h"
 #include "MouseItem.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/SpriteRenderer.h"
+
+const int kInventorySlotSize = 25;
 
 void Inventory::Initialize(const std::shared_ptr<MouseItem>& mouse_item)
 {
@@ -14,15 +17,32 @@ void Inventory::Initialize(const std::shared_ptr<MouseItem>& mouse_item)
 
 void Inventory::Awake()
 {
+	const auto width = static_cast<float>(kInventorySlotSize * columns_);
+	const auto height = static_cast<float>(kInventorySlotSize * rows_);
 	auto background = Instantiate();
-	background->AddComponent(ShapeRenderer(Shape::kSquare, 0.4f, 0.4f, 0.4f, 1, false));
+	background->AddComponent(ShapeRenderer(Shape::kSquare, 0.2f, 0.2f, 0.2f, 1, false));
 
-	auto& transform = background->GetTransform();
-	transform.SetParent(&GetTransform());
-	transform.SetSize(300, 150);
+	auto& background_transform = background->GetTransform();
+	background_transform.SetParent(&GetTransform());
+	background_transform.SetSize(width, height);
+
+	auto offset_x = (width - kInventorySlotSize )/2;
+	auto offset_y = (height - kInventorySlotSize )/2;
+	
+	for (auto row = 0; row < rows_; ++row)
+	{
+		for (auto col = 0; col < columns_; ++col)
+		{
+			const auto slot = Instantiate<InventorySlot>();
+			auto& slot_transform = slot->GetTransform();
+			slot_transform.SetSize(kInventorySlotSize, kInventorySlotSize);
+			slot_transform.SetParent(&GetTransform());
+			slot_transform.SetLocalPosition({col * kInventorySlotSize - offset_x, row * kInventorySlotSize - offset_y});
+		}
+	}
 
 	auto interactable = AddComponent(Interactable());
-	interactable->bounds_ = {0, 0, 300, 150};
+	interactable->bounds_ = {0, 0, width, height};
 	interactable->OnPress += [this] { HandlePress(); };
 }
 

@@ -160,6 +160,7 @@
     <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventoryItem.cpp" />
+    <ClCompile Include="InventorySlot.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="Loot.cpp" />
     <ClCompile Include="main.cpp" />
@@ -185,6 +186,7 @@
     <ClInclude Include="FireballSkill.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryItem.h" />
+    <ClInclude Include="InventorySlot.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Loot.h" />
     <ClInclude Include="MouseHandler.h" />
@@ -208,6 +210,7 @@
     <Image Include="Sprites\chars\gabe\gabe-idle-run.png" />
     <Image Include="Sprites\Driftwood_Wand_inventory_icon.png" />
     <Image Include="Sprites\frames\knight_f_idle_anim_f0.png" />
+    <Image Include="Sprites\InvSlot.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Opus\Opus.vcxproj">

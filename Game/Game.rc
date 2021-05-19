@@ -52,6 +52,8 @@ END
 
 IDB_PNG1                PNG                     "Sprites\\Driftwood_Wand_inventory_icon.png"
 
+IDB_PNG2                PNG                     "Sprites\\InvSlot.png"
+
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 
