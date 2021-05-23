@@ -1,5 +1,6 @@
 #pragma once
 
+struct Color;
 struct Sprite;
 struct Vector2;
 class Entity;
@@ -12,7 +13,8 @@ public:
 	virtual void SetSize(float width, float height) = 0;
 
 	virtual void SetSprite(Sprite sprite) = 0;
-	virtual void SetShape(const Shape shape, float r, float g, float b, float a) = 0;
+	virtual void SetShape(const Shape& shape) = 0;
+	virtual void SetColor(const Color& color) = 0;
 
 	virtual void Reset() = 0;
 

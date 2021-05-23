@@ -19,7 +19,7 @@ void Inventory::Awake()
 	const auto width = static_cast<float>(kInventorySlotSize * columns_);
 	const auto height = static_cast<float>(kInventorySlotSize * rows_);
 	auto background = Instantiate(&GetTransform());
-	background->AddComponent(ShapeRenderer(Shape::kSquare, 0.2f, 0.2f, 0.2f, 1, false));
+	background->AddComponent(ShapeRenderer(Shape::kSquare, {0.2f, 0.2f, 0.2f}, false));
 
 	auto& background_transform = background->GetTransform();
 	background_transform.SetSize(width, height);
@@ -204,7 +204,7 @@ void Inventory::EnableHighlights()
 {
 	for (auto highlight_slot : hover_slot_indices_)
 	{
-		slots_[highlight_slot]->EnableHighlight();
+		slots_[highlight_slot]->EnableHighlight({0, 0.5f, 0, 0.5f});
 	}
 }
 

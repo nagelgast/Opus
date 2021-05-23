@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Color.h"
 #include "Component.h"
 
 enum class Shape;
@@ -8,14 +9,13 @@ class ShapeRenderer :
     public Component
 {
 public:
-    ShapeRenderer(const Shape shape, float r, float g, float b, float a, bool in_world_space = true);
+    ShapeRenderer(Shape shape, Color color, bool in_world_space = true);
+	void SetColor(Color color);
     void Start() override;
 private:
     Shape shape_;
-    float r_;
-    float g_;
-    float b_;
-    float a_;
+	Color color_;
 	bool in_world_space_;
+	BaseEntityRenderer* renderer_ = nullptr;
 };
 

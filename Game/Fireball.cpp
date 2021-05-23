@@ -8,7 +8,7 @@
 
 void Fireball::Awake()
 {
-	AddComponent(ShapeRenderer(Shape::kCircle, 1, 0, 0, 1));
+	AddComponent(ShapeRenderer(Shape::kCircle, {1, 0, 0}));
 	const auto collider = AddComponent(Collider(2, Shape::kSquare, true, false));
 	GetTransform().SetSize(20,20);
 	projectile_ = AddComponent(Projectile(10, 200, 400));

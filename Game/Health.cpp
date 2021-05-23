@@ -22,7 +22,7 @@ void Health::Start()
 	transform.SetLocalPosition({ 0, -30 });
 	
 	health_bar->AddComponent(HealthBar(reference));
-	health_bar->AddComponent(ShapeRenderer(Shape::kSquare, 1, 0, 0, 0.5f));
+	health_bar->AddComponent(ShapeRenderer(Shape::kSquare, {1, 0, 0, 0.5f}));
 }
 
 void Health::TakeDamage(int amount)

@@ -49,13 +49,13 @@ int main()
 
 		{
 			auto health_globe = root.Instantiate({margin, kScreenHeight - margin});
-			health_globe->AddComponent(ShapeRenderer(Shape::kCircle, 1, 0, 0, 1, false));
+			health_globe->AddComponent(ShapeRenderer(Shape::kCircle, {1, 0, 0}, false));
 			health_globe->GetTransform().SetSize(100, 100);
 		}
 
 		{
 			auto mana_globe = root.Instantiate({kScreenWidth - margin, kScreenHeight - margin});
-			mana_globe->AddComponent(ShapeRenderer(Shape::kCircle, 0, 0, 1, 1, false));
+			mana_globe->AddComponent(ShapeRenderer(Shape::kCircle, {0, 0, 1}, false));
 			mana_globe->GetTransform().SetSize(100, 100);
 		}
 

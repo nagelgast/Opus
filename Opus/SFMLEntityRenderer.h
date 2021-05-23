@@ -12,7 +12,8 @@ public:
 	void SetSize(float width, float height) override;
 
 	void SetSprite(Sprite sprite) override;
-	void SetShape(Shape shape, float r, float g, float b, float a) override;
+	void SetShape(const Shape& shape) override;
+	void SetColor(const Color& color) override;
 
 	void Reset() override;
 

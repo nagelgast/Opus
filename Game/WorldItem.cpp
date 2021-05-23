@@ -9,7 +9,7 @@ void WorldItem::Awake()
 {
 	SetName("WorldItem");
 
-	AddComponent(ShapeRenderer(Shape::kSquare, 0.5f, 0.5f, 0.5f, 1));
+	AddComponent(ShapeRenderer(Shape::kSquare, {0.5f, 0.5f, 0.5f}));
 	const auto size = 30;
 	auto interactable = AddComponent(Interactable());
 	interactable->bounds_ = { 0, 0, size, size };

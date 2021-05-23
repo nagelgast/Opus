@@ -1,12 +1,15 @@
 #include "pch.h"
 #include "SFMLEntityRenderer.h"
 
+
+#include "Color.h"
 #include "Entity.h"
 #include "Shape.h"
 #include "Sprite.h"
 #include "Vector2.h"
 #include "Transform.h"
 
+// TODO Improve relation with entity scale
 void SFMLEntityRenderer::SetSize(float width, float height)
 {
 	scale_ = {width, height};
@@ -40,7 +43,7 @@ void SFMLEntityRenderer::SetSprite(const Sprite sprite)
 	});
 }
 
-void SFMLEntityRenderer::SetShape(const Shape shape, float r, float g, float b, float a)
+void SFMLEntityRenderer::SetShape(const Shape& shape)
 {
 	switch (shape)
 	{
@@ -52,12 +55,15 @@ void SFMLEntityRenderer::SetShape(const Shape shape, float r, float g, float b, 
 		drawable_shape_ = std::make_unique<sf::RectangleShape>(length);
 		break;
 	}
+}
 
+void SFMLEntityRenderer::SetColor(const Color& color)
+{
 	drawable_shape_->setFillColor(sf::Color(
-		static_cast<sf::Uint8>(r * 255),
-		static_cast<sf::Uint8>(g * 255),
-		static_cast<sf::Uint8>(b * 255),
-		static_cast<sf::Uint8>(a * 255)
+		static_cast<sf::Uint8>(color.r * 255),
+		static_cast<sf::Uint8>(color.g * 255),
+		static_cast<sf::Uint8>(color.b * 255),
+		static_cast<sf::Uint8>(color.a * 255)
 	));
 }
 

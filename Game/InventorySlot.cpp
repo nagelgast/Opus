@@ -13,7 +13,7 @@ void InventorySlot::Awake()
 	sprite_renderer->SetSprite(sprite, false);
 
 	highlight_ = Instantiate(&transform);
-	highlight_->AddComponent(ShapeRenderer(Shape::kSquare, 0, 0, 0.3f, 0.5f, false));
+	shape_renderer_ = highlight_->AddComponent(ShapeRenderer(Shape::kSquare, {0, 0, 0.3f, 0.5f}, false));
 	highlight_->GetTransform().SetSize(25, 25);
 	highlight_->SetVisible(false);
 
@@ -49,12 +49,13 @@ std::shared_ptr<InventoryItem> InventorySlot::Take()
 	return item;
 }
 
-void InventorySlot::EnableHighlight()
+void InventorySlot::EnableHighlight(const Color color) const
 {
 	highlight_->SetVisible(true);
+	shape_renderer_->SetColor(color);
 }
 
-void InventorySlot::DisableHighlight()
+void InventorySlot::DisableHighlight() const
 {
 	highlight_->SetVisible(false);
 }
