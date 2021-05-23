@@ -8,7 +8,6 @@ class MouseItem;
 class InventoryItem;
 class Item;
 
-
 // TODO Move to global settings
 const int kInventorySlotSize = 25;
 const Color kItemSlotColor = {0, 0, 0.5, 0.5};

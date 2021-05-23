@@ -136,14 +136,15 @@ void Inventory::HandleSlotHoverEnter(const int index)
 				}
 			}
 		}
-		
-		SetHighlights();
 	}
+
+	SetHighlights();
 }
 
 void Inventory::HandleSlotHoverExit(int index)
 {
 	ResetHighlights();
+	hover_slot_indices_.clear();
 }
 
 std::vector<int> Inventory::CalculateHoverSlots(Item& item, const int index) const
@@ -202,20 +203,24 @@ std::vector<int> Inventory::CalculateHoverSlots(Item& item, const int index) con
 
 void Inventory::SetHighlights()
 {
-	if(pickup_slot_->HasItem())
+	if(mouse_item_->HasItem())
 	{
-		const auto pickup_slot_indices = pickup_slot_->GetItem().GetSlotIndices();
-		for (auto pickup_slot_index : pickup_slot_indices)
+		const auto hover_color = hovering_over_multiple_items_ ? kUnavailableSlotColor : kAvailableSlotColor;
+
+		for (auto highlight_slot : hover_slot_indices_)
 		{
-			slots_[pickup_slot_index]->EnableHighlight(kPickupSlotColor);
+			slots_[highlight_slot]->EnableHighlight(hover_color);
 		}
 	}
 
-	const auto hover_color = hovering_over_multiple_items_ ? kUnavailableSlotColor : kAvailableSlotColor;
-	
-	for (auto highlight_slot : hover_slot_indices_)
+	if (pickup_slot_->HasItem())
 	{
-		slots_[highlight_slot]->EnableHighlight(hover_color);
+		const auto pickup_color = mouse_item_->HasItem() ? kPickupSlotColor : kAvailableSlotColor;
+		const auto pickup_slot_indices = pickup_slot_->GetItem().GetSlotIndices();
+		for (auto pickup_slot_index : pickup_slot_indices)
+		{
+			slots_[pickup_slot_index]->EnableHighlight(pickup_color);
+		}
 	}
 }
 
@@ -232,5 +237,4 @@ void Inventory::ResetHighlights()
 			slot->DisableHighlight();
 		}
 	}
-	hover_slot_indices_.clear();
 }
