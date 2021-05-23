@@ -207,9 +207,11 @@
     <ClInclude Include="WorldItem.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Sprites\Chaos_Orb_inventory_icon.png" />
     <Image Include="Sprites\chars\gabe\gabe-idle-run.png" />
     <Image Include="Sprites\Driftwood_Wand_inventory_icon.png" />
     <Image Include="Sprites\frames\knight_f_idle_anim_f0.png" />
+    <Image Include="Sprites\Goldrim_inventory_icon.png" />
     <Image Include="Sprites\InvSlot.png" />
   </ItemGroup>
   <ItemGroup>
