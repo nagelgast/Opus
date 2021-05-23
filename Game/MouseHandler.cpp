@@ -187,13 +187,13 @@ void MouseHandler::HandleHover()
 
 	if (target_ != previous_target_)
 	{
+		if (previous_target_)
+		{
+			previous_target_->OnHoverExit();
+		}
 		if(target_)
 		{
 			target_->OnHoverEnter();
-		}
-		if(previous_target_)
-		{
-			previous_target_->OnHoverExit();
 		}
 	}
 }

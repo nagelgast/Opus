@@ -46,6 +46,11 @@ std::shared_ptr<Item> MouseItem::Take()
 	return item;
 }
 
+Item& MouseItem::GetItem()
+{
+	return *item_;
+}
+
 bool MouseItem::HasItem() const
 {
 	return item_ != nullptr;

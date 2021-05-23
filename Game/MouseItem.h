@@ -16,6 +16,7 @@ public:
 	
 	bool TryDrop(Vector2 position);
 	std::shared_ptr<Item> Take();
+	Item& GetItem();
 	bool HasItem() const;
 	void Update() override;
 private:

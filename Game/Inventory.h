@@ -18,10 +18,20 @@ public:
 
 private:
 	std::shared_ptr<InventoryItem> SpawnInventoryItem(const std::shared_ptr<Item>& item) const;
+
+	std::vector<int> CalculateHighlightedSlots(Item& item, int index) const;
+
+	void SetHighlights(const std::vector<int>& slot_indices);
+	void ClearHighlights();
+	
+	void HandleSlotHoverEnter(int index);
+	void HandleSlotHoverExit(int index);
+
 	int rows_ = 5;
 	int columns_ = 12;
 
 	std::shared_ptr<MouseItem> mouse_item_;
 	
 	std::vector<std::shared_ptr<InventorySlot>> slots_;
+	std::vector<int> highlighted_slots_;
 };

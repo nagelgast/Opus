@@ -19,14 +19,23 @@ void InventorySlot::Awake()
 
 	auto interactable = AddComponent(Interactable());
 	interactable->bounds_ = {0,0, 25, 25};
-	interactable->OnHoverEnter += [this] {HandleHoverEnter();};
-	interactable->OnHoverExit += [this] {HandleHoverExit(); };
 }
 
 void InventorySlot::SetItem(const std::shared_ptr<InventoryItem>& item)
 {
 	item_ = item;
 }
+
+InventoryItem& InventorySlot::GetItem()
+{
+	return *item_;
+}
+
+bool InventorySlot::HasItem() const
+{
+	return item_ != nullptr;
+}
+
 
 std::shared_ptr<InventoryItem> InventorySlot::Take()
 {
@@ -35,12 +44,12 @@ std::shared_ptr<InventoryItem> InventorySlot::Take()
 	return item;
 }
 
-void InventorySlot::HandleHoverEnter() const
+void InventorySlot::EnableHighlight()
 {
 	highlight_->SetVisible(true);
 }
 
-void InventorySlot::HandleHoverExit() const
+void InventorySlot::DisableHighlight()
 {
 	highlight_->SetVisible(false);
 }
