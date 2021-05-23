@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../Opus/Color.h"
 #include "../Opus/Core.h"
 
 class InventorySlot;
@@ -10,6 +11,10 @@ class Item;
 
 // TODO Move to global settings
 const int kInventorySlotSize = 25;
+const Color kItemSlotColor = {0, 0, 0.5, 0.5};
+const Color kAvailableSlotColor = { 0, 0.5, 0, 0.5 };
+const Color kPickupSlotColor = { 0.5, 0.5, 0, 0.5 };
+const Color kUnavailableSlotColor = { 0.5, 0, 0, 0.5 };
 
 class Inventory : public Entity
 {
@@ -24,8 +29,8 @@ private:
 
 	std::vector<int> CalculateHoverSlots(Item& item, int index) const;
 
-	void EnableHighlights();
-	void ClearHighlights();
+	void SetHighlights();
+	void ResetHighlights();
 	
 	void HandleSlotHoverEnter(int index);
 	void HandleSlotHoverExit(int index);
