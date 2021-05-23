@@ -8,9 +8,6 @@
 #include "Item.h"
 
 #include "../Opus/ShapeRenderer.h"
-#include "../Opus/SpriteRenderer.h"
-
-const int kInventorySlotSize = 25;
 
 void Inventory::Initialize(const std::shared_ptr<MouseItem>& mouse_item)
 {
@@ -57,32 +54,29 @@ void Inventory::AddItem(const std::shared_ptr<Item>& item)
 	AddItem(item, slots_[0]);
 }
 
-void Inventory::AddItem(const std::shared_ptr<Item>& item, const std::shared_ptr<InventorySlot>& slot) const
+void Inventory::AddItem(const std::shared_ptr<Item>& item, const std::shared_ptr<InventorySlot>& slot)
 {
-	const auto inventory_item = SpawnInventoryItem(item);
-	auto& transform = inventory_item->entity_->GetTransform();
+	// Create new inventory item instance
+	const auto inventory_item = Instantiate<InventoryItem>(&GetTransform());
+	inventory_item->Initialize(item, hover_slot_indices_);
+
+	// Position item correctly
+	auto& transform = inventory_item->GetTransform();
 	const Vector2 offset = {kInventorySlotSize*(item->width-1)/2, kInventorySlotSize * (item->height - 1) / 2 };
 	transform.SetPosition(slot->GetTransform().GetPosition() + offset);
 
-	
-	slot->SetItem(inventory_item);
+	// Mark all of its slots as occupied
+	for (auto hover_slot_index : hover_slot_indices_)
+	{
+		slots_[hover_slot_index]->SetItem(inventory_item);
+	}
 }
 
 void Inventory::HandleRelease(const int index)
 {
-	std::shared_ptr<Item> old_item = nullptr;
+	if(hovering_over_multiple_items_) return;
 
-	if(hovering_over_multiple_items_)
-	{
-		return;
-	}
-	
-	const auto slot_item = pickup_slot_->Take();
-	if(slot_item)
-	{
-		old_item = slot_item->item_;
-		slot_item->entity_->Destroy();
-	}
+	const auto picked_up_item = PickupItem();
 
 	if (mouse_item_->HasItem())
 	{
@@ -90,30 +84,29 @@ void Inventory::HandleRelease(const int index)
 		AddItem(new_item, slots_[index]);
 	}
 
-	// Swap the old item to the mouse after placing the new item to ensure the mouse has space
-	if (old_item)
+	if (picked_up_item)
 	{
-		mouse_item_->TryAddItem(old_item);
+		mouse_item_->TryAddItem(picked_up_item);
 	}
 }
 
-
-std::shared_ptr<InventoryItem> Inventory::SpawnInventoryItem(const std::shared_ptr<Item>& item) const
+std::shared_ptr<Item> Inventory::PickupItem()
 {
-	const auto width = static_cast<float>(kInventorySlotSize * item->width);
-	const auto height = static_cast<float>(kInventorySlotSize * item->height);
+	if(!pickup_slot_->HasItem()) return nullptr;
+	
+	auto& inventory_item = pickup_slot_->GetItem();
+	auto item = inventory_item.GetItem();
 
-	auto entity = Instantiate(&GetTransform());
-	auto interactable = entity->AddComponent(Interactable());
-	interactable->bounds_ = {0, 0, width, height};
+	auto slot_indices = inventory_item.GetSlotIndices();
 
-	auto inventory_item = entity->AddComponent(InventoryItem(item));
-	auto sr = entity->AddComponent(SpriteRenderer());
-	sr->SetSprite(item->sprite, false);
+	for (auto slot_index : slot_indices)
+	{
+		slots_[slot_index]->ClearItem();
+	}
+	
+	inventory_item.Destroy();
 
-	entity->GetTransform().SetSize(width, height);
-
-	return inventory_item;
+	return item;
 }
 
 void Inventory::HandleSlotHoverEnter(const int index)

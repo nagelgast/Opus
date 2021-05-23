@@ -7,17 +7,20 @@ class MouseItem;
 class InventoryItem;
 class Item;
 
+
+// TODO Move to global settings
+const int kInventorySlotSize = 25;
+
 class Inventory : public Entity
 {
 public:
 	void Initialize(const std::shared_ptr<MouseItem>& mouse_item);
 	void Awake() override;
 	void AddItem(const std::shared_ptr<Item>& item);
-	void AddItem(const std::shared_ptr<Item>& item, const std::shared_ptr<InventorySlot>& slot) const;
-	void HandleRelease(int index);
-
 private:
-	std::shared_ptr<InventoryItem> SpawnInventoryItem(const std::shared_ptr<Item>& item) const;
+	void HandleRelease(int index);
+	std::shared_ptr<Item> PickupItem();
+	void AddItem(const std::shared_ptr<Item>& item, const std::shared_ptr<InventorySlot>& slot);
 
 	std::vector<int> CalculateHoverSlots(Item& item, int index) const;
 
@@ -35,6 +38,7 @@ private:
 	std::vector<std::shared_ptr<InventorySlot>> slots_;
 	
 	std::vector<int> hover_slot_indices_;
+	std::vector<int> pickup_slot_indices_;
 	std::shared_ptr<InventorySlot> pickup_slot_;
 	bool hovering_over_multiple_items_ = false;
 };

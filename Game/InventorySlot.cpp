@@ -26,6 +26,11 @@ void InventorySlot::SetItem(const std::shared_ptr<InventoryItem>& item)
 	item_ = item;
 }
 
+void InventorySlot::ClearItem()
+{
+	item_ = nullptr;
+}
+
 InventoryItem& InventorySlot::GetItem()
 {
 	return *item_;
