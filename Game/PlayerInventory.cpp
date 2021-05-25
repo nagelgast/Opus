@@ -4,9 +4,16 @@
 
 #include "Item.h"
 
+PlayerInventory& PlayerInventory::GetInstance()
+{
+	return *instance_;
+}
+
 void PlayerInventory::Initialize(const std::shared_ptr<MouseItem>& mouse,
                                  const std::shared_ptr<PlayerInventoryScreen>& screen)
 {
+	instance_ = this;
+	
 	mouse_item_ = mouse;
 	screen_ = screen;
 
@@ -34,3 +41,5 @@ void PlayerInventory::PickUpItem(const std::shared_ptr<Item>& item) const
 		}
 	}
 }
+
+PlayerInventory* PlayerInventory::instance_;

@@ -21,6 +21,6 @@ void WorldItem::Awake()
 
 void WorldItem::PickUp()
 {
-	inventory_->PickUpItem(item_);
+	PlayerInventory::GetInstance().PickUpItem(item_);
 	Destroy();
 }
