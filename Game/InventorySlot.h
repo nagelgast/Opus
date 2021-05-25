@@ -18,6 +18,8 @@ public:
 	void ClearItem();
 	bool HasItem() const;
 
+	bool CanHold(Item& item) const;
+	
 	void SetRequiredTag(ItemTag tag);
 	ItemTag GetRequiredTag() const;
 

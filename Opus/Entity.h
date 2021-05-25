@@ -68,6 +68,7 @@ public:
 	{
 		auto entity = ec_->CreateEntity<T>();
 		entity->transform_->SetParent(parent);
+		entity->transform_->SetLocalPosition({ 0, 0 });
 		return entity;
 	}
 

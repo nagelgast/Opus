@@ -6,6 +6,7 @@
 #include "MouseSlot.h"
 #include "InventoryItem.h"
 #include "Item.h"
+#include "PlayerInventory.h"
 
 #include "../Opus/ShapeRenderer.h"
 
@@ -123,7 +124,7 @@ void Inventory::HandleRelease(const int index)
 
 	if (picked_up_item)
 	{
-		mouse_item_->SetItem(picked_up_item);
+		PlayerInventory::GetInstance().PickUpItem(picked_up_item);
 		HandleSlotHoverEnter(index);
 	}
 }

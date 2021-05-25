@@ -2,6 +2,7 @@
 
 #include "Interactable.h"
 #include "InventoryItem.h"
+#include "Item.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/SpriteRenderer.h"
 
@@ -37,6 +38,13 @@ void InventorySlot::ClearItem()
 bool InventorySlot::HasItem() const
 {
 	return item_ != nullptr;
+}
+
+bool InventorySlot::CanHold(Item& item) const
+{
+	if(required_tag_ == ItemTag::no_tag) return true;
+	
+	return Contains(item.tags, required_tag_);
 }
 
 void InventorySlot::SetRequiredTag(const ItemTag tag)

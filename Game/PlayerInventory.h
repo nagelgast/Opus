@@ -17,10 +17,11 @@ private:
 	void SpawnEquipmentSlot(ItemTag tag, Vector2 position, float width, float height);
 	void HandleEquipmentSlotHoverEnter(std::shared_ptr<InventorySlot> slot);
 	void HandleEquipmentSlotHoverExit(std::shared_ptr<InventorySlot> slot);
-	void HandleEquipmentSlotRelease(std::shared_ptr<InventorySlot> slot);
+	void HandleEquipmentSlotRelease(const std::shared_ptr<InventorySlot>& slot);
 
-	bool TryPickup(const std::shared_ptr<InventorySlot>& slot) const;
-	
+	void TryPickup(const std::shared_ptr<InventorySlot>& slot);
+	void Equip(std::shared_ptr<InventorySlot> equipment_slot, std::shared_ptr<Item> item);
+		
 	std::shared_ptr<PlayerInventoryScreen> screen_;
 	std::shared_ptr<Inventory> inventory_;
 	std::shared_ptr<MouseSlot> mouse_slot_;
