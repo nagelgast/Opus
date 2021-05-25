@@ -10,7 +10,7 @@ void MouseSlot::Awake()
 	renderer_ = AddComponent(SpriteRenderer());
 }
 
-bool MouseSlot::SetItem(const std::shared_ptr<Item> item)
+bool MouseSlot::SetItem(const std::shared_ptr<Item>& item)
 {
 	item_ = item;
 	renderer_->SetSprite(item_->sprite, false);

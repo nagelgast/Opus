@@ -21,7 +21,7 @@ private:
 
 	std::shared_ptr<PlayerInventoryScreen> screen_;
 	std::shared_ptr<Inventory> inventory_;
-	std::shared_ptr<MouseSlot> mouse_item_;
+	std::shared_ptr<MouseSlot> mouse_slot_;
 	// std::shared_ptr<EquipmentInventory>
 
 	// TODO Replace with system/service

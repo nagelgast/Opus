@@ -19,6 +19,7 @@ public:
 	bool HasItem() const;
 
 	void SetRequiredTag(ItemTag tag);
+	ItemTag GetRequiredTag() const;
 
 	void EnableHighlight(Color color) const;
 	void DisableHighlight() const;

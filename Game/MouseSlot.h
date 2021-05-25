@@ -12,7 +12,7 @@ class MouseSlot final :
 public:
 	void Awake() override;
 	
-	bool SetItem(std::shared_ptr<Item> item);
+	bool SetItem(const std::shared_ptr<Item>& item);
 	
 	bool TryDrop(Vector2 position);
 	std::shared_ptr<Item> Take();

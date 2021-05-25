@@ -44,6 +44,11 @@ void InventorySlot::SetRequiredTag(const ItemTag tag)
 	required_tag_ = tag;
 }
 
+ItemTag InventorySlot::GetRequiredTag() const
+{
+	return required_tag_;
+}
+
 void InventorySlot::EnableHighlight(const Color color) const
 {
 	highlight_->SetVisible(true);
