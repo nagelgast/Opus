@@ -204,7 +204,7 @@ std::vector<int> Inventory::CalculateSlotsToOccupy(const ItemSize item_size, con
 		}
 		else
 		{
-			// Check mid-way position
+			// TODO Check mid-slot mouse position
 		}
 	}
 
@@ -218,7 +218,7 @@ std::vector<int> Inventory::CalculateSlotsToOccupy(const ItemSize item_size, con
 		}
 		else
 		{
-			// Check mid-way position
+			// TODO Check mid-slot mouse position
 		}
 	}
 
@@ -239,6 +239,8 @@ std::vector<int> Inventory::CalculateSlotsToOccupy(const ItemSize item_size, con
 
 void Inventory::SetHighlights()
 {
+	// TODO Implement overlap slot coloring
+	
 	if(mouse_item_->HasItem())
 	{
 		const auto hover_color = hovering_over_multiple_items_ ? kUnavailableSlotColor : kAvailableSlotColor;
