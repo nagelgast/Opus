@@ -122,6 +122,7 @@ void Inventory::HandleRelease(const int index)
 	if (picked_up_item)
 	{
 		mouse_item_->TryAddItem(picked_up_item);
+		HandleSlotHoverEnter(index);
 	}
 }
 
