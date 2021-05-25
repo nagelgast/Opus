@@ -14,11 +14,11 @@ void Loot::OnDestroy()
 void Loot::SpawnItem() const
 {
 	const Sprite sprite{ "Sprites/Driftwood_Wand_inventory_icon.png", {0, 0, 78, 234} };
-	Item item {"TestWand", sprite, 1, 3};
+	Item item {"TestWand", sprite, {1, 3}};
 	const Sprite sprite2{ "Sprites/Goldrim_inventory_icon.png", {0, 0, 156, 156} };
-	Item item2 { "TestHelm", sprite2, 2, 2 };
+	Item item2 { "TestHelm", sprite2, {2, 2} };
 	const Sprite sprite3{ "Sprites/Chaos_Orb_inventory_icon.png", {0, 0, 78, 78} };
-	Item item3 {"TestOrb", sprite3, 1, 1};
+	Item item3 {"TestOrb", sprite3, {1, 1}};
 	
 	auto pos = entity_->GetTransform().GetPosition();
 	

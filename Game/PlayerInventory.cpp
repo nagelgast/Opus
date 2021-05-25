@@ -1,5 +1,8 @@
 #include "PlayerInventory.h"
 
+#include <iostream>
+
+
 #include "Item.h"
 
 void PlayerInventory::PickUpItem(std::shared_ptr<Item> item)
@@ -12,6 +15,11 @@ void PlayerInventory::PickUpItem(std::shared_ptr<Item> item)
 	{
 		//if(can_go_to_empty_gear_slot) Equip()
 		
-		inventory_->AddItem(item);
+		const auto success = inventory_->TryAutoAddItem(item);
+		if(!success)
+		{
+			// TODO Give feedback that inventory is full
+			std::cout << "Too. Much. Clutter.\n";
+		}
 	}
 }

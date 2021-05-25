@@ -200,6 +200,9 @@
     <ClInclude Include="InventorySlot.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="ItemSize.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Sprites\frames\knight_f_idle_anim_f0.png">

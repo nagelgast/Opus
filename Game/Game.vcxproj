@@ -188,6 +188,7 @@
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="InventorySlot.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemSize.h" />
     <ClInclude Include="Loot.h" />
     <ClInclude Include="MouseHandler.h" />
     <ClInclude Include="MouseItem.h" />

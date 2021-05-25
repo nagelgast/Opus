@@ -48,28 +48,63 @@ void Inventory::Awake()
 	}
 }
 
-void Inventory::AddItem(const std::shared_ptr<Item>& item)
+bool Inventory::TryAutoAddItem(const std::shared_ptr<Item>& item)
 {
-	// TODO Implement automatically finding available space
-	AddItem(item, slots_[0]);
+	const auto slot_indices = FindAvailableSlots(item);
+	const auto has_space = !slot_indices.empty();
+	if(has_space)
+	{
+		AddItem(item, slot_indices);
+	}
+
+	return has_space;
 }
 
-void Inventory::AddItem(const std::shared_ptr<Item>& item, const std::shared_ptr<InventorySlot>& slot)
+std::vector<int> Inventory::FindAvailableSlots(const std::shared_ptr<Item>& item)
+{
+	for(auto col = 0; col < columns_; ++col)
+	{
+		for(auto row = 0; row < rows_; ++row)
+		{
+			const auto index = col+row*columns_;
+			auto slot_indices = CalculateSlotsToOccupy(item->size, index);
+			auto is_available = true;
+			for (auto slot_index : slot_indices)
+			{
+				if(slots_[slot_index]->HasItem())
+				{
+					is_available = false;
+					break;
+				}
+			}
+			if(is_available)
+			{
+				return slot_indices;
+			}
+		}
+	}
+	
+	return {};
+}
+
+void Inventory::AddItem(const std::shared_ptr<Item>& item, std::vector<int> slot_indices)
 {
 	// Create new inventory item instance
 	const auto inventory_item = Instantiate<InventoryItem>(&GetTransform());
-	inventory_item->Initialize(item, hover_slot_indices_);
+	inventory_item->Initialize(item, slot_indices);
 
 	// Position item correctly
 	auto& transform = inventory_item->GetTransform();
-	const Vector2 offset = {kInventorySlotSize*(item->width-1)/2, kInventorySlotSize * (item->height - 1) / 2 };
-	transform.SetPosition(slot->GetTransform().GetPosition() + offset);
+	const Vector2 offset = {kInventorySlotSize*(item->size.width-1)/2, kInventorySlotSize * (item->size.height - 1) / 2 };
+	transform.SetPosition(slots_[slot_indices[0]]->GetTransform().GetPosition() + offset);
 
 	// Mark all of its slots as occupied
-	for (auto hover_slot_index : hover_slot_indices_)
+	for (auto slot_index : slot_indices)
 	{
-		slots_[hover_slot_index]->SetItem(inventory_item);
+		slots_[slot_index]->SetItem(inventory_item);
 	}
+
+	ResetHighlights();
 }
 
 void Inventory::HandleRelease(const int index)
@@ -81,7 +116,7 @@ void Inventory::HandleRelease(const int index)
 	if (mouse_item_->HasItem())
 	{
 		const auto new_item = mouse_item_->Take();
-		AddItem(new_item, slots_[index]);
+		AddItem(new_item, place_slot_indices_);
 	}
 
 	if (picked_up_item)
@@ -115,11 +150,11 @@ void Inventory::HandleSlotHoverEnter(const int index)
 	
 	if(mouse_item_->HasItem())
 	{
-		hover_slot_indices_ = CalculateHoverSlots(mouse_item_->GetItem(), index);
+		place_slot_indices_ = CalculateSlotsToOccupy(mouse_item_->GetItem().size, index);
 
 		auto hovering_over_item = false;
 		hovering_over_multiple_items_ = false;
-		for (auto slot_index : hover_slot_indices_)
+		for (auto slot_index : place_slot_indices_)
 		{
 			const auto slot = slots_[slot_index];
 			if(slot->HasItem())
@@ -144,13 +179,13 @@ void Inventory::HandleSlotHoverEnter(const int index)
 void Inventory::HandleSlotHoverExit(int index)
 {
 	ResetHighlights();
-	hover_slot_indices_.clear();
+	place_slot_indices_.clear();
 }
 
-std::vector<int> Inventory::CalculateHoverSlots(Item& item, const int index) const
+std::vector<int> Inventory::CalculateSlotsToOccupy(const ItemSize item_size, const int index) const
 {
 	// Just return index if small item
-	if(item.width == 1 && item.height == 1)
+	if(item_size.width == 1 && item_size.height == 1)
 	{
 		return {index};
 	}
@@ -158,13 +193,13 @@ std::vector<int> Inventory::CalculateHoverSlots(Item& item, const int index) con
 	auto top_row = index / columns_;
 	auto left_col = index % columns_;
 	
-	if (item.width > 1)
+	if (item_size.width > 1)
 	{
 		// Calculate left-most column
-		if (left_col + item.width > columns_)
+		if (left_col + item_size.width > columns_)
 		{
 			// Correct if near right edge
-			left_col = columns_ - item.width;
+			left_col = columns_ - item_size.width;
 		}
 		else
 		{
@@ -172,13 +207,13 @@ std::vector<int> Inventory::CalculateHoverSlots(Item& item, const int index) con
 		}
 	}
 
-	if (item.height > 1)
+	if (item_size.height > 1)
 	{
 		// Calculate top-most row
-		if(top_row + item.height > rows_)
+		if(top_row + item_size.height > rows_)
 		{
 			// Correct if near bottom edge
-			top_row = rows_ - item.height;
+			top_row = rows_ - item_size.height;
 		}
 		else
 		{
@@ -189,9 +224,9 @@ std::vector<int> Inventory::CalculateHoverSlots(Item& item, const int index) con
 	// TODO Initialize this to size
 	std::vector<int> result;
 	
-	for(auto row = 0; row < item.height; ++row)
+	for(auto row = 0; row < item_size.height; ++row)
 	{
-		for(auto col = 0; col < item.width; ++col)
+		for(auto col = 0; col < item_size.width; ++col)
 		{
 			auto value = (row+top_row)*columns_ + col + left_col;
 			result.push_back(value);
@@ -207,7 +242,7 @@ void Inventory::SetHighlights()
 	{
 		const auto hover_color = hovering_over_multiple_items_ ? kUnavailableSlotColor : kAvailableSlotColor;
 
-		for (auto highlight_slot : hover_slot_indices_)
+		for (auto highlight_slot : place_slot_indices_)
 		{
 			slots_[highlight_slot]->EnableHighlight(hover_color);
 		}

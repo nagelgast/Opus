@@ -17,8 +17,8 @@ void InventoryItem::Initialize(const std::shared_ptr<Item>& item, const std::vec
 	item_ = item;
 	slot_indices_ = slot_indices;
 
-	const auto width = static_cast<float>(kInventorySlotSize * item->width);
-	const auto height = static_cast<float>(kInventorySlotSize * item->height);
+	const auto width = static_cast<float>(kInventorySlotSize * item->size.width);
+	const auto height = static_cast<float>(kInventorySlotSize * item->size.height);
 	
 	interactable_->bounds_ = { 0, 0, width, height };
 	sr_->SetSprite(item->sprite, false);
