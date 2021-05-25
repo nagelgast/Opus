@@ -15,12 +15,13 @@ public:
 	void PickUpItem(const std::shared_ptr<Item>& item) const;
 private:
 	void SpawnEquipmentSlot(ItemTag tag, Vector2 position, float width, float height);
-	void HandleEquipmentSlotHoverEnter(std::shared_ptr<InventorySlot> slot);
-	void HandleEquipmentSlotHoverExit(std::shared_ptr<InventorySlot> slot);
+	
+	void HandleEquipmentSlotHoverEnter(const InventorySlot& slot) const;
+	void HandleEquipmentSlotHoverExit(const InventorySlot& slot) const;
 	void HandleEquipmentSlotRelease(const std::shared_ptr<InventorySlot>& slot);
 
-	void TryPickup(const std::shared_ptr<InventorySlot>& slot);
-	void Equip(std::shared_ptr<InventorySlot> equipment_slot, std::shared_ptr<Item> item);
+	void TryPickup(const InventorySlot& slot) const;
+	void Equip(const std::shared_ptr<InventorySlot>& equipment_slot, const std::shared_ptr<Item>& item);
 		
 	std::shared_ptr<PlayerInventoryScreen> screen_;
 	std::shared_ptr<Inventory> inventory_;

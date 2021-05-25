@@ -25,7 +25,7 @@ void InventorySlot::SetItem(std::shared_ptr<InventoryItem> item)
 	item_ = item;
 }
 
-std::shared_ptr<InventoryItem> InventorySlot::GetItem()
+std::shared_ptr<InventoryItem> InventorySlot::GetItem() const
 {
 	return item_;
 }

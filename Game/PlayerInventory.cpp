@@ -65,8 +65,8 @@ void PlayerInventory::SpawnEquipmentSlot(ItemTag tag, Vector2 position, float wi
 	slot->SetRequiredTag(tag);
 
 	auto interactable = slot->GetComponent<Interactable>();
-	interactable->OnHoverEnter += [this, slot] { HandleEquipmentSlotHoverEnter(slot); };
-	interactable->OnHoverExit += [this, slot] { HandleEquipmentSlotHoverExit(slot); };
+	interactable->OnHoverEnter += [this, slot] { HandleEquipmentSlotHoverEnter(*slot); };
+	interactable->OnHoverExit += [this, slot] { HandleEquipmentSlotHoverExit(*slot); };
 	interactable->OnRelease += [this, slot] { HandleEquipmentSlotRelease(slot); };
 
 	auto& slot_transform = slot->GetTransform();
@@ -78,21 +78,21 @@ void PlayerInventory::SpawnEquipmentSlot(ItemTag tag, Vector2 position, float wi
 	background_transform.SetLocalPosition({0, 0});
 }
 
-void PlayerInventory::HandleEquipmentSlotHoverEnter(std::shared_ptr<InventorySlot> slot)
+void PlayerInventory::HandleEquipmentSlotHoverEnter(const InventorySlot& slot) const
 {
-	if (mouse_slot_->HasItem() && !slot->CanHold(mouse_slot_->GetItem()))
+	if (mouse_slot_->HasItem() && !slot.CanHold(mouse_slot_->GetItem()))
 	{
-		slot->EnableHighlight(kUnavailableSlotColor);
+		slot.EnableHighlight(kUnavailableSlotColor);
 	}
 	else
 	{
-		slot->EnableHighlight(kAvailableSlotColor);
+		slot.EnableHighlight(kAvailableSlotColor);
 	}
 }
 
-void PlayerInventory::HandleEquipmentSlotHoverExit(std::shared_ptr<InventorySlot> slot)
+void PlayerInventory::HandleEquipmentSlotHoverExit(const InventorySlot& slot) const
 {
-	slot->DisableHighlight();
+	slot.DisableHighlight();
 }
 
 void PlayerInventory::HandleEquipmentSlotRelease(const std::shared_ptr<InventorySlot>& slot)
@@ -106,8 +106,10 @@ void PlayerInventory::HandleEquipmentSlotRelease(const std::shared_ptr<Inventory
 			const auto blub = mouse_slot_->Take();
 
 			// Pick up the equipped item
-			// TODO INLINING THIS IS CRASH???
-			TryPickup(slot);
+			if (slot->HasItem())
+			{
+				PickUpItem(slot->GetItem()->Take());
+			}
 
 			Equip(slot, blub);
 		}
@@ -116,22 +118,12 @@ void PlayerInventory::HandleEquipmentSlotRelease(const std::shared_ptr<Inventory
 	{
 		if (slot->HasItem())
 		{
-			const auto item = slot->GetItem()->Take();
-			mouse_slot_->SetItem(item);
+			PickUpItem(slot->GetItem()->Take());
 		}
 	}
 }
 
-
-void PlayerInventory::TryPickup(const std::shared_ptr<InventorySlot>& slot)
-{
-	if (slot->HasItem())
-	{
-		mouse_slot_->SetItem(slot->GetItem()->Take());
-	}
-}
-
-void PlayerInventory::Equip(std::shared_ptr<InventorySlot> equipment_slot, std::shared_ptr<Item> item)
+void PlayerInventory::Equip(const std::shared_ptr<InventorySlot>& equipment_slot, const std::shared_ptr<Item>& item)
 {
 	auto slot_transform = equipment_slot->GetTransform();
 
