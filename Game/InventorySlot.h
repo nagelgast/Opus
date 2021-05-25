@@ -13,10 +13,9 @@ class InventorySlot : public Entity
 public:
 	void Awake() override;
 	void SetItem(const std::shared_ptr<InventoryItem>& item);
+	InventoryItem& GetItem() const;
 	void ClearItem();
 	bool HasItem() const;
-	InventoryItem& GetItem();
-	std::shared_ptr<InventoryItem> Take();
 
 	void EnableHighlight(Color color) const;
 	void DisableHighlight() const;

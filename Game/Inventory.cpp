@@ -50,24 +50,24 @@ void Inventory::Awake()
 
 bool Inventory::TryAutoAddItem(const std::shared_ptr<Item>& item)
 {
-	const auto slot_indices = FindAvailableSlots(item);
+	const auto slot_indices = FindAvailableSlots(item->size);
 	const auto has_space = !slot_indices.empty();
 	if(has_space)
 	{
-		AddItem(item, slot_indices);
+		Place(item, slot_indices);
 	}
 
 	return has_space;
 }
 
-std::vector<int> Inventory::FindAvailableSlots(const std::shared_ptr<Item>& item)
+std::vector<int> Inventory::FindAvailableSlots(const ItemSize item_size)
 {
 	for(auto col = 0; col < columns_; ++col)
 	{
 		for(auto row = 0; row < rows_; ++row)
 		{
 			const auto index = col+row*columns_;
-			auto slot_indices = CalculateSlotsToOccupy(item->size, index);
+			auto slot_indices = CalculateSlotsToOccupy(item_size, index);
 			auto is_available = true;
 			for (auto slot_index : slot_indices)
 			{
@@ -87,7 +87,7 @@ std::vector<int> Inventory::FindAvailableSlots(const std::shared_ptr<Item>& item
 	return {};
 }
 
-void Inventory::AddItem(const std::shared_ptr<Item>& item, std::vector<int> slot_indices)
+void Inventory::Place(const std::shared_ptr<Item>& item, std::vector<int> slot_indices)
 {
 	// Create new inventory item instance
 	const auto inventory_item = Instantiate<InventoryItem>(&GetTransform());
@@ -111,12 +111,12 @@ void Inventory::HandleRelease(const int index)
 {
 	if(hovering_over_multiple_items_) return;
 
-	const auto picked_up_item = PickupItem();
+	const auto picked_up_item = Take(pickup_slot_);
 
 	if (mouse_item_->HasItem())
 	{
 		const auto new_item = mouse_item_->Take();
-		AddItem(new_item, hover_slot_indices_);
+		Place(new_item, hover_slot_indices_);
 	}
 
 	if (picked_up_item)
@@ -126,11 +126,11 @@ void Inventory::HandleRelease(const int index)
 	}
 }
 
-std::shared_ptr<Item> Inventory::PickupItem()
+std::shared_ptr<Item> Inventory::Take(const std::shared_ptr<InventorySlot>& slot)
 {
-	if(!pickup_slot_->HasItem()) return nullptr;
+	if(!slot->HasItem()) return nullptr;
 	
-	auto& inventory_item = pickup_slot_->GetItem();
+	auto& inventory_item = slot->GetItem();
 	auto item = inventory_item.GetItem();
 
 	auto slot_indices = inventory_item.GetSlotIndices();
