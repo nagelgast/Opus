@@ -5,12 +5,16 @@
 
 Rect Interactable::GetGlobalBounds()
 {
-	const auto pos = entity_->GetTransform().GetPosition();
-	const auto offset = entity_->GetTransform().GetOrigin();
-
+	const auto transform = entity_->GetTransform();
+	const auto pos = transform.GetPosition();
+	const auto offset = transform.GetOrigin();
+	const auto scale = transform.GetScale();
+	
 	auto global_bounds = bounds_;
 	global_bounds.left = pos.x - offset.x;
 	global_bounds.top = pos.y - offset.y;
+	global_bounds.width *= scale.x;
+	global_bounds.height *= scale.y;
 	
 	return global_bounds;
 }

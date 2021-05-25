@@ -5,6 +5,9 @@
 #include "Entity.h"
 #include "SFMLEntityRenderer.h"
 #include "Transform.h"
+#include "../Game/Interactable.h"
+
+const bool kDrawDebug = false;
 
 SFMLRenderer::SFMLRenderer(const std::shared_ptr<BaseWindow>& window) : window_(dynamic_cast<SFMLWindow&>(*window).GetWindow())
 {
@@ -45,14 +48,14 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 
 	for (const auto& entity_renderer : world_entity_renderers)
 	{
-		window_.draw(*entity_renderer);
+		DrawEntity(entity_renderer);
 	}
 
 	window_.setView(window_.getDefaultView());
 
 	for (const auto& entity_renderer : screen_entity_renderers)
 	{
-		window_.draw(*entity_renderer);
+		DrawEntity(entity_renderer);
 	}
 	
 	window_.display();
@@ -68,4 +71,25 @@ void SFMLRenderer::SetCamera(const std::shared_ptr<Camera>& camera)
 std::unique_ptr<BaseEntityRenderer> SFMLRenderer::CreateEntityRendererInstance() const
 {
 	return std::make_unique<SFMLEntityRenderer>();
+}
+
+void SFMLRenderer::DrawEntity(SFMLEntityRenderer* entity_renderer) const
+{
+	window_.draw(*entity_renderer);
+	
+	if (kDrawDebug)
+	{
+		auto entity = entity_renderer->entity_;
+		auto transform = entity->GetTransform();
+		auto position = transform.GetPosition() - transform.GetOrigin();
+		auto scale = transform.GetScale();
+		SFMLEntityRenderer::DrawBox(window_, sf::RenderStates::Default, {position.x, position.y}, {scale.x, scale.y}, sf::Color::Red);
+
+		auto interactable = entity->GetComponent<Interactable>();
+		if (interactable)
+		{
+			auto bounds = interactable->GetGlobalBounds();
+			SFMLEntityRenderer::DrawBox(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Cyan);
+		}
+	}
 }

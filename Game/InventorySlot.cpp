@@ -18,7 +18,6 @@ void InventorySlot::Awake()
 	highlight_->SetVisible(false);
 
 	auto interactable = AddComponent(Interactable());
-	interactable->bounds_ = {0,0, 25, 25};
 }
 
 void InventorySlot::SetItem(const std::shared_ptr<InventoryItem>& item)

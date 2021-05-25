@@ -12,7 +12,6 @@ void WorldItem::Awake()
 	AddComponent(ShapeRenderer(Shape::kSquare, {0.5f, 0.5f, 0.5f}));
 	const auto size = 30;
 	auto interactable = AddComponent(Interactable());
-	interactable->bounds_ = { 0, 0, size, size };
 	interactable->OnInteract += [this] { PickUp(); };
 
 	auto& transform = GetTransform();

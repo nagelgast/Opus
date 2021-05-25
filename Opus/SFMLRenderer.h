@@ -5,6 +5,7 @@
 
 #include "SFMLWindow.h"
 
+class SFMLEntityRenderer;
 class Camera;
 class Entity;
 
@@ -17,6 +18,8 @@ public:
 
 private:
 	std::unique_ptr<BaseEntityRenderer> CreateEntityRendererInstance() const override;
+
+	void DrawEntity(SFMLEntityRenderer* entity_renderer) const;
 
 	std::weak_ptr<Camera> camera_;
 	sf::RenderWindow& window_;

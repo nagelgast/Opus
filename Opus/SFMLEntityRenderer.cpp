@@ -94,7 +94,7 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 }
 
 void SFMLEntityRenderer::DrawBox(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position,
-                                 const sf::Vector2f& size, const sf::Color& color) const
+                                 const sf::Vector2f& size, const sf::Color& color)
 {
 	sf::RectangleShape box;
 	box.setSize(size);

@@ -18,8 +18,8 @@ public:
 	void Reset() override;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+	static void DrawBox(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const sf::Vector2f& size, const sf::Color& color);
 private:
-	void DrawBox(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const sf::Vector2f& size, const sf::Color& color) const;
 
 	sf::Vector2f scale_;
 

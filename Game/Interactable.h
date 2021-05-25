@@ -14,6 +14,6 @@ public:
 	Event OnPress;
 	Event OnRelease;
 	Event OnInteract;
-	Rect bounds_;
+	Rect bounds_ {0,0,1,1};
 };
 

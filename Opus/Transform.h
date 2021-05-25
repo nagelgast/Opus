@@ -26,7 +26,7 @@ private:
 	Vector2 position_;
 	Vector2 local_position_;
 	Vector2 rotation_;
-	Vector2 scale_;
+	Vector2 scale_ {1,1};
 
 	Vector2 origin_;
 
