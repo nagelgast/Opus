@@ -19,14 +19,14 @@ void InventorySlot::Awake()
 	auto interactable = AddComponent(Interactable());
 }
 
-void InventorySlot::SetItem(const std::shared_ptr<InventoryItem>& item)
+void InventorySlot::SetItem(std::shared_ptr<InventoryItem> item)
 {
 	item_ = item;
 }
 
-InventoryItem& InventorySlot::GetItem() const
+std::shared_ptr<InventoryItem> InventorySlot::GetItem()
 {
-	return *item_;
+	return item_;
 }
 
 void InventorySlot::ClearItem()

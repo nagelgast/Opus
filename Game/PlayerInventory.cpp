@@ -90,40 +90,48 @@ void PlayerInventory::HandleEquipmentSlotHoverExit(std::shared_ptr<InventorySlot
 
 void PlayerInventory::HandleEquipmentSlotRelease(std::shared_ptr<InventorySlot> slot)
 {
-	std::shared_ptr<Item> picked_up_item = nullptr;
-
-	if (slot->HasItem())
-	{
-		picked_up_item = slot->GetItem().GetItem();
-	}
-
 	if (mouse_slot_->HasItem())
 	{
 		if (Contains(mouse_slot_->GetItem().tags, slot->GetRequiredTag()))
 		{
-			// Equip the item
-			auto item = mouse_slot_->Take();
+			// Store the mouse item
+			const auto item = mouse_slot_->Take();
+
+			// Pick up the equipped item
+			TryPickup(slot);
 
 			// Create new inventory item instance
 			const auto inventory_item = Instantiate<InventoryItem>(&GetTransform());
-			inventory_item->Initialize(item);
+			inventory_item->Initialize(inventory_item, item, {slot});
 
 			// Position item correctly
 			auto& transform = inventory_item->GetTransform();
 			const Vector2 offset = { (item->size.width - 1) / 2, kInventorySlotSize * (item->size.height - 1) / 2 };
 			transform.SetPosition(slot->GetTransform().GetPosition());
+		}
+	}
+	else
+	{
+		TryPickup(slot);
+	}
+}
 
-		}
-		else
-		{
-			return;
-		}
+bool PlayerInventory::TryPickup(const std::shared_ptr<InventorySlot>& slot) const
+{
+	if(mouse_slot_->HasItem())
+	{
+		return false;
 	}
 	
-	if (picked_up_item)
+	const auto has_item = slot->HasItem();
+	
+	if (has_item)
 	{
-		mouse_slot_->SetItem(picked_up_item);
+		const auto item = slot->GetItem()->Take();
+		mouse_slot_->SetItem(item);
 	}
+
+	return has_item;
 }
 
 PlayerInventory* PlayerInventory::instance_;

@@ -13,8 +13,8 @@ class InventorySlot : public Entity
 {
 public:
 	void Awake() override;
-	void SetItem(const std::shared_ptr<InventoryItem>& item);
-	InventoryItem& GetItem() const;
+	void SetItem(std::shared_ptr<InventoryItem> item);
+	std::shared_ptr<InventoryItem> GetItem();
 	void ClearItem();
 	bool HasItem() const;
 

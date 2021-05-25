@@ -86,20 +86,20 @@ std::vector<int> Inventory::FindAvailableSlots(const ItemSize item_size)
 
 void Inventory::Place(const std::shared_ptr<Item>& item, std::vector<int> slot_indices)
 {
+	std::vector<std::shared_ptr<InventorySlot>> item_slots;
+	for(auto index : slot_indices)
+	{
+		item_slots.push_back(slots_[index]);
+	}
+	
 	// Create new inventory item instance
 	const auto inventory_item = Instantiate<InventoryItem>(&GetTransform());
-	inventory_item->Initialize(item, slot_indices);
+	inventory_item->Initialize(inventory_item, item, item_slots);
 
 	// Position item correctly
 	auto& transform = inventory_item->GetTransform();
 	const Vector2 offset = {kInventorySlotSize*(item->size.width-1)/2, kInventorySlotSize * (item->size.height - 1) / 2 };
-	transform.SetPosition(slots_[slot_indices[0]]->GetTransform().GetPosition());
-
-	// Mark all of its slots as occupied
-	for (auto slot_index : slot_indices)
-	{
-		slots_[slot_index]->SetItem(inventory_item);
-	}
+	transform.SetPosition(item_slots[0]->GetTransform().GetPosition());
 
 	ResetHighlights();
 }
@@ -108,8 +108,13 @@ void Inventory::HandleRelease(const int index)
 {
 	if(hovering_over_multiple_items_) return;
 
-	const auto picked_up_item = Take(pickup_slot_);
+	std::shared_ptr<Item> picked_up_item = nullptr;
 
+	if(pickup_item_)
+	{
+		picked_up_item = pickup_item_->Take();
+	}
+	
 	if (mouse_item_->HasItem())
 	{
 		const auto new_item = mouse_item_->Take();
@@ -123,28 +128,9 @@ void Inventory::HandleRelease(const int index)
 	}
 }
 
-std::shared_ptr<Item> Inventory::Take(const std::shared_ptr<InventorySlot>& slot)
-{
-	if(!slot->HasItem()) return nullptr;
-	
-	auto& inventory_item = slot->GetItem();
-	auto item = inventory_item.GetItem();
-
-	auto slot_indices = inventory_item.GetSlotIndices();
-
-	for (auto slot_index : slot_indices)
-	{
-		slots_[slot_index]->ClearItem();
-	}
-	
-	inventory_item.Destroy();
-
-	return item;
-}
-
 void Inventory::HandleSlotHoverEnter(const int index)
 {
-	pickup_slot_ = slots_[index];
+	pickup_item_ = slots_[index]->GetItem();
 	
 	if(mouse_item_->HasItem())
 	{
@@ -161,9 +147,9 @@ void Inventory::HandleSlotHoverEnter(const int index)
 				{
 					// Set pickup slot here so that you will pick up that item, even if it's not underneath the hovered slot
 					hovering_over_item = true;
-					pickup_slot_ = slot;
+					pickup_item_ = slot->GetItem();
 				}
-				else if(&pickup_slot_->GetItem() != &slot->GetItem())
+				else if(pickup_item_ != slot->GetItem())
 				{
 					hovering_over_multiple_items_ = true;
 				}
@@ -248,14 +234,10 @@ void Inventory::SetHighlights()
 		}
 	}
 
-	if (pickup_slot_->HasItem())
+	if (pickup_item_)
 	{
 		const auto pickup_color = mouse_item_->HasItem() ? kPickupSlotColor : kAvailableSlotColor;
-		const auto pickup_slot_indices = pickup_slot_->GetItem().GetSlotIndices();
-		for (auto pickup_slot_index : pickup_slot_indices)
-		{
-			slots_[pickup_slot_index]->EnableHighlight(pickup_color);
-		}
+		pickup_item_->SetHighlight(pickup_color);
 	}
 }
 

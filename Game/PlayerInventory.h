@@ -19,6 +19,8 @@ private:
 	void HandleEquipmentSlotHoverExit(std::shared_ptr<InventorySlot> slot);
 	void HandleEquipmentSlotRelease(std::shared_ptr<InventorySlot> slot);
 
+	bool TryPickup(const std::shared_ptr<InventorySlot>& slot) const;
+	
 	std::shared_ptr<PlayerInventoryScreen> screen_;
 	std::shared_ptr<Inventory> inventory_;
 	std::shared_ptr<MouseSlot> mouse_slot_;

@@ -24,10 +24,9 @@ public:
 	bool TryAutoAddItem(const std::shared_ptr<Item>& item);
 private:
 	void HandleRelease(int index);
-	std::shared_ptr<Item> Take(const std::shared_ptr<InventorySlot>& slot);
 	void Place(const std::shared_ptr<Item>& item, std::vector<int> slot_indices);
+	
 	std::vector<int> FindAvailableSlots(ItemSize item_size);
-
 	std::vector<int> CalculateSlotsToOccupy(ItemSize item_size, int index) const;
 
 	void SetHighlights();
@@ -44,7 +43,8 @@ private:
 	std::vector<std::shared_ptr<InventorySlot>> slots_;
 	
 	std::vector<int> hover_slot_indices_;
-	std::vector<int> pickup_slot_indices_;
-	std::shared_ptr<InventorySlot> pickup_slot_;
+
+	std::shared_ptr<InventoryItem> pickup_item_;
+	
 	bool hovering_over_multiple_items_ = false;
 };
