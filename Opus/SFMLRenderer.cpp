@@ -7,7 +7,7 @@
 #include "Transform.h"
 #include "../Game/Interactable.h"
 
-const bool kDrawDebug = false;
+const bool kDrawDebug = true;
 
 SFMLRenderer::SFMLRenderer(const std::shared_ptr<BaseWindow>& window) : window_(dynamic_cast<SFMLWindow&>(*window).GetWindow())
 {

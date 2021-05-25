@@ -23,9 +23,12 @@ void Loot::SpawnItem() const
 	auto pos = entity_->GetTransform().GetPosition();
 	
 	const auto world_item = entity_->Instantiate<WorldItem>(pos);
+	world_item->GetTransform().CenterOrigin();
 	world_item->item_ = std::make_shared<Item>(item);
 	const auto world_item2 = entity_->Instantiate<WorldItem>(pos);
+	world_item2->GetTransform().CenterOrigin();
 	world_item2->item_ = std::make_shared<Item>(item2);
 	const auto world_item3 = entity_->Instantiate<WorldItem>(pos);
+	world_item3->GetTransform().CenterOrigin();
 	world_item3->item_ = std::make_shared<Item>(item3);
 }

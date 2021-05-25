@@ -22,10 +22,7 @@ void Inventory::Awake()
 	background->AddComponent(ShapeRenderer(Shape::kSquare, {0.2f, 0.2f, 0.2f}, false));
 
 	auto& background_transform = background->GetTransform();
-	background_transform.SetSize(width, height);
-
-	// TODO Replace with anchoring system
-	const Vector2 offset = {(width - kInventorySlotSize) / 2, (height - kInventorySlotSize) / 2};
+	background_transform.SetScale(width, height);
 
 	for (auto row = 0; row < rows_; ++row)
 	{
@@ -39,9 +36,9 @@ void Inventory::Awake()
 			slot_interactable->OnHoverExit += [this, index] { HandleSlotHoverExit(index); };
 
 			auto& slot_transform = slot->GetTransform();
-			slot_transform.SetSize(kInventorySlotSize, kInventorySlotSize);
-			Vector2 slot_pos = {col * kInventorySlotSize, row * kInventorySlotSize};
-			slot_transform.SetLocalPosition(slot_pos - offset);
+			slot_transform.SetScale(kInventorySlotSize, kInventorySlotSize);
+			const Vector2 slot_pos = {col * kInventorySlotSize, row * kInventorySlotSize};
+			slot_transform.SetLocalPosition(slot_pos);
 
 			slots_.push_back(slot);
 		}
@@ -96,7 +93,7 @@ void Inventory::Place(const std::shared_ptr<Item>& item, std::vector<int> slot_i
 	// Position item correctly
 	auto& transform = inventory_item->GetTransform();
 	const Vector2 offset = {kInventorySlotSize*(item->size.width-1)/2, kInventorySlotSize * (item->size.height - 1) / 2 };
-	transform.SetPosition(slots_[slot_indices[0]]->GetTransform().GetPosition() + offset);
+	transform.SetPosition(slots_[slot_indices[0]]->GetTransform().GetPosition());
 
 	// Mark all of its slots as occupied
 	for (auto slot_index : slot_indices)

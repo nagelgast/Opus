@@ -15,6 +15,7 @@ struct Vector2
 
 	Vector2 operator +(const Vector2& right) const;
 	Vector2 operator -(const Vector2& right) const;
+	
 	Vector2 operator *(const float right) const;
 	Vector2 operator /(const float right) const;
 	Vector2 operator+=(const Vector2& right);

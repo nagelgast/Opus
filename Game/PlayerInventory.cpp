@@ -26,13 +26,13 @@ void PlayerInventory::Initialize(const std::shared_ptr<MouseItem>& mouse,
 
 	inventory_ = Instantiate<Inventory>(screen_transform);
 	auto& inv_trans = inventory_->GetTransform();
-	inv_trans.SetLocalPosition({0, 250});
+	inv_trans.SetLocalPosition({25, 550});
 
 	inventory_->Initialize(mouse_item_);
 
-	SpawnEquipmentSlot(ItemTag::helmet, {0, -250}, 50, 50);
-	SpawnEquipmentSlot(ItemTag::body, {0, -200}, 50, 100);
-	SpawnEquipmentSlot(ItemTag::weapon, {-50, -200}, 50, 100);
+	SpawnEquipmentSlot(ItemTag::helmet, {175, 150}, 50, 50);
+	SpawnEquipmentSlot(ItemTag::body, {175, 275}, 50, 100);
+	SpawnEquipmentSlot(ItemTag::weapon, {100, 275}, 50, 100);
 }
 
 void PlayerInventory::PickUpItem(const std::shared_ptr<Item>& item) const
@@ -59,7 +59,7 @@ void PlayerInventory::SpawnEquipmentSlot(ItemTag tag, Vector2 position, float wi
 	background->AddComponent(ShapeRenderer(Shape::kSquare, {0.2f, 0.2f, 0.2f}, false));
 	auto& background_transform = background->GetTransform();
 
-	background_transform.SetSize(width, height);
+	background_transform.SetScale(width, height);
 
 	auto slot = Instantiate<InventorySlot>(&screen_->GetTransform());
 	slot->SetRequiredTag(ItemTag::weapon);
@@ -70,7 +70,7 @@ void PlayerInventory::SpawnEquipmentSlot(ItemTag tag, Vector2 position, float wi
 	interactable->OnRelease += [this, slot] {HandleEquipmentSlotRelease(slot); };
 
 	auto& slot_transform = slot->GetTransform();
-	slot_transform.SetSize(width, height);
+	slot_transform.SetScale(width, height);
 	slot_transform.SetLocalPosition(position);
 
 	// TODO Implement sorting so we don't have to rely on instantiation order

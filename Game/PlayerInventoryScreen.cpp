@@ -12,7 +12,7 @@ void PlayerInventoryScreen::Awake()
 	background_->AddComponent(ShapeRenderer(Shape::kSquare, {0.8f, 0.8f, 0.8f}, false));
 
 	auto& transform = background_->GetTransform();
-	transform.SetSize(350, 768);
+	transform.SetScale(350, 768);
 }
 
 void PlayerInventoryScreen::Open()

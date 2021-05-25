@@ -13,7 +13,7 @@ void Enemy::Awake()
 	auto sr = AddComponent(SpriteRenderer());
 	sr->SetSprite(sprite);
 	AddComponent(Collider(0, Shape::kSquare, false, false));
-	GetTransform().SetSize(32, 32);
+	GetTransform().SetScale(32, 32);
 
 	AddComponent(Health(1));
 	AddComponent(Loot());

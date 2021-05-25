@@ -14,7 +14,6 @@ void InventorySlot::Awake()
 
 	highlight_ = Instantiate(&transform);
 	shape_renderer_ = highlight_->AddComponent(ShapeRenderer(Shape::kSquare, {0, 0, 0, 0.5f}, false));
-	highlight_->GetTransform().SetSize(25, 25);
 	highlight_->SetVisible(false);
 
 	auto interactable = AddComponent(Interactable());

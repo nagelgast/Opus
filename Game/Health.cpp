@@ -18,7 +18,7 @@ void Health::Start()
 	health_bar->SetName("HealthBar");
 
 	auto& transform = health_bar->GetTransform();
-	transform.SetSize(50, 10);
+	transform.SetScale(50, 10);
 	transform.SetLocalPosition({ 0, -30 });
 	
 	health_bar->AddComponent(HealthBar(reference));

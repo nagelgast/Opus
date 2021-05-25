@@ -18,21 +18,12 @@ void Transform::SetParent(Transform* transform)
 {
 	parent_ = transform;
 	parent_->children_.push_back(this);
+	
 	RecalculateLocalPosition();
+	RecalculateLocalScale();
+	
 	entity_->RecalculateVisibility(transform);
 	entity_->RecalculateChildVisibility();
-}
-
-void Transform::SetSize(const float width, const float height)
-{
-	scale_ = {width, height};
-
-	origin_ = scale_ / 2;
-	
-	if(entity_->HasRenderer())
-	{
-		entity_->GetRenderer()->SetSize(width, height);
-	}
 }
 
 Vector2 Transform::GetPosition() const
@@ -44,8 +35,6 @@ void Transform::SetPosition(const Vector2 position)
 {
 	position_ = position;
 	RecalculateLocalPosition();
-	
-	// TODO Should only be recalculated once at end of frame
 	RecalculateChildrenPosition();
 }
 
@@ -71,9 +60,21 @@ void Transform::SetOrigin(const Vector2 origin)
 	origin_ = origin;
 }
 
+void Transform::CenterOrigin()
+{
+	origin_ = scale_ / 2;
+}
+
 Vector2 Transform::GetOrigin() const
 {
 	return origin_;
+}
+
+void Transform::SetScale(const float width, const float height)
+{
+	scale_ = {width, height};
+	RecalculateLocalScale();
+	RecalculateChildrenScale();
 }
 
 Vector2 Transform::GetScale() const
@@ -106,4 +107,31 @@ void Transform::RecalculateChildPosition()
 	position_ = parent_->position_ + local_position_;
 
 	RecalculateChildrenPosition();
+}
+
+void Transform::RecalculateLocalScale()
+{
+	if(parent_)
+	{
+		local_scale_ = {scale_.x / parent_->scale_.x, scale_.y / parent_->scale_.y};
+	}
+	else
+	{
+		local_scale_ = scale_;
+	}
+}
+
+void Transform::RecalculateChildrenScale()
+{
+	for (const auto& child : children_)
+	{
+		child->RecalculateChildScale();
+	}
+}
+
+void Transform::RecalculateChildScale()
+{
+	scale_ = {parent_->scale_.x * local_scale_.x, parent_->scale_.y * local_scale_.y};
+
+	RecalculateChildrenScale();
 }

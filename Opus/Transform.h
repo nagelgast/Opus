@@ -6,27 +6,35 @@ class Transform final : public Component
 {
 public:
 	~Transform();
-	
+
 	void SetParent(Transform* transform);
 	
-	void SetSize(float width, float height);
 	Vector2 GetPosition() const;
 	void SetPosition(Vector2 position);
 	void SetLocalPosition(Vector2 position);
 	void Move(Vector2 offset);
+	
 	void SetOrigin(Vector2 origin);
+	void CenterOrigin();
 	Vector2 GetOrigin() const;
+	
+	void SetScale(float width, float height);
 	Vector2 GetScale() const;
 private:
 	void RecalculateLocalPosition();
 	void RecalculateChildrenPosition();
 	void RecalculateChildPosition();
-	
+
+	void RecalculateLocalScale();
+	void RecalculateChildrenScale();
+	void RecalculateChildScale();
+
+
 	Transform* parent_ = nullptr;
 	Vector2 position_;
 	Vector2 local_position_;
-	Vector2 rotation_;
 	Vector2 scale_ {1,1};
+	Vector2 local_scale_;
 
 	Vector2 origin_;
 

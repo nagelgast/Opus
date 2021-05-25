@@ -9,25 +9,6 @@
 #include "Vector2.h"
 #include "Transform.h"
 
-// TODO Improve relation with entity scale
-void SFMLEntityRenderer::SetSize(float width, float height)
-{
-	scale_ = {width, height};
-	if (drawable_shape_)
-	{
-		drawable_shape_->setScale(scale_);
-	}
-
-	if (drawable_sprite_)
-	{
-		const auto& rect = drawable_sprite_->getTextureRect();
-		const sf::Vector2f sprite_scale = {
-			width / static_cast<int>(rect.width), height / static_cast<int>(rect.height)
-		};
-		drawable_sprite_->setScale(sprite_scale);
-	}
-}
-
 void SFMLEntityRenderer::SetSprite(const Sprite sprite)
 {
 	texture_ = std::make_unique<sf::Texture>();
@@ -76,18 +57,28 @@ void SFMLEntityRenderer::Reset()
 
 void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	const auto& corner = entity_->GetTransform().GetPosition() - entity_->GetTransform().GetOrigin();
+	const auto transform = entity_->GetTransform();
+	const auto scale = transform.GetScale();
+	const sf::Vector2f draw_scale = {scale.x, scale.y};
+	const auto& corner = transform.GetPosition() - transform.GetOrigin();
 	const sf::Vector2f draw_pos = {corner.x, corner.y};
-	//DrawBox(target, states, draw_pos, scale_, sf::Color::Magenta);
 
 	if (drawable_shape_)
 	{
+		drawable_shape_->setScale(draw_scale);
 		drawable_shape_->setPosition(draw_pos);
 		target.draw(*drawable_shape_, states);
 	}
 
 	if (drawable_sprite_)
 	{
+		// TODO Optimize this
+		const auto& rect = drawable_sprite_->getTextureRect();
+		const sf::Vector2f sprite_scale = {
+			draw_scale.x / static_cast<int>(rect.width), draw_scale.y / static_cast<int>(rect.height)
+		};
+
+		drawable_sprite_->setScale(sprite_scale);
 		drawable_sprite_->setPosition(draw_pos);
 		target.draw(*drawable_sprite_, states);
 	}

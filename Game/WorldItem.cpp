@@ -15,7 +15,7 @@ void WorldItem::Awake()
 	interactable->OnInteract += [this] { PickUp(); };
 
 	auto& transform = GetTransform();
-	transform.SetSize(size, size);
+	transform.SetScale(size, size);
 }
 
 void WorldItem::PickUp()

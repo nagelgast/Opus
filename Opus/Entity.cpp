@@ -27,12 +27,6 @@ void Entity::StartComponents()
 	{
 		component.second->Start();
 	}
-
-	if (renderer_)
-	{
-		const auto scale = transform_->GetScale();
-		renderer_->SetSize(scale.x, scale.y);
-	}
 }
 
 void Entity::UpdateComponents()

@@ -26,5 +26,5 @@ void HealthBar::Update()
 	// TODO: Handle event-based?
 	auto health_remaining = static_cast<float>(health->GetHealth()) / static_cast<float>(health->GetMaxHealth());
 	health_remaining += 0.5f;
-	entity_->GetTransform().SetSize(max_width_ * health_remaining, height_);
+	entity_->GetTransform().SetScale(max_width_ * health_remaining, height_);
 }

@@ -9,8 +9,6 @@ class Entity;
 class SFMLEntityRenderer final : public BaseEntityRenderer, public sf::Drawable
 {
 public:
-	void SetSize(float width, float height) override;
-
 	void SetSprite(Sprite sprite) override;
 	void SetShape(const Shape& shape) override;
 	void SetColor(const Color& color) override;

@@ -36,6 +36,7 @@ int main()
 
 		auto player = root.Instantiate<Player>();
 		player->SetName("Player");
+		player->GetTransform().CenterOrigin();
 
 		{
 			auto main_camera = root.Instantiate();
@@ -50,13 +51,13 @@ int main()
 		{
 			auto health_globe = root.Instantiate({margin, kScreenHeight - margin});
 			health_globe->AddComponent(ShapeRenderer(Shape::kCircle, {1, 0, 0}, false));
-			health_globe->GetTransform().SetSize(100, 100);
+			health_globe->GetTransform().SetScale(100, 100);
 		}
 
 		{
 			auto mana_globe = root.Instantiate({kScreenWidth - margin, kScreenHeight - margin});
 			mana_globe->AddComponent(ShapeRenderer(Shape::kCircle, {0, 0, 1}, false));
-			mana_globe->GetTransform().SetSize(100, 100);
+			mana_globe->GetTransform().SetScale(100, 100);
 		}
 
 		auto screen_manager = root.Instantiate<ScreenManager>();
@@ -72,15 +73,18 @@ int main()
 		{
 			const auto wall1 = root.Instantiate<Wall>({500, 500});
 			wall1->SetName("Wall1");
+			wall1->GetTransform().CenterOrigin();
 		}
 		{
 			const auto wall2 = root.Instantiate<Wall>({300, 500});
 			wall2->SetName("Wall2");
+			wall2->GetTransform().CenterOrigin();
 		}
 
 		{
 			const auto enemy = root.Instantiate<Enemy>({500, 100});
 			enemy->SetName("Enemy");
+			enemy->GetTransform().CenterOrigin();
 		}
 	}
 
