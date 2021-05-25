@@ -65,14 +65,8 @@ int main()
 		mouse->AddComponent(MouseHandler(screen_manager, player->GetComponent<PlayerController>(), mouse));
 
 		{
-			auto inventory = root.Instantiate();
-			auto player_inventory = inventory->AddComponent(PlayerInventory());
-			player_inventory->mouse_item_ = mouse;
-			player_inventory->screen_ = screen_manager->player_inventory_screen_;
-			player_inventory->inventory_ = player_inventory->screen_->player_inventory_;
-
-			// TODO Fix coupling
-			screen_manager->player_inventory_screen_->player_inventory_->Initialize(mouse);
+			auto player_inventory = root.Instantiate<PlayerInventory>();
+			player_inventory->Initialize(mouse, screen_manager->player_inventory_screen_);
 		}
 
 		{

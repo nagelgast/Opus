@@ -2,10 +2,22 @@
 
 #include <iostream>
 
-
 #include "Item.h"
 
-void PlayerInventory::PickUpItem(std::shared_ptr<Item> item)
+void PlayerInventory::Initialize(const std::shared_ptr<MouseItem>& mouse,
+                                 const std::shared_ptr<PlayerInventoryScreen>& screen)
+{
+	mouse_item_ = mouse;
+	screen_ = screen;
+
+	inventory_ = Instantiate<Inventory>(&screen_->GetTransform());
+	auto& inv_trans = inventory_->GetTransform();
+	inv_trans.SetLocalPosition({ 0, 250 });
+
+	inventory_->Initialize(mouse_item_);
+}
+
+void PlayerInventory::PickUpItem(const std::shared_ptr<Item>& item) const
 {
 	if(screen_->IsOpen())
 	{
@@ -18,7 +30,6 @@ void PlayerInventory::PickUpItem(std::shared_ptr<Item> item)
 		const auto success = inventory_->TryAutoAddItem(item);
 		if(!success)
 		{
-			// TODO Give feedback that inventory is full
 			std::cout << "Too. Much. Clutter.\n";
 		}
 	}

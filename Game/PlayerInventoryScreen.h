@@ -12,10 +12,7 @@ public:
 	void Close();
 
 	bool IsOpen() const;
-
-	std::shared_ptr<Inventory> player_inventory_;
 private:
-	bool is_open_;
+	bool is_open_ = false;
 	std::shared_ptr<Entity> background_;
 };
-

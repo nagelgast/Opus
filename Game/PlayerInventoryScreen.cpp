@@ -13,10 +13,6 @@ void PlayerInventoryScreen::Awake()
 
 	auto& transform = background_->GetTransform();
 	transform.SetSize(350, 768);
-
-	player_inventory_ = Instantiate<Inventory>(&GetTransform());
-	auto& inv_trans = player_inventory_->GetTransform();
-	inv_trans.SetLocalPosition({0, 250});
 }
 
 void PlayerInventoryScreen::Open()

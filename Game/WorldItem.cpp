@@ -21,14 +21,6 @@ void WorldItem::Awake()
 
 void WorldItem::PickUp()
 {
-	// TODO Improve this, geez
-	for (const auto& entity : GetEntities())
-	{
-		auto inventory = entity->GetComponent<PlayerInventory>();
-		if (inventory)
-		{
-			inventory->PickUpItem(item_);
-			Destroy();
-		}
-	}
+	inventory_->PickUpItem(item_);
+	Destroy();
 }

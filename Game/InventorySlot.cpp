@@ -41,6 +41,11 @@ bool InventorySlot::HasItem() const
 	return item_ != nullptr;
 }
 
+void InventorySlot::SetRequiredTag(const ItemTag tag)
+{
+	required_tag_ = tag;
+}
+
 void InventorySlot::EnableHighlight(const Color color) const
 {
 	highlight_->SetVisible(true);
