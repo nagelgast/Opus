@@ -116,7 +116,7 @@ void Inventory::HandleRelease(const int index)
 	if (mouse_item_->HasItem())
 	{
 		const auto new_item = mouse_item_->Take();
-		AddItem(new_item, place_slot_indices_);
+		AddItem(new_item, hover_slot_indices_);
 	}
 
 	if (picked_up_item)
@@ -151,11 +151,11 @@ void Inventory::HandleSlotHoverEnter(const int index)
 	
 	if(mouse_item_->HasItem())
 	{
-		place_slot_indices_ = CalculateSlotsToOccupy(mouse_item_->GetItem().size, index);
+		hover_slot_indices_ = CalculateSlotsToOccupy(mouse_item_->GetItem().size, index);
 
 		auto hovering_over_item = false;
 		hovering_over_multiple_items_ = false;
-		for (auto slot_index : place_slot_indices_)
+		for (auto slot_index : hover_slot_indices_)
 		{
 			const auto slot = slots_[slot_index];
 			if(slot->HasItem())
@@ -166,7 +166,7 @@ void Inventory::HandleSlotHoverEnter(const int index)
 					hovering_over_item = true;
 					pickup_slot_ = slot;
 				}
-				else
+				else if(&pickup_slot_->GetItem() != &slot->GetItem())
 				{
 					hovering_over_multiple_items_ = true;
 				}
@@ -180,7 +180,7 @@ void Inventory::HandleSlotHoverEnter(const int index)
 void Inventory::HandleSlotHoverExit(int index)
 {
 	ResetHighlights();
-	place_slot_indices_.clear();
+	hover_slot_indices_.clear();
 }
 
 std::vector<int> Inventory::CalculateSlotsToOccupy(const ItemSize item_size, const int index) const
@@ -243,7 +243,7 @@ void Inventory::SetHighlights()
 	{
 		const auto hover_color = hovering_over_multiple_items_ ? kUnavailableSlotColor : kAvailableSlotColor;
 
-		for (auto highlight_slot : place_slot_indices_)
+		for (auto highlight_slot : hover_slot_indices_)
 		{
 			slots_[highlight_slot]->EnableHighlight(hover_color);
 		}

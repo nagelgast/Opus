@@ -43,7 +43,7 @@ private:
 	
 	std::vector<std::shared_ptr<InventorySlot>> slots_;
 	
-	std::vector<int> place_slot_indices_;
+	std::vector<int> hover_slot_indices_;
 	std::vector<int> pickup_slot_indices_;
 	std::shared_ptr<InventorySlot> pickup_slot_;
 	bool hovering_over_multiple_items_ = false;
