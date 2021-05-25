@@ -3,13 +3,13 @@
 #include "../Opus/Core.h"
 
 class ScreenManager;
-class MouseItem;
+class MouseSlot;
 class PlayerController;
 
 class MouseHandler : public Component
 {
 public:
-	MouseHandler(std::shared_ptr<ScreenManager> screen_manager, std::shared_ptr<PlayerController> player_controller, std::shared_ptr<MouseItem> mouse_item);
+	MouseHandler(std::shared_ptr<ScreenManager> screen_manager, std::shared_ptr<PlayerController> player_controller, std::shared_ptr<MouseSlot> mouse_item);
 	void Update() override;
 
 private:
@@ -32,7 +32,7 @@ private:
 
 	std::shared_ptr<ScreenManager> screen_manager_;
 	std::shared_ptr<PlayerController> player_controller_;
-	std::shared_ptr<MouseItem> mouse_item_;
+	std::shared_ptr<MouseSlot> mouse_item_;
 	
 	std::shared_ptr<Interactable> target_;
 	std::shared_ptr<Interactable> previous_target_;

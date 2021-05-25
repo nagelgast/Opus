@@ -6,13 +6,13 @@
 class SpriteRenderer;
 class Item;
 
-class MouseItem final :
+class MouseSlot final :
 	public Entity
 {
 public:
 	void Awake() override;
 	
-	bool TryAddItem(std::shared_ptr<Item> item);
+	bool SetItem(std::shared_ptr<Item> item);
 	
 	bool TryDrop(Vector2 position);
 	std::shared_ptr<Item> Take();

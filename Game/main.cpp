@@ -62,7 +62,7 @@ int main()
 
 		auto screen_manager = root.Instantiate<ScreenManager>();
 
-		auto mouse = root.Instantiate<MouseItem>();
+		auto mouse = root.Instantiate<MouseSlot>();
 		mouse->AddComponent(MouseHandler(screen_manager, player->GetComponent<PlayerController>(), mouse));
 
 		{

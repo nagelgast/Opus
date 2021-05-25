@@ -9,7 +9,6 @@ void InventoryItem::Awake()
 {
 	interactable_ = AddComponent(Interactable());
 	sr_ = AddComponent(SpriteRenderer());
-
 }
 
 void InventoryItem::Initialize(const std::shared_ptr<Item>& item, const std::vector<int>& slot_indices)

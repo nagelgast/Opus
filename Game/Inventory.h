@@ -5,7 +5,7 @@
 
 struct ItemSize;
 class InventorySlot;
-class MouseItem;
+class MouseSlot;
 class InventoryItem;
 class Item;
 
@@ -19,7 +19,7 @@ const Color kUnavailableSlotColor = { 0.5, 0, 0, 0.5 };
 class Inventory : public Entity
 {
 public:
-	void Initialize(const std::shared_ptr<MouseItem>& mouse_item);
+	void Initialize(const std::shared_ptr<MouseSlot>& mouse_item);
 	void Awake() override;
 	bool TryAutoAddItem(const std::shared_ptr<Item>& item);
 private:
@@ -39,7 +39,7 @@ private:
 	int rows_ = 5;
 	int columns_ = 12;
 
-	std::shared_ptr<MouseItem> mouse_item_;
+	std::shared_ptr<MouseSlot> mouse_item_;
 	
 	std::vector<std::shared_ptr<InventorySlot>> slots_;
 	

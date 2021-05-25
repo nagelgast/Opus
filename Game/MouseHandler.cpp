@@ -2,14 +2,14 @@
 
 #include <utility>
 
-#include "MouseItem.h"
+#include "MouseSlot.h"
 #include "PlayerController.h"
 #include "ScreenManager.h"
 #include "../Opus/Input.h"
 
 MouseHandler::MouseHandler(std::shared_ptr<ScreenManager> screen_manager,
                            std::shared_ptr<PlayerController> player_controller,
-                           std::shared_ptr<MouseItem> mouse_item) :
+                           std::shared_ptr<MouseSlot> mouse_item) :
 	screen_manager_(std::move(screen_manager)),
 	player_controller_(std::move(player_controller)),
 	mouse_item_(std::move(mouse_item))

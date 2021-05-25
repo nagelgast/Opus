@@ -1,26 +1,26 @@
-#include "MouseItem.h"
+#include "MouseSlot.h"
 
 #include "Item.h"
 #include "WorldItem.h"
 #include "../Opus/Input.h"
 #include "../Opus/SpriteRenderer.h"
 
-void MouseItem::Awake()
+void MouseSlot::Awake()
 {
 	renderer_ = AddComponent(SpriteRenderer());
 }
 
-bool MouseItem::TryAddItem(std::shared_ptr<Item> item)
+bool MouseSlot::SetItem(const std::shared_ptr<Item> item)
 {
-	if(item_) return false;
-
-	item_ = std::move(item);
+	item_ = item;
 	renderer_->SetSprite(item_->sprite, false);
 
+	GetTransform().SetScale(item_->sprite.rect.width, item_->sprite.rect.height);
+	
 	return true;
 }
 
-bool MouseItem::TryDrop(const Vector2 position)
+bool MouseSlot::TryDrop(const Vector2 position)
 {
 	if(HasItem())
 	{
@@ -39,29 +39,29 @@ bool MouseItem::TryDrop(const Vector2 position)
 	return false;
 }
 
-std::shared_ptr<Item> MouseItem::Take()
+std::shared_ptr<Item> MouseSlot::Take()
 {
 	auto item = item_;
 	Clear();
 	return item;
 }
 
-Item& MouseItem::GetItem()
+Item& MouseSlot::GetItem()
 {
 	return *item_;
 }
 
-bool MouseItem::HasItem() const
+bool MouseSlot::HasItem() const
 {
 	return item_ != nullptr;
 }
 
-void MouseItem::Update()
+void MouseSlot::Update()
 {
 	GetTransform().SetPosition(GetInput().mouse_screen_pos);
 }
 
-void MouseItem::Drop(const Vector2 position)
+void MouseSlot::Drop(const Vector2 position)
 {
 	const auto world_item = Instantiate<WorldItem>(position);
 	world_item->item_ = item_;
@@ -69,8 +69,9 @@ void MouseItem::Drop(const Vector2 position)
 	Clear();
 }
 
-void MouseItem::Clear()
+void MouseSlot::Clear()
 {
 	item_ = nullptr;
 	renderer_->ResetSprite();
+	GetTransform().SetScale(1,1);
 }

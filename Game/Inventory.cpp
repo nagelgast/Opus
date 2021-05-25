@@ -3,13 +3,13 @@
 
 #include "InventorySlot.h"
 #include "Interactable.h"
-#include "MouseItem.h"
+#include "MouseSlot.h"
 #include "InventoryItem.h"
 #include "Item.h"
 
 #include "../Opus/ShapeRenderer.h"
 
-void Inventory::Initialize(const std::shared_ptr<MouseItem>& mouse_item)
+void Inventory::Initialize(const std::shared_ptr<MouseSlot>& mouse_item)
 {
 	mouse_item_ = mouse_item;
 }
@@ -118,7 +118,7 @@ void Inventory::HandleRelease(const int index)
 
 	if (picked_up_item)
 	{
-		mouse_item_->TryAddItem(picked_up_item);
+		mouse_item_->SetItem(picked_up_item);
 		HandleSlotHoverEnter(index);
 	}
 }

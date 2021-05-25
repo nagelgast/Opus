@@ -14,7 +14,7 @@ PlayerInventory& PlayerInventory::GetInstance()
 	return *instance_;
 }
 
-void PlayerInventory::Initialize(const std::shared_ptr<MouseItem>& mouse,
+void PlayerInventory::Initialize(const std::shared_ptr<MouseSlot>& mouse,
                                  const std::shared_ptr<PlayerInventoryScreen>& screen)
 {
 	instance_ = this;
@@ -39,7 +39,7 @@ void PlayerInventory::PickUpItem(const std::shared_ptr<Item>& item) const
 {
 	if (screen_->IsOpen())
 	{
-		mouse_item_->TryAddItem(item);
+		mouse_item_->SetItem(item);
 	}
 	else
 	{

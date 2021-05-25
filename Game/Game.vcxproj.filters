@@ -99,9 +99,6 @@
     <ClCompile Include="Inventory.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
-    <ClCompile Include="MouseItem.cpp">
-      <Filter>Source Files\Items</Filter>
-    </ClCompile>
     <ClCompile Include="InventoryItem.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
@@ -115,6 +112,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InventorySlot.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="MouseSlot.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,9 +170,6 @@
     <ClInclude Include="WorldItem.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
-    <ClInclude Include="MouseItem.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerInventoryScreen.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
@@ -204,6 +201,9 @@
       <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="ItemTag.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseSlot.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
   </ItemGroup>
