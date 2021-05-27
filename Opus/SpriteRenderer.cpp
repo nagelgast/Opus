@@ -4,33 +4,18 @@
 #include "BaseEntityRenderer.h"
 #include "Entity.h"
 
-// TODO Improve this logic
-void SpriteRenderer::Start()
+void SpriteRenderer::Awake()
 {
 	renderer_ = entity_->CreateRenderer();
-	renderer_->SetSprite(sprite_);
-	renderer_->in_world_space_ = world_space_;
 }
 
-void SpriteRenderer::SetSprite(const Sprite& sprite, bool world_space)
+void SpriteRenderer::SetSprite(const Sprite& sprite, bool world_space) const
 {
-	sprite_ = sprite;
-	if(renderer_)
-	{
-		renderer_->SetSprite(sprite);
-		renderer_->in_world_space_ = world_space;
-	}
-	else
-	{
-		world_space_ = world_space;
-	}
+	renderer_->SetSprite(sprite);
+	renderer_->in_world_space_ = world_space;
 }
 
-void SpriteRenderer::ResetSprite()
+void SpriteRenderer::ResetSprite() const
 {
-	sprite_ = {};
-	if(renderer_)
-	{
-		renderer_->Reset();
-	}
+	renderer_->Reset();
 }

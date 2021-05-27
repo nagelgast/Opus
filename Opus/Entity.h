@@ -81,6 +81,8 @@ public:
 		const auto type = std::type_index(typeid(*c_ptr));
 		components_[type] = std::move(c_ptr);
 
+		components_[type]->Awake();
+
 		return static_cast<T&>(*components_[type]);
 	}
 

@@ -6,12 +6,9 @@
 class SpriteRenderer : public Component
 {
 public:
-	void Start() override;
-	void SetSprite(const Sprite& sprite, bool world_space = true);
-	void ResetSprite();
+	void Awake() override;
+	void SetSprite(const Sprite& sprite, bool world_space = true) const;
+	void ResetSprite() const;
 private:
 	BaseEntityRenderer* renderer_ = nullptr;
-	Sprite sprite_;
-
-	bool world_space_ = false;
 };

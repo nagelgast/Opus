@@ -15,6 +15,7 @@ public:
 	Component& operator=(Component&& other) = delete;
 	
 	virtual ~Component() = default;
+	virtual void Awake() {}
 	virtual void Start() {}
 	virtual void Update() {}
 	virtual void FixedUpdate() {}
