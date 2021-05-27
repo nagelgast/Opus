@@ -1,18 +1,12 @@
 #include "MouseHandler.h"
 
-#include <utility>
-
 #include "MouseSlot.h"
 #include "PlayerController.h"
 #include "ScreenManager.h"
 #include "../Opus/Input.h"
 
-MouseHandler::MouseHandler(std::shared_ptr<ScreenManager> screen_manager,
-                           std::shared_ptr<PlayerController> player_controller,
-                           std::shared_ptr<MouseSlot> mouse_item) :
-	screen_manager_(std::move(screen_manager)),
-	player_controller_(std::move(player_controller)),
-	mouse_item_(std::move(mouse_item))
+MouseHandler::MouseHandler(ScreenManager& screen_manager, PlayerController& player_controller, MouseSlot& mouse_item) :
+	screen_manager_(&screen_manager), player_controller_(&player_controller), mouse_item_(&mouse_item)
 {
 }
 
@@ -79,17 +73,17 @@ void MouseHandler::FindTarget()
 
 	// TODO Optimize this
 	auto entities = entity_->GetEntities();
-	std::vector<std::shared_ptr<Interactable>> interactables;
+	std::vector<Interactable*> interactables;
 	for (const auto& entity : entities)
 	{
-		auto interactable = entity->GetComponent<Interactable>();
+		auto* interactable = entity->GetComponent<Interactable>();
 		if (interactable)
 		{
 			interactables.push_back(interactable);
 		}
 	}
 
-	std::vector<std::shared_ptr<Interactable>> targets;
+	std::vector<Interactable*> targets;
 
 	for (const auto& interactable : interactables)
 	{
@@ -123,7 +117,7 @@ void MouseHandler::HandleWorldPress()
 	is_world_space_hold_ = !dropped_item;
 
 	// If we did not drop an item, update player target
-	if(!dropped_item)
+	if (!dropped_item)
 	{
 		if (target_)
 		{
@@ -131,13 +125,13 @@ void MouseHandler::HandleWorldPress()
 		}
 		else
 		{
-			player_controller_->SetTarget(nullptr);
+			player_controller_->ClearTarget();
 			SetPlayerTargetPosition();
 		}
 	}
 }
 
-void MouseHandler::HandleWorldHold()
+void MouseHandler::HandleWorldHold() const
 {
 	SetPlayerTargetPosition();
 }
@@ -154,7 +148,7 @@ void MouseHandler::HandleWorldHover()
 	HandleHover();
 }
 
-void MouseHandler::HandleScreenPress()
+void MouseHandler::HandleScreenPress() const
 {
 	if (target_)
 	{
@@ -167,7 +161,7 @@ void MouseHandler::HandleScreenHold()
 	HandleHover();
 }
 
-void MouseHandler::HandleScreenRelease()
+void MouseHandler::HandleScreenRelease() const
 {
 	if (target_)
 	{
@@ -191,19 +185,19 @@ void MouseHandler::HandleHover()
 		{
 			previous_target_->OnHoverExit();
 		}
-		if(target_)
+		if (target_)
 		{
 			target_->OnHoverEnter();
 		}
 	}
 }
 
-void MouseHandler::SetPlayerTargetPosition()
+void MouseHandler::SetPlayerTargetPosition() const
 {
 	player_controller_->SetTarget(mouse_position_);
 }
 
-void MouseHandler::SetPlayerTargetInteractable()
+void MouseHandler::SetPlayerTargetInteractable() const
 {
-	player_controller_->SetTarget(target_);
+	player_controller_->SetTarget(*target_);
 }

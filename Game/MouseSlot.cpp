@@ -7,12 +7,12 @@
 
 void MouseSlot::Awake()
 {
-	renderer_ = AddComponent(SpriteRenderer());
+	renderer_ = &AddComponent(SpriteRenderer());
 }
 
-bool MouseSlot::SetItem(const std::shared_ptr<Item>& item)
+bool MouseSlot::SetItem(std::unique_ptr<Item> item)
 {
-	item_ = item;
+	item_ = std::move(item);
 	renderer_->SetSprite(item_->sprite, false);
 
 	GetTransform().SetScale(item_->sprite.rect.width, item_->sprite.rect.height);
@@ -39,11 +39,10 @@ bool MouseSlot::TryDrop(const Vector2 position)
 	return false;
 }
 
-std::shared_ptr<Item> MouseSlot::Take()
+std::unique_ptr<Item> MouseSlot::Take()
 {
-	auto item = item_;
 	Clear();
-	return item;
+	return std::move(item_);
 }
 
 Item& MouseSlot::GetItem()
@@ -63,15 +62,14 @@ void MouseSlot::Update()
 
 void MouseSlot::Drop(const Vector2 position)
 {
-	const auto world_item = Instantiate<WorldItem>(position);
-	world_item->item_ = item_;
+	auto& world_item = Instantiate<WorldItem>(position);
+	world_item.Initialize(std::move(item_));
 
 	Clear();
 }
 
-void MouseSlot::Clear()
+void MouseSlot::Clear() const
 {
-	item_ = nullptr;
 	renderer_->ResetSprite();
 	GetTransform().SetScale(1,1);
 }

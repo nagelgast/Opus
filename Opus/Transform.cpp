@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Transform.h"
 
-#include "BaseEntityRenderer.h"
 #include "Core.h"
 
 Transform::~Transform()
@@ -13,10 +12,9 @@ Transform::~Transform()
 	}
 }
 
-// TODO Change to ref
-void Transform::SetParent(Transform* transform)
+void Transform::SetParent(Transform& transform)
 {
-	parent_ = transform;
+	parent_ = &transform;
 	parent_->children_.push_back(this);
 	
 	RecalculateLocalPosition();

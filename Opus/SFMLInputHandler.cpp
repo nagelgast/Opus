@@ -4,8 +4,8 @@
 #include "Key.h"
 #include <SFML/Window/Mouse.hpp>
 
-SFMLInputHandler::SFMLInputHandler(const std::shared_ptr<BaseWindow> window) :
-	window_(static_cast<SFMLWindow&>(*window).GetWindow())
+SFMLInputHandler::SFMLInputHandler(BaseWindow& window) :
+	window_(dynamic_cast<SFMLWindow&>(window).GetWindow())
 {
 }
 

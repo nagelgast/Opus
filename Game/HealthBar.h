@@ -8,12 +8,12 @@ class HealthBar final :
 	public Component
 {
 public:
-	explicit HealthBar(const std::shared_ptr<Health>& health);
+	explicit HealthBar(const Health& health);
 
 	void Start() override;
 	void Update() override;
 private:
-	const std::weak_ptr<Health> health_;
+	const Health* health_;
 	float max_width_ = 0;
 	float height_ = 0;
 };

@@ -13,7 +13,7 @@ void Player::Awake()
 {
 	const Sprite sprite { "Sprites/chars/gabe/gabe-idle-run.png", {0, 0, 24, 24}};
 	auto sr = AddComponent(SpriteRenderer());
-	sr->SetSprite(sprite);
+	sr.SetSprite(sprite);
 	
 	const auto collider = AddComponent(Collider(1, Shape::kSquare, false, false));
 	GetTransform().SetScale(100, 100);
@@ -21,7 +21,5 @@ void Player::Awake()
 	auto pc = AddComponent(PlayerController(200, 400));
 	auto fireball = FireballSkill();
 
-	const auto psh = AddComponent(PlayerSkillHandler(fireball));
-
-	pc->psh_ = psh;
+	AddComponent(PlayerSkillHandler(fireball));
 }

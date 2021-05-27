@@ -11,21 +11,20 @@ class PlayerInventory : public Entity
 {
 public:
 	static PlayerInventory& GetInstance();
-	void Initialize(const std::shared_ptr<MouseSlot>& mouse, const std::shared_ptr<PlayerInventoryScreen>& screen);
-	void PickUpItem(const std::shared_ptr<Item>& item) const;
+	void Initialize(MouseSlot& mouse, PlayerInventoryScreen& screen);
+	void PickUpItem(std::unique_ptr<Item> item);
 private:
 	void SpawnEquipmentSlot(ItemTag tag, Vector2 position, float width, float height);
 	
 	void HandleEquipmentSlotHoverEnter(const InventorySlot& slot) const;
 	void HandleEquipmentSlotHoverExit(const InventorySlot& slot) const;
-	void HandleEquipmentSlotRelease(const std::shared_ptr<InventorySlot>& slot);
+	void HandleEquipmentSlotRelease(InventorySlot& slot);
 
-	void TryPickup(const InventorySlot& slot) const;
-	void Equip(const std::shared_ptr<InventorySlot>& equipment_slot, const std::shared_ptr<Item>& item);
+	void Equip(InventorySlot& equipment_slot, std::unique_ptr<Item> item);
 		
-	std::shared_ptr<PlayerInventoryScreen> screen_;
-	std::shared_ptr<Inventory> inventory_;
-	std::shared_ptr<MouseSlot> mouse_slot_;
+	PlayerInventoryScreen* screen_ = nullptr;
+	Inventory* inventory_ = nullptr;
+	MouseSlot* mouse_slot_ = nullptr;
 	// std::shared_ptr<EquipmentInventory>
 
 	// TODO Replace with system/service

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Collider.h"
 
+
+#include "Entity.h"
 #include "Game.h"
 
 

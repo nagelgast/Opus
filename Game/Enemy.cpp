@@ -11,7 +11,7 @@ void Enemy::Awake()
 {
 	const Sprite sprite{"Sprites/mobs/slime-blue.png", {0, 8, 16, 16}};
 	auto sr = AddComponent(SpriteRenderer());
-	sr->SetSprite(sprite);
+	sr.SetSprite(sprite);
 	AddComponent(Collider(0, Shape::kSquare, false, false));
 	GetTransform().SetScale(32, 32);
 

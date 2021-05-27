@@ -10,19 +10,19 @@
 
 #include "../Opus/ShapeRenderer.h"
 
-void Inventory::Initialize(const std::shared_ptr<MouseSlot>& mouse_item)
+void Inventory::Initialize(MouseSlot& mouse_item)
 {
-	mouse_item_ = mouse_item;
+	mouse_item_ = &mouse_item;
 }
 
 void Inventory::Awake()
 {
 	const auto width = static_cast<float>(kInventorySlotSize * columns_);
 	const auto height = static_cast<float>(kInventorySlotSize * rows_);
-	auto background = Instantiate(&GetTransform());
-	background->AddComponent(ShapeRenderer(Shape::kSquare, {0.2f, 0.2f, 0.2f}, false));
+	auto& background = Instantiate(GetTransform());
+	background.AddComponent(ShapeRenderer(Shape::kSquare, {0.2f, 0.2f, 0.2f}, false));
 
-	auto& background_transform = background->GetTransform();
+	auto& background_transform = background.GetTransform();
 	background_transform.SetScale(width, height);
 
 	for (auto row = 0; row < rows_; ++row)
@@ -30,29 +30,29 @@ void Inventory::Awake()
 		for (auto col = 0; col < columns_; ++col)
 		{
 			auto index = col + row * columns_;
-			const auto slot = Instantiate<InventorySlot>(&GetTransform());
-			auto slot_interactable = slot->GetComponent<Interactable>();
-			slot_interactable->OnRelease += [this, index] { HandleRelease(index); };
-			slot_interactable->OnHoverEnter += [this, index] { HandleSlotHoverEnter(index); };
-			slot_interactable->OnHoverExit += [this, index] { HandleSlotHoverExit(index); };
+			auto& slot = Instantiate<InventorySlot>(GetTransform());
+			auto& slot_interactable = *slot.GetComponent<Interactable>();
+			slot_interactable.OnRelease += [this, index] { HandleRelease(index); };
+			slot_interactable.OnHoverEnter += [this, index] { HandleSlotHoverEnter(index); };
+			slot_interactable.OnHoverExit += [this, index] { HandleSlotHoverExit(index); };
 
-			auto& slot_transform = slot->GetTransform();
+			auto& slot_transform = slot.GetTransform();
 			slot_transform.SetScale(kInventorySlotSize, kInventorySlotSize);
 			const Vector2 slot_pos = {col * kInventorySlotSize, row * kInventorySlotSize};
 			slot_transform.SetLocalPosition(slot_pos);
 
-			slots_.push_back(slot);
+			slots_.push_back(&slot);
 		}
 	}
 }
 
-bool Inventory::TryAutoAddItem(const std::shared_ptr<Item>& item)
+bool Inventory::TryAutoAddItem(std::unique_ptr<Item> item)
 {
 	const auto slot_indices = FindAvailableSlots(item->size);
 	const auto has_space = !slot_indices.empty();
 	if(has_space)
 	{
-		Place(item, slot_indices);
+		Place(std::move(item), slot_indices);
 	}
 
 	return has_space;
@@ -85,22 +85,24 @@ std::vector<int> Inventory::FindAvailableSlots(const ItemSize item_size)
 	return {};
 }
 
-void Inventory::Place(const std::shared_ptr<Item>& item, std::vector<int> slot_indices)
+void Inventory::Place(std::unique_ptr<Item> item, const std::vector<int>& slot_indices)
 {
-	std::vector<std::shared_ptr<InventorySlot>> item_slots;
+	std::vector<InventorySlot*> item_slots;
 	for(auto index : slot_indices)
 	{
 		item_slots.push_back(slots_[index]);
 	}
 	
 	// Create new inventory item instance
-	const auto inventory_item = Instantiate<InventoryItem>(&GetTransform());
-	inventory_item->Initialize(inventory_item, item, item_slots);
+	auto& inventory_item = Instantiate<InventoryItem>(GetTransform());
 
 	// Position item correctly
-	auto& transform = inventory_item->GetTransform();
-	const Vector2 offset = {kInventorySlotSize*(item->size.width-1)/2, kInventorySlotSize * (item->size.height - 1) / 2 };
+	auto& transform = inventory_item.GetTransform();
+	const Vector2 offset = { kInventorySlotSize * (item->size.width - 1) / 2, kInventorySlotSize * (item->size.height - 1) / 2 };
 	transform.SetPosition(item_slots[0]->GetTransform().GetPosition());
+	
+	inventory_item.Initialize(std::move(item), item_slots);
+
 
 	ResetHighlights();
 }
@@ -109,29 +111,28 @@ void Inventory::HandleRelease(const int index)
 {
 	if(hovering_over_multiple_items_) return;
 
-	std::shared_ptr<Item> picked_up_item = nullptr;
+	std::unique_ptr<Item> picked_up_item = nullptr;
 
 	if(pickup_item_)
 	{
-		picked_up_item = pickup_item_->Take();
+		picked_up_item = pickup_item_->TakeItem();
 	}
 	
 	if (mouse_item_->HasItem())
 	{
-		const auto new_item = mouse_item_->Take();
-		Place(new_item, hover_slot_indices_);
+		Place(mouse_item_->Take(), hover_slot_indices_);
 	}
 
 	if (picked_up_item)
 	{
-		PlayerInventory::GetInstance().PickUpItem(picked_up_item);
+		PlayerInventory::GetInstance().PickUpItem(std::move(picked_up_item));
 		HandleSlotHoverEnter(index);
 	}
 }
 
 void Inventory::HandleSlotHoverEnter(const int index)
 {
-	pickup_item_ = slots_[index]->GetItem();
+	pickup_item_ = &slots_[index]->GetItem();
 	
 	if(mouse_item_->HasItem())
 	{
@@ -141,16 +142,16 @@ void Inventory::HandleSlotHoverEnter(const int index)
 		hovering_over_multiple_items_ = false;
 		for (auto slot_index : hover_slot_indices_)
 		{
-			const auto slot = slots_[slot_index];
+			auto* const slot = slots_[slot_index];
 			if(slot->HasItem())
 			{
 				if(!hovering_over_item)
 				{
 					// Set pickup slot here so that you will pick up that item, even if it's not underneath the hovered slot
 					hovering_over_item = true;
-					pickup_item_ = slot->GetItem();
+					pickup_item_ = &slot->GetItem();
 				}
-				else if(pickup_item_ != slot->GetItem())
+				else if(pickup_item_ != &slot->GetItem())
 				{
 					hovering_over_multiple_items_ = true;
 				}

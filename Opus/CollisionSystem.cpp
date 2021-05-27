@@ -7,6 +7,8 @@
 
 #include <algorithm>
 
+#include "Entity.h"
+
 void CollisionSystem::FixedUpdate()
 {
 	// TODO Replace with iterators

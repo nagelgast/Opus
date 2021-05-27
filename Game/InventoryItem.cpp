@@ -8,32 +8,30 @@
 
 void InventoryItem::Awake()
 {
-	interactable_ = AddComponent(Interactable());
-	sr_ = AddComponent(SpriteRenderer());
+	interactable_ = &AddComponent(Interactable());
+	sr_ = &AddComponent(SpriteRenderer());
 }
 
-void InventoryItem::Initialize(const std::shared_ptr<InventoryItem>& self, const std::shared_ptr<Item>& item,
-	const std::vector<std::shared_ptr<InventorySlot>>& slots)
+void InventoryItem::Initialize(std::unique_ptr<Item> item, const std::vector<InventorySlot*>& slots)
 {
-	self_ = self;
-	item_ = item;
+	item_ = std::move(item);
 	slots_ = slots;
 
 	for(const auto& slot : slots_)
 	{
-		slot->SetItem(self);
+		slot->SetItem(*this);
 	}
 	
-	const auto width = static_cast<float>(kInventorySlotSize * item->size.width);
-	const auto height = static_cast<float>(kInventorySlotSize * item->size.height);
+	const auto width = static_cast<float>(kInventorySlotSize * item_->size.width);
+	const auto height = static_cast<float>(kInventorySlotSize * item_->size.height);
 
-	sr_->SetSprite(item->sprite, false);
+	sr_->SetSprite(item_->sprite, false);
 
 	GetTransform().SetScale(width, height);
 
 }
 
-std::shared_ptr<Item> InventoryItem::Take()
+std::unique_ptr<Item> InventoryItem::TakeItem()
 {
 	for(auto& slot : slots_)
 	{
@@ -42,12 +40,12 @@ std::shared_ptr<Item> InventoryItem::Take()
 	
 	Destroy();
 
-	return item_;
+	return std::move(item_);
 }
 
-std::shared_ptr<Item> InventoryItem::GetItem() const
+Item& InventoryItem::GetItem() const
 {
-	return item_;
+	return *item_;
 }
 
 void InventoryItem::SetHighlight(const Color color)

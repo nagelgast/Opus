@@ -13,7 +13,7 @@ struct Key;
 class SFMLInputHandler final : public BaseInputHandler
 {
 public:
-	explicit SFMLInputHandler(std::shared_ptr<BaseWindow> window);
+	explicit SFMLInputHandler(BaseWindow& window);
 	const Input& GetInput() override;
 	void UpdateInput() override;
 

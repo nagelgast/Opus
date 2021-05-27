@@ -7,9 +7,9 @@ class Camera : public Component
 {
 public:
 	void Update() override;
-	void SetTarget(const std::shared_ptr<Entity>& target);
+	void SetTarget(Entity& target);
 private:
 	Vector2 offset_;
-	std::weak_ptr<Entity> target_;
+	Entity* target_;
 };
 

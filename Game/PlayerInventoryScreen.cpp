@@ -8,7 +8,7 @@
 
 void PlayerInventoryScreen::Awake()
 {
-	background_ = Instantiate(&GetTransform());
+	background_ = &Instantiate(GetTransform());
 	background_->AddComponent(ShapeRenderer(Shape::kSquare, {0.8f, 0.8f, 0.8f}, false));
 
 	auto& transform = background_->GetTransform();

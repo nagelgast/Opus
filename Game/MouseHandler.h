@@ -9,33 +9,33 @@ class PlayerController;
 class MouseHandler : public Component
 {
 public:
-	MouseHandler(std::shared_ptr<ScreenManager> screen_manager, std::shared_ptr<PlayerController> player_controller, std::shared_ptr<MouseSlot> mouse_item);
+	MouseHandler(ScreenManager& screen_manager, PlayerController& player_controller, MouseSlot& mouse_item);
 	void Update() override;
 
 private:
 	void FindTarget();
 	
 	void HandleWorldPress();
-	void HandleWorldHold();
+	void HandleWorldHold() const;
 	void HandleWorldRelease();
 	void HandleWorldHover();
 
-	void HandleScreenPress();
+	void HandleScreenPress() const;
 	void HandleScreenHold();
-	void HandleScreenRelease();
+	void HandleScreenRelease() const;
 	void HandleScreenHover();
 	
 	void HandleHover();
 
-	void SetPlayerTargetPosition();
-	void SetPlayerTargetInteractable();
+	void SetPlayerTargetPosition() const;
+	void SetPlayerTargetInteractable() const;
 
-	std::shared_ptr<ScreenManager> screen_manager_;
-	std::shared_ptr<PlayerController> player_controller_;
-	std::shared_ptr<MouseSlot> mouse_item_;
+	ScreenManager* screen_manager_ = nullptr;
+	PlayerController* player_controller_ = nullptr;
+	MouseSlot* mouse_item_ = nullptr;
 	
-	std::shared_ptr<Interactable> target_;
-	std::shared_ptr<Interactable> previous_target_;
+	Interactable* target_ = nullptr;
+	Interactable* previous_target_ = nullptr;
 
 	Vector2 mouse_position_;
 

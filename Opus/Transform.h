@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+
 #include "Component.h"
 #include "Vector2.h"
 
@@ -7,7 +9,7 @@ class Transform final : public Component
 public:
 	~Transform();
 
-	void SetParent(Transform* transform);
+	void SetParent(Transform& transform);
 	
 	Vector2 GetPosition() const;
 	void SetPosition(Vector2 position);

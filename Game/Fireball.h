@@ -8,8 +8,8 @@ class Fireball final : public Entity
 {
 public:
 	void Awake() override;
-	void Initialize(const Vector2& target_pos);
+	void Initialize(const Vector2& target_pos) const;
 private:
-	std::shared_ptr<Projectile> projectile_;
+	Projectile* projectile_ = nullptr;
 };
 

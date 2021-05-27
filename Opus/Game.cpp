@@ -8,13 +8,13 @@
 #include "SFMLWindow.h"
 
 Game::Game(const int width, const int height, const int fps_limit, const int fixed_update_ms, const std::string& title) :
-	window_(std::make_shared<SFMLWindow>(width, height, fps_limit, title)),
-	renderer_(std::make_unique<SFMLRenderer>(window_)),
-	input_handler_(std::make_unique<SFMLInputHandler>(window_)),
+	window_(std::make_unique<SFMLWindow>(width, height, fps_limit, title)),
+	renderer_(std::make_unique<SFMLRenderer>(*window_)),
+	input_handler_(std::make_unique<SFMLInputHandler>(*window_)),
 	time_(std::make_unique<SFMLTime>(fixed_update_ms)),
 	entity_controller_(*renderer_, *time_, input_handler_->GetInput())
 {
-	root_ = entity_controller_.CreateEntity();
+	root_ = &entity_controller_.CreateEntity();
 	root_->SetName("Root");
 }
 
@@ -50,7 +50,7 @@ Entity& Game::GetRoot() const
 	return *root_;
 }
 
-void Game::SetCamera(const std::shared_ptr<Camera>& camera)
+void Game::SetCamera(const Camera& camera) const
 {
 	renderer_->SetCamera(camera);
 }

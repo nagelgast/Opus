@@ -13,7 +13,7 @@
 
 Entity::Entity()
 {
-	transform_ = AddComponent(Transform());
+	transform_ = &AddComponent(Transform());
 }
 
 Entity::~Entity()
@@ -48,36 +48,36 @@ void Entity::FixedUpdateComponents()
 void Entity::Destroy()
 {
 	destroyed_ = true;
-	for (auto child : transform_->children_)
+	for (auto* child : transform_->children_)
 	{
 		child->entity_->Destroy();
 	}
 	OnDestroy();
 }
 
-std::shared_ptr<Collider> Entity::AddComponent(const Collider& c)
+Collider& Entity::AddComponent(const Collider& c)
 {
-	collider_ = AddComponent<Collider>(c);
-	return collider_;
+	collider_ = &AddComponent<Collider>(c);
+	return *collider_;
 }
 
-std::shared_ptr<Entity> Entity::Instantiate() const
+Entity& Entity::Instantiate() const
 {
 	return ec_->CreateEntity();
 }
 
-std::shared_ptr<Entity> Entity::Instantiate(const Vector2& position) const
+Entity& Entity::Instantiate(const Vector2& position) const
 {
-	auto entity = Instantiate();
-	entity->transform_->SetPosition(position);
+	auto& entity = Instantiate();
+	entity.transform_->SetPosition(position);
 	return entity;
 }
 
-std::shared_ptr<Entity> Entity::Instantiate(Transform* parent) const
+Entity& Entity::Instantiate(Transform& parent) const
 {
-	auto entity = Instantiate();
-	entity->transform_->SetParent(parent);
-	entity->transform_->SetLocalPosition({0, 0});
+	auto& entity = Instantiate();
+	entity.transform_->SetParent(parent);
+	entity.transform_->SetLocalPosition({0, 0});
 	return entity;
 }
 
@@ -156,16 +156,16 @@ BaseEntityRenderer* Entity::GetRenderer() const
 	return renderer_.get();
 }
 
-void Entity::RecalculateVisibility(Transform* parent)
+void Entity::RecalculateVisibility(Transform& parent)
 {
-	parent_visible_ = parent->entity_->visible_ && parent->entity_->parent_visible_;
+	parent_visible_ = parent.entity_->visible_ && parent.entity_->parent_visible_;
 }
 
-void Entity::RecalculateChildVisibility()
+void Entity::RecalculateChildVisibility() const
 {
 	for (auto* child : transform_->children_)
 	{
-		child->entity_->RecalculateVisibility(transform_.get());
+		child->entity_->RecalculateVisibility(*transform_);
 		child->entity_->RecalculateChildVisibility();
 	}
 }

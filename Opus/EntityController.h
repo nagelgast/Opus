@@ -13,14 +13,14 @@ class EntityController
 public:
 	explicit EntityController(const BaseRenderer& renderer, const BaseTime& time, const Input& input);
 	void DestroyEntity(Entity& entity);
-	std::shared_ptr<Entity> CreateEntity();
+	Entity& CreateEntity();
 
 	template <typename T>
-	std::shared_ptr<T> CreateEntity()
+	T& CreateEntity()
 	{
 		auto entity = std::make_shared<T>();
 		AddEntity(entity);
-		return entity;
+		return *entity;
 	}
 
 	std::vector<std::shared_ptr<Entity>>& GetEntities();
@@ -32,7 +32,7 @@ public:
 	const BaseTime& GetTime() const;
 	const Input& GetInput() const;
 private:
-	void AddEntity(const std::shared_ptr<Entity>& entity);
+	void AddEntity(std::shared_ptr<Entity> entity);
 	std::vector<std::shared_ptr<Entity>> entities_;
 	std::vector<std::shared_ptr<Entity>> new_entities_;
 	

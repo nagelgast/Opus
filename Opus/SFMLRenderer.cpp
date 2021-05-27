@@ -9,7 +9,7 @@
 
 const bool kDrawDebug = true;
 
-SFMLRenderer::SFMLRenderer(const std::shared_ptr<BaseWindow>& window) : window_(dynamic_cast<SFMLWindow&>(*window).GetWindow())
+SFMLRenderer::SFMLRenderer(BaseWindow& window) : window_(dynamic_cast<SFMLWindow&>(window).GetWindow())
 {
 }
 
@@ -61,7 +61,7 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 	window_.display();
 }
 
-void SFMLRenderer::SetCamera(const std::shared_ptr<Camera>& camera)
+void SFMLRenderer::SetCamera(const Camera& camera)
 {
 	// TODO For some reason, this tanks debugging speed???
 	//camera_ = camera;

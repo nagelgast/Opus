@@ -14,6 +14,11 @@ PlayerController::PlayerController(const float walk_speed,
 {
 }
 
+void PlayerController::Start()
+{
+	psh_ = entity_->GetComponent<PlayerSkillHandler>();
+}
+
 void PlayerController::FixedUpdate()
 {
 	const auto dt = entity_->GetFixedDeltaTime();
@@ -56,7 +61,12 @@ void PlayerController::SetTarget(const Vector2 position)
 	target_pos_ = position;
 }
 
-void PlayerController::SetTarget(const std::shared_ptr<Interactable>& target)
+void PlayerController::SetTarget(Interactable& target)
 {
-	target_ = target;
+	target_ = &target;
+}
+
+void PlayerController::ClearTarget()
+{
+	target_ = nullptr;
 }

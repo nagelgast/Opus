@@ -14,5 +14,5 @@ public:
 	bool IsOpen() const;
 private:
 	bool is_open_ = false;
-	std::shared_ptr<Entity> background_;
+	Entity* background_ = nullptr;
 };

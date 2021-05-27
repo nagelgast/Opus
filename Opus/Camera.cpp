@@ -5,14 +5,13 @@
 
 void Camera::Update()
 {
-	if(!target_.expired())
+	if(target_)
 	{
-		const auto target = target_.lock();
-		entity_->GetTransform().SetPosition(target->GetTransform().GetPosition() + offset_);
+		entity_->GetTransform().SetPosition(target_->GetTransform().GetPosition() + offset_);
 	}
 }
 
-void Camera::SetTarget(const std::shared_ptr<Entity>& target)
+void Camera::SetTarget(Entity& target)
 {
-	target_ = target;
+	target_ = &target;
 }

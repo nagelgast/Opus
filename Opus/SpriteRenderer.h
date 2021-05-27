@@ -13,5 +13,5 @@ private:
 	BaseEntityRenderer* renderer_ = nullptr;
 	Sprite sprite_;
 
-	bool world_space_;
+	bool world_space_ = false;
 };

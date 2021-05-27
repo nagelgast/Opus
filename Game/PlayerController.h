@@ -10,14 +10,16 @@ class PlayerController final :
 {
 public:
 	PlayerController(float walk_speed, float run_speed);
+	void Start() override;
 	void FixedUpdate() override;
 
 	void SetTarget(Vector2 position);
-	void SetTarget(const std::shared_ptr<Interactable>& target);
+	void SetTarget(Interactable& target);
+	void ClearTarget();
 
-	std::shared_ptr<PlayerSkillHandler> psh_;
 private:
-	std::shared_ptr<Interactable> target_ = nullptr;
+	PlayerSkillHandler* psh_ = nullptr;
+	Interactable* target_ = nullptr;
 	Vector2 target_pos_ = {0,0};
 	float walk_speed_ = 0;
 	float run_speed_ = 0;

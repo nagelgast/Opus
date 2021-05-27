@@ -12,5 +12,5 @@ public:
 
 	bool CheckIsInScreenSpace(Vector2 position) const;
 
-	std::shared_ptr<PlayerInventoryScreen> player_inventory_screen_;
+	PlayerInventoryScreen* player_inventory_screen_ = nullptr;
 };

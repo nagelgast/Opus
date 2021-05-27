@@ -3,18 +3,18 @@
 #include "ItemTag.h"
 #include "../Opus/Core.h"
 
+struct Item;
 struct Color;
 class ShapeRenderer;
 class InventoryItem;
-class Item;
 class Inventory;
 
 class InventorySlot : public Entity
 {
 public:
 	void Awake() override;
-	void SetItem(std::shared_ptr<InventoryItem> item);
-	std::shared_ptr<InventoryItem> GetItem() const;
+	void SetItem(InventoryItem& item);
+	InventoryItem& GetItem() const;
 	void ClearItem();
 	bool HasItem() const;
 
@@ -26,9 +26,10 @@ public:
 	void EnableHighlight(Color color) const;
 	void DisableHighlight() const;
 private:
-	std::shared_ptr<InventoryItem> item_;
-	std::shared_ptr<Entity> highlight_;
+	InventoryItem* item_ = nullptr;
+	Entity* highlight_ = nullptr;
+	
 	ItemTag required_tag_ = ItemTag::no_tag;
 
-	std::shared_ptr<ShapeRenderer> shape_renderer_;
+	ShapeRenderer* shape_renderer_ = nullptr;
 };

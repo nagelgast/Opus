@@ -7,7 +7,7 @@
 
 void ScreenManager::Awake()
 {
-	player_inventory_screen_ = Instantiate<PlayerInventoryScreen>({ 1024 - 350, 0});
+	player_inventory_screen_ = &Instantiate<PlayerInventoryScreen>({ 1024 - 350, 0});
 	player_inventory_screen_->Close();
 }
 

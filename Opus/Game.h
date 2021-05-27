@@ -21,7 +21,7 @@ public:
 	void Exit();
 
 	Entity& GetRoot() const;
-	void SetCamera(const std::shared_ptr<Camera>& camera);
+	void SetCamera(const Camera& camera) const;
 	void SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix);
 	
 	static CollisionSystem& GetCollisionSystem();
@@ -32,12 +32,11 @@ private:
 	void Update();
 	void HandleOutput();
 
-	std::shared_ptr<BaseWindow> window_;
+	std::unique_ptr<BaseWindow> window_;
 	std::unique_ptr<BaseRenderer> renderer_;
 	std::unique_ptr<BaseInputHandler> input_handler_;
 	std::unique_ptr<BaseTime> time_;
 
 	EntityController entity_controller_;
-	std::shared_ptr<Entity> root_;
-
+	Entity* root_ = nullptr;
 };

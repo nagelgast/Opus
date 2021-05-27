@@ -34,57 +34,56 @@ int main()
 	{
 		auto& root = game->GetRoot();
 
-		auto player = root.Instantiate<Player>();
-		player->SetName("Player");
-		player->GetTransform().CenterOrigin();
+		auto& player = root.Instantiate<Player>();
+		player.SetName("Player");
+		player.GetTransform().CenterOrigin();
 
 		{
-			auto main_camera = root.Instantiate();
-			auto camera = main_camera->AddComponent(Camera());
-			camera->SetTarget(player);
+			auto& main_camera = root.Instantiate();
+			auto camera = main_camera.AddComponent(Camera());
+			camera.SetTarget(player);
 			game->SetCamera(camera);
 		}
-
+		
 		const auto margin = 120;
-
-
+		
 		{
-			auto health_globe = root.Instantiate({margin, kScreenHeight - margin});
-			health_globe->AddComponent(ShapeRenderer(Shape::kCircle, {1, 0, 0}, false));
-			health_globe->GetTransform().SetScale(100, 100);
+			auto& health_globe = root.Instantiate({margin, kScreenHeight - margin});
+			health_globe.AddComponent(ShapeRenderer(Shape::kCircle, {1, 0, 0}, false));
+			health_globe.GetTransform().SetScale(100, 100);
 		}
-
+		
 		{
-			auto mana_globe = root.Instantiate({kScreenWidth - margin, kScreenHeight - margin});
-			mana_globe->AddComponent(ShapeRenderer(Shape::kCircle, {0, 0, 1}, false));
-			mana_globe->GetTransform().SetScale(100, 100);
+			auto& mana_globe = root.Instantiate({kScreenWidth - margin, kScreenHeight - margin});
+			mana_globe.AddComponent(ShapeRenderer(Shape::kCircle, {0, 0, 1}, false));
+			mana_globe.GetTransform().SetScale(100, 100);
 		}
-
-		auto screen_manager = root.Instantiate<ScreenManager>();
-
-		auto mouse = root.Instantiate<MouseSlot>();
-		mouse->AddComponent(MouseHandler(screen_manager, player->GetComponent<PlayerController>(), mouse));
-
+		
+		auto& screen_manager = root.Instantiate<ScreenManager>();
+		
+		auto& mouse = root.Instantiate<MouseSlot>();
+		mouse.AddComponent(MouseHandler(screen_manager, *player.GetComponent<PlayerController>(), mouse));
+		
 		{
-			auto player_inventory = root.Instantiate<PlayerInventory>();
-			player_inventory->Initialize(mouse, screen_manager->player_inventory_screen_);
+			auto& player_inventory = root.Instantiate<PlayerInventory>();
+			player_inventory.Initialize(mouse, *screen_manager.player_inventory_screen_);
 		}
-
+		
 		{
-			const auto wall1 = root.Instantiate<Wall>({500, 500});
-			wall1->SetName("Wall1");
-			wall1->GetTransform().CenterOrigin();
+			auto& wall1 = root.Instantiate<Wall>({500, 500});
+			wall1.SetName("Wall1");
+			wall1.GetTransform().CenterOrigin();
 		}
 		{
-			const auto wall2 = root.Instantiate<Wall>({300, 500});
-			wall2->SetName("Wall2");
-			wall2->GetTransform().CenterOrigin();
+			auto& wall2 = root.Instantiate<Wall>({300, 500});
+			wall2.SetName("Wall2");
+			wall2.GetTransform().CenterOrigin();
 		}
-
+		
 		{
-			const auto enemy = root.Instantiate<Enemy>({500, 100});
-			enemy->SetName("Enemy");
-			enemy->GetTransform().CenterOrigin();
+			auto& enemy = root.Instantiate<Enemy>({500, 100});
+			enemy.SetName("Enemy");
+			enemy.GetTransform().CenterOrigin();
 		}
 	}
 
