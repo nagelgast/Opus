@@ -142,6 +142,7 @@ void Inventory::HandleSlotHoverEnter(const int index)
 		pos.x -= 40;
 		pos.y -= 210;
 		popup_ = &Instantiate<ItemInfoPopup>(pos);
+		popup_->SetItem(pickup_item_->GetItem());
 	}
 	
 	if(mouse_item_->HasItem())

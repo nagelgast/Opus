@@ -11,7 +11,7 @@ class ShapeRenderer :
 public:
     ShapeRenderer(Shape shape, Color color, bool in_world_space = true);
 	void SetColor(Color color);
-    void Start() override;
+    void Awake() override;
 private:
     Shape shape_;
 	Color color_;

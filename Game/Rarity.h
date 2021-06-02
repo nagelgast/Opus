@@ -5,5 +5,6 @@ enum class Rarity
 	kNormal,
 	kMagic,
 	kRare,
-	kUnique
+	kUnique,
+	kCurrency
 };

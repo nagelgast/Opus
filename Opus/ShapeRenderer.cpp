@@ -17,7 +17,7 @@ void ShapeRenderer::SetColor(const Color color)
 	renderer_->SetColor(color_);
 }
 
-void ShapeRenderer::Start()
+void ShapeRenderer::Awake()
 {
 	renderer_ = entity_->CreateRenderer();
 	renderer_->in_world_space_ = in_world_space_;

@@ -1,13 +1,24 @@
 #pragma once
 
+#include "../Opus/Color.h"
 #include "../Opus/Core.h"
 
+class ShapeRenderer;
 struct Item;
+
+const Color kNormalItemColor = {0.78f,0.78f,0.78f};			// 200 200 200
+const Color kMagicItemColor = { 0.53f,0.53f,1};				// 136 136 255
+const Color kRareItemColor = { 1,1,0.47f};					// 255 255 119
+const Color kUniqueItemColor = { 0.69f, 0.38f, 0.15f};		// 175  96  37
+const Color kCurrencyItemColor = { 0.67f, 0.62f, 0.51f};		// 170 158 130
+
 
 class ItemInfoPopup : public Entity
 {
 public:
 	void Awake() override;
-	void SetItem(const Item& item);
+	void SetItem(const Item& item) const;
+private:
+	ShapeRenderer* title_renderer_ = nullptr;
 };
 
