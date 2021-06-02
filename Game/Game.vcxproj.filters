@@ -117,6 +117,9 @@
     <ClCompile Include="MouseSlot.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
+    <ClCompile Include="ItemInfoPopup.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -204,6 +207,9 @@
       <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="MouseSlot.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemInfoPopup.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
   </ItemGroup>

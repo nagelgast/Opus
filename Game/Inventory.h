@@ -3,6 +3,7 @@
 #include "../Opus/Color.h"
 #include "../Opus/Core.h"
 
+class ItemInfoPopup;
 struct Item;
 struct ItemSize;
 class InventorySlot;
@@ -38,6 +39,9 @@ private:
 	int rows_ = 5;
 	int columns_ = 12;
 
+	// TODO Should be controlled by mouse handler
+	ItemInfoPopup* popup_ = nullptr;
+	
 	MouseSlot* mouse_item_ = nullptr;
 	InventoryItem* pickup_item_ = nullptr;
 

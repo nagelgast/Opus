@@ -6,6 +6,7 @@
 #include "MouseSlot.h"
 #include "InventoryItem.h"
 #include "Item.h"
+#include "ItemInfoPopup.h"
 #include "PlayerInventory.h"
 
 #include "../Opus/ShapeRenderer.h"
@@ -133,6 +134,15 @@ void Inventory::HandleRelease(const int index)
 void Inventory::HandleSlotHoverEnter(const int index)
 {
 	pickup_item_ = &slots_[index]->GetItem();
+
+	if(pickup_item_)
+	{
+		// TODO Dynamic positioning
+		auto pos = pickup_item_->GetTransform().GetPosition();
+		pos.x -= 40;
+		pos.y -= 210;
+		popup_ = &Instantiate<ItemInfoPopup>(pos);
+	}
 	
 	if(mouse_item_->HasItem())
 	{
@@ -164,6 +174,11 @@ void Inventory::HandleSlotHoverEnter(const int index)
 
 void Inventory::HandleSlotHoverExit(int index)
 {
+	if(popup_)
+	{
+		popup_->Destroy();
+		popup_ = nullptr;
+	}
 	ResetHighlights();
 	hover_slot_indices_.clear();
 }
