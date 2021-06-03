@@ -3,6 +3,7 @@
 #include "../Opus/Color.h"
 #include "../Opus/Core.h"
 
+class TextRenderer;
 class ShapeRenderer;
 struct Item;
 
@@ -19,6 +20,7 @@ public:
 	void Awake() override;
 	void SetItem(const Item& item) const;
 private:
-	ShapeRenderer* title_renderer_ = nullptr;
+	ShapeRenderer* title_background_renderer_ = nullptr;
+	TextRenderer* title_renderer_ = nullptr;
 };
 

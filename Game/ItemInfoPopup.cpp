@@ -4,6 +4,7 @@
 #include "Item.h"
 #include "Rarity.h"
 #include "../Opus/ShapeRenderer.h"
+#include "../Opus/TextRenderer.h"
 
 void ItemInfoPopup::Awake()
 {
@@ -17,8 +18,11 @@ void ItemInfoPopup::Awake()
 	auto& title_background = Instantiate(transform);
 
 	title_background.GetTransform().SetScale(100, 20);
-	title_renderer_ = &title_background.AddComponent(ShapeRenderer(Shape::kSquare, kUniqueItemColor, false));
+	title_background_renderer_ = &title_background.AddComponent(ShapeRenderer(Shape::kSquare, kUniqueItemColor, false));
 
+
+	auto& title = Instantiate(transform);
+	title_renderer_ = &title.AddComponent(TextRenderer());
 }
 
 void ItemInfoPopup::SetItem(const Item& item) const
@@ -43,5 +47,7 @@ void ItemInfoPopup::SetItem(const Item& item) const
 			break;
 	}
 
-	title_renderer_->SetColor(title_color);
+	title_background_renderer_->SetColor(title_color);
+
+	title_renderer_->SetText(item.name);
 }

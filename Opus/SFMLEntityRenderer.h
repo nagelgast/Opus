@@ -11,6 +11,8 @@ class SFMLEntityRenderer final : public BaseEntityRenderer, public sf::Drawable
 public:
 	void SetSprite(Sprite sprite) override;
 	void SetShape(const Shape& shape) override;
+	void SetText(const char* text) override;
+	
 	void SetColor(const Color& color) override;
 
 	void Reset() override;
@@ -23,5 +25,10 @@ private:
 
 	std::unique_ptr<sf::Texture> texture_;
 	std::unique_ptr<sf::Sprite> drawable_sprite_;
+	std::unique_ptr<sf::Text> drawable_text_;
 	std::unique_ptr<sf::Shape> drawable_shape_;
+
+
+	// TODO Store in font manager
+	sf::Font font_;
 };

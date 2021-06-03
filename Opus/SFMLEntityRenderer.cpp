@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "SFMLEntityRenderer.h"
 
+#include <iostream>
+
+
 
 #include "Color.h"
 #include "Entity.h"
@@ -36,6 +39,15 @@ void SFMLEntityRenderer::SetShape(const Shape& shape)
 		drawable_shape_ = std::make_unique<sf::RectangleShape>(length);
 		break;
 	}
+}
+
+void SFMLEntityRenderer::SetText(const char* text)
+{
+	if(!font_.loadFromFile("../Game/Fonts/Fontin-Regular.ttf"))
+	{
+		std::cout << "Failed to load font.\n";
+	}
+	drawable_text_ = std::make_unique<sf::Text>(text, font_);
 }
 
 void SFMLEntityRenderer::SetColor(const Color& color)
@@ -81,6 +93,12 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 		drawable_sprite_->setScale(sprite_scale);
 		drawable_sprite_->setPosition(draw_pos);
 		target.draw(*drawable_sprite_, states);
+	}
+
+	if(drawable_text_)
+	{
+		drawable_text_->setPosition(draw_pos);
+		target.draw(*drawable_text_, states);
 	}
 }
 
