@@ -11,7 +11,9 @@ class SFMLEntityRenderer final : public BaseEntityRenderer, public sf::Drawable
 public:
 	void SetSprite(Sprite sprite) override;
 	void SetShape(const Shape& shape) override;
+	
 	void SetText(const char* text) override;
+	float GetWidth() override;
 	
 	void SetColor(const Color& color) override;
 

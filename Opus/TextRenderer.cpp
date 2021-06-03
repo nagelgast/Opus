@@ -12,3 +12,8 @@ void TextRenderer::SetText(const std::string& text) const
 {
 	renderer_->SetText(text.c_str());
 }
+
+float TextRenderer::GetWidth()
+{
+	return renderer_->GetWidth();
+}

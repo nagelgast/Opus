@@ -47,8 +47,19 @@ void SFMLEntityRenderer::SetText(const char* text)
 	{
 		std::cout << "Failed to load font.\n";
 	}
-	drawable_text_ = std::make_unique<sf::Text>(text, font_);
+	drawable_text_ = std::make_unique<sf::Text>(text, font_, 18);
 }
+
+float SFMLEntityRenderer::GetWidth()
+{
+	if(drawable_text_)
+	{
+		return drawable_text_->getGlobalBounds().width;
+	}
+
+	return 0;
+}
+
 
 void SFMLEntityRenderer::SetColor(const Color& color)
 {
