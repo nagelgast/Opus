@@ -6,7 +6,7 @@
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/TextRenderer.h"
 
-const float kMargin = 2;
+const float kMargin = 10;
 
 void ItemInfoPopup::Awake()
 {
@@ -20,7 +20,7 @@ void ItemInfoPopup::Awake()
 
 	auto& title_background = Instantiate(transform);
 
-	title_background.GetTransform().SetScale(100, 20);
+	title_background.GetTransform().SetScale(100, 30);
 	title_background_renderer_ = &title_background.AddComponent(ShapeRenderer(Shape::kSquare, kUniqueItemColor, false));
 
 	auto& title = Instantiate(transform);
