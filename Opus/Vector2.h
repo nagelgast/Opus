@@ -22,4 +22,6 @@ struct Vector2
 
 	float x;
 	float y;
+
+	static bool IsInRange(const Vector2& left, const Vector2& right, float range);
 };

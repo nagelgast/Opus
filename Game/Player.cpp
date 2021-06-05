@@ -1,6 +1,7 @@
 #include "Player.h"
 
-#include "FireballSkill.h"
+
+#include "DefaultAttack.h"
 #include "MouseHandler.h"
 #include "PlayerController.h"
 #include "PlayerSkillHandler.h"
@@ -19,7 +20,9 @@ void Player::Awake()
 	GetTransform().SetScale(100, 100);
 
 	auto pc = AddComponent(PlayerController(200, 400));
-	auto fireball = FireballSkill();
 
-	AddComponent(PlayerSkillHandler(fireball));
+	auto& psh = AddComponent(PlayerSkillHandler());
+	
+	auto* const default_attack = new DefaultAttack();
+	psh.SetActiveSkill(default_attack);
 }

@@ -88,3 +88,10 @@ Vector2 Vector2::operator+=(const Vector2& right)
 
 	return *this;
 }
+
+bool Vector2::IsInRange(const Vector2& left, const Vector2& right, const float range)
+{
+	const auto delta = left - right;
+	const auto distance_squared = delta.GetLengthSquared();
+	return distance_squared < range * range;
+}

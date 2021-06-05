@@ -123,6 +123,9 @@
     <ClCompile Include="ItemData.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
+    <ClCompile Include="DefaultAttack.cpp">
+      <Filter>Source Files\Skills</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -130,9 +133,6 @@
     </ClInclude>
     <ClInclude Include="PlayerSkillHandler.h">
       <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Skill.h">
-      <Filter>Header Files\Skills</Filter>
     </ClInclude>
     <ClInclude Include="Projectile.h">
       <Filter>Header Files\Components</Filter>
@@ -220,6 +220,12 @@
     </ClInclude>
     <ClInclude Include="ItemData.h">
       <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="DefaultAttack.h">
+      <Filter>Header Files\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="ActiveSkill.h">
+      <Filter>Header Files\Skills</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

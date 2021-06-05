@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Clickable.cpp" />
+    <ClCompile Include="DefaultAttack.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="FireballSkill.cpp" />
@@ -181,6 +182,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Clickable.h" />
+    <ClInclude Include="DefaultAttack.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="Enemy.h" />
@@ -207,7 +209,7 @@
     <ClInclude Include="Projectile.h" />
     <ClInclude Include="resource1.h" />
     <ClInclude Include="ScreenManager.h" />
-    <ClInclude Include="Skill.h" />
+    <ClInclude Include="ActiveSkill.h" />
     <ClInclude Include="PlayerController.h" />
     <ClInclude Include="Interactable.h" />
     <ClInclude Include="Wall.h" />

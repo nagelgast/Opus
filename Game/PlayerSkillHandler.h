@@ -2,17 +2,20 @@
 
 #include "../Opus/Core.h"
 
-class FireballSkill;
+class ActiveSkill;
 
 class PlayerSkillHandler final : public Component
 {
 public:
-	explicit PlayerSkillHandler(FireballSkill& active_skill);
-
+	~PlayerSkillHandler() override;
+	
+	void SetActiveSkill(ActiveSkill* active_skill);
 	void Update() override;
 	bool IsCasting() const;
 
 private:
-	float remaining_cast_time_;
-	FireballSkill& active_skill_;
+	float remaining_cast_time_ = 0;
+
+	// TODO Replace with smart ptr or ref
+	ActiveSkill* active_skill_ = nullptr;
 };

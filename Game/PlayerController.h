@@ -1,8 +1,8 @@
 #pragma once
 
-#include "PlayerSkillHandler.h"
 #include "../Opus/Core.h"
 
+class PlayerSkillHandler;
 class Interactable;
 
 class PlayerController final :
