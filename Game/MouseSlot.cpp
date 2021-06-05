@@ -13,9 +13,10 @@ void MouseSlot::Awake()
 bool MouseSlot::SetItem(std::unique_ptr<Item> item)
 {
 	item_ = std::move(item);
-	renderer_->SetSprite(item_->sprite, false);
+	auto sprite = item_->GetSprite();
+	renderer_->SetSprite(sprite, false);
 
-	GetTransform().SetScale(item_->sprite.rect.width, item_->sprite.rect.height);
+	GetTransform().SetScale(sprite.rect.width, sprite.rect.height);
 	
 	return true;
 }

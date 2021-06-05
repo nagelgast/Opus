@@ -3,7 +3,6 @@
 #include "../Opus/Core.h"
 
 #include "Inventory.h"
-#include "ItemTag.h"
 #include "MouseSlot.h"
 #include "PlayerInventoryScreen.h"
 
@@ -14,7 +13,7 @@ public:
 	void Initialize(MouseSlot& mouse, PlayerInventoryScreen& screen);
 	void PickUpItem(std::unique_ptr<Item> item);
 private:
-	void SpawnEquipmentSlot(ItemTag tag, Vector2 position, float width, float height);
+	void SpawnEquipmentSlot(std::string tag, Vector2 position, float width, float height);
 	
 	void HandleEquipmentSlotHoverEnter(const InventorySlot& slot) const;
 	void HandleEquipmentSlotHoverExit(const InventorySlot& slot) const;

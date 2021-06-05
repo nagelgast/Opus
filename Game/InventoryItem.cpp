@@ -22,10 +22,10 @@ void InventoryItem::Initialize(std::unique_ptr<Item> item, const std::vector<Inv
 		slot->SetItem(*this);
 	}
 	
-	const auto width = static_cast<float>(kInventorySlotSize * item_->size.width);
-	const auto height = static_cast<float>(kInventorySlotSize * item_->size.height);
+	const auto width = static_cast<float>(kInventorySlotSize * item_->GetSize().width);
+	const auto height = static_cast<float>(kInventorySlotSize * item_->GetSize().height);
 
-	sr_->SetSprite(item_->sprite, false);
+	sr_->SetSprite(item_->GetSprite(), false);
 
 	GetTransform().SetScale(width, height);
 

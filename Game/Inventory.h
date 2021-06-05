@@ -4,7 +4,7 @@
 #include "../Opus/Core.h"
 
 class ItemInfoPopup;
-struct Item;
+class Item;
 struct ItemSize;
 class InventorySlot;
 class MouseSlot;

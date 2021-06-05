@@ -42,17 +42,17 @@ bool InventorySlot::HasItem() const
 
 bool InventorySlot::CanHold(Item& item) const
 {
-	if(required_tag_ == ItemTag::no_tag) return true;
+	if(required_tag_ == "no_tag") return true;
 	
-	return Contains(item.tags, required_tag_);
+	return item.HasTag(required_tag_);
 }
 
-void InventorySlot::SetRequiredTag(const ItemTag tag)
+void InventorySlot::SetRequiredTag(const std::string& tag)
 {
 	required_tag_ = tag;
 }
 
-ItemTag InventorySlot::GetRequiredTag() const
+std::string InventorySlot::GetRequiredTag() const
 {
 	return required_tag_;
 }

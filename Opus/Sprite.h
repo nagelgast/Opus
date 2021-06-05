@@ -6,5 +6,5 @@
 struct Sprite
 {
 	std::string path;
-	Rect rect{};
+	Rect rect;
 };

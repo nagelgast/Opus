@@ -162,6 +162,7 @@
     <ClCompile Include="InventoryItem.cpp" />
     <ClCompile Include="InventorySlot.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ItemData.cpp" />
     <ClCompile Include="ItemInfoPopup.cpp" />
     <ClCompile Include="Loot.cpp" />
     <ClCompile Include="main.cpp" />
@@ -189,9 +190,11 @@
     <ClInclude Include="InventoryItem.h" />
     <ClInclude Include="InventorySlot.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="ItemBaseType.h" />
+    <ClInclude Include="ItemCategory.h" />
+    <ClInclude Include="ItemData.h" />
     <ClInclude Include="ItemInfoPopup.h" />
     <ClInclude Include="ItemSize.h" />
-    <ClInclude Include="ItemTag.h" />
     <ClInclude Include="Loot.h" />
     <ClInclude Include="MouseHandler.h" />
     <ClInclude Include="MouseSlot.h" />

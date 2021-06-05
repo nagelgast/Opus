@@ -1,20 +1,25 @@
 #pragma once
 
-#include <vector>
-
+#include "ItemBaseType.h"
 #include "ItemSize.h"
 #include "../Opus/Sprite.h"
 
-enum class ItemTag;
-//enum class ItemClass;
 enum class Rarity;
 
-struct Item
+class Item
 {
-//	ItemClass item_class;
-	Rarity rarity;
-	std::string name;
-	Sprite sprite;
-	ItemSize size;
-	std::vector<ItemTag> tags;
+public:
+	explicit Item(ItemBaseType base_type, ItemCategory category, Rarity rarity);
+	
+	std::string GetName() const;
+	Rarity GetRarity() const;
+	Sprite GetSprite() const;
+	ItemSize GetSize() const;
+	bool HasTag(const std::string& required_tag);
+private:
+	ItemBaseType base_type_;
+	ItemCategory category_;
+	Rarity rarity_;
+
+	Sprite sprite_;
 };

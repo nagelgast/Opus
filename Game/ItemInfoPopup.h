@@ -3,9 +3,9 @@
 #include "../Opus/Color.h"
 #include "../Opus/Core.h"
 
+class Item;
 class TextRenderer;
 class ShapeRenderer;
-struct Item;
 
 const Color kNormalItemColor = {0.78f,0.78f,0.78f};			// 200 200 200
 const Color kMagicItemColor = { 0.53f,0.53f,1};				// 136 136 255

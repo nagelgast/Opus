@@ -30,7 +30,7 @@ void ItemInfoPopup::Awake()
 void ItemInfoPopup::SetItem(const Item& item) const
 {
 	Color title_color {};
-	switch (item.rarity)
+	switch (item.GetRarity())
 	{
 		case Rarity::kNormal:
 			title_color = kNormalItemColor;
@@ -51,7 +51,7 @@ void ItemInfoPopup::SetItem(const Item& item) const
 
 	title_background_renderer_->SetColor(title_color);
 
-	title_renderer_->SetText(item.name);
+	title_renderer_->SetText(item.GetName());
 	const auto width = title_renderer_->GetWidth();
 
 	Resize(*title_background_renderer_, width);

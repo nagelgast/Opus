@@ -29,9 +29,9 @@ void PlayerInventory::Initialize(MouseSlot& mouse, PlayerInventoryScreen& screen
 
 	inventory_->Initialize(*mouse_slot_);
 
-	SpawnEquipmentSlot(ItemTag::helmet, {175, 150}, 50, 50);
-	SpawnEquipmentSlot(ItemTag::body, {175, 275}, 50, 100);
-	SpawnEquipmentSlot(ItemTag::weapon, {100, 275}, 50, 100);
+	SpawnEquipmentSlot("helmet", {175, 150}, 50, 50);
+	SpawnEquipmentSlot("body", {175, 275}, 50, 100);
+	SpawnEquipmentSlot("weapon", {100, 275}, 50, 100);
 }
 
 void PlayerInventory::PickUpItem(std::unique_ptr<Item> item)
@@ -52,7 +52,7 @@ void PlayerInventory::PickUpItem(std::unique_ptr<Item> item)
 	}
 }
 
-void PlayerInventory::SpawnEquipmentSlot(ItemTag tag, Vector2 position, float width, float height)
+void PlayerInventory::SpawnEquipmentSlot(std::string tag, Vector2 position, float width, float height)
 {
 	auto& background = Instantiate();
 	background.AddComponent(ShapeRenderer(Shape::kSquare, {0.2f, 0.2f, 0.2f}, false));

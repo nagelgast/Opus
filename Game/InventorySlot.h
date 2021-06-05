@@ -1,9 +1,8 @@
 #pragma once
 
-#include "ItemTag.h"
 #include "../Opus/Core.h"
 
-struct Item;
+class Item;
 struct Color;
 class ShapeRenderer;
 class InventoryItem;
@@ -20,8 +19,8 @@ public:
 
 	bool CanHold(Item& item) const;
 	
-	void SetRequiredTag(ItemTag tag);
-	ItemTag GetRequiredTag() const;
+	void SetRequiredTag(const std::string& tag);
+	std::string GetRequiredTag() const;
 
 	void EnableHighlight(Color color) const;
 	void DisableHighlight() const;
@@ -29,7 +28,7 @@ private:
 	InventoryItem* item_ = nullptr;
 	Entity* highlight_ = nullptr;
 	
-	ItemTag required_tag_ = ItemTag::no_tag;
+	std::string required_tag_ = "no_tag";
 
 	ShapeRenderer* shape_renderer_ = nullptr;
 };

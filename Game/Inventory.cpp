@@ -49,7 +49,7 @@ void Inventory::Awake()
 
 bool Inventory::TryAutoAddItem(std::unique_ptr<Item> item)
 {
-	const auto slot_indices = FindAvailableSlots(item->size);
+	const auto slot_indices = FindAvailableSlots(item->GetSize());
 	const auto has_space = !slot_indices.empty();
 	if(has_space)
 	{
@@ -99,7 +99,7 @@ void Inventory::Place(std::unique_ptr<Item> item, const std::vector<int>& slot_i
 
 	// Position item correctly
 	auto& transform = inventory_item.GetTransform();
-	const Vector2 offset = { kInventorySlotSize * (item->size.width - 1) / 2, kInventorySlotSize * (item->size.height - 1) / 2 };
+	const Vector2 offset = { kInventorySlotSize * (item->GetSize().width - 1) / 2, kInventorySlotSize * (item->GetSize().height - 1) / 2 };
 	transform.SetPosition(item_slots[0]->GetTransform().GetPosition());
 	
 	inventory_item.Initialize(std::move(item), item_slots);
@@ -147,7 +147,7 @@ void Inventory::HandleSlotHoverEnter(const int index)
 	
 	if(mouse_item_->HasItem())
 	{
-		hover_slot_indices_ = CalculateSlotsToOccupy(mouse_item_->GetItem().size, index);
+		hover_slot_indices_ = CalculateSlotsToOccupy(mouse_item_->GetItem().GetSize(), index);
 
 		auto hovering_over_item = false;
 		hovering_over_multiple_items_ = false;

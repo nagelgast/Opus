@@ -120,6 +120,9 @@
     <ClCompile Include="ItemInfoPopup.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
+    <ClCompile Include="ItemData.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -203,13 +206,19 @@
     <ClInclude Include="ItemSize.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
-    <ClInclude Include="ItemTag.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
     <ClInclude Include="MouseSlot.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="ItemInfoPopup.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemCategory.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemBaseType.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemData.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
   </ItemGroup>
