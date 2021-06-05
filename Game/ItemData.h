@@ -10,8 +10,8 @@ class ItemData
 public:
 	ItemData()
 	{
-		const ItemCategory wands{ "Wands", 1, 3, {"wand", "ranged", "one_hand_weapon", "weapon"} };
-		categories_[wands.name] = wands;
+		const ItemCategory wands{ "Wand", 1, 3, {"wand", "ranged", "one_hand_weapon", "weapon"} };
+		categories_["Wands"] = wands;
 
 		const ItemBaseType driftwood_wand{ "Driftwood_Wand", "Wands", 5, 9, 70, 84 };
 		base_types_[driftwood_wand.name] = driftwood_wand;

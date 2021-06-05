@@ -20,9 +20,11 @@ public:
 	void Awake() override;
 	void SetItem(const Item& item) const;
 private:
+	std::string ParseInfo(const Item& item) const;
 	static void Resize(ShapeRenderer& sr, float width);
 	ShapeRenderer* background_renderer_ = nullptr;
 	ShapeRenderer* title_background_renderer_ = nullptr;
 	TextRenderer* title_renderer_ = nullptr;
+	TextRenderer* info_renderer_ = nullptr;
 };
 
