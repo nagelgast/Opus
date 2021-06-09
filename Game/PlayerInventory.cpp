@@ -74,21 +74,26 @@ void PlayerInventory::PickUpItem(std::unique_ptr<Item> item)
 std::unique_ptr<Item> PlayerInventory::Equip(InventorySlot& equipment_slot, std::unique_ptr<Item> item)
 {
 	const auto slot_tag = equipment_slot.GetRequiredTag();
-	
-	// TODO Check if item can be equipped by player
-	if(!item->HasTag(slot_tag)) return item;
 
+	// If we can't equip the new item, do nothing
+	// TODO Check properly if item can be equipped by player
+	if(item && !item->HasTag(slot_tag))
+	{
+		return item;
+	}
+
+	// Get the currently equipped item
 	equipment_slot.RemoveItem();
-	
-	// auto picked_up_item = std::move(equipment_[slot_tag]);
-	// equipment_[slot_tag] = std::move(item);
-	//
-	// screen_->SpawnEquippedItem(equipment_slot, *equipment_[slot_tag]);
 	auto picked_up_item = std::move(helmet_);
-	helmet_ = std::move(item);
-	
-	screen_->SpawnEquippedItem(equipment_slot, *helmet_);
-	
+
+	// Equip the new item, if any
+	if(item)
+	{
+		helmet_ = std::move(item);
+		screen_->SpawnEquippedItem(equipment_slot, *helmet_);
+	}
+
+	// Return the previously equipped item
 	return picked_up_item;
 }
 

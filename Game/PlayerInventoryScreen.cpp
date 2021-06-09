@@ -84,6 +84,7 @@ void PlayerInventoryScreen::SpawnEquipmentSlot(std::string tag, Vector2 position
 
 void PlayerInventoryScreen::SpawnEquippedItem(InventorySlot& slot, Item& item)
 {
+	// TODO Should be part of equipment slot itself
 	auto slot_transform = slot.GetTransform();
 	auto& inventory_item = Instantiate<InventoryItem>(slot_transform);
 	inventory_item.Initialize(item, { &slot });
