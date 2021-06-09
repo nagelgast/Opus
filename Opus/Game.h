@@ -11,6 +11,7 @@
 
 
 #include "BaseWindow.h"
+#include "Service.h"
 
 class Game
 {
@@ -26,16 +27,45 @@ public:
 	
 	static CollisionSystem& GetCollisionSystem();
 
+
+	template <typename T>
+	T& AddService()
+	{
+		auto c_ptr = std::make_unique<T>();
+
+		const auto type = std::type_index(typeid(*c_ptr));
+		services_[type] = std::move(c_ptr);
+
+		return static_cast<T&>(*services_[type]);
+	}
+	
+	template <typename T>
+	static T* GetService()
+	{
+		const std::type_index index(typeid(T));
+
+		if (instance_->services_.count(index) != 0)
+		{
+			return static_cast<T*>(instance_->services_[index].get());
+		}
+
+		return nullptr;
+	}
+
 private:
 	void HandleInput() const;
 	void FixedUpdate();
 	void Update();
 	void HandleOutput();
 
+	static Game* instance_;
+
 	std::unique_ptr<BaseWindow> window_;
 	std::unique_ptr<BaseRenderer> renderer_;
 	std::unique_ptr<BaseInputHandler> input_handler_;
 	std::unique_ptr<BaseTime> time_;
+
+	std::map<std::type_index, std::unique_ptr<Service>> services_{};
 
 	EntityController entity_controller_;
 	Entity* root_ = nullptr;

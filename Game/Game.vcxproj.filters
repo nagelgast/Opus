@@ -126,6 +126,9 @@
     <ClCompile Include="DefaultAttack.cpp">
       <Filter>Source Files\Skills</Filter>
     </ClCompile>
+    <ClCompile Include="InventoryScreen.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -226,6 +229,9 @@
     </ClInclude>
     <ClInclude Include="ActiveSkill.h">
       <Filter>Header Files\Skills</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryScreen.h">
+      <Filter>Header Files\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -185,6 +185,7 @@
     <ClInclude Include="Physics.h" />
     <ClInclude Include="Rect.h" />
     <ClInclude Include="RenderType.h" />
+    <ClInclude Include="Service.h" />
     <ClInclude Include="SFMLEntityRenderer.h" />
     <ClInclude Include="SFMLInputHandler.h" />
     <ClInclude Include="SFMLRenderer.h" />
@@ -209,6 +210,7 @@
     <ClCompile Include="pch.cpp" />
     <ClCompile Include="Physics.cpp" />
     <ClCompile Include="Rect.cpp" />
+    <ClCompile Include="Service.cpp" />
     <ClCompile Include="SFMLEntityRenderer.cpp" />
     <ClCompile Include="SFMLInputHandler.cpp" />
     <ClCompile Include="SFMLRenderer.cpp" />

@@ -5,27 +5,26 @@
 #include "Inventory.h"
 #include "MouseSlot.h"
 #include "PlayerInventoryScreen.h"
+#include "../Opus/Service.h"
 
-class PlayerInventory : public Entity
+class PlayerInventory : public Service
 {
 public:
-	static PlayerInventory& GetInstance();
 	void Initialize(MouseSlot& mouse, PlayerInventoryScreen& screen);
-	void PickUpItem(std::unique_ptr<Item> item);
+	void PickUpItem(std::unique_ptr<Item> item) const;
+	std::unique_ptr<Item> Equip(InventorySlot& equipment_slot, std::unique_ptr<Item> item);
 private:
-	void SpawnEquipmentSlot(std::string tag, Vector2 position, float width, float height);
-	
-	void HandleEquipmentSlotHoverEnter(const InventorySlot& slot) const;
-	void HandleEquipmentSlotHoverExit(const InventorySlot& slot) const;
-	void HandleEquipmentSlotRelease(InventorySlot& slot);
-
-	void Equip(InventorySlot& equipment_slot, std::unique_ptr<Item> item);
-		
-	PlayerInventoryScreen* screen_ = nullptr;
+	// Data
 	Inventory* inventory_ = nullptr;
+	//std::map<std::string, std::unique_ptr<Item>> equipment_;
+	std::unique_ptr<Item> helmet_;
+	std::unique_ptr<Item> weapon_;
+	std::unique_ptr<Item> armour_;
+
+	
+	// UI
+	PlayerInventoryScreen* screen_ = nullptr;
 	MouseSlot* mouse_slot_ = nullptr;
 	// std::shared_ptr<EquipmentInventory>
 
-	// TODO Replace with system/service
-	static PlayerInventory* instance_;
 };

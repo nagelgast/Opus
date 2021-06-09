@@ -7,6 +7,7 @@
 
 void WorldItem::Awake()
 {
+	player_inventory_ = Game::GetService<PlayerInventory>();
 	SetName("WorldItem");
 
 	AddComponent(ShapeRenderer(Shape::kSquare, {0.5f, 0.5f, 0.5f}));
@@ -26,6 +27,6 @@ void WorldItem::Initialize(std::unique_ptr<Item> item)
 // TODO Should return the item
 void WorldItem::PickUp()
 {
-	PlayerInventory::GetInstance().PickUpItem(std::move(item_));
+	player_inventory_->PickUpItem(std::move(item_));
 	Destroy();
 }

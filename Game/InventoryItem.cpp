@@ -2,6 +2,7 @@
 
 #include "Inventory.h"
 #include "Interactable.h"
+#include "InventoryScreen.h"
 #include "InventorySlot.h"
 #include "Item.h"
 #include "../Opus/SpriteRenderer.h"
@@ -12,9 +13,9 @@ void InventoryItem::Awake()
 	sr_ = &AddComponent(SpriteRenderer());
 }
 
-void InventoryItem::Initialize(std::unique_ptr<Item> item, const std::vector<InventorySlot*>& slots)
+void InventoryItem::Initialize(Item& item, const std::vector<InventorySlot*>& slots)
 {
-	item_ = std::move(item);
+	item_ = &item;
 	slots_ = slots;
 
 	for(const auto& slot : slots_)
@@ -31,7 +32,7 @@ void InventoryItem::Initialize(std::unique_ptr<Item> item, const std::vector<Inv
 
 }
 
-std::unique_ptr<Item> InventoryItem::TakeItem()
+void InventoryItem::Remove()
 {
 	for(auto& slot : slots_)
 	{
@@ -39,8 +40,6 @@ std::unique_ptr<Item> InventoryItem::TakeItem()
 	}
 	
 	Destroy();
-
-	return std::move(item_);
 }
 
 Item& InventoryItem::GetItem() const

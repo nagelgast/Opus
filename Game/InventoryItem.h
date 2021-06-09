@@ -13,13 +13,14 @@ class InventoryItem :
 {
 public:
 	void Awake() override;
-	void Initialize(std::unique_ptr<Item> item, const std::vector<InventorySlot*>& slots);
-	std::unique_ptr<Item> TakeItem();
+	void Initialize(Item& item, const std::vector<InventorySlot*>& slots);
 	Item& GetItem() const;
 
+	void Remove();
+	
 	void SetHighlight(Color color);
 private:
-	std::unique_ptr<Item> item_;
+	Item* item_ = nullptr;
 	std::vector<InventorySlot*> slots_;
 
 	Interactable* interactable_ = nullptr;

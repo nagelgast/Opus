@@ -14,5 +14,7 @@ public:
 	void Initialize(std::unique_ptr<Item> item);
 	void PickUp();
 private:
+	PlayerInventory* player_inventory_ = nullptr;
+	
 	std::unique_ptr<Item> item_;
 };

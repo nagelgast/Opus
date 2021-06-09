@@ -30,6 +30,9 @@ int main()
 
 	game->SetCollisionMatrix(collision_matrix);
 
+	// Initialize services
+	auto& player_inventory = game->AddService<PlayerInventory>();
+	
 	// Load in starting entities
 	{
 		auto& root = game->GetRoot();
@@ -63,11 +66,8 @@ int main()
 		
 		auto& mouse = root.Instantiate<MouseSlot>();
 		mouse.AddComponent(MouseHandler(screen_manager, *player.GetComponent<PlayerController>(), mouse));
-		
-		{
-			auto& player_inventory = root.Instantiate<PlayerInventory>();
-			player_inventory.Initialize(mouse, *screen_manager.player_inventory_screen_);
-		}
+
+		player_inventory.Initialize(mouse, *screen_manager.player_inventory_screen_);
 		
 		{
 			auto& wall1 = root.Instantiate<Wall>({500, 500});

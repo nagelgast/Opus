@@ -16,6 +16,7 @@ Game::Game(const int width, const int height, const int fps_limit, const int fix
 {
 	root_ = &entity_controller_.CreateEntity();
 	root_->SetName("Root");
+	instance_ = this;
 }
 
 void Game::Run()
@@ -87,3 +88,5 @@ void Game::HandleOutput()
 {
 	renderer_->Render(entity_controller_.GetEntities());
 }
+
+Game* Game::instance_;

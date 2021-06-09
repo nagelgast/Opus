@@ -42,6 +42,10 @@ void PlayerSkillHandler::Update()
 				std::cout << "Casting\n";
 				remaining_cast_time_ = active_skill_->GetCastTime();
 			}
+			else
+			{
+				// TODO Move towards mouse position
+			}
 		}
 	}
 }
