@@ -1,4 +1,4 @@
-#include "InventoryItem.h"
+#include "ScreenItem.h"
 
 #include "Inventory.h"
 #include "Interactable.h"
@@ -8,13 +8,13 @@
 #include "PlayerItemStorage.h"
 #include "../Opus/SpriteRenderer.h"
 
-void InventoryItem::Awake()
+void ScreenItem::Awake()
 {
 	interactable_ = &AddComponent(Interactable());
 	sr_ = &AddComponent(SpriteRenderer());
 }
 
-void InventoryItem::Initialize(Item& item, const std::vector<InventorySlot*>& slots)
+void ScreenItem::Initialize(Item& item, const std::vector<InventorySlot*>& slots)
 {
 	item_ = &item;
 	slots_ = slots;
@@ -33,7 +33,7 @@ void InventoryItem::Initialize(Item& item, const std::vector<InventorySlot*>& sl
 
 }
 
-void InventoryItem::Remove()
+void ScreenItem::Remove()
 {
 	for(auto& slot : slots_)
 	{
@@ -43,12 +43,12 @@ void InventoryItem::Remove()
 	Destroy();
 }
 
-Item& InventoryItem::GetItem() const
+Item& ScreenItem::GetItem() const
 {
 	return *item_;
 }
 
-void InventoryItem::SetHighlight(const Color color)
+void ScreenItem::SetHighlight(const Color color)
 {
 	for (const auto& slot : slots_)
 	{

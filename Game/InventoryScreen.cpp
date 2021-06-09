@@ -5,7 +5,7 @@
 
 
 #include "Interactable.h"
-#include "InventoryItem.h"
+#include "ScreenItem.h"
 #include "InventorySlot.h"
 #include "ItemInfoPopup.h"
 #include "MouseSlot.h"
@@ -120,7 +120,7 @@ void InventoryScreen::SpawnItem(Item& item, const std::vector<int>& slot_indices
 	}
 
 	// Create new inventory item instance
-	auto& inventory_item = Instantiate<InventoryItem>(GetTransform());
+	auto& inventory_item = Instantiate<ScreenItem>(GetTransform());
 
 	// Position item correctly
 	auto& transform = inventory_item.GetTransform();

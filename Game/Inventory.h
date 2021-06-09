@@ -9,7 +9,7 @@ class Item;
 struct ItemSize;
 class InventorySlot;
 class MouseSlot;
-class InventoryItem;
+class ScreenItem;
 
 
 class Inventory

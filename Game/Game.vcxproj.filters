@@ -43,6 +43,12 @@
     <Filter Include="Source Files\UI">
       <UniqueIdentifier>{9839fdab-5474-4847-81bf-a92566888aed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Items\UI">
+      <UniqueIdentifier>{324a653b-e098-4546-9527-0a244a2a580a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items\UI">
+      <UniqueIdentifier>{4bb35807-e20a-4909-a236-40646a810508}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerController.cpp">
@@ -90,16 +96,10 @@
     <ClCompile Include="WorldItem.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerInventoryScreen.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
     <ClCompile Include="ScreenManager.cpp">
       <Filter>Source Files\UI</Filter>
     </ClCompile>
     <ClCompile Include="Inventory.cpp">
-      <Filter>Source Files\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="InventoryItem.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
     <ClCompile Include="Interactable.cpp">
@@ -108,13 +108,7 @@
     <ClCompile Include="MouseHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InventorySlot.cpp">
-      <Filter>Source Files\Items</Filter>
-    </ClCompile>
     <ClCompile Include="MouseSlot.cpp">
-      <Filter>Source Files\Items</Filter>
-    </ClCompile>
-    <ClCompile Include="ItemInfoPopup.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
     <ClCompile Include="ItemData.cpp">
@@ -123,11 +117,23 @@
     <ClCompile Include="DefaultAttack.cpp">
       <Filter>Source Files\Skills</Filter>
     </ClCompile>
-    <ClCompile Include="InventoryScreen.cpp">
-      <Filter>Source Files\UI</Filter>
-    </ClCompile>
     <ClCompile Include="PlayerItemStorage.cpp">
       <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySlot.cpp">
+      <Filter>Source Files\Items\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemInfoPopup.cpp">
+      <Filter>Source Files\Items\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerInventoryScreen.cpp">
+      <Filter>Source Files\Items\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="InventoryScreen.cpp">
+      <Filter>Source Files\Items\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ScreenItem.cpp">
+      <Filter>Source Files\Items\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,16 +185,10 @@
     <ClInclude Include="WorldItem.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
-    <ClInclude Include="PlayerInventoryScreen.h">
-      <Filter>Header Files\UI</Filter>
-    </ClInclude>
     <ClInclude Include="ScreenManager.h">
       <Filter>Header Files\UI</Filter>
     </ClInclude>
     <ClInclude Include="Inventory.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="InventoryItem.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="resource1.h">
@@ -200,16 +200,7 @@
     <ClInclude Include="MouseHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InventorySlot.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
     <ClInclude Include="ItemSize.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="MouseSlot.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemInfoPopup.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
     <ClInclude Include="ItemCategory.h">
@@ -227,11 +218,29 @@
     <ClInclude Include="ActiveSkill.h">
       <Filter>Header Files\Skills</Filter>
     </ClInclude>
-    <ClInclude Include="InventoryScreen.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerItemStorage.h">
       <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemTag.h">
+      <Filter>Header Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryScreen.h">
+      <Filter>Header Files\Items\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerInventoryScreen.h">
+      <Filter>Header Files\Items\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemInfoPopup.h">
+      <Filter>Header Files\Items\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySlot.h">
+      <Filter>Header Files\Items\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MouseSlot.h">
+      <Filter>Header Files\Items\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="ScreenItem.h">
+      <Filter>Header Files\Items\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -20,11 +20,9 @@ public:
 
 	void SpawnEquippedItem(InventorySlot& slot, Item& item);
 
-	InventoryScreen& GetInventoryScreen();
+	InventoryScreen& GetInventoryScreen() const;
 private:
-	void SpawnEquipmentSlot(std::string tag, Vector2 position, float width, float height);
-
-	void HandleEquipmentSlotHoverEnter(const InventorySlot& slot) const;
+	void SpawnEquipmentSlot(ItemTag tag, Vector2 position, float width, float height);
 
 	bool is_open_ = false;
 	InventoryScreen* inventory_ = nullptr;

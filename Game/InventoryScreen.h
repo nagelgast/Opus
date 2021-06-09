@@ -9,7 +9,7 @@ struct ItemSize;
 class Inventory;
 class ItemInfoPopup;
 class MouseSlot;
-class InventoryItem;
+class ScreenItem;
 
 class InventorySlot;
 
@@ -42,7 +42,7 @@ private:
 	// TODO Should be controlled by mouse handler
 	ItemInfoPopup* popup_ = nullptr;
 
-	InventoryItem* pickup_item_ = nullptr;
+	ScreenItem* pickup_item_ = nullptr;
 
 	PlayerItemStorage* player_inventory_ = nullptr;
 };

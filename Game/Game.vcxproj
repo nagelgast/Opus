@@ -160,7 +160,7 @@
     <ClCompile Include="Health.cpp" />
     <ClCompile Include="HealthBar.cpp" />
     <ClCompile Include="Inventory.cpp" />
-    <ClCompile Include="InventoryItem.cpp" />
+    <ClCompile Include="ScreenItem.cpp" />
     <ClCompile Include="InventoryScreen.cpp" />
     <ClCompile Include="InventorySlot.cpp" />
     <ClCompile Include="Item.cpp" />
@@ -190,7 +190,7 @@
     <ClInclude Include="Fireball.h" />
     <ClInclude Include="FireballSkill.h" />
     <ClInclude Include="Inventory.h" />
-    <ClInclude Include="InventoryItem.h" />
+    <ClInclude Include="ScreenItem.h" />
     <ClInclude Include="InventoryScreen.h" />
     <ClInclude Include="InventorySlot.h" />
     <ClInclude Include="Item.h" />
@@ -199,6 +199,7 @@
     <ClInclude Include="ItemData.h" />
     <ClInclude Include="ItemInfoPopup.h" />
     <ClInclude Include="ItemSize.h" />
+    <ClInclude Include="ItemTag.h" />
     <ClInclude Include="Loot.h" />
     <ClInclude Include="MouseHandler.h" />
     <ClInclude Include="MouseSlot.h" />

@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "Interactable.h"
-#include "InventoryItem.h"
+#include "ScreenItem.h"
 #include "InventorySlot.h"
 #include "Item.h"
 
@@ -29,7 +29,6 @@ void PlayerItemStorage::HandleEquipmentRelease(InventorySlot& slot)
 	auto old_mouse_item = mouse_slot_->Take();
 	auto new_mouse_item = Equip(slot, std::move(old_mouse_item));
 	PickUpItem(std::move(new_mouse_item));
-
 }
 
 void PlayerItemStorage::ReleasedOverInventorySlot(const int index, const std::vector<int>& hovered_slot_indices)

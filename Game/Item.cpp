@@ -2,6 +2,8 @@
 
 #include <utility>
 
+
+#include "ItemTag.h"
 #include "../Opus/VectorExtensions.h"
 
 const int kInventorySlotSize = 78;
@@ -42,7 +44,7 @@ ItemBaseType Item::GetBaseType() const
 	return base_type_;
 }
 
-bool Item::HasTag(const std::string& required_tag)
+bool Item::HasTag(const ItemTag& tag)
 {
-	return Contains(category_.tags, required_tag);
+	return Contains(category_.tags, tag);
 }

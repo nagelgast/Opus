@@ -4,7 +4,7 @@
 
 #include "Interactable.h"
 #include "Inventory.h"
-#include "InventoryItem.h"
+#include "ScreenItem.h"
 #include "InventoryScreen.h"
 #include "InventorySlot.h"
 #include "MouseSlot.h"
@@ -16,10 +16,10 @@
 void PlayerInventoryScreen::Awake()
 {
 	player_inventory_ = Game::GetService<PlayerItemStorage>();
-	auto background = &Instantiate(GetTransform());
-	background->AddComponent(ShapeRenderer(Shape::kSquare, {0.8f, 0.8f, 0.8f}, false));
+	auto& background = Instantiate(GetTransform());
+	background.AddComponent(ShapeRenderer(Shape::kSquare, {0.8f, 0.8f, 0.8f}, false));
 
-	auto& transform = background->GetTransform();
+	auto& transform = background.GetTransform();
 	transform.SetScale(350, 768);
 
 	auto& screen_transform = GetTransform();
@@ -28,9 +28,9 @@ void PlayerInventoryScreen::Awake()
 	auto& inv_trans = inventory_->GetTransform();
 	inv_trans.SetLocalPosition({ 25, 550 });
 
-	SpawnEquipmentSlot("helmet", { 175, 150 }, 50, 50);
-	SpawnEquipmentSlot("body", { 175, 275 }, 50, 100);
-	SpawnEquipmentSlot("weapon", { 100, 275 }, 50, 100);
+	SpawnEquipmentSlot(ItemTag::kHelmet, { 175, 150 }, 50, 50);
+	SpawnEquipmentSlot(ItemTag::kArmour, { 175, 275 }, 50, 100);
+	SpawnEquipmentSlot(ItemTag::kWeapon, { 100, 275 }, 50, 100);
 }
 
 void PlayerInventoryScreen::Open()
@@ -57,7 +57,7 @@ bool PlayerInventoryScreen::IsOpen() const
 	return is_open_;
 }
 
-void PlayerInventoryScreen::SpawnEquipmentSlot(std::string tag, Vector2 position, float width, float height)
+void PlayerInventoryScreen::SpawnEquipmentSlot(const ItemTag tag, const Vector2 position, const float width, const float height)
 {
 	auto& background = Instantiate();
 	background.AddComponent(ShapeRenderer(Shape::kSquare, { 0.2f, 0.2f, 0.2f }, false));
@@ -67,11 +67,6 @@ void PlayerInventoryScreen::SpawnEquipmentSlot(std::string tag, Vector2 position
 
 	auto& slot = Instantiate<InventorySlot>(GetTransform());
 	slot.SetRequiredTag(tag);
-
-	auto* interactable = slot.GetComponent<Interactable>();
-	interactable->OnHoverEnter += [this, &slot] { slot.SetEquippableHighlight(); };
-	interactable->OnHoverExit += [this, &slot] { slot.DisableHighlight(); };
-	interactable->OnRelease += [this, &slot] { player_inventory_->HandleEquipmentRelease(slot); };
 
 	auto& slot_transform = slot.GetTransform();
 	slot_transform.SetScale(width, height);
@@ -86,11 +81,11 @@ void PlayerInventoryScreen::SpawnEquippedItem(InventorySlot& slot, Item& item)
 {
 	// TODO Should be part of equipment slot itself
 	auto slot_transform = slot.GetTransform();
-	auto& inventory_item = Instantiate<InventoryItem>(slot_transform);
+	auto& inventory_item = Instantiate<ScreenItem>(slot_transform);
 	inventory_item.Initialize(item, { &slot });
 }
 
-InventoryScreen& PlayerInventoryScreen::GetInventoryScreen()
+InventoryScreen& PlayerInventoryScreen::GetInventoryScreen() const
 {
 	return *inventory_;
 }

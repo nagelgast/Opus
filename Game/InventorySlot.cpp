@@ -1,7 +1,7 @@
 #include "InventorySlot.h"
 
 #include "Interactable.h"
-#include "InventoryItem.h"
+#include "ScreenItem.h"
 #include "Item.h"
 #include "PlayerItemStorage.h"
 #include "../Opus/ShapeRenderer.h"
@@ -9,11 +9,11 @@
 
 void InventorySlot::Awake()
 {
-	player_inventory_ = Game::GetService<PlayerItemStorage>();
+	storage_ = Game::GetService<PlayerItemStorage>();
 	
 	auto& transform = GetTransform();
 	const Sprite sprite {"Sprites/InvSlot.png", {0,0, 40, 40}};
-	auto sprite_renderer = AddComponent(SpriteRenderer());
+	const auto sprite_renderer = AddComponent(SpriteRenderer());
 	sprite_renderer.SetSprite(sprite, false);
 
 	highlight_ = &Instantiate(transform);
@@ -21,14 +21,19 @@ void InventorySlot::Awake()
 	highlight_->SetVisible(false);
 
 	auto interactable = AddComponent(Interactable());
+
+	interactable.OnHoverEnter += [this] { SetEquippableHighlight(); };
+	interactable.OnHoverExit += [this] { DisableHighlight(); };
+	interactable.OnRelease += [this] { HandleRelease(); };
+
 }
 
-void InventorySlot::SetItem(InventoryItem& item)
+void InventorySlot::SetItem(ScreenItem& item)
 {
 	item_ = &item;
 }
 
-InventoryItem& InventorySlot::GetItem() const
+ScreenItem& InventorySlot::GetItem() const
 {
 	return *item_;
 }
@@ -38,7 +43,7 @@ void InventorySlot::ClearItem()
 	item_ = nullptr;
 }
 
-void InventorySlot::RemoveItem()
+void InventorySlot::RemoveItem() const
 {
 	if(item_)
 	{
@@ -53,24 +58,29 @@ bool InventorySlot::HasItem() const
 
 bool InventorySlot::CanHold(Item& item) const
 {
-	if(required_tag_ == "no_tag") return true;
+	if(required_tag_ == ItemTag::kNoTag) return true;
 	
 	return item.HasTag(required_tag_);
 }
 
-void InventorySlot::SetRequiredTag(const std::string& tag)
+void InventorySlot::SetRequiredTag(const ItemTag& tag)
 {
 	required_tag_ = tag;
 }
 
-std::string InventorySlot::GetRequiredTag() const
+ItemTag InventorySlot::GetRequiredTag() const
 {
 	return required_tag_;
 }
 
+void InventorySlot::HandleRelease()
+{
+	storage_->HandleEquipmentRelease(*this);
+}
+
 void InventorySlot::SetEquippableHighlight() const
 {
-	if (player_inventory_->IsHoldingItem() && !player_inventory_->CanEquipHeldItem(*this))
+	if (storage_->IsHoldingItem() && !storage_->CanEquipHeldItem(*this))
 	{
 		EnableHighlight(kUnavailableSlotColor);
 	}

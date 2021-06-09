@@ -4,6 +4,7 @@
 #include "ItemSize.h"
 #include "../Opus/Sprite.h"
 
+enum class ItemTag;
 enum class Rarity;
 
 class Item
@@ -16,7 +17,7 @@ public:
 	Sprite GetSprite() const;
 	ItemSize GetSize() const;
 	ItemBaseType GetBaseType() const;
-	bool HasTag(const std::string& required_tag);
+	bool HasTag(const ItemTag& tag);
 private:
 	ItemBaseType base_type_;
 	ItemCategory category_;

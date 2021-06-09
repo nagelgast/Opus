@@ -8,7 +8,7 @@ class InventorySlot;
 class SpriteRenderer;
 class Interactable;
 
-class InventoryItem :
+class ScreenItem :
     public Entity
 {
 public:
