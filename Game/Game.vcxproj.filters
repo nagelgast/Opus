@@ -127,7 +127,7 @@
       <Filter>Source Files\Skills</Filter>
     </ClCompile>
     <ClCompile Include="InventoryScreen.cpp">
-      <Filter>Source Files\Items</Filter>
+      <Filter>Source Files\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

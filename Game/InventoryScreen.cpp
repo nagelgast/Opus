@@ -132,6 +132,11 @@ void InventoryScreen::SpawnItem(Item& item, const std::vector<int>& slot_indices
 	ResetHighlights();
 }
 
+void InventoryScreen::RemoveItem(const int slot_index)
+{
+	slots_[slot_index]->RemoveItem();
+}
+
 std::vector<int> InventoryScreen::CalculateSlotsToOccupy(const ItemSize item_size, const int index) const
 {
 	// Just return index if small item

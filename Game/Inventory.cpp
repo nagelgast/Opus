@@ -13,6 +13,12 @@ Inventory::Inventory(InventoryScreen& screen, const int rows, const int columns)
 	  columns_(columns)
 {
 	screen.Initialize(this, rows_, columns_);
+
+	// Initialize slot contents to be empty
+	for(auto i = 0; i < rows_ * columns_; ++i)
+	{
+		slot_contents_[i] = -1;
+	}
 }
 
 std::unique_ptr<Item> Inventory::Take(const int slot_index)
@@ -23,11 +29,13 @@ std::unique_ptr<Item> Inventory::Take(const int slot_index)
 	auto item_slot_indices = slots_per_item_[item_index];
 	for (auto item_slot_index : item_slot_indices)
 	{
-		// Do UI stuff
+		slot_contents_[item_slot_index] = kEmptySlot;
 	}
-	slots_per_item_[item_index] = {};
-	slot_contents_[slot_index] = kEmptySlot;
 
+	screen_.RemoveItem(slot_index);
+	
+	// TODO Handle vector changes
+	slots_per_item_[item_index] = {};
 	return std::move(items_[item_index]);
 }
 
@@ -78,9 +86,16 @@ std::vector<int> Inventory::FindAvailableSlots(const ItemSize item_size)
 	return {};
 }
 
-void Inventory::Place(const std::unique_ptr<Item> item, const std::vector<int>& slot_indices)
+void Inventory::Place(std::unique_ptr<Item> item, const std::vector<int>& slot_indices)
 {
 	// TODO Handle items
+	items_.push_back(std::move(item));
+	slots_per_item_.push_back(slot_indices);
 
-	screen_.SpawnItem(*item, slot_indices);
+	for (auto slot_index : slot_indices)
+	{
+		slot_contents_[slot_index] = items_.size()-1;
+	}
+	
+	screen_.SpawnItem(*items_.back(), slot_indices);
 }

@@ -18,6 +18,7 @@ class InventoryScreen : public Entity
 public:
 	void Initialize(Inventory* inventory, int rows, int columns);
 	void SpawnItem(Item& item, const std::vector<int>& slot_indices);
+	void RemoveItem(int slot_index);
 
 	// TODO Make private (inventory depends on it)
 	std::vector<int> CalculateSlotsToOccupy(ItemSize item_size, int index) const;
