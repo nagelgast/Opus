@@ -80,7 +80,7 @@ void SFMLEntityRenderer::Reset()
 
 void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	const auto transform = entity_->GetTransform();
+	const auto& transform = entity_->GetTransform();
 	const auto scale = transform.GetScale();
 	const sf::Vector2f draw_scale = {scale.x, scale.y};
 	const auto& corner = transform.GetPosition() - transform.GetOrigin();

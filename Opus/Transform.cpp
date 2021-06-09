@@ -5,8 +5,8 @@
 
 Transform::~Transform()
 {
-	// TODO Check why empty check needed
-	if(parent_ && !parent_->children_.empty())
+	// TODO Investigate why checks are needed
+	if(parent_ && !parent_->children_.empty() && Contains(parent_->children_, this))
 	{
 		RemoveByValue(parent_->children_, this);
 	}

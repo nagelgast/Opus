@@ -80,7 +80,7 @@ void SFMLRenderer::DrawEntity(SFMLEntityRenderer* entity_renderer) const
 	if (kDrawDebug)
 	{
 		auto entity = entity_renderer->entity_;
-		auto transform = entity->GetTransform();
+		auto& transform = entity->GetTransform();
 		auto position = transform.GetPosition() - transform.GetOrigin();
 		auto scale = transform.GetScale();
 		SFMLEntityRenderer::DrawBox(window_, sf::RenderStates::Default, {position.x, position.y}, {scale.x, scale.y}, sf::Color::Red);

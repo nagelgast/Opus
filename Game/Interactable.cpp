@@ -5,7 +5,7 @@
 
 Rect Interactable::GetGlobalBounds()
 {
-	const auto transform = entity_->GetTransform();
+	const auto& transform = entity_->GetTransform();
 	const auto pos = transform.GetPosition();
 	const auto offset = transform.GetOrigin();
 	const auto scale = transform.GetScale();

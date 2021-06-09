@@ -16,6 +16,7 @@ public:
 	void SetItem(InventoryItem& item);
 	InventoryItem& GetItem() const;
 	void ClearItem();
+	void RemoveItem();
 	bool HasItem() const;
 
 	bool CanHold(Item& item) const;

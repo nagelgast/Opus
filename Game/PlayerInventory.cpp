@@ -53,6 +53,8 @@ void PlayerInventory::ReleasedOverInventorySlot(const int index, const std::vect
 
 void PlayerInventory::PickUpItem(std::unique_ptr<Item> item)
 {
+	if(!item) return;
+	
 	if (screen_->IsOpen())
 	{
 		mouse_slot_->SetItem(std::move(item));
@@ -76,8 +78,7 @@ std::unique_ptr<Item> PlayerInventory::Equip(InventorySlot& equipment_slot, std:
 	// TODO Check if item can be equipped by player
 	if(!item->HasTag(slot_tag)) return item;
 
-	// TODO Allow (equipment) slots to empty themselves
-	equipment_slot.GetItem().Remove();
+	equipment_slot.RemoveItem();
 	
 	// auto picked_up_item = std::move(equipment_[slot_tag]);
 	// equipment_[slot_tag] = std::move(item);

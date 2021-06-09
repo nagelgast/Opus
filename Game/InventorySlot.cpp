@@ -38,6 +38,14 @@ void InventorySlot::ClearItem()
 	item_ = nullptr;
 }
 
+void InventorySlot::RemoveItem()
+{
+	if(item_)
+	{
+		item_->Remove();
+	}
+}
+
 bool InventorySlot::HasItem() const
 {
 	return item_ != nullptr;
@@ -62,7 +70,7 @@ std::string InventorySlot::GetRequiredTag() const
 
 void InventorySlot::SetEquippableHighlight() const
 {
-	if (player_inventory_->IsHoldingItem() && player_inventory_->CanEquipHeldItem(*this))
+	if (player_inventory_->IsHoldingItem() && !player_inventory_->CanEquipHeldItem(*this))
 	{
 		EnableHighlight(kUnavailableSlotColor);
 	}
