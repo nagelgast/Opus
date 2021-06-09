@@ -4,7 +4,7 @@
 #include "..\Opus\Entity.h"
 class InventoryScreen;
 class MouseSlot;
-class PlayerInventory;
+class PlayerItemStorage;
 class InventorySlot;
 class Inventory;
 
@@ -29,5 +29,5 @@ private:
 	bool is_open_ = false;
 	InventoryScreen* inventory_ = nullptr;
 
-	PlayerInventory* player_inventory_ = nullptr;
+	PlayerItemStorage* player_inventory_ = nullptr;
 };

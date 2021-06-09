@@ -5,7 +5,7 @@
 #include "InventoryScreen.h"
 #include "InventorySlot.h"
 #include "Item.h"
-#include "PlayerInventory.h"
+#include "PlayerItemStorage.h"
 #include "../Opus/SpriteRenderer.h"
 
 void InventoryItem::Awake()

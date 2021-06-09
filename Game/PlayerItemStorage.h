@@ -14,7 +14,7 @@ const Color kAvailableSlotColor = { 0, 0.5, 0, 0.5 };
 const Color kPickupSlotColor = { 0.5, 0.5, 0, 0.5 };
 const Color kUnavailableSlotColor = { 0.5, 0, 0, 0.5 };
 
-class PlayerInventory : public Service
+class PlayerItemStorage : public Service
 {
 public:
 	void Initialize(MouseSlot& mouse, PlayerInventoryScreen& screen);

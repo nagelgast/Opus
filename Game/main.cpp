@@ -1,7 +1,7 @@
 #include "Enemy.h"
 #include "MouseHandler.h"
 #include "Player.h"
-#include "PlayerInventory.h"
+#include "PlayerItemStorage.h"
 #include "ScreenManager.h"
 #include "Wall.h"
 #include "PlayerController.h"
@@ -31,7 +31,7 @@ int main()
 	game->SetCollisionMatrix(collision_matrix);
 
 	// Initialize services
-	auto& player_inventory = game->AddService<PlayerInventory>();
+	auto& player_inventory = game->AddService<PlayerItemStorage>();
 	
 	// Load in starting entities
 	{

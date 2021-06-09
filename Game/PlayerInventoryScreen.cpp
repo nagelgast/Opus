@@ -8,14 +8,14 @@
 #include "InventoryScreen.h"
 #include "InventorySlot.h"
 #include "MouseSlot.h"
-#include "PlayerInventory.h"
+#include "PlayerItemStorage.h"
 #include "../Opus/Shape.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/Transform.h"
 
 void PlayerInventoryScreen::Awake()
 {
-	player_inventory_ = Game::GetService<PlayerInventory>();
+	player_inventory_ = Game::GetService<PlayerItemStorage>();
 	auto background = &Instantiate(GetTransform());
 	background->AddComponent(ShapeRenderer(Shape::kSquare, {0.8f, 0.8f, 0.8f}, false));
 

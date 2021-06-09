@@ -172,7 +172,7 @@
     <ClCompile Include="MouseSlot.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerController.cpp" />
-    <ClCompile Include="PlayerInventory.cpp" />
+    <ClCompile Include="PlayerItemStorage.cpp" />
     <ClCompile Include="PlayerInventoryScreen.cpp" />
     <ClCompile Include="PlayerSkillHandler.cpp" />
     <ClCompile Include="Projectile.cpp" />
@@ -202,7 +202,7 @@
     <ClInclude Include="Loot.h" />
     <ClInclude Include="MouseHandler.h" />
     <ClInclude Include="MouseSlot.h" />
-    <ClInclude Include="PlayerInventory.h" />
+    <ClInclude Include="PlayerItemStorage.h" />
     <ClInclude Include="PlayerInventoryScreen.h" />
     <ClInclude Include="Rarity.h" />
     <ClInclude Include="resource.h" />

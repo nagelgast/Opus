@@ -9,13 +9,13 @@
 #include "InventorySlot.h"
 #include "ItemInfoPopup.h"
 #include "MouseSlot.h"
-#include "PlayerInventory.h"
+#include "PlayerItemStorage.h"
 #include "../Opus/ShapeRenderer.h"
 
 
 void InventoryScreen::Initialize(Inventory* inventory, int rows, int columns)
 {
-	player_inventory_ = Game::GetService<PlayerInventory>();
+	player_inventory_ = Game::GetService<PlayerItemStorage>();
 	inventory_ = inventory;
 	rows_ = rows;
 	columns_ = columns;

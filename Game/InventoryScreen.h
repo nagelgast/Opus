@@ -4,7 +4,7 @@
 #include "../Opus/Color.h"
 #include "../Opus/Core.h"
 
-class PlayerInventory;
+class PlayerItemStorage;
 struct ItemSize;
 class Inventory;
 class ItemInfoPopup;
@@ -44,6 +44,6 @@ private:
 
 	InventoryItem* pickup_item_ = nullptr;
 
-	PlayerInventory* player_inventory_ = nullptr;
+	PlayerItemStorage* player_inventory_ = nullptr;
 };
 

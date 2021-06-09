@@ -3,7 +3,7 @@
 #include "Item.h"
 #include "../Opus/Core.h"
 
-class PlayerInventory;
+class PlayerItemStorage;
 class Interactable;
 
 class WorldItem :
@@ -14,7 +14,7 @@ public:
 	void Initialize(std::unique_ptr<Item> item);
 	void PickUp();
 private:
-	PlayerInventory* player_inventory_ = nullptr;
+	PlayerItemStorage* player_inventory_ = nullptr;
 	
 	std::unique_ptr<Item> item_;
 };

@@ -2,7 +2,7 @@
 
 #include "../Opus/Core.h"
 
-class PlayerInventory;
+class PlayerItemStorage;
 class Item;
 struct Color;
 class ShapeRenderer;
@@ -36,5 +36,5 @@ private:
 
 	ShapeRenderer* shape_renderer_ = nullptr;
 
-	PlayerInventory* player_inventory_ = nullptr;
+	PlayerItemStorage* player_inventory_ = nullptr;
 };

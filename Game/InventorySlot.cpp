@@ -3,13 +3,13 @@
 #include "Interactable.h"
 #include "InventoryItem.h"
 #include "Item.h"
-#include "PlayerInventory.h"
+#include "PlayerItemStorage.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/SpriteRenderer.h"
 
 void InventorySlot::Awake()
 {
-	player_inventory_ = Game::GetService<PlayerInventory>();
+	player_inventory_ = Game::GetService<PlayerItemStorage>();
 	
 	auto& transform = GetTransform();
 	const Sprite sprite {"Sprites/InvSlot.png", {0,0, 40, 40}};

@@ -3,11 +3,11 @@
 #include "../Opus/ShapeRenderer.h"
 
 #include "Interactable.h"
-#include "PlayerInventory.h"
+#include "PlayerItemStorage.h"
 
 void WorldItem::Awake()
 {
-	player_inventory_ = Game::GetService<PlayerInventory>();
+	player_inventory_ = Game::GetService<PlayerItemStorage>();
 	SetName("WorldItem");
 
 	AddComponent(ShapeRenderer(Shape::kSquare, {0.5f, 0.5f, 0.5f}));

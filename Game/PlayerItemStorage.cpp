@@ -1,4 +1,4 @@
-#include "PlayerInventory.h"
+#include "PlayerItemStorage.h"
 
 #include <iostream>
 
@@ -7,24 +7,24 @@
 #include "InventorySlot.h"
 #include "Item.h"
 
-void PlayerInventory::Initialize(MouseSlot& mouse, PlayerInventoryScreen& screen)
+void PlayerItemStorage::Initialize(MouseSlot& mouse, PlayerInventoryScreen& screen)
 {
 	inventory_ = std::make_unique<Inventory>(screen.GetInventoryScreen(), 5, 12);
 	screen_ = &screen;
 	mouse_slot_ = &mouse;
 }
 
-bool PlayerInventory::IsHoldingItem() const
+bool PlayerItemStorage::IsHoldingItem() const
 {
 	return mouse_slot_->HasItem();
 }
 
-ItemSize PlayerInventory::GetHeldItemSize() const
+ItemSize PlayerItemStorage::GetHeldItemSize() const
 {
 	return mouse_slot_->GetItem().GetSize();
 }
 
-void PlayerInventory::HandleEquipmentRelease(InventorySlot& slot)
+void PlayerItemStorage::HandleEquipmentRelease(InventorySlot& slot)
 {
 	auto old_mouse_item = mouse_slot_->Take();
 	auto new_mouse_item = Equip(slot, std::move(old_mouse_item));
@@ -32,7 +32,7 @@ void PlayerInventory::HandleEquipmentRelease(InventorySlot& slot)
 
 }
 
-void PlayerInventory::ReleasedOverInventorySlot(const int index, const std::vector<int>& hovered_slot_indices)
+void PlayerItemStorage::ReleasedOverInventorySlot(const int index, const std::vector<int>& hovered_slot_indices)
 {
 	auto picked_up_item = inventory_->Take(index);
 
@@ -51,7 +51,7 @@ void PlayerInventory::ReleasedOverInventorySlot(const int index, const std::vect
 	}
 }
 
-void PlayerInventory::PickUpItem(std::unique_ptr<Item> item)
+void PlayerItemStorage::PickUpItem(std::unique_ptr<Item> item)
 {
 	if(!item) return;
 	
@@ -71,7 +71,7 @@ void PlayerInventory::PickUpItem(std::unique_ptr<Item> item)
 	}
 }
 
-std::unique_ptr<Item> PlayerInventory::Equip(InventorySlot& equipment_slot, std::unique_ptr<Item> item)
+std::unique_ptr<Item> PlayerItemStorage::Equip(InventorySlot& equipment_slot, std::unique_ptr<Item> item)
 {
 	const auto slot_tag = equipment_slot.GetRequiredTag();
 
@@ -97,7 +97,7 @@ std::unique_ptr<Item> PlayerInventory::Equip(InventorySlot& equipment_slot, std:
 	return picked_up_item;
 }
 
-bool PlayerInventory::CanEquipHeldItem(const InventorySlot& slot) const
+bool PlayerItemStorage::CanEquipHeldItem(const InventorySlot& slot) const
 {
 	return slot.CanHold(mouse_slot_->GetItem());
 }
