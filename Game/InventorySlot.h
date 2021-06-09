@@ -2,6 +2,7 @@
 
 #include "../Opus/Core.h"
 
+class PlayerInventory;
 class Item;
 struct Color;
 class ShapeRenderer;
@@ -22,6 +23,8 @@ public:
 	void SetRequiredTag(const std::string& tag);
 	std::string GetRequiredTag() const;
 
+	void SetEquippableHighlight() const;
+	
 	void EnableHighlight(Color color) const;
 	void DisableHighlight() const;
 private:
@@ -31,4 +34,6 @@ private:
 	std::string required_tag_ = "no_tag";
 
 	ShapeRenderer* shape_renderer_ = nullptr;
+
+	PlayerInventory* player_inventory_ = nullptr;
 };

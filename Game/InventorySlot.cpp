@@ -3,11 +3,14 @@
 #include "Interactable.h"
 #include "InventoryItem.h"
 #include "Item.h"
+#include "PlayerInventory.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/SpriteRenderer.h"
 
 void InventorySlot::Awake()
 {
+	player_inventory_ = Game::GetService<PlayerInventory>();
+	
 	auto& transform = GetTransform();
 	const Sprite sprite {"Sprites/InvSlot.png", {0,0, 40, 40}};
 	auto sprite_renderer = AddComponent(SpriteRenderer());
@@ -55,6 +58,18 @@ void InventorySlot::SetRequiredTag(const std::string& tag)
 std::string InventorySlot::GetRequiredTag() const
 {
 	return required_tag_;
+}
+
+void InventorySlot::SetEquippableHighlight() const
+{
+	if (player_inventory_->IsHoldingItem() && player_inventory_->CanEquipHeldItem(*this))
+	{
+		EnableHighlight(kUnavailableSlotColor);
+	}
+	else
+	{
+		EnableHighlight(kAvailableSlotColor);
+	}
 }
 
 void InventorySlot::EnableHighlight(const Color color) const

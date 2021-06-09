@@ -4,17 +4,12 @@
 #include "../Opus/Color.h"
 #include "../Opus/Core.h"
 
+class PlayerInventory;
 struct ItemSize;
 class Inventory;
 class ItemInfoPopup;
 class MouseSlot;
 class InventoryItem;
-// TODO Move to global settings
-const int kInventorySlotSize = 25;
-const Color kItemSlotColor = { 0, 0, 0.5, 0.5 };
-const Color kAvailableSlotColor = { 0, 0.5, 0, 0.5 };
-const Color kPickupSlotColor = { 0.5, 0.5, 0, 0.5 };
-const Color kUnavailableSlotColor = { 0.5, 0, 0, 0.5 };
 
 class InventorySlot;
 
@@ -46,8 +41,8 @@ private:
 	// TODO Should be controlled by mouse handler
 	ItemInfoPopup* popup_ = nullptr;
 
-	MouseSlot* mouse_item_ = nullptr;
 	InventoryItem* pickup_item_ = nullptr;
 
+	PlayerInventory* player_inventory_ = nullptr;
 };
 

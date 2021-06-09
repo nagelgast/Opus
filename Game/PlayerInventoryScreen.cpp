@@ -24,7 +24,7 @@ void PlayerInventoryScreen::Awake()
 
 	auto& screen_transform = GetTransform();
 
-	inventory_ = &Instantiate<Inventory>(screen_transform);
+	inventory_ = &Instantiate<InventoryScreen>(screen_transform);
 	auto& inv_trans = inventory_->GetTransform();
 	inv_trans.SetLocalPosition({ 25, 550 });
 
@@ -69,9 +69,9 @@ void PlayerInventoryScreen::SpawnEquipmentSlot(std::string tag, Vector2 position
 	slot.SetRequiredTag(tag);
 
 	auto* interactable = slot.GetComponent<Interactable>();
-	interactable->OnHoverEnter += [this, &slot] { HandleEquipmentSlotHoverEnter(slot); };
-	interactable->OnHoverExit += [this, &slot] { HandleEquipmentSlotHoverExit(slot); };
-	interactable->OnRelease += [this, &slot] { HandleEquipmentSlotRelease(slot); };
+	interactable->OnHoverEnter += [this, &slot] { slot.SetEquippableHighlight(); };
+	interactable->OnHoverExit += [this, &slot] { slot.DisableHighlight(); };
+	interactable->OnRelease += [this, &slot] { player_inventory_->HandleEquipmentRelease(slot); };
 
 	auto& slot_transform = slot.GetTransform();
 	slot_transform.SetScale(width, height);
@@ -82,35 +82,14 @@ void PlayerInventoryScreen::SpawnEquipmentSlot(std::string tag, Vector2 position
 	background_transform.SetLocalPosition({ 0, 0 });
 }
 
-
-void PlayerInventoryScreen::HandleEquipmentSlotHoverEnter(const InventorySlot& slot) const
-{
-	if (mouse_slot_->HasItem() && !slot.CanHold(mouse_slot_->GetItem()))
-	{
-		slot.EnableHighlight(kUnavailableSlotColor);
-	}
-	else
-	{
-		slot.EnableHighlight(kAvailableSlotColor);
-	}
-}
-
-void PlayerInventoryScreen::HandleEquipmentSlotHoverExit(const InventorySlot& slot) const
-{
-	slot.DisableHighlight();
-}
-
-void PlayerInventoryScreen::HandleEquipmentSlotRelease(InventorySlot& slot)
-{
-	auto old_mouse_item = mouse_slot_->Take();
-	auto new_mouse_item = player_inventory_->Equip(slot, std::move(old_mouse_item));
-	player_inventory_->PickUpItem(std::move(new_mouse_item));
-
-}
-
 void PlayerInventoryScreen::SpawnEquippedItem(InventorySlot& slot, Item& item)
 {
 	auto slot_transform = slot.GetTransform();
 	auto& inventory_item = Instantiate<InventoryItem>(slot_transform);
 	inventory_item.Initialize(item, { &slot });
+}
+
+InventoryScreen& PlayerInventoryScreen::GetInventoryScreen()
+{
+	return *inventory_;
 }

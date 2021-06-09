@@ -9,11 +9,49 @@
 
 void PlayerInventory::Initialize(MouseSlot& mouse, PlayerInventoryScreen& screen)
 {
-	mouse_slot_ = &mouse;
+	inventory_ = std::make_unique<Inventory>(screen.GetInventoryScreen(), 5, 12);
 	screen_ = &screen;
+	mouse_slot_ = &mouse;
 }
 
-void PlayerInventory::PickUpItem(std::unique_ptr<Item> item) const
+bool PlayerInventory::IsHoldingItem() const
+{
+	return mouse_slot_->HasItem();
+}
+
+ItemSize PlayerInventory::GetHeldItemSize() const
+{
+	return mouse_slot_->GetItem().GetSize();
+}
+
+void PlayerInventory::HandleEquipmentRelease(InventorySlot& slot)
+{
+	auto old_mouse_item = mouse_slot_->Take();
+	auto new_mouse_item = Equip(slot, std::move(old_mouse_item));
+	PickUpItem(std::move(new_mouse_item));
+
+}
+
+void PlayerInventory::ReleasedOverInventorySlot(const int index, const std::vector<int>& hovered_slot_indices)
+{
+	auto picked_up_item = inventory_->Take(index);
+
+	if (IsHoldingItem())
+	{
+		const auto success = inventory_->TryPlace(mouse_slot_->Take(), hovered_slot_indices);
+		if (!success)
+		{
+			std::cout << "Error: Couldn't place mouse item!";
+		}
+	}
+
+	if (picked_up_item)
+	{
+		PickUpItem(std::move(picked_up_item));
+	}
+}
+
+void PlayerInventory::PickUpItem(std::unique_ptr<Item> item)
 {
 	if (screen_->IsOpen())
 	{
@@ -51,4 +89,9 @@ std::unique_ptr<Item> PlayerInventory::Equip(InventorySlot& equipment_slot, std:
 	screen_->SpawnEquippedItem(equipment_slot, *helmet_);
 	
 	return picked_up_item;
+}
+
+bool PlayerInventory::CanEquipHeldItem(const InventorySlot& slot) const
+{
+	return slot.CanHold(mouse_slot_->GetItem());
 }

@@ -15,6 +15,7 @@
 
 void InventoryScreen::Initialize(Inventory* inventory, int rows, int columns)
 {
+	player_inventory_ = Game::GetService<PlayerInventory>();
 	inventory_ = inventory;
 	rows_ = rows;
 	columns_ = columns;
@@ -52,22 +53,9 @@ void InventoryScreen::HandleRelease(const int index)
 {
 	if (hovering_over_multiple_items_) return;
 
-	auto picked_up_item = inventory_->Take(index);
-
-	if (mouse_item_->HasItem())
-	{
-		const auto success = inventory_->TryPlace(mouse_item_->Take(), hover_slot_indices_);
-		if(!success)
-		{
-			std::cout << "Error: Couldn't place mouse item!";
-		}
-	}
-
-	if (picked_up_item)
-	{
-		Game::GetService<PlayerInventory>()->PickUpItem(std::move(picked_up_item));
-		HandleSlotHoverEnter(index);
-	}
+	player_inventory_->ReleasedOverInventorySlot(index, hover_slot_indices_);
+	
+	HandleSlotHoverEnter(index);
 }
 
 void InventoryScreen::HandleSlotHoverEnter(const int index)
@@ -84,9 +72,9 @@ void InventoryScreen::HandleSlotHoverEnter(const int index)
 		popup_->SetItem(pickup_item_->GetItem());
 	}
 
-	if (mouse_item_->HasItem())
+	if (player_inventory_->IsHoldingItem())
 	{
-		hover_slot_indices_ = CalculateSlotsToOccupy(mouse_item_->GetItem().GetSize(), index);
+		hover_slot_indices_ = CalculateSlotsToOccupy(player_inventory_->GetHeldItemSize(), index);
 
 		auto hovering_over_item = false;
 		hovering_over_multiple_items_ = false;
@@ -202,7 +190,7 @@ void InventoryScreen::SetHighlights()
 {
 	// TODO Implement overlap slot coloring
 
-	if (mouse_item_->HasItem())
+	if (player_inventory_->IsHoldingItem())
 	{
 		const auto hover_color = hovering_over_multiple_items_ ? kUnavailableSlotColor : kAvailableSlotColor;
 
@@ -214,7 +202,7 @@ void InventoryScreen::SetHighlights()
 
 	if (pickup_item_)
 	{
-		const auto pickup_color = mouse_item_->HasItem() ? kPickupSlotColor : kAvailableSlotColor;
+		const auto pickup_color = player_inventory_->IsHoldingItem() ? kPickupSlotColor : kAvailableSlotColor;
 		pickup_item_->SetHighlight(pickup_color);
 	}
 }

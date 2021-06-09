@@ -12,23 +12,20 @@ class MouseSlot;
 class InventoryItem;
 
 
-class Inventory : public Entity
+class Inventory
 {
 public:
-	void Awake() override;
+	Inventory(InventoryScreen& screen, int rows, int columns);
 	std::unique_ptr<Item> Take(int slot_index);
 	bool TryAutoAddItem(std::unique_ptr<Item> item);
 	bool TryPlace(std::unique_ptr<Item> item, const std::vector<int>& slot_indices);
 private:
 	void Place(std::unique_ptr<Item> item, const std::vector<int>& slot_indices);
-	
 	std::vector<int> FindAvailableSlots(ItemSize item_size);
 
-	InventoryScreen* screen_ = nullptr;
-
-
-	int rows_ = 5;
-	int columns_ = 12;
+	InventoryScreen& screen_;
+	const int rows_;
+	const int columns_;
 
 	// Key -> slot index, Value -> item index
 	std::map<int, int> slot_contents_;
