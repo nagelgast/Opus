@@ -155,6 +155,7 @@
     <ClCompile Include="Clickable.cpp" />
     <ClCompile Include="DefaultAttack.cpp" />
     <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="EquipmentSlot.cpp" />
     <ClCompile Include="Fireball.cpp" />
     <ClCompile Include="FireballSkill.cpp" />
     <ClCompile Include="Health.cpp" />
@@ -184,6 +185,7 @@
   <ItemGroup>
     <ClInclude Include="Clickable.h" />
     <ClInclude Include="DefaultAttack.h" />
+    <ClInclude Include="EquipmentSlot.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="HealthBar.h" />
     <ClInclude Include="Enemy.h" />

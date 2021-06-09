@@ -7,6 +7,7 @@
 #include "PlayerInventoryScreen.h"
 #include "../Opus/Service.h"
 
+class EquipmentSlot;
 // TODO Move to global settings
 const int kInventorySlotSize = 25;
 const Color kItemSlotColor = { 0, 0, 0.5, 0.5 };
@@ -21,23 +22,17 @@ public:
 
 	bool IsHoldingItem() const;
 	ItemSize GetHeldItemSize() const;
-	void HandleEquipmentRelease(InventorySlot& slot);
-	void ReleasedOverInventorySlot(const int index, const std::vector<int>& hovered_slot_indices);
-	void PickUpItem(std::unique_ptr<Item> item);
-	std::unique_ptr<Item> Equip(InventorySlot& equipment_slot, std::unique_ptr<Item> item);
-	bool CanEquipHeldItem(const InventorySlot& slot) const;
+	void HandleEquipmentRelease(EquipmentSlot& slot);
+	void HandleInventoryRelease(int index, const std::vector<int>& hovered_slot_indices) const;
+	void PickUpItem(std::unique_ptr<Item> item) const;
+	std::unique_ptr<Item> Equip(EquipmentSlot& equipment_slot, std::unique_ptr<Item> item);
+	bool CanEquipHeldItem(const EquipmentSlot& slot) const;
 private:
 	// Data
 	std::unique_ptr<Inventory> inventory_;
-	
-	//std::map<std::string, std::unique_ptr<Item>> equipment_;
-	std::unique_ptr<Item> helmet_;
-	std::unique_ptr<Item> weapon_;
-	std::unique_ptr<Item> armour_;
-
+	std::map<ItemTag, std::unique_ptr<Item>> equipment_;
 	
 	// UI
 	PlayerInventoryScreen* screen_ = nullptr;
 	MouseSlot* mouse_slot_ = nullptr;
-	// std::shared_ptr<EquipmentInventory>
 };

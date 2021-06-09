@@ -2,7 +2,6 @@
 
 #include "Interactable.h"
 #include "ScreenItem.h"
-#include "Item.h"
 #include "PlayerItemStorage.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/SpriteRenderer.h"
@@ -20,12 +19,7 @@ void InventorySlot::Awake()
 	shape_renderer_ = &highlight_->AddComponent(ShapeRenderer(Shape::kSquare, {0, 0, 0, 0.5f}, false));
 	highlight_->SetVisible(false);
 
-	auto interactable = AddComponent(Interactable());
-
-	interactable.OnHoverEnter += [this] { SetEquippableHighlight(); };
-	interactable.OnHoverExit += [this] { DisableHighlight(); };
-	interactable.OnRelease += [this] { HandleRelease(); };
-
+	interactable_ = &AddComponent(Interactable());
 }
 
 void InventorySlot::SetItem(ScreenItem& item)
@@ -54,40 +48,6 @@ void InventorySlot::RemoveItem() const
 bool InventorySlot::HasItem() const
 {
 	return item_ != nullptr;
-}
-
-bool InventorySlot::CanHold(Item& item) const
-{
-	if(required_tag_ == ItemTag::kNoTag) return true;
-	
-	return item.HasTag(required_tag_);
-}
-
-void InventorySlot::SetRequiredTag(const ItemTag& tag)
-{
-	required_tag_ = tag;
-}
-
-ItemTag InventorySlot::GetRequiredTag() const
-{
-	return required_tag_;
-}
-
-void InventorySlot::HandleRelease()
-{
-	storage_->HandleEquipmentRelease(*this);
-}
-
-void InventorySlot::SetEquippableHighlight() const
-{
-	if (storage_->IsHoldingItem() && !storage_->CanEquipHeldItem(*this))
-	{
-		EnableHighlight(kUnavailableSlotColor);
-	}
-	else
-	{
-		EnableHighlight(kAvailableSlotColor);
-	}
 }
 
 void InventorySlot::EnableHighlight(const Color color) const

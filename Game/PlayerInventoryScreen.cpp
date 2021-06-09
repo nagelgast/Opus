@@ -1,13 +1,9 @@
 #include "PlayerInventoryScreen.h"
 
-
-
+#include "EquipmentSlot.h"
 #include "Interactable.h"
-#include "Inventory.h"
-#include "ScreenItem.h"
 #include "InventoryScreen.h"
 #include "InventorySlot.h"
-#include "MouseSlot.h"
 #include "PlayerItemStorage.h"
 #include "../Opus/Shape.h"
 #include "../Opus/ShapeRenderer.h"
@@ -65,7 +61,7 @@ void PlayerInventoryScreen::SpawnEquipmentSlot(const ItemTag tag, const Vector2 
 
 	background_transform.SetScale(width, height);
 
-	auto& slot = Instantiate<InventorySlot>(GetTransform());
+	auto& slot = Instantiate<EquipmentSlot>(GetTransform());
 	slot.SetRequiredTag(tag);
 
 	auto& slot_transform = slot.GetTransform();
@@ -75,14 +71,6 @@ void PlayerInventoryScreen::SpawnEquipmentSlot(const ItemTag tag, const Vector2 
 	// TODO Implement sorting so we don't have to rely on instantiation order
 	background_transform.SetParent(slot_transform);
 	background_transform.SetLocalPosition({ 0, 0 });
-}
-
-void PlayerInventoryScreen::SpawnEquippedItem(InventorySlot& slot, Item& item)
-{
-	// TODO Should be part of equipment slot itself
-	auto slot_transform = slot.GetTransform();
-	auto& inventory_item = Instantiate<ScreenItem>(slot_transform);
-	inventory_item.Initialize(item, { &slot });
 }
 
 InventoryScreen& PlayerInventoryScreen::GetInventoryScreen() const

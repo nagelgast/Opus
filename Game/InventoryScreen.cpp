@@ -53,7 +53,7 @@ void InventoryScreen::HandleRelease(const int index)
 {
 	if (hovering_over_multiple_items_) return;
 
-	player_inventory_->ReleasedOverInventorySlot(index, hover_slot_indices_);
+	player_inventory_->HandleInventoryRelease(index, hover_slot_indices_);
 	
 	HandleSlotHoverEnter(index);
 }

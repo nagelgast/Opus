@@ -135,6 +135,9 @@
     <ClCompile Include="ScreenItem.cpp">
       <Filter>Source Files\Items\UI</Filter>
     </ClCompile>
+    <ClCompile Include="EquipmentSlot.cpp">
+      <Filter>Source Files\Items\UI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -240,6 +243,9 @@
       <Filter>Header Files\Items\UI</Filter>
     </ClInclude>
     <ClInclude Include="ScreenItem.h">
+      <Filter>Header Files\Items\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="EquipmentSlot.h">
       <Filter>Header Files\Items\UI</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,8 +18,6 @@ public:
 
 	bool IsOpen() const;
 
-	void SpawnEquippedItem(InventorySlot& slot, Item& item);
-
 	InventoryScreen& GetInventoryScreen() const;
 private:
 	void SpawnEquipmentSlot(ItemTag tag, Vector2 position, float width, float height);
