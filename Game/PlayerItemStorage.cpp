@@ -73,12 +73,14 @@ void PlayerItemStorage::PickUpItem(std::unique_ptr<Item> item) const
 std::unique_ptr<Item> PlayerItemStorage::Equip(EquipmentSlot& equipment_slot, std::unique_ptr<Item> item)
 {
 	const auto tag = equipment_slot.GetRequiredTag();
+	
 	// If we can't equip the new item, do nothing
-	// TODO Check properly if item can be equipped by player
 	if(item && !item->HasTag(tag))
 	{
 		return item;
 	}
+
+	// TODO Check properly if item can be equipped by player
 
 	// Get the currently equipped item
 	equipment_slot.RemoveItem();

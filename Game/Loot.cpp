@@ -22,12 +22,14 @@ void Loot::OnDestroy()
 
 void Loot::SpawnItem() const
 {
-	//const Sprite sprite{"Sprites/Driftwood_Wand_inventory_icon.png", {0, 0, 78, 234}};
-
 	const auto wand_base = item_data_->GetBaseType("Driftwood_Wand");
 	const auto wand_category = item_data_->GetCategory(wand_base.category);
-	
 	auto item = std::make_unique<Item>(Item{wand_base, wand_category, Rarity::kNormal});
+
+	const auto orb_base = item_data_->GetBaseType("Chaos_Orb");
+	const auto orb_category = item_data_->GetCategory(orb_base.category);
+	auto item2 = std::make_unique<Item>(Item{orb_base, orb_category, Rarity::kCurrency});
+	
 	// const Sprite sprite2{"Sprites/Goldrim_inventory_icon.png", {0, 0, 156, 156}};
 	// auto item2 = std::make_unique<Item>(Item{Rarity::kUnique, "Goldrim", sprite2, {2, 2}, {"helmet"}});
 	// const Sprite sprite3{"Sprites/Chaos_Orb_inventory_icon.png", {0, 0, 78, 78}};
@@ -38,9 +40,9 @@ void Loot::SpawnItem() const
 	auto& world_item = entity_->Instantiate<WorldItem>(pos);
 	world_item.Initialize(std::move(item));
 	world_item.GetTransform().CenterOrigin();
-	// auto& world_item2 = entity_->Instantiate<WorldItem>(pos);
-	// world_item2.Initialize(std::move(item2));
-	// world_item2.GetTransform().CenterOrigin();
+	auto& world_item2 = entity_->Instantiate<WorldItem>(pos);
+	world_item2.Initialize(std::move(item2));
+	world_item2.GetTransform().CenterOrigin();
 	// auto& world_item3 = entity_->Instantiate<WorldItem>(pos);
 	// world_item3.Initialize(std::move(item3));
 	// world_item3.GetTransform().CenterOrigin();

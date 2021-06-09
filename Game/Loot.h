@@ -11,5 +11,5 @@ class Loot :
 	void OnDestroy() override;
 	void SpawnItem() const;
 private:
-	ItemData* item_data_;
+	ItemData* item_data_ = nullptr;
 };
