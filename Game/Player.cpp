@@ -2,6 +2,7 @@
 
 
 #include "DefaultAttack.h"
+#include "FireballSkill.h"
 #include "MouseHandler.h"
 #include "PlayerController.h"
 #include "PlayerSkillHandler.h"
@@ -22,7 +23,11 @@ void Player::Awake()
 	auto pc = AddComponent(PlayerController(200, 400));
 
 	auto& psh = AddComponent(PlayerSkillHandler());
-	
-	auto* const default_attack = new DefaultAttack();
-	psh.SetActiveSkill(default_attack);
+
+	// TODO Store skill references properly
+	// auto* const default_attack = new DefaultAttack();
+	// psh.SetActiveSkill(default_attack);
+
+	auto* const fireball = new FireballSkill(&psh);
+	psh.SetActiveSkill(fireball);
 }

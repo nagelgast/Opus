@@ -1,11 +1,17 @@
 #pragma once
 
+#include "ActiveSkill.h"
 #include "PlayerSkillHandler.h"
 
-class FireballSkill
+class FireballSkill : public ActiveSkill
 {
 public:
-	void Trigger(PlayerSkillHandler&) ;
-	float GetCastTime();
+	FireballSkill(PlayerSkillHandler* psh);
+	void Cast() override;
+
+	float GetCastTime() override;
+	float GetRange() override;
+private:
+	PlayerSkillHandler* psh_ = nullptr;
 };
 
