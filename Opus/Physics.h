@@ -12,9 +12,12 @@ public:
 	static Collider* GetColliderAtPosition(const Vector2& position, int layer);
 	static Collision HandleCollision(Collider& c, int layer);
 	static Collision HandleCollision(Collider& player, Collider& other);
-	static bool CheckCircleCollision(const Transform& t1, const Transform& t2);
-	static bool CheckSquareCollision(const Transform& t1, const Transform& t2);
-	static Collision HandleCircleSquareCollision(const Transform& circle, Transform& square);
-	static Vector2 ResolveCircleCollision(const Transform& t1, const Transform& t2);
-	static Vector2 ResolveSquareCollision(const Transform& t1, const Transform& t2);
+	
+	static bool CheckCircleCollision(const CircleCollider& c1, const CircleCollider& c2);
+	static bool CheckRectCollision(const RectCollider& c1, const RectCollider& c2);
+
+	static Vector2 ResolveCircleCollision(const CircleCollider& c1, const CircleCollider& c2);
+	static Vector2 ResolveRectCollision(const RectCollider& c1, const RectCollider& c2);
+
+	static Collision HandleCircleRectCollision(const CircleCollider& circle, const RectCollider& rect);
 };

@@ -1,11 +1,12 @@
 #include "pch.h"
 #include "Physics.h"
 
+#include "CircleCollider.h"
 #include "Collider.h"
 #include "Collision.h"
 #include "Entity.h"
 #include "Game.h"
-#include "Shape.h"
+#include "RectCollider.h"
 #include "Vector2.h"
 #include "Transform.h"
 
@@ -41,43 +42,14 @@ Collision Physics::HandleCollision(Collider& c, const int layer)
 
 Collision Physics::HandleCollision(Collider& player, Collider& other)
 {
-	const auto is_circle1 = player.GetShape() == Shape::kCircle;
-	const auto is_circle2 = other.GetShape() == Shape::kCircle;
-
-	const auto& t1 = player.entity_->GetTransform();
-	auto& t2 = other.entity_->GetTransform();
-	if(is_circle1 && is_circle2)
-	{
-		const auto collision = CheckCircleCollision(t1, t2);
-		if(collision)
-		{
-			const auto displacement = ResolveCircleCollision(t1, t2);
-			return Collision{other.entity_, displacement};
-		}
-	}
-	if(!is_circle1 && !is_circle2)
-	{
-		const auto collision = CheckSquareCollision(t1, t2);
-		if(collision)
-		{
-			const auto displacement = ResolveSquareCollision(t1, t2);
-			return Collision{other.entity_, displacement};
-		}
-	}
-	if(is_circle1 && !is_circle2)
-	{
-		return HandleCircleSquareCollision(t1, t2);
-	}
-	if (!is_circle1 && is_circle2)
-	{
-		// TODO: Implement circle/square collisions
-	}
-
-	return {};
+	return player.HandleCollision(other);
 }
 
-bool Physics::CheckCircleCollision(const Transform& t1, const Transform& t2)
+bool Physics::CheckCircleCollision(const CircleCollider& c1, const CircleCollider& c2)
 {
+	const auto t1 = c1.entity_->GetTransform();
+	const auto t2 = c2.entity_->GetTransform();
+	
 	const auto pos1 = t1.GetPosition();
 	const auto pos2 = t2.GetPosition();
 
@@ -92,52 +64,29 @@ bool Physics::CheckCircleCollision(const Transform& t1, const Transform& t2)
 	return distance_squared <= radii_squared;
 }
 
-bool Physics::CheckSquareCollision(const Transform& t1, const Transform& t2)
+bool Physics::CheckRectCollision(const RectCollider& c1, const RectCollider& c2)
 {
-	const auto p1 = t1.GetPosition() - t1.GetOrigin();
-	const auto s1 = t1.GetScale();
+	const auto c1_bounds = c1.GetGlobalBounds();
+	const Vector2 c1_top_left {c1_bounds.left, c1_bounds.top};
+	const Vector2 c1_bottom_right {c1_bounds.left + c1_bounds.width, c1_bounds.top + c1_bounds.height};
 
-	const auto p2 = t2.GetPosition() - t2.GetOrigin();
-	const auto s2 = t2.GetScale();
+	const auto c2_bounds = c2.GetGlobalBounds();
+	const Vector2 c2_top_left{ c2_bounds.left, c2_bounds.top };
+	const Vector2 c2_bottom_right{ c2_bounds.left + c2_bounds.width, c2_bounds.top + c2_bounds.height };
 
-	if (p1.x > p2.x + s2.x) return false;
-	if (p1.x + s1.x < p2.x) return false;
-	if (p1.y > p2.y + s2.y) return false;
-	if (p1.y + s1.y < p2.y) return false;
+	if (c1_top_left.x > c2_bottom_right.x) return false;
+	if (c1_bottom_right.x < c2_top_left.x) return false;
+	if (c1_top_left.y > c2_bottom_right.y) return false;
+	if (c1_bottom_right.y < c2_top_left.y) return false;
 
 	return true;
 }
 
-Collision Physics::HandleCircleSquareCollision(const Transform& circle, Transform& square)
+Vector2 Physics::ResolveCircleCollision(const CircleCollider& c1, const CircleCollider& c2)
 {
-	const auto circle_pos = circle.GetPosition();
-	const auto circle_radius = circle.GetScale().x/2.f;
-	const auto square_center = square.GetPosition();
-	const auto square_size = square.GetScale();
-	const auto square_origin = square.GetOrigin();
-	const auto square_top_left = square_center - square_origin;
-	const auto square_bottom_right = square_top_left + square_size;
-
-	const auto closest_x = std::min(square_bottom_right.x, std::max(square_top_left.x, circle_pos.x));
-	const auto closest_y = std::min(square_bottom_right.y, std::max(square_top_left.y, circle_pos.y));
-
-	const Vector2 closest_pos = {closest_x, closest_y};
+	const auto t1 = c1.entity_->GetTransform();
+	const auto t2 = c2.entity_->GetTransform();
 	
-	const auto ray_to_nearest = (closest_pos - circle_pos);
-	const auto distance = ray_to_nearest.GetLength();
-	if(distance <= circle_radius)
-	{
-		const auto displacement = ray_to_nearest/distance * (circle_radius - distance);
-		
-		auto c = Collision(square.entity_, displacement);
-		return c;
-	}
-
-	return {};
-}
-
-Vector2 Physics::ResolveCircleCollision(const Transform& t1, const Transform& t2)
-{
 	const auto p1 = t1.GetPosition();
 	const auto p2 = t2.GetPosition();
 	const auto delta = p1 - p2;
@@ -148,8 +97,11 @@ Vector2 Physics::ResolveCircleCollision(const Transform& t1, const Transform& t2
 	return Vector2 {displacement};
 }
 
-Vector2 Physics::ResolveSquareCollision(const Transform& t1, const Transform& t2)
+Vector2 Physics::ResolveRectCollision(const RectCollider& c1, const RectCollider& c2)
 {
+	const auto t1 = c1.entity_->GetTransform();
+	const auto t2 = c2.entity_->GetTransform();
+	
 	const auto p1 = t1.GetPosition() - t1.GetOrigin();
 	const auto s1 = t1.GetScale();
 
@@ -172,4 +124,35 @@ Vector2 Physics::ResolveSquareCollision(const Transform& t1, const Transform& t2
 	{
 		return {0, depth_ver};
 	}
+}
+
+Collision Physics::HandleCircleRectCollision(const CircleCollider& circle, const RectCollider& rect)
+{
+	const auto circle_transform = circle.entity_->GetTransform();
+	const auto rect_transform = rect.entity_->GetTransform();
+	
+	const auto circle_pos = circle_transform.GetPosition();
+	const auto circle_radius = circle_transform.GetScale().x / 2.f;
+	const auto square_center = rect_transform.GetPosition();
+	const auto square_size = rect_transform.GetScale();
+	const auto square_origin = rect_transform.GetOrigin();
+	const auto square_top_left = square_center - square_origin;
+	const auto square_bottom_right = square_top_left + square_size;
+
+	const auto closest_x = std::min(square_bottom_right.x, std::max(square_top_left.x, circle_pos.x));
+	const auto closest_y = std::min(square_bottom_right.y, std::max(square_top_left.y, circle_pos.y));
+
+	const Vector2 closest_pos = { closest_x, closest_y };
+
+	const auto ray_to_nearest = (closest_pos - circle_pos);
+	const auto distance = ray_to_nearest.GetLength();
+	if (distance <= circle_radius)
+	{
+		const auto displacement = ray_to_nearest / distance * (circle_radius - distance);
+
+		auto c = Collision(rect.entity_, displacement);
+		return c;
+	}
+
+	return {};
 }
