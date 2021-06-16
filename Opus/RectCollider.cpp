@@ -1,15 +1,9 @@
 #include "pch.h"
 #include "RectCollider.h"
 
-
 #include "Physics.h"
+#include "Transform.h"
 #include "Vector2.h"
-
-RectCollider::RectCollider(const Rect bounds, const int layer, const bool trigger, const bool fixed)
-	: Collider(layer, trigger, fixed),
-	  bounds_(bounds)
-{
-}
 
 Collision RectCollider::HandleCollision(const Collider& other) const
 {
@@ -31,9 +25,19 @@ Collision RectCollider::HandleCollision(const CircleCollider& other) const
 	return Physics::HandleCircleRectCollision(other, *this);
 }
 
+void RectCollider::SetOffset(const Vector2 offset)
+{
+	offset_ = offset;
+}
+
+void RectCollider::SetSize(Vector2 size)
+{
+	size_ = size;
+}
+
 bool RectCollider::Contains(const Vector2& position) const
 {
-	return bounds_.Contains(position);
+	return GetGlobalBounds().Contains(position);
 }
 
 Shape RectCollider::GetShape() const
@@ -43,5 +47,19 @@ Shape RectCollider::GetShape() const
 
 Rect RectCollider::GetGlobalBounds() const
 {
-	return bounds_.ConvertToGlobalSpace(entity_->GetTransform());
+	auto& transform = entity_->GetTransform();
+
+	const auto pos = transform.GetPosition();
+	const auto origin = transform.GetOrigin();
+	const auto scale = transform.GetScale();
+
+	const Rect bounds
+	{
+		pos.y - origin.y + offset_.y,
+		pos.x - origin.x + offset_.x,
+		scale.x * size_.x,
+		scale.y * size_.y
+	};
+
+	return bounds;
 }

@@ -16,7 +16,9 @@ void Player::Awake()
 	const auto sr = AddComponent(SpriteRenderer());
 	sr.SetSprite(sprite);
 	
-	const auto collider = AddComponent(RectCollider({0,0,1,1}, 1, false, false));
+	auto& collider = AddComponent(RectCollider(1, false, false));
+	collider.SetSize({2,2});
+	
 	GetTransform().SetScale(100, 100);
 
 	auto pc = AddComponent(PlayerController(200, 400));

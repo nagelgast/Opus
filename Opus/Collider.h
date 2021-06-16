@@ -9,6 +9,8 @@ class CollisionSystem;
 class Collider : public Component
 {
 public:
+	Collider(int layer, bool trigger, bool fixed);
+
 	void Start() override;
 	void OnDestroy() override;
 
@@ -25,8 +27,6 @@ public:
 	bool IsFixed() const;
 	virtual Shape GetShape() const = 0;
 	virtual bool Contains(const Vector2& position) const = 0;
-protected:
-	explicit Collider(int layer, bool trigger, bool fixed);
 private:
 	int layer_;
 	bool trigger_;

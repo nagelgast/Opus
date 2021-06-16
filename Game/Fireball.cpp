@@ -9,7 +9,7 @@
 void Fireball::Awake()
 {
 	AddComponent(ShapeRenderer(Shape::kCircle, {1, 0, 0}));
-	AddComponent(RectCollider({0,0,1,1}, 2, true, false));
+	AddComponent(RectCollider(2, true, false));
 	GetTransform().SetScale(20,20);
 	projectile_ = &AddComponent(Projectile(10, 200, 400));
 }

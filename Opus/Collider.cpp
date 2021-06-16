@@ -5,7 +5,6 @@
 #include "Game.h"
 #include "Transform.h"
 
-
 Collider::Collider(const int layer, const bool trigger, const bool fixed)
 	: layer_(layer),
 	  trigger_(trigger),

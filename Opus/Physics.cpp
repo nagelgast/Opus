@@ -99,14 +99,13 @@ Vector2 Physics::ResolveCircleCollision(const CircleCollider& c1, const CircleCo
 
 Vector2 Physics::ResolveRectCollision(const RectCollider& c1, const RectCollider& c2)
 {
-	const auto t1 = c1.entity_->GetTransform();
-	const auto t2 = c2.entity_->GetTransform();
-	
-	const auto p1 = t1.GetPosition() - t1.GetOrigin();
-	const auto s1 = t1.GetScale();
+	const auto b1 = c1.GetGlobalBounds();
+	const Vector2 p1 { b1.left, b1.top };
+	const Vector2 s1 { b1.width, b1.height };
 
-	const auto p2 = t2.GetPosition() - t2.GetOrigin();
-	const auto s2 = t2.GetScale();
+	const auto b2 = c2.GetGlobalBounds();
+	const Vector2 p2 = { b2.left, b2.top };
+	const Vector2 s2 = { b2.width, b2.height };
 
 	const auto depth_left = p1.x + s1.x - p2.x;
 	const auto depth_right = p1.x - (p2.x + s2.x);
