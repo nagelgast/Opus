@@ -113,14 +113,26 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 	}
 }
 
-void SFMLEntityRenderer::DrawBox(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position,
+void SFMLEntityRenderer::DrawRect(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position,
                                  const sf::Vector2f& size, const sf::Color& color)
 {
-	sf::RectangleShape box;
-	box.setSize(size);
-	box.setPosition(position);
-	box.setFillColor(sf::Color::Transparent);
-	box.setOutlineThickness(1);
-	box.setOutlineColor(color);
-	target.draw(box, states);
+	sf::RectangleShape rect;
+	rect.setSize(size);
+	rect.setPosition(position);
+	rect.setFillColor(sf::Color::Transparent);
+	rect.setOutlineThickness(1);
+	rect.setOutlineColor(color);
+	target.draw(rect, states);
+}
+
+void SFMLEntityRenderer::DrawCircle(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position,
+	const float radius, const sf::Color& color)
+{
+	sf::CircleShape circle;
+	circle.setRadius(radius);
+	circle.setPosition(position);
+	circle.setFillColor(sf::Color::Transparent);
+	circle.setOutlineThickness(1);
+	circle.setOutlineColor(color);
+	target.draw(circle, states);
 }

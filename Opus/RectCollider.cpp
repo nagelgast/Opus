@@ -22,15 +22,14 @@ Collision RectCollider::HandleCollision(const RectCollider& other) const
 
 Collision RectCollider::HandleCollision(const CircleCollider& other) const
 {
-	return Physics::HandleCircleRectCollision(other, *this);
+	auto collision = Physics::HandleCircleRectCollision(other, *this);
+	// Compensate for swapping the collider order
+	collision.displacement.x *= -1;
+	collision.displacement.y *= -1;
+	return collision;
 }
 
-void RectCollider::SetOffset(const Vector2 offset)
-{
-	offset_ = offset;
-}
-
-void RectCollider::SetSize(Vector2 size)
+void RectCollider::SetSize(const Vector2 size)
 {
 	size_ = size;
 }
@@ -48,15 +47,13 @@ Shape RectCollider::GetShape() const
 Rect RectCollider::GetGlobalBounds() const
 {
 	auto& transform = entity_->GetTransform();
-
-	const auto pos = transform.GetPosition();
-	const auto origin = transform.GetOrigin();
 	const auto scale = transform.GetScale();
 
+	const auto global_pos = GetGlobalPosition();
 	const Rect bounds
 	{
-		pos.y - origin.y + offset_.y,
-		pos.x - origin.x + offset_.x,
+		global_pos.y,
+		global_pos.x,
 		scale.x * size_.x,
 		scale.y * size_.y
 	};

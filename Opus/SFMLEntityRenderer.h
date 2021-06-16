@@ -20,7 +20,8 @@ public:
 	void Reset() override;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
-	static void DrawBox(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const sf::Vector2f& size, const sf::Color& color);
+	static void DrawRect(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const sf::Vector2f& size, const sf::Color& color);
+	static void DrawCircle(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const float radius, const sf::Color& color);
 private:
 
 	sf::Vector2f scale_;

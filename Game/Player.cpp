@@ -6,6 +6,7 @@
 #include "MouseHandler.h"
 #include "PlayerController.h"
 #include "PlayerSkillHandler.h"
+#include "../Opus/CircleCollider.h"
 
 #include "../Opus/SpriteRenderer.h"
 #include "../Opus/RectCollider.h"
@@ -16,8 +17,7 @@ void Player::Awake()
 	const auto sr = AddComponent(SpriteRenderer());
 	sr.SetSprite(sprite);
 	
-	auto& collider = AddComponent(RectCollider(1, false, false));
-	collider.SetSize({2,2});
+	auto& collider = AddComponent(CircleCollider(1, false, false));
 	
 	GetTransform().SetScale(100, 100);
 

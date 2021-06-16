@@ -22,6 +22,9 @@ public:
 
 	void Collide(const Collider& other) const;
 
+	Vector2 GetGlobalPosition() const;
+	void SetOffset(const Vector2& offset);
+	
 	int GetLayer() const;
 	bool IsTrigger() const;
 	bool IsFixed() const;
@@ -31,4 +34,5 @@ private:
 	int layer_;
 	bool trigger_;
 	bool fixed_;
+	Vector2 offset_ {0,0};
 };

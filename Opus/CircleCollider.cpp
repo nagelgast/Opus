@@ -26,6 +26,11 @@ Collision CircleCollider::HandleCollision(const CircleCollider& other) const
 	return collision;
 }
 
+void CircleCollider::SetRadius(const float radius)
+{
+	radius_ = radius;
+}
+
 bool CircleCollider::Contains(const Vector2& position) const
 {
 	return Vector2::IsInRange(position, entity_->GetTransform().GetPosition(), radius_);
@@ -34,4 +39,10 @@ bool CircleCollider::Contains(const Vector2& position) const
 Shape CircleCollider::GetShape() const
 {
 	return Shape::kCircle;
+}
+
+float CircleCollider::GetGlobalRadius() const
+{
+	const auto scale = entity_->GetTransform().GetScale();
+	return radius_ * std::max(scale.x, scale.y);
 }

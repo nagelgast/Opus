@@ -27,6 +27,24 @@ void Collider::Collide(const Collider& other) const
 	entity_->OnCollision(other);
 }
 
+Vector2 Collider::GetGlobalPosition() const
+{
+	auto& transform = entity_->GetTransform();
+
+	const auto pos = transform.GetPosition();
+	const auto origin = transform.GetOrigin();
+
+	return {
+		pos.x - origin.x + offset_.x,
+		pos.y - origin.y + offset_.y
+	};
+}
+
+void Collider::SetOffset(const Vector2& offset)
+{
+	offset_ = offset;
+}
+
 bool Collider::IsTrigger() const
 {
 	return trigger_;

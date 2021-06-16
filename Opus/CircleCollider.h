@@ -14,10 +14,12 @@ public:
 	Collision HandleCollision(const RectCollider& other) const override;
 	Collision HandleCollision(const CircleCollider& other) const override;
 
+	void SetRadius(float radius);
 	bool Contains(const Vector2& position) const override;
 	Shape GetShape() const override;
 
+	float GetGlobalRadius() const;
+
 private:
-	Vector2 offset_{0, 0};
-	float radius_ = 1;
+	float radius_ = 0.5f;
 };

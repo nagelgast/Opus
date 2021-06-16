@@ -2,6 +2,7 @@
 #include "SFMLRenderer.h"
 
 #include "Camera.h"
+#include "CircleCollider.h"
 #include "Entity.h"
 #include "RectCollider.h"
 #include "SFMLEntityRenderer.h"
@@ -84,20 +85,28 @@ void SFMLRenderer::DrawEntity(SFMLEntityRenderer* entity_renderer) const
 		auto& transform = entity->GetTransform();
 		auto position = transform.GetPosition() - transform.GetOrigin();
 		auto scale = transform.GetScale();
-		SFMLEntityRenderer::DrawBox(window_, sf::RenderStates::Default, {position.x, position.y}, {scale.x, scale.y}, sf::Color::Red);
+		SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, {position.x, position.y}, {scale.x, scale.y}, sf::Color::Red);
 
 		auto interactable = entity->GetComponent<Interactable>();
 		if (interactable)
 		{
 			auto bounds = interactable->GetGlobalBounds();
-			SFMLEntityRenderer::DrawBox(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Cyan);
+			SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Cyan);
 		}
 		
-		auto collider = entity->GetComponent<RectCollider>();
-		if (collider)
+		auto rect_collider = entity->GetComponent<RectCollider>();
+		if (rect_collider)
 		{
-			auto bounds = collider->GetGlobalBounds();
-			SFMLEntityRenderer::DrawBox(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Magenta);
+			auto bounds = rect_collider->GetGlobalBounds();
+			SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Magenta);
+		}
+
+		auto circle_collider = entity->GetComponent<CircleCollider>();
+		if (circle_collider)
+		{
+			const auto position = circle_collider->GetGlobalPosition();
+			const auto radius = circle_collider->GetGlobalRadius();
+			SFMLEntityRenderer::DrawCircle(window_, sf::RenderStates::Default, {position.x, position.y}, radius, sf::Color::Magenta);
 		}
 	}
 }
