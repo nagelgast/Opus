@@ -40,9 +40,9 @@ Collision Physics::HandleCollision(Collider& c, const int layer)
 	return {};
 }
 
-Collision Physics::HandleCollision(Collider& player, Collider& other)
+Collision Physics::HandleCollision(Collider& c1, Collider& c2)
 {
-	return player.HandleCollision(other);
+	return c1.HandleCollision(c2);
 }
 
 bool Physics::CheckCircleCollision(const CircleCollider& c1, const CircleCollider& c2)

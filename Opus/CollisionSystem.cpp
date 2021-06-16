@@ -35,16 +35,16 @@ void CollisionSystem::HandleCollision(Collider& c1, Collider& c2) const
 	{
 		if (c2.IsFixed())
 		{
-			c1.entity_->GetTransform().Move(-collision.displacement);
+			c1.entity_->GetTransform().Move(collision.displacement);
 		}
 		else if (c1.IsFixed())
 		{
-			c2.entity_->GetTransform().Move(collision.displacement);
+			c2.entity_->GetTransform().Move(-collision.displacement);
 		}
 		else
 		{
-			c1.entity_->GetTransform().Move(-collision.displacement / 2.f);
-			c2.entity_->GetTransform().Move(collision.displacement / 2.f);
+			c1.entity_->GetTransform().Move(collision.displacement / 2.f);
+			c2.entity_->GetTransform().Move(-collision.displacement / 2.f);
 		}
 	}
 	
