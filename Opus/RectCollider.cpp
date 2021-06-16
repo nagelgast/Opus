@@ -18,3 +18,8 @@ Shape RectCollider::GetShape()
 {
 	return Shape::kSquare;
 }
+
+Rect RectCollider::GetGlobalBounds()
+{
+	return bounds_.ConvertToGlobalSpace(entity_->GetTransform());
+}

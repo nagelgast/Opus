@@ -24,9 +24,9 @@ void Player::Awake()
 	auto& psh = AddComponent(PlayerSkillHandler());
 
 	// TODO Store skill references properly
-	auto* const default_attack = new DefaultAttack();
-	psh.SetActiveSkill(default_attack);
+	// auto* const default_attack = new DefaultAttack();
+	// psh.SetActiveSkill(default_attack);
 
-	// auto* const fireball = new FireballSkill(&psh);
-	// psh.SetActiveSkill(fireball);
+	auto* const fireball = new FireballSkill(&psh);
+	psh.SetActiveSkill(fireball);
 }

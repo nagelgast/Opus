@@ -3,6 +3,7 @@
 
 #include "Camera.h"
 #include "Entity.h"
+#include "RectCollider.h"
 #include "SFMLEntityRenderer.h"
 #include "Transform.h"
 #include "../Game/Interactable.h"
@@ -90,6 +91,13 @@ void SFMLRenderer::DrawEntity(SFMLEntityRenderer* entity_renderer) const
 		{
 			auto bounds = interactable->GetGlobalBounds();
 			SFMLEntityRenderer::DrawBox(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Cyan);
+		}
+		
+		auto collider = entity->GetComponent<RectCollider>();
+		if (collider)
+		{
+			auto bounds = collider->GetGlobalBounds();
+			SFMLEntityRenderer::DrawBox(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Magenta);
 		}
 	}
 }

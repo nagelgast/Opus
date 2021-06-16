@@ -12,6 +12,7 @@
 void CollisionSystem::FixedUpdate()
 {
 	// TODO Replace with iterators
+	// TODO Optimize to only check colliders with matching layers
 	for (size_t i = 0; i < colliders_.size(); ++i)
 	{
 		auto* const collider = colliders_[i];

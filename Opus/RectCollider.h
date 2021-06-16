@@ -10,6 +10,7 @@ public:
 	
 	bool Contains(const Vector2& position) override;
 	Shape GetShape() override;
+	Rect GetGlobalBounds();
 private:
 	Rect bounds_;
 };
