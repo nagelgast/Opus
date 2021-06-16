@@ -1,12 +1,9 @@
 #include "Player.h"
 
-
-#include "DefaultAttack.h"
 #include "FireballSkill.h"
 #include "MouseHandler.h"
 #include "PlayerController.h"
 #include "PlayerSkillHandler.h"
-#include "../Opus/CircleCollider.h"
 
 #include "../Opus/SpriteRenderer.h"
 #include "../Opus/RectCollider.h"
@@ -17,7 +14,7 @@ void Player::Awake()
 	const auto sr = AddComponent(SpriteRenderer());
 	sr.SetSprite(sprite);
 	
-	auto& collider = AddComponent(CircleCollider(1, false, false));
+	auto& collider = AddComponent(RectCollider(1, false, false));
 	
 	GetTransform().SetScale(100, 100);
 
