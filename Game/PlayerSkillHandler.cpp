@@ -34,18 +34,31 @@ void PlayerSkillHandler::Update()
 	{
 		const auto& input = entity_->GetInput();
 
+
+		// TODO Refactor this
+		if(input.right_mouse.released)
+		{
+			moving_to_target_ = true;
+		}
+
+		if(moving_to_target_ && input.left_mouse.pressed)
+		{
+			moving_to_target_ = false;
+		}
+
 		if (input.right_mouse.held)
 		{
 			target_position_ = input.mouse_world_pos;
+		}
+		
+		if (input.right_mouse.held || moving_to_target_)
+		{
 			if (Vector2::IsInRange(target_position_, entity_->GetTransform().GetPosition(),
 			                       active_skill_->GetRange()))
 			{
 				std::cout << "Casting\n";
 				remaining_cast_time_ = active_skill_->GetCastTime();
-			}
-			else
-			{
-				// TODO Move towards mouse position
+				moving_to_target_ = false;
 			}
 		}
 	}

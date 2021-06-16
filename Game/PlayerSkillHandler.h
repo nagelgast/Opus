@@ -16,8 +16,9 @@ public:
 
 private:
 	float remaining_cast_time_ = 0;
+	bool moving_to_target_ = false;
 	Vector2 target_position_;
-
+	
 	// TODO Replace with smart ptr or ref
 	ActiveSkill* active_skill_ = nullptr;
 };

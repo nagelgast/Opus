@@ -23,18 +23,19 @@ void MouseHandler::Update()
 
 	if (in_world_space_)
 	{
-		if (pressed)
+		// TODO Handle decently for all skill keys
+		if (pressed || input.right_mouse.pressed)
 		{
 			HandleWorldPress();
 		}
-		else if (held)
+		else if (held || input.right_mouse.held)
 		{
 			if (is_world_space_hold_)
 			{
 				HandleWorldHold();
 			}
 		}
-		else if (released)
+		else if (released || input.right_mouse.released)
 		{
 			HandleWorldRelease();
 		}

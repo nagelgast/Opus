@@ -20,7 +20,7 @@ DefaultAttack::DefaultAttack(const PlayerSkillHandler& psh) : ActiveSkill(psh)
 
 void DefaultAttack::Cast()
 {
-	auto* collider = Physics::GetColliderAtPosition(psh_.entity_->GetInput().mouse_world_pos, 0);
+	auto* collider = Physics::GetColliderAtPosition(psh_.GetTargetPosition(), 0);
 	if(!collider) return;
 
 	auto* health = collider->entity_->GetComponent<Health>();
