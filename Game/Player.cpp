@@ -4,6 +4,7 @@
 #include "MouseHandler.h"
 #include "PlayerController.h"
 #include "PlayerSkillHandler.h"
+#include "../Opus/CircleCollider.h"
 
 #include "../Opus/SpriteRenderer.h"
 #include "../Opus/RectCollider.h"
