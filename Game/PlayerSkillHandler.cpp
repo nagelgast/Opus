@@ -36,7 +36,8 @@ void PlayerSkillHandler::Update()
 
 		if (input.right_mouse.held)
 		{
-			if (Vector2::IsInRange(input.mouse_world_pos, entity_->GetTransform().GetPosition(),
+			target_position_ = input.mouse_world_pos;
+			if (Vector2::IsInRange(target_position_, entity_->GetTransform().GetPosition(),
 			                       active_skill_->GetRange()))
 			{
 				std::cout << "Casting\n";
@@ -53,4 +54,9 @@ void PlayerSkillHandler::Update()
 bool PlayerSkillHandler::IsCasting() const
 {
 	return remaining_cast_time_ > 0;
+}
+
+Vector2 PlayerSkillHandler::GetTargetPosition() const
+{
+	return target_position_;
 }
