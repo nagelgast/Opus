@@ -6,12 +6,11 @@
 class FireballSkill : public ActiveSkill
 {
 public:
-	FireballSkill(PlayerSkillHandler* psh);
+	explicit FireballSkill(const PlayerSkillHandler& psh);
+
 	void Cast() override;
 
 	float GetCastTime() override;
 	float GetRange() override;
-private:
-	PlayerSkillHandler* psh_ = nullptr;
 };
 

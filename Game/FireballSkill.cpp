@@ -3,18 +3,16 @@
 #include "../Opus/Input.h"
 #include "Fireball.h"
 
-
-FireballSkill::FireballSkill(PlayerSkillHandler* psh)
+FireballSkill::FireballSkill(const PlayerSkillHandler& psh) : ActiveSkill(psh)
 {
-	psh_ = psh;
 }
 
 void FireballSkill::Cast()
 {
-	const auto player_pos = psh_->entity_->GetTransform().GetPosition();
-	auto& fireball = psh_->entity_->Instantiate<Fireball>(player_pos);
+	const auto player_pos = psh_.entity_->GetTransform().GetPosition();
+	auto& fireball = psh_.entity_->Instantiate<Fireball>(player_pos);
 
-	fireball.Initialize(psh_->entity_->GetInput().mouse_world_pos);
+	fireball.Initialize(psh_.entity_->GetInput().mouse_world_pos);
 	fireball.GetTransform().CenterOrigin();
 	fireball.SetName("Fireball");
 }

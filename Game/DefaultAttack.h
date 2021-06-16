@@ -4,7 +4,8 @@
 class DefaultAttack : public ActiveSkill
 {
 public:
-	DefaultAttack();
+	explicit DefaultAttack(const PlayerSkillHandler& psh);
+
 	void Cast() override;
 
 	float GetCastTime() override;
