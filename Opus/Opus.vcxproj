@@ -167,6 +167,8 @@
     <ClInclude Include="BaseRenderer.h" />
     <ClInclude Include="BaseTime.h" />
     <ClInclude Include="BaseWindow.h" />
+    <ClInclude Include="CircleCollider.h" />
+    <ClInclude Include="RectCollider.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
     <ClInclude Include="Collision.h" />
@@ -201,6 +203,8 @@
     <ClInclude Include="VectorExtensions.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="RectCollider.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />
     <ClCompile Include="CollisionSystem.cpp" />

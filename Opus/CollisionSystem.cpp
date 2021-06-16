@@ -12,12 +12,12 @@
 void CollisionSystem::FixedUpdate()
 {
 	// TODO Replace with iterators
-	for (auto i = 0; i < colliders_.size(); ++i)
+	for (size_t i = 0; i < colliders_.size(); ++i)
 	{
-		auto collider = colliders_[i];
+		auto* const collider = colliders_[i];
 		for(auto j = i+1; j < colliders_.size(); ++j)
 		{
-			auto other = colliders_[j];
+			auto* const other = colliders_[j];
 			HandleCollision(*collider, *other);
 		}
 	}
@@ -60,15 +60,24 @@ bool CollisionSystem::CheckLayerCollision(const Collider& c1, const Collider& c2
 void CollisionSystem::AddCollider(Collider* collider)
 {
 	colliders_.push_back(collider);
+	colliders_by_layer_[collider->GetLayer()].push_back(collider);
 }
 
 void CollisionSystem::RemoveCollider(Collider* collider)
 {
 	const auto iter = remove(colliders_.begin(), colliders_.end(), collider);
 	colliders_.erase(iter, colliders_.end());
+	auto& layer = colliders_by_layer_[collider->GetLayer()];
+	const auto layer_iter = remove(layer.begin(), layer.end(), collider);
+	layer.erase(layer_iter, layer.end());
 }
 
 void CollisionSystem::SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix)
 {
 	collision_matrix_ = collision_matrix;
+}
+
+std::vector<Collider*> CollisionSystem::GetLayerColliders(int layer)
+{
+	return colliders_by_layer_[layer];
 }

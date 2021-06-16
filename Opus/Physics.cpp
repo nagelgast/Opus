@@ -4,26 +4,36 @@
 #include "Collider.h"
 #include "Collision.h"
 #include "Entity.h"
+#include "Game.h"
 #include "Shape.h"
 #include "Vector2.h"
 #include "Transform.h"
 
+Collider* Physics::GetColliderAtPosition(const Vector2& position, const int layer)
+{
+	auto colliders = Game::GetCollisionSystem().GetLayerColliders(layer);
+	for (const auto& collider : colliders)
+	{
+		if(collider->Contains(position))
+		{
+			return collider;
+		}
+	}
+
+	return nullptr;
+}
+
 Collision Physics::HandleCollision(Collider& c, const int layer)
 {
-	auto& entities = c.entity_->GetEntities();
-
-	for (const auto& entity : entities)
+	auto colliders = Game::GetCollisionSystem().GetLayerColliders(layer);
+	for (const auto& collider : colliders)
 	{
-		//TODO Fix really slow
-		auto col = entity->GetComponent<Collider>();
-		if (col != nullptr && col->GetLayer() == layer)
+		const auto collision = HandleCollision(c, *collider);
+		if (collision.hit)
 		{
-			const auto collision = HandleCollision(c, *col);
-			if(collision.hit)
-			{
-				return collision;
-			}
+			return collision;
 		}
+
 	}
 
 	return {};

@@ -1,28 +1,26 @@
 #include "pch.h"
 #include "Collider.h"
 
-
 #include "Entity.h"
 #include "Game.h"
+#include "Transform.h"
 
 
-Collider::Collider(const int layer, const Shape shape, const bool trigger, const bool fixed)
-	: collision_system_(Game::GetCollisionSystem()),
-	  layer_(layer),
-	  shape_(shape),
+Collider::Collider(const int layer, const bool trigger, const bool fixed)
+	: layer_(layer),
 	  trigger_(trigger),
 	  fixed_(fixed)
 {
 }
 
-Collider::~Collider()
-{
-	collision_system_.RemoveCollider(this);
-}
-
 void Collider::Start()
 {
-	collision_system_.AddCollider(this);
+	Game::GetCollisionSystem().AddCollider(this);
+}
+
+void Collider::OnDestroy()
+{
+	Game::GetCollisionSystem().RemoveCollider(this);
 }
 
 void Collider::Collide(const Collider& other) const
@@ -43,9 +41,4 @@ bool Collider::IsFixed() const
 int Collider::GetLayer() const
 {
 	return layer_;
-}
-
-Shape Collider::GetShape() const
-{
-	return shape_;
 }

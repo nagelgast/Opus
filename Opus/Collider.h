@@ -8,21 +8,20 @@ class CollisionSystem;
 class Collider : public Component
 {
 public:
-	explicit Collider(int layer, Shape shape, bool trigger, bool fixed);
-	~Collider();
-
 	void Start() override;
+	void OnDestroy() override;
 	
 	void Collide(const Collider& other) const;
 
 	int GetLayer() const;
-	Shape GetShape() const;
 	bool IsTrigger() const;
 	bool IsFixed() const;
+	virtual Shape GetShape() = 0;
+	virtual bool Contains(const Vector2& position) = 0;
+protected:
+	explicit Collider(int layer, bool trigger, bool fixed);
 private:
-	CollisionSystem& collision_system_;
 	int layer_;
-	Shape shape_;
 	bool trigger_;
 	bool fixed_;
 };

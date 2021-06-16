@@ -8,6 +8,8 @@
 
 #include "EntityController.h"
 
+class CircleCollider;
+class RectCollider;
 class Collider;
 class Transform;
 class BaseEntityRenderer;
@@ -44,7 +46,9 @@ public:
 
 	void Destroy();
 
-	Collider& AddComponent(const Collider& c);
+	RectCollider& AddComponent(const RectCollider& c);
+	CircleCollider& AddComponent(const CircleCollider& c);
+	
 	Entity& Instantiate() const;
 	Entity& Instantiate(const Vector2& position) const;
 	Entity& Instantiate(Transform& parent) const;

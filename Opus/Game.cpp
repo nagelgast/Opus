@@ -63,9 +63,7 @@ void Game::SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_m
 
 CollisionSystem& Game::GetCollisionSystem()
 {
-	// TODO Find better way to handle systems
-	static CollisionSystem collision_system {};
-	return collision_system;
+	return instance_->collision_system_;
 }
 
 void Game::HandleInput() const

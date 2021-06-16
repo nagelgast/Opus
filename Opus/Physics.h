@@ -9,6 +9,7 @@ struct Collision;
 class Physics
 {
 public:
+	static Collider* GetColliderAtPosition(const Vector2& position, int layer);
 	static Collision HandleCollision(Collider& c, int layer);
 	static Collision HandleCollision(Collider& player, Collider& other);
 	static bool CheckCircleCollision(const Transform& t1, const Transform& t2);

@@ -7,9 +7,8 @@
 #include "PlayerController.h"
 #include "PlayerSkillHandler.h"
 
-#include "../Opus/Shape.h"
 #include "../Opus/SpriteRenderer.h"
-#include "../Opus/Collider.h"
+#include "../Opus/RectCollider.h"
 
 void Player::Awake()
 {
@@ -17,7 +16,7 @@ void Player::Awake()
 	const auto sr = AddComponent(SpriteRenderer());
 	sr.SetSprite(sprite);
 	
-	const auto collider = AddComponent(Collider(1, Shape::kSquare, false, false));
+	const auto collider = AddComponent(RectCollider({0,0,1,1}, 1, false, false));
 	GetTransform().SetScale(100, 100);
 
 	auto pc = AddComponent(PlayerController(200, 400));
@@ -25,9 +24,9 @@ void Player::Awake()
 	auto& psh = AddComponent(PlayerSkillHandler());
 
 	// TODO Store skill references properly
-	// auto* const default_attack = new DefaultAttack();
-	// psh.SetActiveSkill(default_attack);
+	auto* const default_attack = new DefaultAttack();
+	psh.SetActiveSkill(default_attack);
 
-	auto* const fireball = new FireballSkill(&psh);
-	psh.SetActiveSkill(fireball);
+	// auto* const fireball = new FireballSkill(&psh);
+	// psh.SetActiveSkill(fireball);
 }

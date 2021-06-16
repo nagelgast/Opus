@@ -27,7 +27,6 @@ public:
 	
 	static CollisionSystem& GetCollisionSystem();
 
-
 	template <typename T>
 	T& AddService()
 	{
@@ -66,6 +65,9 @@ private:
 	std::unique_ptr<BaseTime> time_;
 
 	std::map<std::type_index, std::unique_ptr<Service>> services_{};
+
+	// TODO Make system
+	CollisionSystem collision_system_;
 
 	EntityController entity_controller_;
 	Entity* root_ = nullptr;

@@ -9,7 +9,8 @@
 #include "EntityController.h"
 
 #include "BaseTime.h"
-#include "Collider.h"
+#include "CircleCollider.h"
+#include "RectCollider.h"
 
 Entity::Entity()
 {
@@ -55,10 +56,16 @@ void Entity::Destroy()
 	OnDestroy();
 }
 
-Collider& Entity::AddComponent(const Collider& c)
+RectCollider& Entity::AddComponent(const RectCollider& c)
 {
-	collider_ = &AddComponent<Collider>(c);
-	return *collider_;
+	collider_ = &AddComponent<RectCollider>(c);
+	return dynamic_cast<RectCollider&>(*collider_);
+}
+
+CircleCollider& Entity::AddComponent(const CircleCollider& c)
+{
+	collider_ = &AddComponent<CircleCollider>(c);
+	return dynamic_cast<CircleCollider&>(*collider_);
 }
 
 Entity& Entity::Instantiate() const

@@ -3,13 +3,14 @@
 #include "Projectile.h"
 
 #include "../Opus/Collider.h"
+#include "../Opus/RectCollider.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/Shape.h"
 
 void Fireball::Awake()
 {
 	AddComponent(ShapeRenderer(Shape::kCircle, {1, 0, 0}));
-	const auto collider = AddComponent(Collider(2, Shape::kSquare, true, false));
+	AddComponent(RectCollider({0,0,20,20}, 2, true, false));
 	GetTransform().SetScale(20,20);
 	projectile_ = &AddComponent(Projectile(10, 200, 400));
 }

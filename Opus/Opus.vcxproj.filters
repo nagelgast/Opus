@@ -156,6 +156,12 @@
     <ClInclude Include="Service.h">
       <Filter>Header Files\Core</Filter>
     </ClInclude>
+    <ClInclude Include="RectCollider.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleCollider.h">
+      <Filter>Header Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -217,6 +223,12 @@
     </ClCompile>
     <ClCompile Include="Service.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="RectCollider.cpp">
+      <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleCollider.cpp">
+      <Filter>Source Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -3,8 +3,7 @@
 #include "Health.h"
 #include "Loot.h"
 
-#include "../Opus/Shape.h"
-#include "../Opus/Collider.h"
+#include "../Opus/RectCollider.h"
 #include "../Opus/SpriteRenderer.h"
 
 void Enemy::Awake()
@@ -12,7 +11,7 @@ void Enemy::Awake()
 	const Sprite sprite{"Sprites/mobs/slime-blue.png", {0, 8, 16, 16}};
 	auto sr = AddComponent(SpriteRenderer());
 	sr.SetSprite(sprite);
-	AddComponent(Collider(0, Shape::kSquare, false, false));
+	AddComponent(RectCollider({ 0,0,32,32 }, 0, false, false));
 	GetTransform().SetScale(32, 32);
 
 	AddComponent(Health(1));
