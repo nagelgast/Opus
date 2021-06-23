@@ -16,20 +16,20 @@ public:
 		const ItemCategory wands{"Wand", 1, 3, {ItemTag::kWeapon}};
 		categories_["Wands"] = wands;
 
-		StatList stats{};
-		// stats.Add(WeaponStats{5, 9, 70, 1400});
-		// stats.Add(RequirementStats{0, 0, 0, 14});
-		// stats.Add(ImplicitStat{StatGroup::SpellDamage, 8, 12, true});
-		const ItemBaseType driftwood_wand{"Driftwood_Wand", "Wands", stats};
-		base_types_[driftwood_wand.name] = driftwood_wand;
+		StatList stats {};
+		stats.Add(WeaponStats{5, 9, 70, 1400});
+		stats.Add(RequirementStats{0, 0, 0, 14});
+		stats.Add(ImplicitStat{StatGroup::SpellDamage, 8, 12, true});
+		ItemBaseType driftwood_wand{"Driftwood_Wand", "Wands", std::move(stats)};
+		base_types_[driftwood_wand.name] = std::move(driftwood_wand);
 
 		const ItemCategory currency{"Currency", 1, 1, {}};
 		categories_["Currency"] = currency;
-		const ItemBaseType chaos_orb{"Chaos_Orb", "Currency", {}};
-		base_types_[chaos_orb.name] = chaos_orb;
+		ItemBaseType chaos_orb{"Chaos_Orb", "Currency", {}};
+		base_types_[chaos_orb.name] = std::move(chaos_orb);
 	}
 
-	ItemBaseType GetBaseType(const std::string& base_type_name)
+	ItemBaseType& GetBaseType(const std::string& base_type_name)
 	{
 		return base_types_[base_type_name];
 	}

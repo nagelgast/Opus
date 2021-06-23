@@ -22,11 +22,11 @@ void Loot::OnDestroy()
 
 void Loot::SpawnItem() const
 {
-	const auto wand_base = item_data_->GetBaseType("Driftwood_Wand");
+	const auto& wand_base = item_data_->GetBaseType("Driftwood_Wand");
 	const auto wand_category = item_data_->GetCategory(wand_base.category);
 	auto item = std::make_unique<Item>(Item{wand_base, wand_category, Rarity::kNormal});
 
-	const auto orb_base = item_data_->GetBaseType("Chaos_Orb");
+	const auto& orb_base = item_data_->GetBaseType("Chaos_Orb");
 	const auto orb_category = item_data_->GetCategory(orb_base.category);
 	auto item2 = std::make_unique<Item>(Item{orb_base, orb_category, Rarity::kCurrency});
 	

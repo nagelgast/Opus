@@ -8,8 +8,8 @@
 
 const int kInventorySlotSize = 78;
 
-Item::Item(ItemBaseType base_type, ItemCategory category, const Rarity rarity) :
-	base_type_(std::move(base_type)),
+Item::Item(const ItemBaseType& base_type, ItemCategory category, const Rarity rarity) :
+	base_type_(base_type),
 	category_(std::move(category)),
 	rarity_(rarity),
 	sprite_(Sprite{
@@ -43,7 +43,7 @@ std::string Item::GenerateText() const
 {
 	std::string text {};
 	text += base_type_.category + "\n";
-	//text += base_type_.stats.GenerateText();
+	text += base_type_.stats.GenerateText();
 	return text;
 }
 

@@ -4,8 +4,6 @@
 #include "ItemCategory.h"
 #include "StatList.h"
 
-struct Stat;
-
 struct ItemBaseType
 {
 	ItemBaseType() = default;
