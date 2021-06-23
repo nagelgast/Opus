@@ -17,7 +17,7 @@ public:
 		categories_["Wands"] = wands;
 
 		StatList stats {};
-		stats.Add(WeaponStats{5, 9, 70, 1400});
+		stats.Add(WeaponStats{5, 9, 700, 140});
 		stats.Add(RequirementStats{0, 0, 0, 14});
 		stats.Add(ImplicitStat{StatGroup::SpellDamage, 8, 12, true});
 		ItemBaseType driftwood_wand{"Driftwood_Wand", "Wands", std::move(stats)};
