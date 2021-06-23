@@ -39,9 +39,12 @@ ItemSize Item::GetSize() const
 	return {category_.width, category_.height};
 }
 
-ItemBaseType Item::GetBaseType() const
+std::string Item::GenerateText() const
 {
-	return base_type_;
+	std::string text {};
+	text += base_type_.category + "\n";
+	//text += base_type_.stats.GenerateText();
+	return text;
 }
 
 bool Item::HasTag(const ItemTag& tag)

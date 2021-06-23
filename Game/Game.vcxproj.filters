@@ -49,6 +49,15 @@
     <Filter Include="Source Files\Items\UI">
       <UniqueIdentifier>{4bb35807-e20a-4909-a236-40646a810508}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Items\Stats">
+      <UniqueIdentifier>{f7b1bea8-e0d0-406b-b180-a75ded9f3470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Items\Data">
+      <UniqueIdentifier>{348c945c-ac23-45ac-b800-778b86e675f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items\Stats">
+      <UniqueIdentifier>{17779542-4b08-4a77-a660-bf5362ceb070}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PlayerController.cpp">
@@ -138,6 +147,9 @@
     <ClCompile Include="EquipmentSlot.cpp">
       <Filter>Source Files\Items\UI</Filter>
     </ClCompile>
+    <ClCompile Include="StatList.cpp">
+      <Filter>Source Files\Items\Stats</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="PlayerController.h">
@@ -212,9 +224,6 @@
     <ClInclude Include="ItemBaseType.h">
       <Filter>Header Files\Items</Filter>
     </ClInclude>
-    <ClInclude Include="ItemData.h">
-      <Filter>Header Files\Items</Filter>
-    </ClInclude>
     <ClInclude Include="DefaultAttack.h">
       <Filter>Header Files\Skills</Filter>
     </ClInclude>
@@ -247,6 +256,27 @@
     </ClInclude>
     <ClInclude Include="EquipmentSlot.h">
       <Filter>Header Files\Items\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Stat.h">
+      <Filter>Header Files\Items\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponStats.h">
+      <Filter>Header Files\Items\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="RequirementStats.h">
+      <Filter>Header Files\Items\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemData.h">
+      <Filter>Header Files\Items\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="ImplicitStat.h">
+      <Filter>Header Files\Items\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="StatGroup.h">
+      <Filter>Header Files\Items\Stats</Filter>
+    </ClInclude>
+    <ClInclude Include="StatList.h">
+      <Filter>Header Files\Items\Stats</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

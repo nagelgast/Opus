@@ -16,7 +16,7 @@ public:
 	Rarity GetRarity() const;
 	Sprite GetSprite() const;
 	ItemSize GetSize() const;
-	ItemBaseType GetBaseType() const;
+	std::string GenerateText() const;
 	bool HasTag(const ItemTag& tag);
 private:
 	ItemBaseType base_type_;

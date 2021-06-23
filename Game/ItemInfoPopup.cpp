@@ -3,6 +3,7 @@
 
 #include "Item.h"
 #include "Rarity.h"
+#include "Stat.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/TextRenderer.h"
 
@@ -58,7 +59,7 @@ void ItemInfoPopup::SetItem(const Item& item) const
 	title_renderer_->SetText(item.GetName());
 	const auto title_width = title_renderer_->GetWidth();
 
-	const auto info_text = ParseInfo(item);
+	const auto info_text = item.GenerateText();
 	info_renderer_->SetText(info_text);
 
 	const auto info_width = info_renderer_->GetWidth();
@@ -67,29 +68,6 @@ void ItemInfoPopup::SetItem(const Item& item) const
 	
 	Resize(*title_background_renderer_, width);
 	Resize(*background_renderer_, width);
-
-
-}
-
-std::string ItemInfoPopup::ParseInfo(const Item& item) const
-{
-	std::string output;
-	
-	auto base_type = item.GetBaseType();
-
-	output += base_type.category + "\n";
-	output += "Physical Damage: " + std::to_string(base_type.min_dmg) + "-" + std::to_string(base_type.max_dmg) + "\n";
-	output += "Critical Strike Chance: " + std::to_string(base_type.crit_chance/10) + "%\n";
-	output += "Attacks per Second: ";
-
-	// TODO My god string manipulation is terrible in C++
-	char aps [4];
-	snprintf(aps, 4, "%.2f", base_type.apm/60.0);
-	output += aps;
-	
-	output += "\n";
-
-	return output;
 }
 
 void ItemInfoPopup::Resize(ShapeRenderer& sr, const float width)

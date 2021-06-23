@@ -1,13 +1,22 @@
 #pragma once
+#include <utility>
+
 #include "ItemCategory.h"
+#include "StatList.h"
+
+struct Stat;
 
 struct ItemBaseType
 {
+	ItemBaseType() = default;
+	ItemBaseType(std::string name, std::string category, StatList stats)
+		: name(std::move(name)),
+		  category(std::move(category)),
+		  stats(std::move(stats))
+	{
+	}
+
 	std::string name;
 	std::string category;
-
-	int min_dmg = 0;
-	int max_dmg = 0;
-	int crit_chance = 0; // x100
-	int apm = 0;
+	StatList stats;
 };
