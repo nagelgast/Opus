@@ -45,19 +45,6 @@ END
 #endif    // APSTUDIO_INVOKED
 
 
-/////////////////////////////////////////////////////////////////////////////
-//
-// PNG
-//
-
-IDB_PNG1                PNG                     "Sprites\\Driftwood_Wand_inventory_icon.png"
-
-IDB_PNG2                PNG                     "Sprites\\InvSlot.png"
-
-IDB_PNG3                PNG                     "Sprites\\Chaos_Orb_inventory_icon.png"
-
-IDB_PNG4                PNG                     "Sprites\\Goldrim_inventory_icon.png"
-
 #endif    // English (United States) resources
 /////////////////////////////////////////////////////////////////////////////
 

@@ -286,16 +286,7 @@
     <Image Include="Sprites\chars\gabe\gabe-idle-run.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="Sprites\Driftwood_Wand_inventory_icon.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="Sprites\InvSlot.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Sprites\Chaos_Orb_inventory_icon.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="Sprites\Goldrim_inventory_icon.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
