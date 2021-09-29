@@ -12,6 +12,11 @@ Transform::~Transform()
 	}
 }
 
+Transform* Transform::GetParent()
+{
+	return parent_;
+}
+
 void Transform::SetParent(Transform& transform)
 {
 	parent_ = &transform;
@@ -78,6 +83,11 @@ void Transform::SetScale(const float width, const float height)
 Vector2 Transform::GetScale() const
 {
 	return scale_;
+}
+
+std::vector<Transform*> Transform::GetChildren()
+{
+	return children_;
 }
 
 void Transform::RecalculateLocalPosition()

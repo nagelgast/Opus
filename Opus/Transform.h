@@ -9,6 +9,7 @@ class Transform final : public Component
 public:
 	~Transform();
 
+	Transform* GetParent();
 	void SetParent(Transform& transform);
 	
 	Vector2 GetPosition() const;
@@ -22,6 +23,8 @@ public:
 	
 	void SetScale(float width, float height);
 	Vector2 GetScale() const;
+
+	std::vector<Transform*> GetChildren();
 private:
 	void RecalculateLocalPosition();
 	void RecalculateChildrenPosition();

@@ -23,6 +23,7 @@ void InventoryScreen::Initialize(Inventory* inventory, int rows, int columns)
 	const auto width = static_cast<float>(kInventorySlotSize * columns);
 	const auto height = static_cast<float>(kInventorySlotSize * rows);
 	auto& background = Instantiate(GetTransform());
+	background.SetName("Background");
 	background.AddComponent(ShapeRenderer(Shape::kSquare, { 0.2f, 0.2f, 0.2f }, false));
 
 	auto& background_transform = background.GetTransform();
@@ -34,6 +35,7 @@ void InventoryScreen::Initialize(Inventory* inventory, int rows, int columns)
 		{
 			auto index = col + row * columns;
 			auto& slot = Instantiate<InventorySlot>(GetTransform());
+			slot.SetName("Slot" + std::to_string(index));
 			auto& slot_interactable = *slot.GetComponent<Interactable>();
 			slot_interactable.OnRelease += [this, index] { HandleRelease(index); };
 			slot_interactable.OnHoverEnter += [this, index] { HandleSlotHoverEnter(index); };

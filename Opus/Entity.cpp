@@ -113,6 +113,11 @@ Transform& Entity::GetTransform() const
 	return *transform_;
 }
 
+std::string Entity::GetName() const
+{
+	return name_;
+}
+
 void Entity::SetName(const std::string& name)
 {
 	name_ = name;

@@ -8,6 +8,7 @@
 
 #include "../Opus/Core.h"
 #include "../Opus/Camera.h"
+#include "../Opus/EntityHierarchyUI.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/Shape.h"
 
@@ -28,6 +29,7 @@ Player& InitPlayer(Entity& root)
 void InitCamera(Entity& root, Player& player, Game& game)
 {
 	auto& main_camera = root.Instantiate();
+	main_camera.SetName("Main Camera");
 	auto camera = main_camera.AddComponent(Camera());
 	camera.SetTarget(player);
 	game.SetCamera(camera);
@@ -35,17 +37,17 @@ void InitCamera(Entity& root, Player& player, Game& game)
 
 void InitHUD(Entity& root)
 {
-
 	const auto margin = 120;
-
 	{
 		auto& health_globe = root.Instantiate({ margin, kScreenHeight - margin });
+		health_globe.SetName("Health Globe");
 		health_globe.AddComponent(ShapeRenderer(Shape::kCircle, { 1, 0, 0 }, false));
 		health_globe.GetTransform().SetScale(100, 100);
 	}
 
 	{
 		auto& mana_globe = root.Instantiate({ kScreenWidth - margin, kScreenHeight - margin });
+		mana_globe.SetName("Mana Globe");
 		mana_globe.AddComponent(ShapeRenderer(Shape::kCircle, { 0, 0, 1 }, false));
 		mana_globe.GetTransform().SetScale(100, 100);
 	}
@@ -56,8 +58,10 @@ void InitUI(Entity& root, Player& player)
 {
 
 	auto& screen_manager = root.Instantiate<ScreenManager>();
-
+	screen_manager.SetName("Screen Manager");
+	
 	auto& mouse = root.Instantiate<MouseSlot>();
+	mouse.SetName("Mouse Slot");
 	mouse.AddComponent(MouseHandler(screen_manager, *player.GetComponent<PlayerController>(), mouse));
 
 	Game::GetService<PlayerItemStorage>()->Initialize(mouse, *screen_manager.player_inventory_screen_);
@@ -87,7 +91,6 @@ int main()
 {
 	auto* game = new Game(kScreenWidth, kScreenHeight, kFpsLimit, kFixedTimeStepMs, "Game");
 
-
 	// TODO Add naming to layers and force symmetry
 	auto collision_matrix = std::map<int, std::vector<int>>();
 
@@ -99,7 +102,8 @@ int main()
 
 	// Initialize services
 	game->AddService<PlayerItemStorage>();
-	
+
+
 	// Load in starting entities
 	auto& root = game->GetRoot();
 	auto& player = InitPlayer(root);
@@ -107,6 +111,9 @@ int main()
 	InitHUD(root);
 	InitUI(root, player);
 	InitEntities(root);
+
+	//root.Instantiate<EntityHierarchyUI>();
+	
 	game->Run();
 
 	game->Exit();

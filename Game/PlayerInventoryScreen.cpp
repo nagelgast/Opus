@@ -56,12 +56,14 @@ bool PlayerInventoryScreen::IsOpen() const
 void PlayerInventoryScreen::SpawnEquipmentSlot(const ItemTag tag, const Vector2 position, const float width, const float height)
 {
 	auto& background = Instantiate();
+	background.SetName("EquipmentSlotBackground");
 	background.AddComponent(ShapeRenderer(Shape::kSquare, { 0.2f, 0.2f, 0.2f }, false));
 	auto& background_transform = background.GetTransform();
 
 	background_transform.SetScale(width, height);
 
 	auto& slot = Instantiate<EquipmentSlot>(GetTransform());
+	slot.SetName("EquipmentSlot");
 	slot.SetRequiredTag(tag);
 
 	auto& slot_transform = slot.GetTransform();

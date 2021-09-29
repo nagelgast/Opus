@@ -168,6 +168,7 @@
     <ClInclude Include="BaseTime.h" />
     <ClInclude Include="BaseWindow.h" />
     <ClInclude Include="CircleCollider.h" />
+    <ClInclude Include="EntityHierarchyUI.h" />
     <ClInclude Include="RectCollider.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider.h" />
@@ -204,6 +205,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="EntityHierarchyUI.cpp" />
     <ClCompile Include="RectCollider.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider.cpp" />

@@ -43,6 +43,12 @@
     <Filter Include="Source Files\Data">
       <UniqueIdentifier>{5078b04b-428d-4985-b22b-31cdec125d89}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Development">
+      <UniqueIdentifier>{a318e7ab-1d43-4262-91ca-024eaee6e3fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Development">
+      <UniqueIdentifier>{0928c15c-5371-45d7-8782-56209cf0a4a3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -162,6 +168,9 @@
     <ClInclude Include="CircleCollider.h">
       <Filter>Header Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="EntityHierarchyUI.h">
+      <Filter>Header Files\Development</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -229,6 +238,9 @@
     </ClCompile>
     <ClCompile Include="CircleCollider.cpp">
       <Filter>Source Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityHierarchyUI.cpp">
+      <Filter>Source Files\Development</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
