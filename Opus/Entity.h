@@ -107,7 +107,6 @@ public:
 	std::vector<std::shared_ptr<Entity>>& GetEntities() const;
 	float GetDeltaTime() const;
 	float GetFixedDeltaTime() const;
-	const Input& GetInput() const;
 
 	Transform& GetTransform() const;
 

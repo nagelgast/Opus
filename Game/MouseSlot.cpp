@@ -58,7 +58,7 @@ bool MouseSlot::HasItem() const
 
 void MouseSlot::Update()
 {
-	GetTransform().SetPosition(GetInput().mouse_screen_pos);
+	GetTransform().SetPosition(Game::GetInput().mouse_screen_pos);
 }
 
 void MouseSlot::Drop(const Vector2 position)

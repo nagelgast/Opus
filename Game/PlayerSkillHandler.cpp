@@ -32,7 +32,7 @@ void PlayerSkillHandler::Update()
 	}
 	else
 	{
-		const auto& input = entity_->GetInput();
+		const auto& input = Game::GetInput();
 
 
 		// TODO Refactor this

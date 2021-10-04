@@ -2,6 +2,7 @@
 
 
 #include "PlayerInventoryScreen.h"
+#include "../Opus/Game.h"
 #include "../Opus/Input.h"
 #include "../Opus/Transform.h"
 
@@ -14,7 +15,7 @@ void ScreenManager::Awake()
 
 void ScreenManager::Update()
 {
-	const auto& input = GetInput();
+	const auto& input = Game::GetInput();
 	if(input.inventory.pressed)
 	{
 		player_inventory_screen_->Open();

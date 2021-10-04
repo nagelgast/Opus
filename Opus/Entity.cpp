@@ -103,11 +103,6 @@ float Entity::GetFixedDeltaTime() const
 	return ec_->GetTime().GetFixedDeltaTime();
 }
 
-const Input& Entity::GetInput() const
-{
-	return ec_->GetInput();
-}
-
 Transform& Entity::GetTransform() const
 {
 	return *transform_;

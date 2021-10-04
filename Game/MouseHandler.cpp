@@ -15,7 +15,7 @@ void MouseHandler::Update()
 	in_world_space_ = !screen_manager_->CheckIsInScreenSpace(mouse_position_);
 	holding_item_ = mouse_item_->HasItem();
 
-	const auto& input = entity_->GetInput();
+	const auto& input = Game::GetInput();
 	const auto pressed = input.left_mouse.pressed;
 	const auto held = input.left_mouse.held;
 	const auto released = input.left_mouse.released;

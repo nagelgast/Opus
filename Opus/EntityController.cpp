@@ -85,11 +85,6 @@ const BaseTime& EntityController::GetTime() const
 	return time_;
 }
 
-const Input& EntityController::GetInput() const
-{
-	return input_;
-}
-
 void EntityController::AddEntity(std::shared_ptr<Entity> entity)
 {
 	entity->ec_ = this;

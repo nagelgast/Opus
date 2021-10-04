@@ -24,7 +24,8 @@ public:
 	Entity& GetRoot() const;
 	void SetCamera(const Camera& camera) const;
 	void SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix);
-	
+
+	static const Input& GetInput();
 	static CollisionSystem& GetCollisionSystem();
 
 	template <typename T>

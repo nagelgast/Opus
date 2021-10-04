@@ -8,7 +8,7 @@
 
 void Clickable::Update()
 {
-	const auto& input = entity_->GetInput();
+	const auto& input = Game::GetInput();
 	if(input.left_mouse.released)
 	{
 		const auto mouse_pos = input.mouse_world_pos;
