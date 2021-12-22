@@ -10,12 +10,7 @@ void InventorySlot::Awake()
 {
 	storage_ = Game::GetService<PlayerItemStorage>();
 	
-	auto& transform = GetTransform();
-	const Sprite sprite {"Sprites/InvSlot.png", {0,0, 40, 40}};
-	const auto sprite_renderer = AddComponent(SpriteRenderer());
-	sprite_renderer.SetSprite(sprite, false);
-
-	highlight_ = &Instantiate(transform);
+	highlight_ = &Instantiate(GetTransform());
 	shape_renderer_ = &highlight_->AddComponent(ShapeRenderer(Shape::kSquare, {0, 0, 0, 0.5f}, false));
 	highlight_->SetVisible(false);
 

@@ -9,7 +9,9 @@
 
 class EquipmentSlot;
 // TODO Move to global settings
-const int kInventorySlotSize = 25;
+const int kInventorySlotSize = 32;
+const int kInventoryRows = 7;
+const int kInventoryColumns = 7;
 const Color kItemSlotColor = { 0, 0, 0.5, 0.5 };
 const Color kAvailableSlotColor = { 0, 0.5, 0, 0.5 };
 const Color kPickupSlotColor = { 0.5, 0.5, 0, 0.5 };

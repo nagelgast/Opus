@@ -9,7 +9,7 @@
 
 void PlayerItemStorage::Initialize(MouseSlot& mouse, PlayerInventoryScreen& screen)
 {
-	inventory_ = std::make_unique<Inventory>(screen.GetInventoryScreen(), 5, 12);
+	inventory_ = std::make_unique<Inventory>(screen.GetInventoryScreen(), kInventoryRows, kInventoryColumns);
 	screen_ = &screen;
 	mouse_slot_ = &mouse;
 }

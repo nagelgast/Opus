@@ -20,15 +20,6 @@ void InventoryScreen::Initialize(Inventory* inventory, int rows, int columns)
 	rows_ = rows;
 	columns_ = columns;
 
-	const auto width = static_cast<float>(kInventorySlotSize * columns);
-	const auto height = static_cast<float>(kInventorySlotSize * rows);
-	auto& background = Instantiate(GetTransform());
-	background.SetName("Background");
-	background.AddComponent(ShapeRenderer(Shape::kSquare, { 0.2f, 0.2f, 0.2f }, false));
-
-	auto& background_transform = background.GetTransform();
-	background_transform.SetScale(width, height);
-
 	for (auto row = 0; row < rows; ++row)
 	{
 		for (auto col = 0; col < columns; ++col)

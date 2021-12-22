@@ -21,6 +21,7 @@ public:
 	InventoryScreen& GetInventoryScreen() const;
 private:
 	void SpawnEquipmentSlot(ItemTag tag, Vector2 position, float width, float height);
+	Transform& SpawnBackground(const Rect& texture_rect, const float& scale);
 
 	bool is_open_ = false;
 	InventoryScreen* inventory_ = nullptr;
