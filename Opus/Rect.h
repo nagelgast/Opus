@@ -5,6 +5,10 @@ struct Vector2;
 
 struct Rect
 {
+	Rect() : Rect(0,0,0,0)
+	{
+	}
+	
 	Rect(const float top, const float left, const float width, const float height) :
 		top(top), left(left), width(width), height(height), bottom(top+height), right(left+width)
 	{

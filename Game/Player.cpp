@@ -9,6 +9,7 @@
 
 #include "../Opus/SpriteRenderer.h"
 #include "../Opus/RectCollider.h"
+#include "../Opus/Animation.h"
 
 void Player::Awake()
 {
@@ -16,6 +17,8 @@ void Player::Awake()
 	const auto sr = AddComponent(SpriteRenderer());
 	sr.SetSprite(sprite);
 	
+	AddComponent(Animation(7, 0.1));
+
 	auto& collider = AddComponent(RectCollider(1, false, false));
 	
 	GetTransform().SetScale(100, 100);

@@ -162,6 +162,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="BaseEntityRenderer.h" />
     <ClInclude Include="BaseInputHandler.h" />
     <ClInclude Include="BaseRenderer.h" />
@@ -204,6 +205,7 @@
     <ClInclude Include="VectorExtensions.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
     <ClCompile Include="EntityHierarchyUI.cpp" />
     <ClCompile Include="RectCollider.cpp" />

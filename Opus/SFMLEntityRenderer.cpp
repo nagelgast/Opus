@@ -19,12 +19,14 @@ void SFMLEntityRenderer::SetSprite(const Sprite sprite)
 
 	drawable_sprite_ = std::make_unique<sf::Sprite>();
 	drawable_sprite_->setTexture(*texture_);
-	drawable_sprite_->setTextureRect({
-		static_cast<int>(sprite.rect.left),
-		static_cast<int>(sprite.rect.top),
-		static_cast<int>(sprite.rect.width),
-		static_cast<int>(sprite.rect.height)
-	});
+	drawable_sprite_->setTextureRect(ConvertRect(sprite.rect));
+}
+
+void SFMLEntityRenderer::SetTextureRect(const Rect& rect)
+{
+	if (!drawable_sprite_) return;
+
+	drawable_sprite_->setTextureRect(ConvertRect(rect));
 }
 
 void SFMLEntityRenderer::SetShape(const Shape& shape)
@@ -50,6 +52,14 @@ void SFMLEntityRenderer::SetText(const char* text)
 	drawable_text_ = std::make_unique<sf::Text>(text, font_, 18);
 }
 
+Rect SFMLEntityRenderer::GetTextureRect() const
+{
+	if (!drawable_sprite_) return {};
+
+	const auto rect = drawable_sprite_->getTextureRect();
+	return { rect.top, rect.left, rect.width, rect.height };
+}
+
 float SFMLEntityRenderer::GetWidth()
 {
 	if(drawable_text_)
@@ -59,7 +69,6 @@ float SFMLEntityRenderer::GetWidth()
 
 	return 0;
 }
-
 
 void SFMLEntityRenderer::SetColor(const Color& color)
 {
@@ -135,4 +144,14 @@ void SFMLEntityRenderer::DrawCircle(sf::RenderTarget& target, sf::RenderStates s
 	circle.setOutlineThickness(1);
 	circle.setOutlineColor(color);
 	target.draw(circle, states);
+}
+
+sf::IntRect SFMLEntityRenderer::ConvertRect(const Rect& rect)
+{
+	return {
+		static_cast<int>(rect.left),
+		static_cast<int>(rect.top),
+		static_cast<int>(rect.width),
+		static_cast<int>(rect.height)
+	};
 }

@@ -9,10 +9,12 @@ class Entity;
 class SFMLEntityRenderer final : public BaseEntityRenderer, public sf::Drawable
 {
 public:
-	void SetSprite(Sprite sprite) override;
+	void SetSprite(const Sprite sprite) override;
+	void SetTextureRect(const Rect& rect) override;
 	void SetShape(const Shape& shape) override;
-	
 	void SetText(const char* text) override;
+	
+	Rect GetTextureRect() const override;
 	float GetWidth() override;
 	
 	void SetColor(const Color& color) override;
@@ -23,7 +25,6 @@ public:
 	static void DrawRect(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const sf::Vector2f& size, const sf::Color& color);
 	static void DrawCircle(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const float radius, const sf::Color& color);
 private:
-
 	sf::Vector2f scale_;
 
 	std::unique_ptr<sf::Texture> texture_;
@@ -31,7 +32,8 @@ private:
 	std::unique_ptr<sf::Text> drawable_text_;
 	std::unique_ptr<sf::Shape> drawable_shape_;
 
-
 	// TODO Store in font manager
 	sf::Font font_;
+
+	sf::IntRect ConvertRect(const Rect& rect);
 };
