@@ -50,5 +50,5 @@ void Animation::Update()
 
 void Animation::SetFrame()
 {
-	entity_->GetRenderer()->SetTextureRect({ 0, current_frame_ * frame_width_, frame_width_, frame_height_ });
+	entity_->GetRenderer()->SetTextureRect({ current_frame_ * frame_width_, 0, frame_width_, frame_height_ });
 }

@@ -52,8 +52,8 @@ Rect RectCollider::GetGlobalBounds() const
 	const auto global_pos = GetGlobalPosition();
 	const Rect bounds
 	{
-		global_pos.y,
 		global_pos.x,
+		global_pos.y,
 		scale.x * size_.x,
 		scale.y * size_.y
 	};

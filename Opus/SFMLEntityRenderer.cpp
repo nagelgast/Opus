@@ -57,7 +57,7 @@ Rect SFMLEntityRenderer::GetTextureRect() const
 	if (!drawable_sprite_) return {};
 
 	const auto& rect = drawable_sprite_->getTextureRect();
-	return { rect.top, rect.left, rect.width, rect.height };
+	return { rect.left, rect.top, rect.width, rect.height };
 }
 
 float SFMLEntityRenderer::GetWidth()

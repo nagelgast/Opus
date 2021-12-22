@@ -22,8 +22,8 @@ Rect Rect::ConvertToGlobalSpace(Transform& transform) const
 
 	const Rect converted_rect
 	{
-		pos.y - offset.y,
 		pos.x - offset.x,
+		pos.y - offset.y,
 		width * scale.x,
 		height * scale.y
 	};
