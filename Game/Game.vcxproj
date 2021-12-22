@@ -165,7 +165,6 @@
     <ClCompile Include="InventoryScreen.cpp" />
     <ClCompile Include="InventorySlot.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="ItemData.cpp" />
     <ClCompile Include="ItemInfoPopup.cpp" />
     <ClCompile Include="Loot.cpp" />
     <ClCompile Include="main.cpp" />

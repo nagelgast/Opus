@@ -23,7 +23,7 @@ public:
 		ItemBaseType driftwood_wand{"Driftwood_Wand", "Wands", std::move(stats)};
 		base_types_[driftwood_wand.name] = std::move(driftwood_wand);
 
-		const ItemCategory currency{"Currency", 1, 1, {}};
+		const ItemCategory currency{"Currency", 2, 2, {}};
 		categories_["Currency"] = currency;
 		ItemBaseType chaos_orb{"Chaos_Orb", "Currency", {}};
 		base_types_[chaos_orb.name] = std::move(chaos_orb);

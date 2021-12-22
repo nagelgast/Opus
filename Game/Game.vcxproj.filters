@@ -120,9 +120,6 @@
     <ClCompile Include="MouseSlot.cpp">
       <Filter>Source Files\Items</Filter>
     </ClCompile>
-    <ClCompile Include="ItemData.cpp">
-      <Filter>Source Files\Items</Filter>
-    </ClCompile>
     <ClCompile Include="DefaultAttack.cpp">
       <Filter>Source Files\Skills</Filter>
     </ClCompile>

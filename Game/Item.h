@@ -10,7 +10,7 @@ enum class Rarity;
 class Item
 {
 public:
-	explicit Item(const ItemBaseType& base_type, ItemCategory category, Rarity rarity);
+	explicit Item(const ItemBaseType& base_type, ItemCategory category, Rarity rarity, const Rect& texture_rect);
 	
 	std::string GetName() const;
 	Rarity GetRarity() const;

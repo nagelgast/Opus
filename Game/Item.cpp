@@ -8,14 +8,11 @@
 
 const int kInventorySlotSize = 78;
 
-Item::Item(const ItemBaseType& base_type, ItemCategory category, const Rarity rarity) :
+Item::Item(const ItemBaseType& base_type, ItemCategory category, const Rarity rarity, const Rect& texture_rect) :
 	base_type_(base_type),
 	category_(std::move(category)),
 	rarity_(rarity),
-	sprite_(Sprite{
-		"Sprites/" + base_type_.name + "_inventory_icon.png",
-		{0, 0, category_.width * kInventorySlotSize, category_.height * kInventorySlotSize}
-	})
+	sprite_(Sprite{"Sprites/items.png", texture_rect})
 {
 }
 
