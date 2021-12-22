@@ -9,7 +9,7 @@
 #include "Transform.h"
 #include "../Game/Interactable.h"
 
-const bool kDrawDebug = true;
+const bool kDrawDebug = false;
 
 SFMLRenderer::SFMLRenderer(BaseWindow& window) : window_(dynamic_cast<SFMLWindow&>(window).GetWindow())
 {
@@ -87,21 +87,21 @@ void SFMLRenderer::DrawEntity(SFMLEntityRenderer* entity_renderer) const
 		auto scale = transform.GetScale();
 		SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, {position.x, position.y}, {scale.x, scale.y}, sf::Color::Red);
 
-		auto interactable = entity->GetComponent<Interactable>();
+		auto* interactable = entity->GetComponent<Interactable>();
 		if (interactable)
 		{
-			auto bounds = interactable->GetGlobalBounds();
+			const auto bounds = interactable->GetGlobalBounds();
 			SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Cyan);
 		}
 		
-		auto rect_collider = entity->GetComponent<RectCollider>();
+		auto* rect_collider = entity->GetComponent<RectCollider>();
 		if (rect_collider)
 		{
-			auto bounds = rect_collider->GetGlobalBounds();
+			const auto bounds = rect_collider->GetGlobalBounds();
 			SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Magenta);
 		}
 
-		auto circle_collider = entity->GetComponent<CircleCollider>();
+		auto* circle_collider = entity->GetComponent<CircleCollider>();
 		if (circle_collider)
 		{
 			const auto position = circle_collider->GetGlobalPosition();
