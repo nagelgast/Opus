@@ -3,6 +3,7 @@
 #include "../Opus/Collision.h"
 #include "../Opus/Input.h"
 #include "../Opus/Animation.h"
+#include "../Opus/SpriteRenderer.h"
 
 #include <cmath>
 
@@ -20,6 +21,7 @@ void PlayerController::Start()
 {
 	psh_ = entity_->GetComponent<PlayerSkillHandler>();
 	anim_ = entity_->GetComponent<Animation>();
+	sr_ = entity_->GetComponent<SpriteRenderer>();
 }
 
 void PlayerController::FixedUpdate()
@@ -34,11 +36,6 @@ void PlayerController::FixedUpdate()
 	if (psh_->IsCasting())
 	{
 		return;
-	}
-
-	if (target_)
-	{
-		target_pos_ = target_->entity_->GetTransform().GetPosition();
 	}
 
 	Vector2 movement;
@@ -57,7 +54,7 @@ void PlayerController::FixedUpdate()
 		if (target_)
 		{
 			target_->OnInteract();
-			target_ = nullptr;
+			ClearTarget();
 		}
 	}
 
@@ -68,17 +65,29 @@ void PlayerController::FixedUpdate()
 
 void PlayerController::SetTarget(const Vector2 position)
 {
-	anim_->Play();
 	target_pos_ = position;
+	StartMoving();
 }
 
 void PlayerController::SetTarget(Interactable& target)
 {
-	anim_->Play();
 	target_ = &target;
+	target_pos_ = target_->entity_->GetTransform().GetPosition();
+	StartMoving();
 }
 
 void PlayerController::ClearTarget()
 {
 	target_ = nullptr;
+}
+
+void PlayerController::StartMoving()
+{
+	anim_->Play();
+	auto x = entity_->GetTransform().GetPosition().x;
+	// Mirror if we're moving into our opposite direction
+	if (target_pos_.x < x != sr_->IsMirrored())
+	{
+		sr_->Mirror();
+	}
 }

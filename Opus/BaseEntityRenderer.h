@@ -22,6 +22,8 @@ public:
 
 	virtual void SetColor(const Color& color) = 0;
 
+	virtual void Mirror() = 0;
+
 	virtual void Reset() = 0;
 
 	Entity* entity_ = nullptr;

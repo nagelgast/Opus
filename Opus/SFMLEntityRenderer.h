@@ -11,6 +11,7 @@ class SFMLEntityRenderer final : public BaseEntityRenderer, public sf::Drawable
 public:
 	void SetSprite(const Sprite sprite) override;
 	void SetTextureRect(const Rect& rect) override;
+
 	void SetShape(const Shape& shape) override;
 	void SetText(const char* text) override;
 	
@@ -19,6 +20,8 @@ public:
 	
 	void SetColor(const Color& color) override;
 
+	void Mirror() override;
+
 	void Reset() override;
 
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
@@ -26,6 +29,8 @@ public:
 	static void DrawCircle(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const float radius, const sf::Color& color);
 private:
 	sf::Vector2f scale_;
+
+	bool mirrored_;
 
 	std::unique_ptr<sf::Texture> texture_;
 	std::unique_ptr<sf::Sprite> drawable_sprite_;

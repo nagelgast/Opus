@@ -56,7 +56,7 @@ Rect SFMLEntityRenderer::GetTextureRect() const
 {
 	if (!drawable_sprite_) return {};
 
-	const auto rect = drawable_sprite_->getTextureRect();
+	const auto& rect = drawable_sprite_->getTextureRect();
 	return { rect.top, rect.left, rect.width, rect.height };
 }
 
@@ -78,6 +78,11 @@ void SFMLEntityRenderer::SetColor(const Color& color)
 		static_cast<sf::Uint8>(color.b * 255),
 		static_cast<sf::Uint8>(color.a * 255)
 	));
+}
+
+void SFMLEntityRenderer::Mirror()
+{
+	mirrored_ = !mirrored_;
 }
 
 void SFMLEntityRenderer::Reset()
@@ -106,12 +111,23 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 	{
 		// TODO Optimize this
 		const auto& rect = drawable_sprite_->getTextureRect();
+
 		const sf::Vector2f sprite_scale = {
-			draw_scale.x / static_cast<int>(rect.width), draw_scale.y / static_cast<int>(rect.height)
+			draw_scale.x / static_cast<int>(rect.width),
+			draw_scale.y / static_cast<int>(rect.height)
 		};
 
-		drawable_sprite_->setScale(sprite_scale);
-		drawable_sprite_->setPosition(draw_pos);
+		if (mirrored_)
+		{
+			drawable_sprite_->setScale({sprite_scale.x * -1, sprite_scale.y});
+			drawable_sprite_->setPosition({draw_pos.x+draw_scale.x, draw_pos.y});
+		}
+		else
+		{
+			drawable_sprite_->setScale(sprite_scale);
+			drawable_sprite_->setPosition({ draw_pos.x, draw_pos.y });
+		}
+
 		target.draw(*drawable_sprite_, states);
 	}
 
