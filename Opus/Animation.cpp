@@ -4,6 +4,24 @@
 #include "BaseEntityRenderer.h"
 #include "SpriteRenderer.h"
 
+void Animation::Play()
+{
+	playing_ = true;
+}
+
+void Animation::Stop()
+{
+	playing_ = false;
+	current_frame_time_ = 0;
+}
+
+void Animation::Reset()
+{
+	Stop();
+	current_frame_ = 0;
+	SetFrame();
+}
+
 void Animation::Start()
 {
 	const auto rect = entity_->GetRenderer()->GetTextureRect();
@@ -13,6 +31,8 @@ void Animation::Start()
 
 void Animation::Update()
 {
+	if(!playing_) return;
+
 	const auto dt = entity_->GetDeltaTime();
 	current_frame_time_ += dt;
 	if(current_frame_time_ > frame_time_)
@@ -24,6 +44,11 @@ void Animation::Update()
 			current_frame_ = 0;
 		}
 
-		entity_->GetRenderer()->SetTextureRect({0, current_frame_ * frame_width_, frame_width_, frame_height_});
+		SetFrame();
 	}
+}
+
+void Animation::SetFrame()
+{
+	entity_->GetRenderer()->SetTextureRect({ 0, current_frame_ * frame_width_, frame_width_, frame_height_ });
 }

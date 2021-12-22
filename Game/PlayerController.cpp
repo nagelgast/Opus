@@ -2,6 +2,7 @@
 
 #include "../Opus/Collision.h"
 #include "../Opus/Input.h"
+#include "../Opus/Animation.h"
 
 #include <cmath>
 
@@ -18,6 +19,7 @@ PlayerController::PlayerController(const float walk_speed,
 void PlayerController::Start()
 {
 	psh_ = entity_->GetComponent<PlayerSkillHandler>();
+	anim_ = entity_->GetComponent<Animation>();
 }
 
 void PlayerController::FixedUpdate()
@@ -46,10 +48,17 @@ void PlayerController::FixedUpdate()
 	{
 		movement = delta.GetNormalized();
 	}
-	else if (target_)
+	else
 	{
-		target_->OnInteract();
-		target_ = nullptr;
+		// Reached target position
+		// TODO Keep track of when player is moving so we don't call this every frame
+		anim_->Reset();
+
+		if (target_)
+		{
+			target_->OnInteract();
+			target_ = nullptr;
+		}
 	}
 
 	movement.x *= speed;
@@ -59,11 +68,13 @@ void PlayerController::FixedUpdate()
 
 void PlayerController::SetTarget(const Vector2 position)
 {
+	anim_->Play();
 	target_pos_ = position;
 }
 
 void PlayerController::SetTarget(Interactable& target)
 {
+	anim_->Play();
 	target_ = &target;
 }
 

@@ -8,11 +8,19 @@ public:
 	{
 	}
 
+	void Play();
+	void Stop();
+	void Reset();
+
 	void Start() override;
 	void Update() override;
 private:
+	void SetFrame();
+
 	const int frames_;
 	const float frame_time_;
+
+	bool playing_ = true;
 
 	int frame_width_ = 0;
 	int frame_height_ = 0;
