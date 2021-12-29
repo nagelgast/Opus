@@ -32,7 +32,6 @@ private:
 
 	bool mirrored_;
 
-	std::unique_ptr<sf::Texture> texture_;
 	std::unique_ptr<sf::Sprite> drawable_sprite_;
 	std::unique_ptr<sf::Text> drawable_text_;
 	std::unique_ptr<sf::Shape> drawable_shape_;

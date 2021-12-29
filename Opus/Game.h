@@ -10,6 +10,7 @@
 #include "CollisionSystem.h"
 
 
+#include "TextureManager.h"
 #include "BaseWindow.h"
 #include "Service.h"
 
@@ -27,6 +28,7 @@ public:
 
 	static const Input& GetInput();
 	static CollisionSystem& GetCollisionSystem();
+	static TextureManager& GetTextureManager();
 
 	template <typename T>
 	T& AddService()
@@ -64,6 +66,7 @@ private:
 	std::unique_ptr<BaseRenderer> renderer_;
 	std::unique_ptr<BaseInputHandler> input_handler_;
 	std::unique_ptr<BaseTime> time_;
+	std::unique_ptr<TextureManager> texture_manager_;
 
 	std::map<std::type_index, std::unique_ptr<Service>> services_{};
 

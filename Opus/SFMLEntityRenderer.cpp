@@ -3,10 +3,11 @@
 
 #include <iostream>
 
-
+#include "SFMLTexture.h"
 
 #include "Color.h"
 #include "Entity.h"
+#include "Game.h"
 #include "Shape.h"
 #include "Sprite.h"
 #include "Vector2.h"
@@ -14,12 +15,11 @@
 
 void SFMLEntityRenderer::SetSprite(const Sprite sprite)
 {
-	texture_ = std::make_unique<sf::Texture>();
-	texture_->loadFromFile(sprite.path);
+	const auto& texture = static_cast<SFMLTexture*>(Game::GetTextureManager().Get(sprite.path).get());  // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
 
 	drawable_sprite_ = std::make_unique<sf::Sprite>();
-	drawable_sprite_->setTexture(*texture_);
-	drawable_sprite_->setTextureRect(ConvertRect(sprite.rect));
+	drawable_sprite_->setTexture(*texture);
+	SetTextureRect(sprite.rect);
 }
 
 void SFMLEntityRenderer::SetTextureRect(const Rect& rect)
@@ -87,7 +87,6 @@ void SFMLEntityRenderer::Mirror()
 
 void SFMLEntityRenderer::Reset()
 {
-	texture_ = nullptr;
 	drawable_sprite_ = nullptr;
 	drawable_shape_ = nullptr;
 }

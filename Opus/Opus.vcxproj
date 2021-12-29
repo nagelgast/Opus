@@ -193,6 +193,8 @@
     <ClInclude Include="SFMLEntityRenderer.h" />
     <ClInclude Include="SFMLInputHandler.h" />
     <ClInclude Include="SFMLRenderer.h" />
+    <ClInclude Include="SFMLTexture.h" />
+    <ClInclude Include="SFMLTextureManager.h" />
     <ClInclude Include="SFMLTime.h" />
     <ClInclude Include="SFMLWindow.h" />
     <ClInclude Include="Shape.h" />
@@ -200,6 +202,8 @@
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="SpriteRenderer.h" />
     <ClInclude Include="TextRenderer.h" />
+    <ClInclude Include="Texture.h" />
+    <ClInclude Include="TextureManager.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="Vector2.h" />
     <ClInclude Include="VectorExtensions.h" />
@@ -222,11 +226,15 @@
     <ClCompile Include="SFMLEntityRenderer.cpp" />
     <ClCompile Include="SFMLInputHandler.cpp" />
     <ClCompile Include="SFMLRenderer.cpp" />
+    <ClCompile Include="SFMLTexture.cpp" />
+    <ClCompile Include="SFMLTextureManager.cpp" />
     <ClCompile Include="SFMLTime.cpp" />
     <ClCompile Include="SFMLWindow.cpp" />
     <ClCompile Include="ShapeRenderer.cpp" />
     <ClCompile Include="SpriteRenderer.cpp" />
     <ClCompile Include="TextRenderer.cpp" />
+    <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Vector2.cpp" />
   </ItemGroup>

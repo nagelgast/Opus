@@ -4,6 +4,7 @@
 #include "Entity.h"
 #include "SFMLInputHandler.h"
 #include "SFMLRenderer.h"
+#include "SFMLTextureManager.h"
 #include "SFMLTime.h"
 #include "SFMLWindow.h"
 
@@ -12,6 +13,7 @@ Game::Game(const int width, const int height, const int fps_limit, const int fix
 	renderer_(std::make_unique<SFMLRenderer>(*window_)),
 	input_handler_(std::make_unique<SFMLInputHandler>(*window_)),
 	time_(std::make_unique<SFMLTime>(fixed_update_ms)),
+	texture_manager_(std::make_unique<SFMLTextureManager>()),
 	entity_controller_(*renderer_, *time_, input_handler_->GetInput())
 {
 	root_ = &entity_controller_.CreateEntity();
@@ -69,6 +71,11 @@ const Input& Game::GetInput()
 CollisionSystem& Game::GetCollisionSystem()
 {
 	return instance_->collision_system_;
+}
+
+TextureManager& Game::GetTextureManager()
+{
+	return *instance_->texture_manager_;
 }
 
 void Game::HandleInput() const
