@@ -7,17 +7,13 @@
 #include "PlayerController.h"
 #include "PlayerSkillHandler.h"
 
-#include "../Opus/SpriteRenderer.h"
 #include "../Opus/RectCollider.h"
-#include "../Opus/Animation.h"
+
+#include "PlayerAnimator.h"
 
 void Player::Awake()
 {
-	const Sprite sprite { "Sprites/chars/gabe/gabe-idle-run.png", {0, 0, 24, 24}};
-	const auto sr = AddComponent(SpriteRenderer());
-	sr.SetSprite(sprite);
-	
-	AddComponent(Animation(7, 0.1));
+	AddComponent(PlayerAnimator());
 
 	auto& collider = AddComponent(RectCollider(1, false, false));
 	
