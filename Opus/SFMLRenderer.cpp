@@ -89,11 +89,6 @@ void SFMLRenderer::DrawEntity(SFMLEntityRenderer* entity_renderer) const
 		auto scale = transform.GetScale();
 		SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, {anchor.x, anchor.y}, {scale.x, scale.y}, sf::Color::Red);
 
-		SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, {anchor.x - 10, anchor.y}, {anchor.x + 10, anchor.y}, sf::Color::Yellow);
-		SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { anchor.x, anchor.y - 10}, { anchor.x, anchor.y + 10}, sf::Color::Yellow);
-
-		SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { position.x - 10, position.y }, { position.x + 10, position.y }, sf::Color::White);
-		SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { position.x, position.y - 10 }, { position.x, position.y + 10 }, sf::Color::White);
 
 		auto* interactable = entity->GetComponent<Interactable>();
 		if (interactable)
@@ -116,5 +111,11 @@ void SFMLRenderer::DrawEntity(SFMLEntityRenderer* entity_renderer) const
 			const auto radius = circle_collider->GetGlobalRadius();
 			SFMLEntityRenderer::DrawCircle(window_, sf::RenderStates::Default, {collider_position.x, collider_position.y}, radius, sf::Color::Magenta);
 		}
+
+		SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { anchor.x - 10, anchor.y }, { anchor.x + 10, anchor.y }, sf::Color::Yellow);
+		SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { anchor.x, anchor.y - 10 }, { anchor.x, anchor.y + 10 }, sf::Color::Yellow);
+
+		SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { position.x - 10, position.y }, { position.x + 10, position.y }, sf::Color::White);
+		SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { position.x, position.y - 10 }, { position.x, position.y + 10 }, sf::Color::White);
 	}
 }
