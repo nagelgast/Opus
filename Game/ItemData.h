@@ -25,8 +25,8 @@ public:
 
 		const ItemCategory currency{"Currency", 2, 2, {}};
 		categories_["Currency"] = currency;
-		ItemBaseType chaos_orb{"Chaos_Orb", "Currency", {}};
-		base_types_[chaos_orb.name] = std::move(chaos_orb);
+		ItemBaseType book{"Book", "Currency", {}};
+		base_types_[book.name] = std::move(book);
 	}
 
 	ItemBaseType& GetBaseType(const std::string& base_type_name)
