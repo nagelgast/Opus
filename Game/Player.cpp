@@ -16,6 +16,7 @@ void Player::Awake()
 	AddComponent(PlayerAnimator());
 
 	auto& collider = AddComponent(RectCollider(1, false, false));
+	collider.SetSize({24, 24});
 	
 	GetTransform().SetScale(5, 5);
 

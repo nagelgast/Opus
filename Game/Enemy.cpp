@@ -11,8 +11,9 @@ void Enemy::Awake()
 	const Sprite sprite{"Sprites/mobs/slime-blue.png", {0, 8, 16, 16}};
 	auto sr = AddComponent(SpriteRenderer());
 	sr.SetSprite(sprite);
-	AddComponent(RectCollider(0, false, false));
-	GetTransform().SetScale(32, 32);
+	auto& col = AddComponent(RectCollider(0, false, false));
+	col.SetSize({16, 16});
+	GetTransform().SetScale(5, 5);
 
 	AddComponent(Health(1));
 	AddComponent(Loot());

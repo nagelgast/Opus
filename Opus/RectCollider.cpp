@@ -46,16 +46,20 @@ Shape RectCollider::GetShape() const
 
 Rect RectCollider::GetGlobalBounds() const
 {
-	auto& transform = entity_->GetTransform();
+	// TODO Cache this
+	const auto& transform = entity_->GetTransform();
 	const auto scale = transform.GetScale();
+	const auto width = scale.x * size_.x;
+	const auto height = scale.y * size_.y;
+
 
 	const auto global_pos = GetGlobalPosition();
 	const Rect bounds
 	{
-		global_pos.x,
-		global_pos.y,
-		scale.x * size_.x,
-		scale.y * size_.y
+		global_pos.x - width * 0.5f,
+		global_pos.y - height * 0.5f,
+		width,
+		height
 	};
 
 	return bounds;
