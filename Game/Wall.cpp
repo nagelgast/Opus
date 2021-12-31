@@ -6,7 +6,7 @@
 
 void Wall::Awake()
 {
-	AddComponent(ShapeRenderer(Shape::kSquare, {1, 1, 1}));
+	AddComponent(ShapeRenderer(Shape::kSquare, {0.8f, 0.8f, 0.8f}));
 	AddComponent(RectCollider(0, false, true));
 	GetTransform().SetScale(100,100);
 }
