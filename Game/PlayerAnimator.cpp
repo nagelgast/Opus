@@ -6,11 +6,10 @@
 
 void PlayerAnimator::Awake()
 {
-	state_ = "idle_whit_sword";
     sr_ = &entity_->AddComponent(SpriteRenderer());
 	UpdateSprite();
 
-	anim_ = &entity_->AddComponent(Animation(8, 0.1f));
+	anim_ = &entity_->AddComponent(Animation(8, 1.f/8));
 }
 
 void PlayerAnimator::Update()
@@ -36,6 +35,11 @@ void PlayerAnimator::Update()
 		UpdateSprite();
 	}
 
+	if((moving_hor || moving_ver) != moving_)
+	{
+		moving_ = !moving_;
+		UpdateSprite();
+	}
 	old_pos_ = new_pos;
 }
 
@@ -44,7 +48,8 @@ void PlayerAnimator::UpdateSprite() const
 	sr_->SetMirrored(facing_right_ != facing_down_);
 
 	// TODO Implement way to pre-load all the textures and sprites
-	const auto facing = facing_down_ ? "front" : "back";
-	const Sprite sprite{ "Sprites/characters/" + state_ + "_" + facing + ".png", {0, 0, 48, 32} };
+	const std::string state = moving_ ? "run" : "idle";
+	const std::string facing = facing_down_ ? "front" : "back";
+	const Sprite sprite{ "Sprites/characters/" + state + "_whit_sword_" + facing + ".png", {0, 0, 48, 32} };
 	sr_->SetSprite(sprite);
 }

@@ -19,8 +19,7 @@ private:
     Animation* anim_ = nullptr;
 
     Vector2 old_pos_;
+    bool moving_ = false;
     bool facing_right_ = true;
     bool facing_down_ = true;
-
-    std::string state_;
 };
