@@ -13,7 +13,7 @@ class ItemData
 public:
 	ItemData()
 	{
-		const ItemCategory wands{"Wand", 1, 3, {ItemTag::kWeapon}};
+		const ItemCategory wands{"Wand", 2, 4, {ItemTag::kWeapon}};
 		categories_["Wands"] = wands;
 
 		StatList stats {};
