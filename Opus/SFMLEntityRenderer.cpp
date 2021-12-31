@@ -104,7 +104,7 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 	if (drawable_shape_)
 	{
 		drawable_shape_->setScale(draw_scale);
-		drawable_shape_->setPosition(draw_pos);
+		drawable_shape_->setPosition(draw_origin);
 		target.draw(*drawable_shape_, states);
 	}
 
@@ -129,7 +129,7 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 
 	if(drawable_text_)
 	{
-		drawable_text_->setPosition(draw_pos);
+		drawable_text_->setPosition(draw_origin);
 		target.draw(*drawable_text_, states);
 	}
 }
