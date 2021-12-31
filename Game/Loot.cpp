@@ -39,11 +39,8 @@ void Loot::SpawnItem() const
 
 	auto& world_item = entity_->Instantiate<WorldItem>(pos);
 	world_item.Initialize(std::move(item));
-	world_item.GetTransform().CenterOrigin();
 	auto& world_item2 = entity_->Instantiate<WorldItem>(pos);
 	world_item2.Initialize(std::move(item2));
-	world_item2.GetTransform().CenterOrigin();
 	// auto& world_item3 = entity_->Instantiate<WorldItem>(pos);
 	// world_item3.Initialize(std::move(item3));
-	// world_item3.GetTransform().CenterOrigin();
 }

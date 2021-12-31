@@ -17,13 +17,12 @@ bool Rect::Contains(const Vector2 point) const
 Rect Rect::ConvertToGlobalSpace(Transform& transform) const
 {
 	const auto pos = transform.GetPosition();
-	const auto offset = transform.GetOrigin();
 	const auto scale = transform.GetScale();
 
 	const Rect converted_rect
 	{
-		pos.x - offset.x,
-		pos.y - offset.y,
+		pos.x,
+		pos.y,
 		width * scale.x,
 		height * scale.y
 	};

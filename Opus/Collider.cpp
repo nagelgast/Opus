@@ -32,11 +32,10 @@ Vector2 Collider::GetGlobalPosition() const
 	auto& transform = entity_->GetTransform();
 
 	const auto pos = transform.GetPosition();
-	const auto origin = transform.GetOrigin();
 
 	return {
-		pos.x - origin.x + offset_.x,
-		pos.y - origin.y + offset_.y
+		pos.x + offset_.x,
+		pos.y + offset_.y
 	};
 }
 

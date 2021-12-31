@@ -21,7 +21,6 @@ Player& InitPlayer(Entity& root)
 {
 	auto& player = root.Instantiate<Player>();
 	player.SetName("Player");
-	player.GetTransform().CenterOrigin();
 
 	return player;
 }
@@ -72,18 +71,15 @@ void InitEntities(Entity& root)
 	{
 		auto& wall1 = root.Instantiate<Wall>({ 500, 500 });
 		wall1.SetName("Wall1");
-		wall1.GetTransform().CenterOrigin();
 	}
 	{
 		auto& wall2 = root.Instantiate<Wall>({ 300, 500 });
 		wall2.SetName("Wall2");
-		wall2.GetTransform().CenterOrigin();
 	}
 
 	{
 		auto& enemy = root.Instantiate<Enemy>({ 500, 100 });
 		enemy.SetName("Enemy");
-		enemy.GetTransform().CenterOrigin();
 	}
 }
 

@@ -58,21 +58,6 @@ void Transform::Move(const Vector2 offset)
 	SetPosition(position_ + offset);
 }
 
-void Transform::SetOrigin(const Vector2 origin)
-{
-	origin_ = origin;
-}
-
-void Transform::CenterOrigin()
-{
-	origin_ = scale_ / 2;
-}
-
-Vector2 Transform::GetOrigin() const
-{
-	return origin_;
-}
-
 void Transform::SetScale(const float width, const float height)
 {
 	scale_ = {width, height};

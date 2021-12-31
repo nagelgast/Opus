@@ -13,7 +13,6 @@ void FireballSkill::Cast()
 	auto& fireball = psh_.entity_->Instantiate<Fireball>(player_pos);
 
 	fireball.Initialize(psh_.GetTargetPosition());
-	fireball.GetTransform().CenterOrigin();
 	fireball.SetName("Fireball");
 }
 

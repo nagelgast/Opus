@@ -95,10 +95,11 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 {
 	const auto& transform = entity_->GetTransform();
 	const auto scale = transform.GetScale();
-	const sf::Vector2f draw_scale = {scale.x, scale.y};
 	const auto& pos = transform.GetPosition();
-	const auto& corner = pos - transform.GetOrigin();
-	const sf::Vector2f draw_pos = {corner.x, corner.y};
+	const sf::Vector2f draw_pos = { pos.x, pos.y };
+	const sf::Vector2f draw_scale = { scale.x, scale.y };
+	const auto draw_offset = draw_scale * 0.5f;
+	const auto draw_origin = draw_pos - draw_offset;
 
 	if (drawable_shape_)
 	{
@@ -110,18 +111,19 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 	if (drawable_sprite_)
 	{
 		auto& sprite_rect = drawable_sprite_->getTextureRect();
-		auto half_sprite_width = sprite_rect.width * scale.x * 0.5f;
-		auto half_sprite_height = sprite_rect.height * scale.y * 0.5f;
+		auto sprite_offset = draw_offset;
+		sprite_offset.x *= static_cast<float>(sprite_rect.width);
+		sprite_offset.y *= static_cast<float>(sprite_rect.height);
 		auto sprite_scale = draw_scale;
 
 		if (mirrored_)
 		{
 			sprite_scale.x *= -1;
-			half_sprite_width *= -1;
+			sprite_offset.x *= -1;
 		}
 
 		drawable_sprite_->setScale(sprite_scale);
-		drawable_sprite_->setPosition({ pos.x - half_sprite_width, pos.y - half_sprite_height });
+		drawable_sprite_->setPosition({ pos.x - sprite_offset.x, pos.y - sprite_offset.y});
 		target.draw(*drawable_sprite_, states);
 	}
 
