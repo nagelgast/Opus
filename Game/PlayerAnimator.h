@@ -12,6 +12,10 @@ class PlayerAnimator :
 public:
     void Awake() override;
     void Update() override;
+
+    void StartAttack();
+    void StopAttack();
+    void SetSprite(const std::string& state) const;
 private:
     void UpdateSprite() const;
 
@@ -22,4 +26,5 @@ private:
     bool moving_ = false;
     bool facing_right_ = true;
     bool facing_down_ = true;
+    bool attacking_ = false;
 };

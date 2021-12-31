@@ -4,11 +4,17 @@
 
 
 #include "ActiveSkill.h"
+#include "PlayerAnimator.h"
 #include "../Opus/Input.h"
 
 PlayerSkillHandler::~PlayerSkillHandler()
 {
 	delete active_skill_;
+}
+
+void PlayerSkillHandler::Start()
+{
+	anim_ = entity_->GetComponent<PlayerAnimator>();
 }
 
 void PlayerSkillHandler::SetActiveSkill(ActiveSkill* active_skill)
@@ -28,6 +34,7 @@ void PlayerSkillHandler::Update()
 		{
 			std::cout << "Cast\n";
 			active_skill_->Cast();
+			anim_->StopAttack();
 		}
 	}
 	else
@@ -59,6 +66,7 @@ void PlayerSkillHandler::Update()
 				std::cout << "Casting\n";
 				remaining_cast_time_ = active_skill_->GetCastTime();
 				moving_to_target_ = false;
+				anim_->StartAttack();
 			}
 		}
 	}

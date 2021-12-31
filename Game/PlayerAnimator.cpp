@@ -6,15 +6,20 @@
 
 void PlayerAnimator::Awake()
 {
-    sr_ = &entity_->AddComponent(SpriteRenderer());
-	UpdateSprite();
+	anim_ = &entity_->AddComponent(Animation(8, 1.f / 8));
 
-	anim_ = &entity_->AddComponent(Animation(8, 1.f/8));
+	sr_ = &entity_->AddComponent(SpriteRenderer());
+	UpdateSprite();
 }
 
 void PlayerAnimator::Update()
 {
 	// TODO Implement FSM instead of using bools
+
+	if(attacking_)
+	{
+		return;
+	}
 
 	const auto new_pos = entity_->GetTransform().GetPosition();
 	const auto delta_pos = new_pos - old_pos_;
@@ -43,13 +48,32 @@ void PlayerAnimator::Update()
 	old_pos_ = new_pos;
 }
 
+void PlayerAnimator::StartAttack()
+{
+	attacking_ = true;
+	SetSprite("attack_02");
+	anim_->Reset();
+	anim_->Play();
+}
+
+void PlayerAnimator::StopAttack()
+{
+	attacking_ = false;
+	UpdateSprite();
+}
+
 void PlayerAnimator::UpdateSprite() const
 {
 	sr_->SetMirrored(facing_right_ != facing_down_);
 
 	// TODO Implement way to pre-load all the textures and sprites
 	const std::string state = moving_ ? "run" : "idle";
-	const std::string facing = facing_down_ ? "front" : "back";
-	const Sprite sprite{ "Sprites/characters/" + state + "_whit_sword_" + facing + ".png", {0, 0, 48, 32} };
+	SetSprite(state + "_whit_sword");
+}
+
+void PlayerAnimator::SetSprite(const std::string& state) const
+{
+	const auto facing = facing_down_ ? "front" : "back";
+	const Sprite sprite{ "Sprites/characters/" + state + "_" + facing + ".png", {0, 0, 48, 32}};
 	sr_->SetSprite(sprite);
 }
