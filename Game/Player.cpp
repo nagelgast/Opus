@@ -17,7 +17,7 @@ void Player::Awake()
 
 	auto& collider = AddComponent(RectCollider(1, false, false));
 	
-	GetTransform().SetScale(100, 100);
+	GetTransform().SetScale(5, 5);
 
 	auto pc = AddComponent(PlayerController(200, 400));
 

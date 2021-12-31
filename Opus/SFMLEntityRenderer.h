@@ -27,10 +27,11 @@ public:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 	static void DrawRect(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const sf::Vector2f& size, const sf::Color& color);
 	static void DrawCircle(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& position, const float radius, const sf::Color& color);
+	static void DrawLine(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& start, const sf::Vector2f& end, const sf::Color& color);
 private:
 	sf::Vector2f scale_;
 
-	bool mirrored_;
+	bool mirrored_ = false;
 
 	std::unique_ptr<sf::Sprite> drawable_sprite_;
 	std::unique_ptr<sf::Text> drawable_text_;

@@ -96,7 +96,8 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 	const auto& transform = entity_->GetTransform();
 	const auto scale = transform.GetScale();
 	const sf::Vector2f draw_scale = {scale.x, scale.y};
-	const auto& corner = transform.GetPosition() - transform.GetOrigin();
+	const auto& pos = transform.GetPosition();
+	const auto& corner = pos - transform.GetOrigin();
 	const sf::Vector2f draw_pos = {corner.x, corner.y};
 
 	if (drawable_shape_)
@@ -108,25 +109,19 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 
 	if (drawable_sprite_)
 	{
-		// TODO Optimize this
-		const auto& rect = drawable_sprite_->getTextureRect();
-
-		const sf::Vector2f sprite_scale = {
-			draw_scale.x / static_cast<int>(rect.width),
-			draw_scale.y / static_cast<int>(rect.height)
-		};
+		auto& sprite_rect = drawable_sprite_->getTextureRect();
+		auto half_sprite_width = sprite_rect.width * scale.x * 0.5f;
+		auto half_sprite_height = sprite_rect.height * scale.y * 0.5f;
+		auto sprite_scale = draw_scale;
 
 		if (mirrored_)
 		{
-			drawable_sprite_->setScale({sprite_scale.x * -1, sprite_scale.y});
-			drawable_sprite_->setPosition({draw_pos.x+draw_scale.x, draw_pos.y});
-		}
-		else
-		{
-			drawable_sprite_->setScale(sprite_scale);
-			drawable_sprite_->setPosition({ draw_pos.x, draw_pos.y });
+			sprite_scale.x *= -1;
+			half_sprite_width *= -1;
 		}
 
+		drawable_sprite_->setScale(sprite_scale);
+		drawable_sprite_->setPosition({ pos.x - half_sprite_width, pos.y - half_sprite_height });
 		target.draw(*drawable_sprite_, states);
 	}
 
@@ -159,6 +154,18 @@ void SFMLEntityRenderer::DrawCircle(sf::RenderTarget& target, sf::RenderStates s
 	circle.setOutlineThickness(1);
 	circle.setOutlineColor(color);
 	target.draw(circle, states);
+}
+
+void SFMLEntityRenderer::DrawLine(sf::RenderTarget& target, sf::RenderStates states, const sf::Vector2f& start,
+	const sf::Vector2f& end, const sf::Color& color)
+{
+	const sf::Vertex line[] =
+	{
+		sf::Vertex(start, color),
+		sf::Vertex(end, color)
+	};
+
+	target.draw(line, 2, sf::Lines);
 }
 
 sf::IntRect SFMLEntityRenderer::ConvertRect(const Rect& rect)
