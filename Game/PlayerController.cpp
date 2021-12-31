@@ -1,6 +1,5 @@
 #include "PlayerController.h"
 
-#include "../Opus/Collision.h"
 #include "../Opus/Input.h"
 #include "../Opus/Animation.h"
 #include "../Opus/SpriteRenderer.h"
@@ -20,7 +19,6 @@ PlayerController::PlayerController(const float walk_speed,
 void PlayerController::Start()
 {
 	psh_ = entity_->GetComponent<PlayerSkillHandler>();
-	anim_ = entity_->GetComponent<Animation>();
 	sr_ = entity_->GetComponent<SpriteRenderer>();
 }
 
@@ -48,8 +46,6 @@ void PlayerController::FixedUpdate()
 	else
 	{
 		// Reached target position
-		// TODO Keep track of when player is moving so we don't call this every frame
-		anim_->Reset();
 
 		if (target_)
 		{
@@ -63,31 +59,18 @@ void PlayerController::FixedUpdate()
 	entity_->GetTransform().Move(movement);
 }
 
-void PlayerController::SetTarget(const Vector2 position)
-{
-	target_pos_ = position;
-	StartMoving();
-}
-
 void PlayerController::SetTarget(Interactable& target)
 {
 	target_ = &target;
-	target_pos_ = target_->entity_->GetTransform().GetPosition();
-	StartMoving();
+	SetTarget(target_->entity_->GetTransform().GetPosition());
+}
+
+void PlayerController::SetTarget(const Vector2 position)
+{
+	target_pos_ = position;
 }
 
 void PlayerController::ClearTarget()
 {
 	target_ = nullptr;
-}
-
-void PlayerController::StartMoving()
-{
-	anim_->Play();
-	auto x = entity_->GetTransform().GetPosition().x;
-	// Mirror if we're moving into our opposite direction
-	if (target_pos_.x < x != sr_->IsMirrored())
-	{
-		sr_->Mirror();
-	}
 }

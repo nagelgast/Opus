@@ -20,14 +20,7 @@ void SpriteRenderer::ResetSprite() const
 	renderer_->Reset();
 }
 
-void SpriteRenderer::Mirror()
+void SpriteRenderer::SetMirrored(bool value) const
 {
-	// TODO Should not be tracked both here and in the actual renderer
-	mirrored_ = !mirrored_;
-	renderer_->Mirror();
-}
-
-bool SpriteRenderer::IsMirrored() const
-{
-	return mirrored_;
+	renderer_->SetMirrored(value);
 }

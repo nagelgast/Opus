@@ -20,7 +20,7 @@ public:
 	
 	void SetColor(const Color& color) override;
 
-	void Mirror() override;
+	void SetMirrored(const bool& value) override;
 
 	void Reset() override;
 

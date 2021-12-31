@@ -9,9 +9,7 @@ public:
 	void Awake() override;
 	void SetSprite(const Sprite& sprite, bool world_space = true) const;
 	void ResetSprite() const;
-	void Mirror();
-	bool IsMirrored() const;
+	void SetMirrored(bool value) const;
 private:
 	BaseEntityRenderer* renderer_ = nullptr;
-	bool mirrored_ = false;
 };

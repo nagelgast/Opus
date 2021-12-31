@@ -80,9 +80,9 @@ void SFMLEntityRenderer::SetColor(const Color& color)
 	));
 }
 
-void SFMLEntityRenderer::Mirror()
+void SFMLEntityRenderer::SetMirrored(const bool& value)
 {
-	mirrored_ = !mirrored_;
+	mirrored_ = value;
 }
 
 void SFMLEntityRenderer::Reset()
