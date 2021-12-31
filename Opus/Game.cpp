@@ -96,6 +96,7 @@ void Game::Update()
 
 void Game::HandleOutput()
 {
+	renderer_->CheckDebugState(input_handler_->GetInput());
 	renderer_->Render(entity_controller_.GetEntities());
 }
 

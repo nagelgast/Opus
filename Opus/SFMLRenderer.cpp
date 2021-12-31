@@ -4,17 +4,30 @@
 #include "Camera.h"
 #include "CircleCollider.h"
 #include "Entity.h"
+#include "Input.h"
 #include "RectCollider.h"
 #include "SFMLEntityRenderer.h"
 #include "Transform.h"
 #include "../Game/Interactable.h"
 
-const bool kDrawGrid = true;
-const int kGridBrightness = 20;
-const bool kDrawDebug = true;
-
-SFMLRenderer::SFMLRenderer(BaseWindow& window) : window_(dynamic_cast<SFMLWindow&>(window).GetWindow())
+SFMLRenderer::SFMLRenderer(BaseWindow& window) :
+	window_(dynamic_cast<SFMLWindow&>(window).GetWindow()),
+    draw_debug_entity_(false),
+    draw_debug_grid_(false)
 {
+}
+
+void SFMLRenderer::CheckDebugState(const Input& input)
+{
+	// TODO this these elsewhere
+	if (input.f1.pressed)
+	{
+		draw_debug_entity_ = !draw_debug_entity_;
+	}
+	if (input.f2.pressed)
+	{
+		draw_debug_grid_ = !draw_debug_grid_;
+	}
 }
 
 void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) const
@@ -50,12 +63,16 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 		window_.setView(sf::View({position.x, position.y}, static_cast<sf::Vector2f>(window_.getSize())));
 	}
 
-	if (kDrawGrid)
+	if (draw_debug_grid_)
 	{
 		for (int i = 0; i < 20; i++)
 		{
-			SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { 0, i * 100.f }, { 2000, i * 100.f }, { kGridBrightness, kGridBrightness, kGridBrightness });
-			SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { i * 100.f, 0 }, { i * 100.f, 2000 }, { kGridBrightness, kGridBrightness, kGridBrightness });
+			constexpr int grid_spacing = 100;
+			constexpr int grid_brightness = 20;
+			const sf::Color grid_color = {grid_brightness, grid_brightness, grid_brightness};
+			auto cur_pos = static_cast<float>(i * grid_spacing);
+			SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { 0, cur_pos}, { 2000, cur_pos}, grid_color);
+			SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { cur_pos, 0 }, { cur_pos, 2000 }, grid_color);
 		}
 	}
 
@@ -90,7 +107,7 @@ void SFMLRenderer::DrawEntity(SFMLEntityRenderer* entity_renderer) const
 {
 	window_.draw(*entity_renderer);
 	
-	if (kDrawDebug)
+	if (draw_debug_entity_)
 	{
 		const auto& entity = entity_renderer->entity_;
 

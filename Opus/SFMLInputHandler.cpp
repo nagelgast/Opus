@@ -27,8 +27,12 @@ void SFMLInputHandler::UpdateInput()
 	UpdateKeyboardKey(input_.inventory, { sf::Keyboard::I});
 	UpdateKeyboardKey(input_.close_all_ui, { sf::Keyboard::Space });
 
+	UpdateKeyboardKey(input_.f1, {sf::Keyboard::F1});
+	UpdateKeyboardKey(input_.f2, { sf::Keyboard::F2 });
+
 	UpdateKey(input_.left_mouse, sf::Mouse::isButtonPressed(sf::Mouse::Left));
 	UpdateKey(input_.right_mouse, sf::Mouse::isButtonPressed(sf::Mouse::Right));
+
 
 	const auto mouse_screen_pos = sf::Mouse::getPosition(window_);
 	const auto mouse_world_pos = window_.mapPixelToCoords(mouse_screen_pos);
