@@ -29,7 +29,8 @@ void ScreenItem::Initialize(Item& item, const std::vector<InventorySlot*>& slots
 
 	sr_->SetSprite(item_->GetSprite(), false);
 
-	GetTransform().SetScale(width, height);
+	// TODO Use a global item scale setting
+	GetTransform().SetScale(2, 2);
 
 }
 

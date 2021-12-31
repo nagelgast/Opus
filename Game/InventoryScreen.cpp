@@ -118,7 +118,7 @@ void InventoryScreen::SpawnItem(Item& item, const std::vector<int>& slot_indices
 	// Position item correctly
 	auto& transform = inventory_item.GetTransform();
 	const Vector2 offset = { kInventorySlotSize * (item.GetSize().width - 1) / 2, kInventorySlotSize * (item.GetSize().height - 1) / 2 };
-	transform.SetPosition(item_slots[0]->GetTransform().GetPosition());
+	transform.SetPosition(item_slots[0]->GetTransform().GetPosition() + offset);
 
 	inventory_item.Initialize(item, item_slots);
 	
