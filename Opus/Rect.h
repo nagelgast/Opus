@@ -29,6 +29,4 @@ struct Rect
 	const float bottom;
 
 	bool Contains(Vector2 point) const;
-
-	Rect ConvertToGlobalSpace(Transform& transform) const;
 };

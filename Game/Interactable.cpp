@@ -2,7 +2,7 @@
 
 #include "PlayerController.h"
 
-Rect Interactable::GetGlobalBounds()
+Rect Interactable::GetGlobalBounds() const
 {
-	return bounds_.ConvertToGlobalSpace(entity_->GetTransform());
+	return entity_->GetTransform().GetBounds(offset_, size_);
 }

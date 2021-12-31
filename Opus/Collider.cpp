@@ -29,14 +29,8 @@ void Collider::Collide(const Collider& other) const
 
 Vector2 Collider::GetGlobalPosition() const
 {
-	auto& transform = entity_->GetTransform();
-
-	const auto pos = transform.GetPosition();
-
-	return {
-		pos.x + offset_.x,
-		pos.y + offset_.y
-	};
+	const auto pos = entity_->GetTransform().GetPosition();
+	return pos + offset_;
 }
 
 void Collider::SetOffset(const Vector2& offset)
@@ -57,4 +51,9 @@ bool Collider::IsFixed() const
 int Collider::GetLayer() const
 {
 	return layer_;
+}
+
+Vector2 Collider::GetOffset() const
+{
+	return offset_;
 }

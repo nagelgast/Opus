@@ -7,13 +7,16 @@ class Interactable final :
     public Component
 {
 public:
-	Rect GetGlobalBounds();
+	Rect GetGlobalBounds() const;
 	
 	Event OnHoverEnter;
 	Event OnHoverExit;
 	Event OnPress;
 	Event OnRelease;
 	Event OnInteract;
-	Rect bounds_ {0,0,1,1};
+
+private:
+	Vector2 offset_ = {0,0};
+	Vector2 size_ = {1,1};
 };
 

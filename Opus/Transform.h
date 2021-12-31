@@ -2,6 +2,7 @@
 #include <vector>
 
 #include "Component.h"
+#include "Rect.h"
 #include "Vector2.h"
 
 class Transform final : public Component
@@ -19,6 +20,8 @@ public:
 	
 	void SetScale(float width, float height);
 	Vector2 GetScale() const;
+
+	Rect GetBounds(Vector2 offset, Vector2 scale_multiplier) const;
 
 	std::vector<Transform*> GetChildren();
 private:

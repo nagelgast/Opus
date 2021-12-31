@@ -13,19 +13,3 @@ bool Rect::Contains(const Vector2 point) const
 
 	return true;
 }
-
-Rect Rect::ConvertToGlobalSpace(Transform& transform) const
-{
-	const auto pos = transform.GetPosition();
-	const auto scale = transform.GetScale();
-
-	const Rect converted_rect
-	{
-		pos.x,
-		pos.y,
-		width * scale.x,
-		height * scale.y
-	};
-
-	return converted_rect;
-}

@@ -70,6 +70,23 @@ Vector2 Transform::GetScale() const
 	return scale_;
 }
 
+Rect Transform::GetBounds(const Vector2 offset, const Vector2 scale_multiplier) const
+{
+	// TODO Cache this
+	const auto width = scale_.x * scale_multiplier.x;
+	const auto height = scale_.y * scale_multiplier.y;
+
+	const Rect bounds
+	{
+		position_.x + offset.x - width * 0.5f,
+		position_.y + offset.y - height * 0.5f,
+		width,
+		height
+	};
+
+	return bounds;
+}
+
 std::vector<Transform*> Transform::GetChildren()
 {
 	return children_;

@@ -30,6 +30,8 @@ public:
 	bool IsFixed() const;
 	virtual Shape GetShape() const = 0;
 	virtual bool Contains(const Vector2& position) const = 0;
+protected:
+	Vector2 GetOffset() const;
 private:
 	int layer_;
 	bool trigger_;
