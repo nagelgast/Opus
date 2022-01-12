@@ -25,6 +25,8 @@ void Animation::Reset()
 void Animation::Start()
 {
 	const auto rect = entity_->GetRenderer()->GetTextureRect();
+	start_x_ = static_cast<int>(rect.left);
+	start_y_ = static_cast<int>(rect.top);
 	frame_width_ = static_cast<int>(rect.width);
 	frame_height_ = static_cast<int>(rect.height);
 }
@@ -50,5 +52,5 @@ void Animation::Update()
 
 void Animation::SetFrame()
 {
-	entity_->GetRenderer()->SetTextureRect({ current_frame_ * frame_width_, 0, frame_width_, frame_height_ });
+	entity_->GetRenderer()->SetTextureRect({ start_x_ + current_frame_ * frame_width_, start_y_, frame_width_, frame_height_ });
 }

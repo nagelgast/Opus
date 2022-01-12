@@ -17,11 +17,15 @@ public:
 private:
 	void SetFrame();
 
+	BaseEntityRenderer* renderer_ = nullptr;
+
 	const int frames_;
 	const float frame_time_;
 
 	bool playing_ = true;
 
+	int start_x_ = 0;
+	int start_y_ = 0;
 	int frame_width_ = 0;
 	int frame_height_ = 0;
 	
