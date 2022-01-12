@@ -46,7 +46,7 @@ void Health::Die()
 	const auto pos = entity_->GetTransform().GetPosition();
 	auto& death_particles = entity_->Instantiate(pos);
 	const Sprite sprite {"Sprites/particles/circle_05.png"};
-	const ParticleSettings settings {sprite, 64};
+	const ParticleSettings settings {sprite, 64, 20, 200};
 	death_particles.AddComponent(ParticleSystem(settings));
 
 	entity_->Destroy();

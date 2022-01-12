@@ -49,13 +49,14 @@ void SFMLEntityRenderer::SetParticles(const ParticleSettings& settings)
 void SFMLEntityRenderer::UpdateParticles(std::vector<Particle>& particles)
 {
 	const auto size = static_cast<float>(particle_settings_->size);
+	const auto half_size = size * 0.5f;
 
 	for (std::size_t i = 0; i < particles.size(); i++)
 	{
 		const auto& particle = particles[i];
 		sf::Vertex* quad = &drawable_vertices_->operator[](i * 4);
 
-		sf::Vector2f corner_pos = {particle.position.x, particle.position.y};
+		sf::Vector2f corner_pos = {particle.position.x - half_size, particle.position.y - half_size};
 
 		quad[0].position = corner_pos;
 		quad[1].position = {corner_pos.x + size, corner_pos.y};

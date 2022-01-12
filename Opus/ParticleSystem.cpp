@@ -1,9 +1,11 @@
 #include "pch.h"
-#include "ParticleSystem.h"
 
+#include "ParticleSystem.h"
 #include "BaseEntityRenderer.h"
 #include "Game.h"
 #include "Transform.h"
+
+#include <math.h>
 
 void ParticleSystem::Awake()
 {
@@ -17,6 +19,13 @@ void ParticleSystem::Awake()
 	for (auto& particle : particles_)
 	{
 		particle.position = pos;
+
+		// TODO Make a utility function for generating a random angle
+		const float angle = float(rand()) / RAND_MAX;
+		// TODO Make a utility function for PI
+		const auto radians = angle * 2 * 3.14159f;
+		particle.velocity.x = cosf(radians) * settings_.speed;
+		particle.velocity.y = sinf(radians) * settings_.speed;
 	}
 
 	remaining_duration_ = settings_.duration;
@@ -31,9 +40,16 @@ void ParticleSystem::Update()
 {
 	if(!playing_) return;
 
+	const auto& dt = entity_->GetDeltaTime();
+
+	for(auto& particle : particles_)
+	{
+		particle.position += particle.velocity * dt;
+	}
+
 	renderer_->UpdateParticles(particles_);
 
-	remaining_duration_ -= entity_->GetDeltaTime();
+	remaining_duration_ -= dt;
 	if(remaining_duration_ < 0)
 	{
 		Finish();
