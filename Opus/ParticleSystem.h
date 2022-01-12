@@ -12,7 +12,6 @@ public:
 
     void Awake() override;
     void Update() override;
-
 private:
     void Finish();
 

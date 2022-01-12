@@ -18,10 +18,11 @@ void ParticleSystem::Awake()
 	const auto pos = entity_->GetTransform().GetPosition();
 	for (auto& particle : particles_)
 	{
+		particle.lifetime = settings_.lifetime;
 		particle.position = pos;
 
 		// TODO Make a utility function for generating a random angle
-		const float angle = float(rand()) / RAND_MAX;
+		const float angle = static_cast<float>(rand()) / RAND_MAX;
 		// TODO Make a utility function for PI
 		const auto radians = angle * 2 * 3.14159f;
 		particle.velocity.x = cosf(radians) * settings_.speed;
@@ -45,6 +46,12 @@ void ParticleSystem::Update()
 	for(auto& particle : particles_)
 	{
 		particle.position += particle.velocity * dt;
+		particle.lifetime -= dt;
+		// TODO Handle alive/reset states
+		if(particle.lifetime < 0)
+		{
+			particle.lifetime = 0;
+		}
 	}
 
 	renderer_->UpdateParticles(particles_);

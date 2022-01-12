@@ -17,7 +17,7 @@ void Loot::Awake()
 
 void Loot::OnDestroy()
 {
-	SpawnItem();
+	//SpawnItem();
 }
 
 void Loot::SpawnItem() const

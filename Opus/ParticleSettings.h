@@ -13,6 +13,10 @@ struct ParticleSettings
     float duration = 1;
     float lifetime = 1;
 
+    bool use_scale = false;
+    float scale_start = 1;
+    float scale_end = 1;
+
     bool auto_play = true;
     bool destroy_on_finish = true;
     bool looping = false;
