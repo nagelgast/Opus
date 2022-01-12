@@ -69,9 +69,6 @@
     <ClCompile Include="Projectile.cpp">
       <Filter>Source Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="Wall.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="FireballSkill.cpp">
       <Filter>Source Files\Skills</Filter>
     </ClCompile>
@@ -160,9 +157,6 @@
   <ItemGroup>
     <ClInclude Include="Projectile.h">
       <Filter>Header Files\Components</Filter>
-    </ClInclude>
-    <ClInclude Include="Wall.h">
-      <Filter>Header Files\Entities</Filter>
     </ClInclude>
     <ClInclude Include="FireballSkill.h">
       <Filter>Header Files\Skills</Filter>

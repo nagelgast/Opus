@@ -3,7 +3,6 @@
 #include "Player.h"
 #include "PlayerItemStorage.h"
 #include "ScreenManager.h"
-#include "Wall.h"
 #include "PlayerController.h"
 
 #include "../Opus/Core.h"
@@ -11,6 +10,8 @@
 #include "../Opus/EntityHierarchyUI.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/Shape.h"
+#include "../Opus/SpriteRenderer.h"
+#include "../Opus/RectCollider.h"
 
 const int kScreenWidth = 1024;
 const int kScreenHeight = 768;
@@ -69,12 +70,20 @@ void InitUI(Entity& root, Player& player)
 void InitEntities(Entity& root)
 {
 	{
-		auto& wall1 = root.Instantiate<Wall>({ 500, 500 });
-		wall1.SetName("Wall1");
+		const Sprite sprite{ "Sprites/atlas.png", {16, 275, 431, 172} };
+		auto& level_background = root.Instantiate();
+		const auto& bg_sr = level_background.AddComponent(SpriteRenderer());
+		bg_sr.SetSprite(sprite);
+		auto& bg_trans = level_background.GetTransform();
+		bg_trans.SetScale(4, 4);
+		bg_trans.SetPosition({431 * 2, 172 * 2});
 	}
 	{
-		auto& wall2 = root.Instantiate<Wall>({ 300, 500 });
-		wall2.SetName("Wall2");
+		auto& pond_collider = root.Instantiate({ 550, 450 });
+		pond_collider.AddComponent(RectCollider(0, false, true));
+		pond_collider.GetTransform().SetScale(200, 128);
+
+		pond_collider.SetName("Pond Collider");
 	}
 
 	{
@@ -102,11 +111,11 @@ int main()
 
 	// Load in starting entities
 	auto& root = game->GetRoot();
+	InitEntities(root);
 	auto& player = InitPlayer(root);
 	InitCamera(root, player, *game);
 	InitHUD(root);
 	InitUI(root, player);
-	InitEntities(root);
 
 	//root.Instantiate<EntityHierarchyUI>();
 	

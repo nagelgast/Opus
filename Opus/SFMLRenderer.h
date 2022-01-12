@@ -21,7 +21,8 @@ public:
 private:
 	std::unique_ptr<BaseEntityRenderer> CreateEntityRendererInstance() const override;
 
-	void DrawEntity(SFMLEntityRenderer* entity_renderer) const;
+	void DrawEntity(const SFMLEntityRenderer* entity_renderer) const;
+	void DebugDrawEntity(Entity& entity) const;
 
 	std::weak_ptr<Camera> camera_;
 	sf::RenderWindow& window_;

@@ -36,7 +36,9 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 	std::vector<SFMLEntityRenderer*> world_entity_renderers{};
 	std::vector<SFMLEntityRenderer*> screen_entity_renderers{};
 
-	for (const auto& entity : entities)
+	std::vector<Entity*> hidden_entities{};
+
+	for (auto& entity : entities)
 	{
 		if (entity->ShouldRender())
 		{
@@ -51,6 +53,10 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 			{
 				screen_entity_renderers.push_back(entity_renderer);
 			}
+		}
+		else
+		{
+			hidden_entities.push_back(entity.get());
 		}
 	}
 
@@ -79,6 +85,7 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 	for (const auto& entity_renderer : world_entity_renderers)
 	{
 		DrawEntity(entity_renderer);
+		DebugDrawEntity(*entity_renderer->entity_);
 	}
 
 	window_.setView(window_.getDefaultView());
@@ -86,6 +93,12 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 	for (const auto& entity_renderer : screen_entity_renderers)
 	{
 		DrawEntity(entity_renderer);
+		DebugDrawEntity(*entity_renderer->entity_);
+	}
+
+	for (const auto& entity : hidden_entities)
+	{
+		DebugDrawEntity(*entity);
 	}
 	
 	window_.display();
@@ -103,40 +116,41 @@ std::unique_ptr<BaseEntityRenderer> SFMLRenderer::CreateEntityRendererInstance()
 	return std::make_unique<SFMLEntityRenderer>();
 }
 
-void SFMLRenderer::DrawEntity(SFMLEntityRenderer* entity_renderer) const
+void SFMLRenderer::DrawEntity(const SFMLEntityRenderer* entity_renderer) const
 {
 	window_.draw(*entity_renderer);
-	
-	if (draw_debug_entity_)
+}
+
+void SFMLRenderer::DebugDrawEntity(Entity& entity) const
+{
+	if (!draw_debug_entity_) return;
+
+	// Draw interactable bounds
+	auto* interactable = entity.GetComponent<Interactable>();
+	if (interactable)
 	{
-		const auto& entity = entity_renderer->entity_;
-
-		// Draw interactable bounds
-		auto* interactable = entity->GetComponent<Interactable>();
-		if (interactable)
-		{
-			const auto bounds = interactable->GetGlobalBounds();
-			SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Cyan);
-		}
-
-		// Draw collider bounds
-		auto* rect_collider = entity->GetComponent<RectCollider>();
-		if (rect_collider)
-		{
-			const auto bounds = rect_collider->GetGlobalBounds();
-			SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Magenta);
-		}
-		auto* circle_collider = entity->GetComponent<CircleCollider>();
-		if (circle_collider)
-		{
-			const auto collider_position = circle_collider->GetGlobalPosition();
-			const auto radius = circle_collider->GetGlobalRadius();
-			SFMLEntityRenderer::DrawCircle(window_, sf::RenderStates::Default, {collider_position.x, collider_position.y}, radius, sf::Color::Magenta);
-		}
-
-		// Draw position
-		const auto& position = entity->GetTransform().GetPosition();
-		SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { position.x - 10, position.y }, { position.x + 10, position.y }, sf::Color::White);
-		SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { position.x, position.y - 10 }, { position.x, position.y + 10 }, sf::Color::White);
+		const auto bounds = interactable->GetGlobalBounds();
+		SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Cyan);
 	}
+
+	// Draw collider bounds
+	auto* rect_collider = entity.GetComponent<RectCollider>();
+	if (rect_collider)
+	{
+		const auto bounds = rect_collider->GetGlobalBounds();
+		SFMLEntityRenderer::DrawRect(window_, sf::RenderStates::Default, { bounds.left, bounds.top }, { bounds.width, bounds.height }, sf::Color::Magenta);
+	}
+	auto* circle_collider = entity.GetComponent<CircleCollider>();
+	if (circle_collider)
+	{
+		const auto collider_position = circle_collider->GetGlobalPosition();
+		const auto radius = circle_collider->GetGlobalRadius();
+		SFMLEntityRenderer::DrawCircle(window_, sf::RenderStates::Default, { collider_position.x, collider_position.y }, radius, sf::Color::Magenta);
+	}
+
+	// Draw position
+	const auto& position = entity.GetTransform().GetPosition();
+	SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { position.x - 10, position.y }, { position.x + 10, position.y }, sf::Color::White);
+	SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { position.x, position.y - 10 }, { position.x, position.y + 10 }, sf::Color::White);
+
 }

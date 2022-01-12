@@ -180,7 +180,6 @@
     <ClCompile Include="ScreenManager.cpp" />
     <ClCompile Include="Interactable.cpp" />
     <ClCompile Include="StatList.cpp" />
-    <ClCompile Include="Wall.cpp" />
     <ClCompile Include="WorldItem.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -224,7 +223,6 @@
     <ClInclude Include="Stat.h" />
     <ClInclude Include="StatGroup.h" />
     <ClInclude Include="StatList.h" />
-    <ClInclude Include="Wall.h" />
     <ClInclude Include="WeaponStats.h" />
     <ClInclude Include="WorldItem.h" />
   </ItemGroup>
