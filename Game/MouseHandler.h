@@ -42,8 +42,5 @@ private:
 	bool is_world_space_hold_ = false;
 	bool in_world_space_ = false;
 	bool holding_item_ = false;
-
-	// TODO Update when implementing towns/hideouts
-	const bool can_drop_items_ = true;
 };
 

@@ -144,7 +144,7 @@ void MouseHandler::HandleWorldRelease()
 
 void MouseHandler::HandleWorldHover()
 {
-	if (holding_item_ && can_drop_items_) return;
+	if (holding_item_) return;
 
 	HandleHover();
 }
