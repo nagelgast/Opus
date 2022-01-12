@@ -7,19 +7,18 @@
 
 #include "Color.h"
 #include "Entity.h"
-#include "Game.h"
 #include "Shape.h"
-#include "Sprite.h"
 #include "Vector2.h"
 #include "Transform.h"
+#include "Particle.h"
+#include "ParticleSettings.h"
 
-void SFMLEntityRenderer::SetSprite(const Sprite sprite)
+void SFMLEntityRenderer::SetTexture(Texture& texture)
 {
-	const auto& texture = static_cast<SFMLTexture*>(Game::GetTextureManager().Get(sprite.path).get());  // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+	const auto sfml_texture = static_cast<SFMLTexture*>(&texture);  // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
 
 	drawable_sprite_ = std::make_unique<sf::Sprite>();
-	drawable_sprite_->setTexture(*texture);
-	SetTextureRect(sprite.rect);
+	drawable_sprite_->setTexture(*sfml_texture);
 }
 
 void SFMLEntityRenderer::SetTextureRect(const Rect& rect)
@@ -27,6 +26,42 @@ void SFMLEntityRenderer::SetTextureRect(const Rect& rect)
 	if (!drawable_sprite_) return;
 
 	drawable_sprite_->setTextureRect(ConvertRect(rect));
+}
+
+void SFMLEntityRenderer::SetParticles(const ParticleSettings& settings)
+{
+	particle_settings_ = &settings;
+	drawable_vertices_ = std::make_unique<sf::VertexArray>(sf::Quads, particle_settings_->particle_count * 4);
+
+	const sf::IntRect& texture_rect = drawable_sprite_->getTextureRect();
+
+	for (auto i = 0; i < particle_settings_->particle_count; i++)
+	{
+		sf::Vertex* quad = &drawable_vertices_->operator[](i * 4);
+		quad[0].texCoords = sf::Vector2f(0, 0);
+		quad[1].texCoords = sf::Vector2f(texture_rect.width, 0);
+		quad[2].texCoords = sf::Vector2f(texture_rect.width, texture_rect.height);
+		quad[3].texCoords = sf::Vector2f(0, texture_rect.height);
+
+	}
+}
+
+void SFMLEntityRenderer::UpdateParticles(std::vector<Particle>& particles)
+{
+	const auto size = static_cast<float>(particle_settings_->size);
+
+	for (std::size_t i = 0; i < particles.size(); i++)
+	{
+		const auto& particle = particles[i];
+		sf::Vertex* quad = &drawable_vertices_->operator[](i * 4);
+
+		sf::Vector2f corner_pos = {particle.position.x, particle.position.y};
+
+		quad[0].position = corner_pos;
+		quad[1].position = {corner_pos.x + size, corner_pos.y};
+		quad[2].position = {corner_pos.x + size, corner_pos.y + size};
+		quad[3].position = {corner_pos.x, corner_pos.y + size};
+	}
 }
 
 void SFMLEntityRenderer::SetShape(const Shape& shape)
@@ -107,27 +142,34 @@ void SFMLEntityRenderer::draw(sf::RenderTarget& target, sf::RenderStates states)
 		drawable_shape_->setPosition(draw_origin);
 		target.draw(*drawable_shape_, states);
 	}
-
-	if (drawable_sprite_)
+	else if (drawable_sprite_)
 	{
-		auto& sprite_rect = drawable_sprite_->getTextureRect();
-		auto sprite_offset = draw_offset;
-		sprite_offset.x *= static_cast<float>(sprite_rect.width);
-		sprite_offset.y *= static_cast<float>(sprite_rect.height);
-		auto sprite_scale = draw_scale;
-
-		if (mirrored_)
+		if (drawable_vertices_)
 		{
-			sprite_scale.x *= -1;
-			sprite_offset.x *= -1;
+			states.texture = drawable_sprite_->getTexture();
+			target.draw(*drawable_vertices_, states);
+			//states.texture = nullptr;
 		}
+		else
+		{
+			auto& sprite_rect = drawable_sprite_->getTextureRect();
+			auto sprite_offset = draw_offset;
+			sprite_offset.x *= static_cast<float>(sprite_rect.width);
+			sprite_offset.y *= static_cast<float>(sprite_rect.height);
+			auto sprite_scale = draw_scale;
 
-		drawable_sprite_->setScale(sprite_scale);
-		drawable_sprite_->setPosition({ pos.x - sprite_offset.x, pos.y - sprite_offset.y});
-		target.draw(*drawable_sprite_, states);
+			if (mirrored_)
+			{
+				sprite_scale.x *= -1;
+				sprite_offset.x *= -1;
+			}
+
+			drawable_sprite_->setScale(sprite_scale);
+			drawable_sprite_->setPosition({ pos.x - sprite_offset.x, pos.y - sprite_offset.y });
+			target.draw(*drawable_sprite_, states);
+		}
 	}
-
-	if(drawable_text_)
+	else if(drawable_text_)
 	{
 		drawable_text_->setPosition(draw_origin);
 		target.draw(*drawable_text_, states);

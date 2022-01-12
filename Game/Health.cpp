@@ -2,6 +2,7 @@
 
 #include "HealthBar.h"
 #include "../Opus/ShapeRenderer.h"
+#include "../Opus/ParticleSystem.h"
 #include "../Opus/Shape.h"
 
 Health::Health(int max_health) : current_health_(max_health), max_health_(max_health)
@@ -42,5 +43,11 @@ int Health::GetMaxHealth() const
 
 void Health::Die()
 {
+	const auto pos = entity_->GetTransform().GetPosition();
+	auto& death_particles = entity_->Instantiate(pos);
+	const Sprite sprite {"Sprites/particles/circle_05.png"};
+	const ParticleSettings settings {sprite, 64};
+	death_particles.AddComponent(ParticleSystem(settings));
+
 	entity_->Destroy();
 }

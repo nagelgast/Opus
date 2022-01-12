@@ -1,5 +1,9 @@
 #pragma once
+#include <vector>
 
+struct ParticleSettings;
+struct Particle;
+class Texture;
 struct Rect;
 struct Color;
 struct Sprite;
@@ -12,8 +16,12 @@ class BaseEntityRenderer
 public:
 	virtual ~BaseEntityRenderer() = default;
 	
-	virtual void SetSprite(const Sprite sprite) = 0;
+	virtual void SetTexture(Texture& texture) = 0;
 	virtual void SetTextureRect(const Rect& rect) = 0;
+
+	virtual void SetParticles(const ParticleSettings& settings) = 0;
+	virtual void UpdateParticles(std::vector<Particle>& particles) = 0;
+
 	virtual void SetShape(const Shape& shape) = 0;
 	virtual void SetText(const char* text) = 0;
 

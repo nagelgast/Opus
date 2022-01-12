@@ -3,6 +3,7 @@
 
 #include "BaseEntityRenderer.h"
 #include "Entity.h"
+#include "Game.h"
 
 void SpriteRenderer::Awake()
 {
@@ -11,7 +12,9 @@ void SpriteRenderer::Awake()
 
 void SpriteRenderer::SetSprite(const Sprite& sprite, bool world_space) const
 {
-	renderer_->SetSprite(sprite);
+	const auto texture = Game::GetTextureManager().Get(sprite.path);
+	renderer_->SetTexture(*texture);
+	renderer_->SetTextureRect(sprite.rect);
 	renderer_->in_world_space_ = world_space;
 }
 

@@ -4,13 +4,20 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
+#include "ParticleSettings.h"
+
+struct ParticleSettings;
+struct Particle;
 class Entity;
 
 class SFMLEntityRenderer final : public BaseEntityRenderer, public sf::Drawable
 {
 public:
-	void SetSprite(const Sprite sprite) override;
+	void SetTexture(Texture& texture) override;
 	void SetTextureRect(const Rect& rect) override;
+
+	void SetParticles(const ParticleSettings& settings) override;
+	void UpdateParticles(std::vector<Particle>& particles) override;
 
 	void SetShape(const Shape& shape) override;
 	void SetText(const char* text) override;
@@ -33,9 +40,14 @@ private:
 
 	bool mirrored_ = false;
 
-	std::unique_ptr<sf::Sprite> drawable_sprite_;
+	// TODO Do these need to be smart pointers or can I just store them here?
 	std::unique_ptr<sf::Text> drawable_text_;
 	std::unique_ptr<sf::Shape> drawable_shape_;
+	std::unique_ptr<sf::VertexArray> drawable_vertices_;
+
+	// TODO Make separate ParticleRenderer class
+	std::unique_ptr<sf::Sprite> drawable_sprite_;
+	const ParticleSettings* particle_settings_ = nullptr;
 
 	// TODO Store in font manager
 	sf::Font font_;
