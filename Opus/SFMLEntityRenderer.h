@@ -52,5 +52,7 @@ private:
 	// TODO Store in font manager
 	sf::Font font_;
 
-	sf::IntRect ConvertRect(const Rect& rect);
+	// TODO Move to utility class
+	static sf::IntRect ConvertRect(const Rect& rect);
+	static sf::Color ConvertColor(const Color& color);
 };

@@ -43,10 +43,11 @@ int Health::GetMaxHealth() const
 
 void Health::Die()
 {
+	// TODO Make this a separate component
 	const auto pos = entity_->GetTransform().GetPosition();
 	auto& death_particles = entity_->Instantiate(pos);
 	const Sprite sprite {"Sprites/particles/circle_05.png"};
-	const ParticleSettings settings {sprite, 64, 20, 200};
+	const ParticleSettings settings {sprite, {0.3f, 0.3f, 1, 1}, 64, 20, 200};
 	death_particles.AddComponent(ParticleSystem(settings));
 
 	entity_->Destroy();

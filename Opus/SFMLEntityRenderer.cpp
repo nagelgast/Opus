@@ -34,6 +34,7 @@ void SFMLEntityRenderer::SetParticles(const ParticleSettings& settings)
 	drawable_vertices_ = std::make_unique<sf::VertexArray>(sf::Quads, particle_settings_->particle_count * 4);
 
 	const sf::IntRect& texture_rect = drawable_sprite_->getTextureRect();
+	const sf::Color& color = ConvertColor(particle_settings_->color);
 
 	for (auto i = 0; i < particle_settings_->particle_count; i++)
 	{
@@ -43,6 +44,10 @@ void SFMLEntityRenderer::SetParticles(const ParticleSettings& settings)
 		quad[2].texCoords = sf::Vector2f(texture_rect.width, texture_rect.height);
 		quad[3].texCoords = sf::Vector2f(0, texture_rect.height);
 
+		quad[0].color = color;
+		quad[1].color = color;
+		quad[2].color = color;
+		quad[3].color = color;
 	}
 }
 
@@ -108,12 +113,7 @@ float SFMLEntityRenderer::GetWidth()
 
 void SFMLEntityRenderer::SetColor(const Color& color)
 {
-	drawable_shape_->setFillColor(sf::Color(
-		static_cast<sf::Uint8>(color.r * 255),
-		static_cast<sf::Uint8>(color.g * 255),
-		static_cast<sf::Uint8>(color.b * 255),
-		static_cast<sf::Uint8>(color.a * 255)
-	));
+	drawable_shape_->setFillColor(ConvertColor(color));
 }
 
 void SFMLEntityRenderer::SetMirrored(const bool& value)
@@ -220,5 +220,15 @@ sf::IntRect SFMLEntityRenderer::ConvertRect(const Rect& rect)
 		static_cast<int>(rect.top),
 		static_cast<int>(rect.width),
 		static_cast<int>(rect.height)
+	};
+}
+
+sf::Color SFMLEntityRenderer::ConvertColor(const Color& color)
+{
+	return {
+		static_cast<sf::Uint8>(color.r * 255),
+		static_cast<sf::Uint8>(color.g * 255),
+		static_cast<sf::Uint8>(color.b * 255),
+		static_cast<sf::Uint8>(color.a * 255)
 	};
 }

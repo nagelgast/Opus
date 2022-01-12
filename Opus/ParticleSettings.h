@@ -1,9 +1,11 @@
 #pragma once
+#include "Color.h"
 #include "Sprite.h"
 
 struct ParticleSettings
 {
     Sprite sprite;
+    Color color;
 
     int size;
     int particle_count = 1;
