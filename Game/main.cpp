@@ -7,7 +7,6 @@
 
 #include "../Opus/Core.h"
 #include "../Opus/Camera.h"
-#include "../Opus/EntityHierarchyUI.h"
 #include "../Opus/ShapeRenderer.h"
 #include "../Opus/Shape.h"
 #include "../Opus/SpriteRenderer.h"
@@ -20,9 +19,7 @@ const int kFixedTimeStepMs = 2;
 
 Player& InitPlayer(Entity& root)
 {
-	auto& player = root.Instantiate<Player>();
-	player.SetName("Player");
-
+	auto& player = root.Instantiate<Player>("Player");
 	return player;
 }
 
@@ -31,7 +28,7 @@ void InitCamera(Entity& root, Player& player, Game& game)
 	auto& main_camera = root.Instantiate();
 	main_camera.SetName("Main Camera");
 	auto camera = main_camera.AddComponent(Camera());
-	camera.SetTarget(player);
+	camera.SetTarget(*player.entity_);
 	game.SetCamera(camera);
 }
 
@@ -39,14 +36,14 @@ void InitHUD(Entity& root)
 {
 	const auto margin = 120;
 	{
-		auto& health_globe = root.Instantiate({ margin, kScreenHeight - margin });
+		auto& health_globe = root.Instantiate(Vector2{ margin, kScreenHeight - margin });
 		health_globe.SetName("Health Globe");
 		health_globe.AddComponent(ShapeRenderer(Shape::kCircle, { 1, 0, 0 }, false));
 		health_globe.GetTransform().SetScale(100, 100);
 	}
 
 	{
-		auto& mana_globe = root.Instantiate({ kScreenWidth - margin, kScreenHeight - margin });
+		auto& mana_globe = root.Instantiate(Vector2{ kScreenWidth - margin, kScreenHeight - margin });
 		mana_globe.SetName("Mana Globe");
 		mana_globe.AddComponent(ShapeRenderer(Shape::kCircle, { 0, 0, 1 }, false));
 		mana_globe.GetTransform().SetScale(100, 100);
@@ -57,14 +54,12 @@ void InitHUD(Entity& root)
 void InitUI(Entity& root, Player& player)
 {
 
-	auto& screen_manager = root.Instantiate<ScreenManager>();
-	screen_manager.SetName("Screen Manager");
+	auto& screen_manager = root.Instantiate<ScreenManager>("Screen Manager");
 	
-	auto& mouse = root.Instantiate<MouseSlot>();
-	mouse.SetName("Mouse Slot");
-	mouse.AddComponent(MouseHandler(screen_manager, *player.GetComponent<PlayerController>(), mouse));
-
-	Game::GetService<PlayerItemStorage>()->Initialize(mouse, *screen_manager.player_inventory_screen_);
+	// auto& mouse = root.Instantiate<MouseSlot>("Mouse Slot");
+	// mouse.AddComponent(MouseHandler(screen_manager, *player.entity_->GetComponent<PlayerController>(), mouse));
+	//
+	// Game::GetService<PlayerItemStorage>()->Initialize(mouse, *screen_manager.player_inventory_screen_);
 }
 
 void InitEntities(Entity& root)
@@ -79,7 +74,7 @@ void InitEntities(Entity& root)
 		bg_trans.SetPosition({431 * 2, 172 * 2});
 	}
 	{
-		auto& pond_collider = root.Instantiate({ 550, 450 });
+		auto& pond_collider = root.Instantiate(Vector2{ 550, 450 });
 		pond_collider.AddComponent(RectCollider(0, false, true));
 		pond_collider.GetTransform().SetScale(200, 128);
 
@@ -87,8 +82,7 @@ void InitEntities(Entity& root)
 	}
 
 	{
-		auto& enemy = root.Instantiate<Enemy>({ 500, 100 });
-		enemy.SetName("Enemy");
+		root.Instantiate<Enemy>({ 500, 100 }, "Enemy");
 	}
 }
 
@@ -117,8 +111,6 @@ int main()
 	InitHUD(root);
 	InitUI(root, player);
 
-	//root.Instantiate<EntityHierarchyUI>();
-	
 	game->Run();
 
 	game->Exit();

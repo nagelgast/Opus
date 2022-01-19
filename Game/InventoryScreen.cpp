@@ -25,8 +25,7 @@ void InventoryScreen::Initialize(Inventory* inventory, int rows, int columns)
 		for (auto col = 0; col < columns; ++col)
 		{
 			auto index = col + row * columns;
-			auto& slot = Instantiate<InventorySlot>(GetTransform());
-			slot.SetName("Slot" + std::to_string(index));
+			auto& slot = CreateChild<InventorySlot>("Slot" + std::to_string(index));
 			auto& slot_interactable = *slot.GetComponent<Interactable>();
 			slot_interactable.OnRelease += [this, index] { HandleRelease(index); };
 			slot_interactable.OnHoverEnter += [this, index] { HandleSlotHoverEnter(index); };
@@ -61,7 +60,7 @@ void InventoryScreen::HandleSlotHoverEnter(const int index)
 		auto pos = pickup_item_->GetTransform().GetPosition();
 		pos.x -= 40;
 		pos.y -= 210;
-		popup_ = &Instantiate<ItemInfoPopup>(pos);
+		popup_ = &Create<ItemInfoPopup>(pos);
 		popup_->SetItem(pickup_item_->GetItem());
 	}
 
@@ -97,7 +96,8 @@ void InventoryScreen::HandleSlotHoverExit(int index)
 {
 	if (popup_)
 	{
-		popup_->Destroy();
+		popup_->entity_->Destroy();
+		popup_->entity_ = nullptr;
 		popup_ = nullptr;
 	}
 	ResetHighlights();
@@ -113,7 +113,7 @@ void InventoryScreen::SpawnItem(Item& item, const std::vector<int>& slot_indices
 	}
 
 	// Create new inventory item instance
-	auto& inventory_item = Instantiate<ScreenItem>(GetTransform());
+	auto& inventory_item = CreateChild<ScreenItem>();
 
 	// Position item correctly
 	auto& transform = inventory_item.GetTransform();

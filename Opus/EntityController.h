@@ -15,14 +15,6 @@ public:
 	void DestroyEntity(Entity& entity);
 	Entity& CreateEntity();
 
-	template <typename T>
-	T& CreateEntity()
-	{
-		auto entity = std::make_shared<T>();
-		AddEntity(entity);
-		return *entity;
-	}
-
 	std::vector<std::shared_ptr<Entity>>& GetEntities();
 	void FixedUpdate();
 
@@ -32,7 +24,7 @@ public:
 	const BaseTime& GetTime() const;
 	const Input& GetInput() const;
 private:
-	void AddEntity(std::shared_ptr<Entity> entity);
+	void AddEntity(const std::shared_ptr<Entity>& entity);
 	std::vector<std::shared_ptr<Entity>> entities_;
 	std::vector<std::shared_ptr<Entity>> new_entities_;
 	

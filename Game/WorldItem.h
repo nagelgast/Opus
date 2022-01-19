@@ -7,7 +7,7 @@ class PlayerItemStorage;
 class Interactable;
 
 class WorldItem :
-    public Entity
+    public Component
 {
 public:
 	void Awake() override;

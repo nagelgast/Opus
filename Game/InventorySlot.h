@@ -11,7 +11,7 @@ class ShapeRenderer;
 class ScreenItem;
 class Inventory;
 
-class InventorySlot : public Entity
+class InventorySlot : public Component
 {
 public:
 	void SetItem(ScreenItem& item);

@@ -41,7 +41,7 @@ void ScreenItem::Remove()
 		slot->ClearItem();
 	}
 	
-	Destroy();
+	entity_->Destroy();
 }
 
 Item& ScreenItem::GetItem() const

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "../Opus/Entity.h"
+#include "../Opus/Core.h"
 
 class PlayerInventoryScreen;
 
-class ScreenManager : public Entity
+class ScreenManager : public Component
 {
 public:
 	void Awake() override;

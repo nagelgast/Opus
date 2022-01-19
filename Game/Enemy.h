@@ -3,7 +3,7 @@
 #include "../Opus/Core.h"
 
 class Enemy final :
-    public Entity
+    public Component
 {
 public:
 	void Awake() override;

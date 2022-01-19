@@ -9,7 +9,7 @@ class SpriteRenderer;
 class Interactable;
 
 class ScreenItem :
-    public Entity
+    public Component
 {
 public:
 	void Awake() override;

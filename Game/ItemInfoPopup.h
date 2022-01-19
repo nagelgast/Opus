@@ -14,7 +14,7 @@ const Color kUniqueItemColor = { 0.69f, 0.38f, 0.15f};		// 175  96  37
 const Color kCurrencyItemColor = { 0.67f, 0.62f, 0.51f};		// 170 158 130
 
 
-class ItemInfoPopup : public Entity
+class ItemInfoPopup : public Component
 {
 public:
 	void Awake() override;

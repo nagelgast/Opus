@@ -8,7 +8,7 @@
 void WorldItem::Awake()
 {
 	player_inventory_ = Game::GetService<PlayerItemStorage>();
-	SetName("WorldItem");
+	entity_->SetName("WorldItem");
 
 	AddComponent(ShapeRenderer(Shape::kSquare, {0.5f, 0.5f, 0.5f}));
 	const auto size = 30;
@@ -28,5 +28,5 @@ void WorldItem::Initialize(std::unique_ptr<Item> item)
 void WorldItem::PickUp()
 {
 	player_inventory_->PickUpItem(std::move(item_));
-	Destroy();
+	entity_->Destroy();
 }

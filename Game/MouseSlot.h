@@ -7,7 +7,7 @@
 class SpriteRenderer;
 
 class MouseSlot final :
-	public Entity
+	public Component
 {
 public:
 	void Awake() override;

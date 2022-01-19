@@ -17,7 +17,7 @@ struct Vector2;
 class Component;
 struct Input;
 
-class Entity
+class Entity final
 {
 public:
 	Entity();
@@ -49,35 +49,37 @@ public:
 	RectCollider& AddComponent(const RectCollider& c);
 	CircleCollider& AddComponent(const CircleCollider& c);
 	
-	Entity& Instantiate() const;
-	Entity& Instantiate(const Vector2& position) const;
-	Entity& Instantiate(Transform& parent) const;
+	Entity& Instantiate(const std::string& name = std::string()) const;
+	Entity& Instantiate(const Vector2& position, const std::string& name = std::string()) const;
+	Entity& Instantiate(Transform& parent, const std::string& name = std::string()) const;
 
 	template <typename T>
-	T& Instantiate()
+	T& Instantiate(const std::string& name = std::string())
 	{
-		return ec_->CreateEntity<T>();
+		auto& entity = Instantiate(name);
+		T& component = entity.AddComponent<T>();
+		return component;
 	}
 
 	template <typename T>
-	T& Instantiate(const Vector2& position)
+	T& Instantiate(const Vector2& position, const std::string& name = std::string())
 	{
-		auto& entity = ec_->CreateEntity<T>();
-		entity.transform_->SetPosition(position);
-		return entity;
+		auto& entity = Instantiate(position, name);
+		auto& component = entity.AddComponent<T>();
+		return component;
+	}
+	
+	template <typename T>
+	T& Instantiate(Transform& parent, const std::string& name = std::string())
+	{
+		auto& entity = Instantiate(parent, name);
+		auto& component = entity.AddComponent<T>();
+
+		return component;
 	}
 
 	template <typename T>
-	T& Instantiate(Transform& parent)
-	{
-		auto& entity = ec_->CreateEntity<T>();
-		entity.transform_->SetParent(parent);
-		entity.transform_->SetLocalPosition({0, 0});
-		return entity;
-	}
-
-	template <typename T>
-	T& AddComponent(T c)
+	T& AddComponent(T c = T())
 	{
 		auto c_ptr = std::make_unique<T>(c);
 		c_ptr->entity_ = this;
@@ -85,7 +87,7 @@ public:
 		const auto type = std::type_index(typeid(*c_ptr));
 		components_[type] = std::move(c_ptr);
 
-		components_[type]->Awake();
+		AwakeComponent(type);
 
 		return static_cast<T&>(*components_[type]);
 	}
@@ -128,6 +130,8 @@ private:
 	void StartComponents();
 	void UpdateComponents();
 	void FixedUpdateComponents();
+
+	void AwakeComponent(std::type_index type);
 
 	std::string name_;
 	EntityController* ec_ = nullptr;

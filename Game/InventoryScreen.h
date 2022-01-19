@@ -13,7 +13,7 @@ class ScreenItem;
 
 class InventorySlot;
 
-class InventoryScreen : public Entity
+class InventoryScreen : public Component
 {
 public:
 	void Initialize(Inventory* inventory, int rows, int columns);

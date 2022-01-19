@@ -19,7 +19,7 @@ void PlayerInventoryScreen::Awake()
 	auto& equipment_background = SpawnBackground({ 191, 32, 109, 113 }, 2);
 	equipment_background.Move({ 170, 200 });
 
-	inventory_ = &Instantiate<InventoryScreen>(GetTransform());
+	inventory_ = &CreateChild<InventoryScreen>();
 	auto& inv_trans = inventory_->GetTransform();
 	inv_trans.SetLocalPosition({ 75, 452 });
 
@@ -37,14 +37,14 @@ void PlayerInventoryScreen::Open()
 	else
 	{
 		is_open_ = true;
-		SetVisible(true);
+		entity_->SetVisible(true);
 	}
 }
 
 void PlayerInventoryScreen::Close()
 {
 	is_open_ = false;
-	SetVisible(false);
+	entity_->SetVisible(false);
 }
 
 bool PlayerInventoryScreen::IsOpen() const
@@ -59,8 +59,7 @@ InventoryScreen& PlayerInventoryScreen::GetInventoryScreen() const
 
 void PlayerInventoryScreen::SpawnEquipmentSlot(const ItemTag tag, const Vector2 position, const float width, const float height)
 {
-	auto& slot = Instantiate<EquipmentSlot>(GetTransform());
-	slot.SetName("EquipmentSlot");
+	auto& slot = CreateChild<EquipmentSlot>("EquipmentSlot");
 	slot.SetRequiredTag(tag);
 
 	auto& slot_transform = slot.GetTransform();
@@ -70,7 +69,7 @@ void PlayerInventoryScreen::SpawnEquipmentSlot(const ItemTag tag, const Vector2 
 
 Transform& PlayerInventoryScreen::SpawnBackground(const Rect& texture_rect, const float& scale)
 {
-	auto& background = Instantiate(GetTransform());
+	auto& background = CreateChild();
 	auto& sr = background.AddComponent(SpriteRenderer());
 	const auto sprite = Sprite{ "Sprites/inventory.png", texture_rect};
 	sr.SetSprite(sprite, false);

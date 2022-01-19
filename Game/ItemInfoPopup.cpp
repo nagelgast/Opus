@@ -11,23 +11,19 @@ const float kMargin = 10;
 
 void ItemInfoPopup::Awake()
 {
-	auto& transform = GetTransform();
-
-	auto& background = Instantiate(transform);
-
+	auto& background = CreateChild();
 	background.GetTransform().SetScale(100, 200);
 	background_renderer_ = &background.AddComponent(ShapeRenderer(Shape::kSquare, {0.1f, 0.1f, 0.1f, 0.5f}, false));
 
 
-	auto& title_background = Instantiate(transform);
-
+	auto& title_background = CreateChild();
 	title_background.GetTransform().SetScale(100, 30);
 	title_background_renderer_ = &title_background.AddComponent(ShapeRenderer(Shape::kSquare, kUniqueItemColor, false));
 
-	auto& title = Instantiate(transform);
+	auto& title = CreateChild();
 	title_renderer_ = &title.AddComponent(TextRenderer());
 
-	auto& info = Instantiate(transform);
+	auto& info = CreateChild();
 	info.GetTransform().SetLocalPosition({0, 30});
 	info_renderer_ = &info.AddComponent(TextRenderer());
 }

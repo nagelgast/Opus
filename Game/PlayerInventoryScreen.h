@@ -1,7 +1,8 @@
 #pragma once
 
 #include "Item.h"
-#include "..\Opus\Entity.h"
+#include "../Opus/Core.h"
+
 class InventoryScreen;
 class MouseSlot;
 class PlayerItemStorage;
@@ -9,7 +10,7 @@ class InventorySlot;
 class Inventory;
 
 class PlayerInventoryScreen :
-    public Entity
+    public Component
 {
 public:
 	void Awake() override;

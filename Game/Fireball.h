@@ -4,7 +4,7 @@
 
 class Projectile;
 
-class Fireball final : public Entity
+class Fireball final : public Component
 {
 public:
 	void Awake() override;

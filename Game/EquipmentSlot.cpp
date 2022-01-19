@@ -15,7 +15,7 @@ void EquipmentSlot::Awake()
 
 void EquipmentSlot::SpawnItem(Item& item)
 {
-	item_ = &Instantiate<ScreenItem>(GetTransform());
+	item_ = &CreateChild<ScreenItem>();
 	item_->Initialize(item, { this });
 }
 

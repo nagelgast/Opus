@@ -46,6 +46,11 @@ void Entity::FixedUpdateComponents()
 	}
 }
 
+void Entity::AwakeComponent(const std::type_index type)
+{
+	components_[type]->Awake();
+}
+
 void Entity::Destroy()
 {
 	destroyed_ = true;
@@ -68,21 +73,23 @@ CircleCollider& Entity::AddComponent(const CircleCollider& c)
 	return dynamic_cast<CircleCollider&>(*collider_);
 }
 
-Entity& Entity::Instantiate() const
+Entity& Entity::Instantiate(const std::string& name) const
 {
-	return ec_->CreateEntity();
+	auto& entity = ec_->CreateEntity();
+	entity.SetName(name);
+	return entity;
 }
 
-Entity& Entity::Instantiate(const Vector2& position) const
+Entity& Entity::Instantiate(const Vector2& position, const std::string& name) const
 {
-	auto& entity = Instantiate();
+	auto& entity = Instantiate(name);
 	entity.transform_->SetPosition(position);
 	return entity;
 }
 
-Entity& Entity::Instantiate(Transform& parent) const
+Entity& Entity::Instantiate(Transform& parent, const std::string& name) const
 {
-	auto& entity = Instantiate();
+	auto& entity = Instantiate(name);
 	entity.transform_->SetParent(parent);
 	entity.transform_->SetLocalPosition({0, 0});
 	return entity;
