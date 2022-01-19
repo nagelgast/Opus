@@ -79,7 +79,21 @@ public:
 	}
 
 	template <typename T>
-	T& AddComponent(T c = T())
+	T& AddComponent()
+	{
+		auto c_ptr = std::make_unique<T>();
+		c_ptr->entity_ = this;
+
+		const auto type = std::type_index(typeid(*c_ptr));
+		components_[type] = std::move(c_ptr);
+
+		AwakeComponent(type);
+
+		return static_cast<T&>(*components_[type]);
+	}
+
+	template <typename T>
+	T& AddComponent(T c)
 	{
 		auto c_ptr = std::make_unique<T>(c);
 		c_ptr->entity_ = this;

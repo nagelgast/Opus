@@ -53,13 +53,12 @@ void InitHUD(Entity& root)
 
 void InitUI(Entity& root, Player& player)
 {
-
 	auto& screen_manager = root.Instantiate<ScreenManager>("Screen Manager");
 	
-	// auto& mouse = root.Instantiate<MouseSlot>("Mouse Slot");
-	// mouse.AddComponent(MouseHandler(screen_manager, *player.entity_->GetComponent<PlayerController>(), mouse));
-	//
-	// Game::GetService<PlayerItemStorage>()->Initialize(mouse, *screen_manager.player_inventory_screen_);
+	auto& mouse = root.Instantiate<MouseSlot>("Mouse Slot");
+	mouse.AddComponent(MouseHandler(screen_manager, *player.entity_->GetComponent<PlayerController>(), mouse));
+	
+	Game::GetService<PlayerItemStorage>()->Initialize(mouse, *screen_manager.player_inventory_screen_);
 }
 
 void InitEntities(Entity& root)

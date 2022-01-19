@@ -63,8 +63,8 @@ void MouseSlot::Update()
 
 void MouseSlot::Drop(const Vector2 position)
 {
-	//auto& world_item = Create<WorldItem>(position);
-	//world_item.Initialize(std::move(item_));
+	auto& world_item = Create<WorldItem>(position);
+	world_item.Initialize(std::move(item_));
 
 	Clear();
 }
