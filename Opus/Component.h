@@ -37,16 +37,13 @@ public:
 		return entity_->GetComponent<T>();
 	}
 
-	Transform& GetTransform() const
-	{
-		return entity_->GetTransform();
-	}
+	Transform& GetTransform() const;
 
-	Entity& Create(const std::string& name = std::string()) const {return entity_->Instantiate(name);}
-	Entity& Create(const Vector2& position, const std::string& name = std::string()) const { return entity_->Instantiate(position, name); }
-	Entity& Create(Transform& parent, const std::string& name = std::string()) const { return entity_->Instantiate(parent, name); }
-	Entity& CreateHere(const std::string& name = std::string()) const { return entity_->Instantiate(name); }
-	Entity& CreateChild(const std::string& name = std::string()) const { return entity_->Instantiate(name); }
+	Entity& Create(const std::string& name = std::string()) const;
+	Entity& Create(const Vector2& position, const std::string& name = std::string()) const;
+	Entity& Create(Transform& parent, const std::string& name = std::string()) const;
+	Entity& CreateHere(const std::string& name = std::string()) const;
+	Entity& CreateChild(const std::string& name = std::string()) const;
 
 	template <typename T>
 	T& Create(const std::string& name = std::string()) const { return entity_->Instantiate<T>(name); }
@@ -55,9 +52,11 @@ public:
 	template <typename T = Entity>
 	T& Create(Transform& parent, const std::string& name = std::string()) const { return entity_->Instantiate<T>(parent, name); }
 	template <typename T = Entity>
-	T& CreateHere(const std::string& name = std::string()) const { return entity_->Instantiate<T>(GetTransform().GetPosition(), name); }
+	T& CreateHere(const std::string& name = std::string()) const { return entity_->Instantiate<T>(GetTransformPosition(), name); }
 	template <typename T = Entity>
 	T& CreateChild(const std::string& name = std::string()) const { return entity_->Instantiate<T>(GetTransform(), name); }
+private:
+	Vector2 GetTransformPosition() const;
 };
 
 inline Component::Component(Component&& c) noexcept : entity_(c.entity_)

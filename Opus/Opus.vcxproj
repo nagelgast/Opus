@@ -213,6 +213,7 @@
   <ItemGroup>
     <ClCompile Include="Animation.cpp" />
     <ClCompile Include="CircleCollider.cpp" />
+    <ClCompile Include="Component.cpp" />
     <ClCompile Include="ParticleSystem.cpp" />
     <ClCompile Include="RectCollider.cpp" />
     <ClCompile Include="Camera.cpp" />

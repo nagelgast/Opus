@@ -32,10 +32,10 @@ void Loot::SpawnItem() const
 
 	const auto pos = entity_->GetTransform().GetPosition();
 
-	// auto& world_item = CreateHere<WorldItem>();
-	// world_item.Initialize(std::move(item));
-	// auto& world_item2 = CreateHere<WorldItem>();
-	// world_item2.Initialize(std::move(item2));
+	auto& world_item = CreateHere<WorldItem>();
+	world_item.Initialize(std::move(item));
+	auto& world_item2 = CreateHere<WorldItem>();
+	world_item2.Initialize(std::move(item2));
 	// auto& world_item3 = entity_->Instantiate<WorldItem>(pos);
 	// world_item3.Initialize(std::move(item3));
 }
