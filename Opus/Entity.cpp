@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Entity.h"
 
+#include <iostream>
+
 #include "Transform.h"
 #include "BaseRenderer.h"
 #include "BaseEntityRenderer.h"
@@ -22,7 +24,7 @@ Entity::~Entity()
 	components_.clear();
 }
 
-void Entity::StartComponents()
+void Entity::Start() const
 {
 	for (const auto& component : components_)
 	{
@@ -30,7 +32,7 @@ void Entity::StartComponents()
 	}
 }
 
-void Entity::UpdateComponents()
+void Entity::Update() const
 {
 	for (const auto& component : components_)
 	{
@@ -38,7 +40,7 @@ void Entity::UpdateComponents()
 	}
 }
 
-void Entity::FixedUpdateComponents()
+void Entity::FixedUpdate() const
 {
 	for (const auto& component : components_)
 	{
@@ -54,7 +56,7 @@ void Entity::AwakeComponent(const std::type_index type)
 void Entity::Destroy()
 {
 	destroyed_ = true;
-	for (auto* child : transform_->children_)
+	for (const auto* child : transform_->children_)
 	{
 		child->entity_->Destroy();
 	}
@@ -149,7 +151,7 @@ bool Entity::HasRenderer() const
 	return renderer_ != nullptr;
 }
 
-void Entity::OnCollision(const Collider& other)
+void Entity::OnCollision(const Collider& other) const
 {
 	for (const auto& component : components_)
 	{
@@ -157,7 +159,7 @@ void Entity::OnCollision(const Collider& other)
 	}
 }
 
-void Entity::OnDestroy()
+void Entity::OnDestroy() const
 {
 	for (const auto& component : components_)
 	{
@@ -170,7 +172,7 @@ BaseEntityRenderer* Entity::GetRenderer() const
 	return renderer_.get();
 }
 
-void Entity::RecalculateVisibility(Transform& parent)
+void Entity::RecalculateVisibility(const Transform& parent)
 {
 	parent_visible_ = parent.entity_->visible_ && parent.entity_->parent_visible_;
 }

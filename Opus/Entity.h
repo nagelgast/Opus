@@ -21,29 +21,13 @@ class Entity final
 {
 public:
 	Entity();
-	virtual ~Entity();
+	~Entity();
 
 	Entity(Entity&) = delete;
 	Entity(Entity&&) = delete;
 	Entity& operator=(Entity& other) = delete;
 	Entity& operator=(Entity&& other) = delete;
-
-	virtual void Awake()
-	{
-	}
-
-	virtual void Start()
-	{
-	}
-
-	virtual void Update()
-	{
-	}
-
-	virtual void FixedUpdate()
-	{
-	}
-
+	
 	void Destroy();
 
 	RectCollider& AddComponent(const RectCollider& c);
@@ -133,17 +117,17 @@ public:
 	BaseEntityRenderer* CreateRenderer();
 	bool ShouldRender() const;
 	BaseEntityRenderer* GetRenderer() const;
-	void RecalculateVisibility(Transform& parent);
+	void RecalculateVisibility(const Transform& parent);
 	void RecalculateChildVisibility() const;
 	bool HasRenderer() const;
 
-	void OnCollision(const Collider& other);
+	void OnCollision(const Collider& other) const;
 
 private:
-	void OnDestroy();
-	void StartComponents();
-	void UpdateComponents();
-	void FixedUpdateComponents();
+	void OnDestroy() const;
+	void Start() const;
+	void Update() const;
+	void FixedUpdate() const;
 
 	void AwakeComponent(std::type_index type);
 

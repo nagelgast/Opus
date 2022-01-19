@@ -16,7 +16,7 @@ public:
 	Entity& CreateEntity();
 
 	std::vector<std::shared_ptr<Entity>>& GetEntities();
-	void FixedUpdate();
+	void FixedUpdate() const;
 
 	void Update();
 

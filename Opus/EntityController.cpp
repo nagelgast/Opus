@@ -28,6 +28,7 @@ Entity& EntityController::CreateEntity()
 {
 	const auto entity = std::make_shared<Entity>();
 	AddEntity(entity);
+	// TODO Fix stack memory warning
 	return *entity;
 }
 
@@ -37,23 +38,21 @@ std::vector<std::shared_ptr<Entity>>& EntityController::GetEntities()
 	return entities_;
 }
 
-void EntityController::FixedUpdate()
+void EntityController::FixedUpdate() const
 {
 	for (auto& entity : entities_)
 	{
 		entity->FixedUpdate();
-		entity->FixedUpdateComponents();
 	}
 }
 
 void EntityController::Update()
 {
-	auto new_entities = new_entities_;
+	const auto new_entities = new_entities_;
 	new_entities_.clear();
 	for (const auto& entity : new_entities)
 	{
 		entity->Start();
-		entity->StartComponents();
 		entities_.push_back(entity);
 	}
 
@@ -61,7 +60,6 @@ void EntityController::Update()
 	for (const auto& entity : entities_)
 	{
 		entity->Update();
-		entity->UpdateComponents();
 		
 		if (entity->destroyed_)
 		{
@@ -89,5 +87,4 @@ void EntityController::AddEntity(const std::shared_ptr<Entity>& entity)
 {
 	entity->ec_ = this;
 	new_entities_.push_back(entity);
-	entity->Awake();
 }
