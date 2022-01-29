@@ -4,10 +4,9 @@
 #include "BaseEntityRenderer.h"
 #include "Entity.h"
 
-ShapeRenderer::ShapeRenderer(const Shape shape, const Color color, const bool in_world_space) :
+ShapeRenderer::ShapeRenderer(const Shape shape, const Color color) :
 	shape_(shape),
-	color_(color),
-	in_world_space_(in_world_space)
+	color_(color)
 {
 }
 
@@ -20,7 +19,6 @@ void ShapeRenderer::SetColor(const Color color)
 void ShapeRenderer::Awake()
 {
 	renderer_ = entity_->CreateRenderer();
-	renderer_->in_world_space_ = in_world_space_;
 	renderer_->SetShape(shape_);
 	renderer_->SetColor(color_);
 }

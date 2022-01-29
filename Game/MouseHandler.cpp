@@ -73,7 +73,7 @@ void MouseHandler::FindTarget()
 	previous_target_ = target_;
 
 	// TODO Optimize this
-	auto entities = entity_->GetEntities();
+	auto entities = Game::GetWorldSpace().GetEntities();
 	std::vector<Interactable*> interactables;
 	for (const auto& entity : entities)
 	{

@@ -35,6 +35,4 @@ public:
 	virtual void Reset() = 0;
 
 	Entity* entity_ = nullptr;
-
-	bool in_world_space_ = true;
 };

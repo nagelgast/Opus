@@ -30,36 +30,8 @@ void SFMLRenderer::CheckDebugState(const Input& input)
 	}
 }
 
-void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) const
+void SFMLRenderer::Render() const
 {
-	// TODO Actively keep track of renderer and UI entities
-	std::vector<SFMLEntityRenderer*> world_entity_renderers{};
-	std::vector<SFMLEntityRenderer*> screen_entity_renderers{};
-
-	std::vector<Entity*> hidden_entities{};
-
-	for (auto& entity : entities)
-	{
-		if (entity->ShouldRender())
-		{
-			// Static cast is used for performance. If the engine was initialized correctly the cast is guaranteed to succeed.
-			const auto entity_renderer = static_cast<SFMLEntityRenderer*>(entity->GetRenderer());  // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
-
-			if(entity_renderer->in_world_space_)
-			{
-				world_entity_renderers.push_back(entity_renderer);
-			}
-			else
-			{
-				screen_entity_renderers.push_back(entity_renderer);
-			}
-		}
-		else
-		{
-			hidden_entities.push_back(entity.get());
-		}
-	}
-
 	window_.clear();
 
 	if(!camera_.expired())
@@ -69,6 +41,7 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 		window_.setView(sf::View({position.x, position.y}, static_cast<sf::Vector2f>(window_.getSize())));
 	}
 
+	// TODO Make this part of a separate debug render class
 	if (draw_debug_grid_)
 	{
 		for (int i = 0; i < 20; i++)
@@ -82,20 +55,12 @@ void SFMLRenderer::Render(const std::vector<std::shared_ptr<Entity>>& entities) 
 		}
 	}
 
-	for (const auto& entity_renderer : world_entity_renderers)
-	{
-		DrawEntity(entity_renderer);
-		DebugDrawEntity(*entity_renderer->entity_);
-	}
-
+	const std::vector<Entity*> hidden_entities{};
+	DrawSpace(Game::GetWorldSpace(), hidden_entities);
 	window_.setView(window_.getDefaultView());
+	DrawSpace(Game::GetScreenSpace(), hidden_entities);
 
-	for (const auto& entity_renderer : screen_entity_renderers)
-	{
-		DrawEntity(entity_renderer);
-		DebugDrawEntity(*entity_renderer->entity_);
-	}
-
+	// TODO Implement solution for drawing debug rendering for invisible entities
 	for (const auto& entity : hidden_entities)
 	{
 		DebugDrawEntity(*entity);
@@ -153,4 +118,29 @@ void SFMLRenderer::DebugDrawEntity(Entity& entity) const
 	SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { position.x - 10, position.y }, { position.x + 10, position.y }, sf::Color::White);
 	SFMLEntityRenderer::DrawLine(window_, sf::RenderStates::Default, { position.x, position.y - 10 }, { position.x, position.y + 10 }, sf::Color::White);
 
+}
+
+void SFMLRenderer::DrawSpace(const Space& space, std::vector<Entity*> hidden_entities) const
+{
+	const auto& entities = space.GetEntities();
+	for (const auto& entity : entities)
+	{
+		if (entity->ShouldRender())
+		{
+			const auto entity_renderer = GetRenderer(*entity);
+			DrawEntity(entity_renderer);
+			DebugDrawEntity(*entity_renderer->entity_);
+		}
+		else
+		{
+			hidden_entities.push_back(entity.get());
+		}
+	}
+}
+
+SFMLEntityRenderer* SFMLRenderer::GetRenderer(const Entity& entity)
+{
+	// Static cast is used for performance. If the engine was initialized correctly the cast is guaranteed to succeed.
+	const auto entity_renderer = static_cast<SFMLEntityRenderer*>(entity.GetRenderer());  // NOLINT(cppcoreguidelines-pro-type-static-cast-downcast)
+	return entity_renderer;
 }

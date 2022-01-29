@@ -1,11 +1,11 @@
 #include "pch.h"
 #include "EntityController.h"
 
-#include "BaseTime.h"
 #include "Entity.h"
+#include "Space.h"
 #include "VectorExtensions.h"
 
-EntityController::EntityController(const BaseRenderer& renderer, const BaseTime& time, const Input& input) : renderer_(renderer), time_(time), input_(input)
+EntityController::EntityController(Space& space): space_(space)
 {
 }
 
@@ -27,13 +27,14 @@ void EntityController::DestroyEntity(Entity& entity)
 Entity& EntityController::CreateEntity()
 {
 	const auto entity = std::make_shared<Entity>();
-	AddEntity(entity);
+	entity->space_ = &space_;
+	new_entities_.push_back(entity);
 	// TODO Fix stack memory warning
 	return *entity;
 }
 
 // Should this call protect the entities somehow?
-std::vector<std::shared_ptr<Entity>>& EntityController::GetEntities()
+const std::vector<std::shared_ptr<Entity>>& EntityController::GetEntities() const
 {
 	return entities_;
 }
@@ -71,20 +72,4 @@ void EntityController::Update()
 	{
 		DestroyEntity(*entity);
 	}
-}
-
-const BaseRenderer& EntityController::GetRenderer() const
-{
-	return renderer_;
-}
-
-const BaseTime& EntityController::GetTime() const
-{
-	return time_;
-}
-
-void EntityController::AddEntity(const std::shared_ptr<Entity>& entity)
-{
-	entity->ec_ = this;
-	new_entities_.push_back(entity);
 }

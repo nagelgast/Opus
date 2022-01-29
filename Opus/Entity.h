@@ -6,8 +6,11 @@
 #include <typeindex>
 #include <vector>
 
+#include "Animation.h"
 #include "EntityController.h"
+#include "EntitySpawner.h"
 
+class Space;
 class CircleCollider;
 class RectCollider;
 class Collider;
@@ -17,7 +20,7 @@ struct Vector2;
 class Component;
 struct Input;
 
-class Entity final
+class Entity final : public EntitySpawner
 {
 public:
 	Entity();
@@ -32,35 +35,6 @@ public:
 
 	RectCollider& AddComponent(const RectCollider& c);
 	CircleCollider& AddComponent(const CircleCollider& c);
-	
-	Entity& Instantiate(const std::string& name = std::string()) const;
-	Entity& Instantiate(const Vector2& position, const std::string& name = std::string()) const;
-	Entity& Instantiate(Transform& parent, const std::string& name = std::string()) const;
-
-	template <typename T>
-	T& Instantiate(const std::string& name = std::string())
-	{
-		auto& entity = Instantiate(name);
-		T& component = entity.AddComponent<T>();
-		return component;
-	}
-
-	template <typename T>
-	T& Instantiate(const Vector2& position, const std::string& name = std::string())
-	{
-		auto& entity = Instantiate(position, name);
-		auto& component = entity.AddComponent<T>();
-		return component;
-	}
-	
-	template <typename T>
-	T& Instantiate(Transform& parent, const std::string& name = std::string())
-	{
-		auto& entity = Instantiate(parent, name);
-		auto& component = entity.AddComponent<T>();
-
-		return component;
-	}
 
 	template <typename T>
 	T& AddComponent()
@@ -81,6 +55,7 @@ public:
 	{
 		auto c_ptr = std::make_unique<T>(c);
 		c_ptr->entity_ = this;
+		c_ptr->space_ = space_;
 
 		const auto type = std::type_index(typeid(*c_ptr));
 		components_[type] = std::move(c_ptr);
@@ -132,7 +107,6 @@ private:
 	void AwakeComponent(std::type_index type);
 
 	std::string name_;
-	EntityController* ec_ = nullptr;
 	Transform* transform_;
 	std::unique_ptr<BaseEntityRenderer> renderer_;
 

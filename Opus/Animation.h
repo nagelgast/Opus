@@ -4,6 +4,10 @@ class Animation :
     public Component
 {
 public:
+	Animation()
+	{
+	}
+
 	Animation(const int frames, const float frame_time) : frames_(frames), frame_time_(frame_time)
 	{
 	}
@@ -19,8 +23,8 @@ private:
 
 	BaseEntityRenderer* renderer_ = nullptr;
 
-	const int frames_;
-	const float frame_time_;
+	const int frames_ = 1;
+	const float frame_time_ = 1;
 
 	bool playing_ = true;
 

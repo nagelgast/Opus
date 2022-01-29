@@ -13,11 +13,8 @@ Game::Game(const int width, const int height, const int fps_limit, const int fix
 	renderer_(std::make_unique<SFMLRenderer>(*window_)),
 	input_handler_(std::make_unique<SFMLInputHandler>(*window_)),
 	time_(std::make_unique<SFMLTime>(fixed_update_ms)),
-	texture_manager_(std::make_unique<SFMLTextureManager>()),
-	entity_controller_(*renderer_, *time_, input_handler_->GetInput())
+	texture_manager_(std::make_unique<SFMLTextureManager>())
 {
-	root_ = &entity_controller_.CreateEntity();
-	root_->SetName("Root");
 	instance_ = this;
 }
 
@@ -48,9 +45,19 @@ void Game::Exit()
 
 }
 
-Entity& Game::GetRoot() const
+Space& Game::GetWorldSpace()
 {
-	return *root_;
+	return instance_->world_space_;
+}
+
+Space& Game::GetScreenSpace()
+{
+	return instance_->screen_space_;
+}
+
+Space& Game::GetDebugSpace()
+{
+	return instance_->debug_space_;
 }
 
 void Game::SetCamera(const Camera& camera) const
@@ -61,6 +68,16 @@ void Game::SetCamera(const Camera& camera) const
 void Game::SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix)
 {
 	GetCollisionSystem().SetCollisionMatrix(collision_matrix);
+}
+
+const BaseRenderer& Game::GetRenderer()
+{
+	return *instance_->renderer_;
+}
+
+const BaseTime& Game::GetTime()
+{
+	return *instance_->time_;
 }
 
 const Input& Game::GetInput()
@@ -86,18 +103,20 @@ void Game::HandleInput() const
 void Game::FixedUpdate()
 {
 	GetCollisionSystem().FixedUpdate();
-	entity_controller_.FixedUpdate();
+	world_space_.FixedUpdate();
 }
 
 void Game::Update()
 {
-	entity_controller_.Update();
+	world_space_.Update();
+	screen_space_.Update();
+	debug_space_.Update();
 }
 
 void Game::HandleOutput()
 {
 	renderer_->CheckDebugState(input_handler_->GetInput());
-	renderer_->Render(entity_controller_.GetEntities());
+	renderer_->Render();
 }
 
 Game* Game::instance_;

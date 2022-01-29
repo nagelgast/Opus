@@ -7,7 +7,7 @@ class SpriteRenderer : public Component
 {
 public:
 	void Awake() override;
-	void SetSprite(const Sprite& sprite, bool world_space = true) const;
+	void SetSprite(const Sprite& sprite) const;
 	void ResetSprite() const;
 	void SetMirrored(bool value) const;
 private:

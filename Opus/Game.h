@@ -6,13 +6,12 @@
 #include "BaseInputHandler.h"
 #include "BaseRenderer.h"
 #include "BaseTime.h"
-#include "EntityController.h"
 #include "CollisionSystem.h"
-
 
 #include "TextureManager.h"
 #include "BaseWindow.h"
 #include "Service.h"
+#include "Space.h"
 
 class Game
 {
@@ -22,13 +21,21 @@ public:
 	void Run();
 	void Exit();
 
-	Entity& GetRoot() const;
+	static Space& GetWorldSpace();
+	static Space& GetScreenSpace();
+	static Space& GetDebugSpace();
+
 	void SetCamera(const Camera& camera) const;
 	void SetCollisionMatrix(const std::map<int, std::vector<int>>& collision_matrix);
 
+	static const BaseTime& GetTime();
 	static const Input& GetInput();
+
+	// TODO These should not be public
+	static const BaseRenderer& GetRenderer();
 	static CollisionSystem& GetCollisionSystem();
 	static TextureManager& GetTextureManager();
+
 
 	template <typename T>
 	T& AddService()
@@ -73,6 +80,7 @@ private:
 	// TODO Make system
 	CollisionSystem collision_system_;
 
-	EntityController entity_controller_;
-	Entity* root_ = nullptr;
+	Space world_space_;
+	Space screen_space_;
+	Space debug_space_;
 };

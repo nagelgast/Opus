@@ -186,6 +186,12 @@
     <ClInclude Include="ParticleSettings.h">
       <Filter>Header Files\Data</Filter>
     </ClInclude>
+    <ClInclude Include="Space.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
+    <ClInclude Include="EntitySpawner.h">
+      <Filter>Header Files\Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -273,6 +279,12 @@
       <Filter>Source Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Space.cpp">
+      <Filter>Source Files\Core</Filter>
+    </ClCompile>
+    <ClCompile Include="EntitySpawner.cpp">
       <Filter>Source Files\Core</Filter>
     </ClCompile>
   </ItemGroup>

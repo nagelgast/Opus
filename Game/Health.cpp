@@ -11,7 +11,7 @@ Health::Health(int max_health) : current_health_(max_health), max_health_(max_he
 
 void Health::Start()
 {
-	auto& health_bar = entity_->Instantiate(entity_->GetTransform());
+	auto& health_bar = CreateChild();
 	health_bar.SetName("HealthBar");
 
 	auto& transform = health_bar.GetTransform();
@@ -45,7 +45,7 @@ void Health::Die()
 {
 	// TODO Make this a separate component
 	const auto pos = entity_->GetTransform().GetPosition();
-	auto& death_particles = entity_->Instantiate(pos);
+	auto& death_particles = Create(pos);
 	const Sprite sprite {"Sprites/particles/circle_05.png"};
 	ParticleSettings settings {sprite, {0.3f, 0.3f, 1, 1}, 64, 20, 300};
 	settings.lifetime = 0.4f;
