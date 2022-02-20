@@ -13,11 +13,11 @@ void ItemInfoPopup::Awake()
 {
 	auto& background = CreateChild();
 	background.GetTransform().SetScale(100, 200);
-	background_renderer_ = &background.AddComponent(ShapeRenderer(Shape::kSquare, {0.1f, 0.1f, 0.1f, 0.5f}));
+	background_renderer_ = &background.AddComponent(ShapeRenderer(Shape::kSquare, {0.1f, 0.1f, 0.1f, 0.5f}, false));
 
 	auto& title_background = CreateChild();
 	title_background.GetTransform().SetScale(100, 30);
-	title_background_renderer_ = &title_background.AddComponent(ShapeRenderer(Shape::kSquare, kUniqueItemColor));
+	title_background_renderer_ = &title_background.AddComponent(ShapeRenderer(Shape::kSquare, kUniqueItemColor, false));
 
 	title_renderer_ = &CreateChild<TextRenderer>();
 

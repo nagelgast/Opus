@@ -10,11 +10,12 @@ void SpriteRenderer::Awake()
 	renderer_ = entity_->CreateRenderer();
 }
 
-void SpriteRenderer::SetSprite(const Sprite& sprite) const
+void SpriteRenderer::SetSprite(const Sprite& sprite, bool world_space) const
 {
 	const auto texture = Game::GetTextureManager().Get(sprite.path);
 	renderer_->SetTexture(*texture);
 	renderer_->SetTextureRect(sprite.rect);
+	renderer_->in_world_space_ = world_space;
 }
 
 void SpriteRenderer::ResetSprite() const

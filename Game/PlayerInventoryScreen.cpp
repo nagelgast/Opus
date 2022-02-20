@@ -72,7 +72,7 @@ Transform& PlayerInventoryScreen::SpawnBackground(const Rect& texture_rect, cons
 	auto& background = CreateChild();
 	auto& sr = background.AddComponent(SpriteRenderer());
 	const auto sprite = Sprite{ "Sprites/inventory.png", texture_rect};
-	sr.SetSprite(sprite);
+	sr.SetSprite(sprite, false);
 	auto& transform = background.GetTransform();
 	transform.SetScale(scale, scale);
 

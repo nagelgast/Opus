@@ -14,7 +14,7 @@ bool MouseSlot::SetItem(std::unique_ptr<Item> item)
 {
 	item_ = std::move(item);
 	const auto& sprite = item_->GetSprite();
-	renderer_->SetSprite(sprite);
+	renderer_->SetSprite(sprite, false);
 
 	GetTransform().SetScale(2, 2);
 	

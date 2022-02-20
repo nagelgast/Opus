@@ -12,7 +12,6 @@
 
 #include "BaseTime.h"
 #include "CircleCollider.h"
-#include "Game.h"
 #include "RectCollider.h"
 
 Entity::Entity()
@@ -76,14 +75,41 @@ CircleCollider& Entity::AddComponent(const CircleCollider& c)
 	return dynamic_cast<CircleCollider&>(*collider_);
 }
 
+Entity& Entity::Instantiate(const std::string& name) const
+{
+	auto& entity = ec_->CreateEntity();
+	entity.SetName(name);
+	return entity;
+}
+
+Entity& Entity::Instantiate(const Vector2& position, const std::string& name) const
+{
+	auto& entity = Instantiate(name);
+	entity.transform_->SetPosition(position);
+	return entity;
+}
+
+Entity& Entity::Instantiate(Transform& parent, const std::string& name) const
+{
+	auto& entity = Instantiate(name);
+	entity.transform_->SetParent(parent);
+	entity.transform_->SetLocalPosition({0, 0});
+	return entity;
+}
+
+std::vector<std::shared_ptr<Entity>>& Entity::GetEntities() const
+{
+	return ec_->GetEntities();
+}
+
 float Entity::GetDeltaTime() const
 {
-	return Game::GetTime().GetDeltaTime();
+	return ec_->GetTime().GetDeltaTime();
 }
 
 float Entity::GetFixedDeltaTime() const
 {
-	return Game::GetTime().GetFixedDeltaTime();
+	return ec_->GetTime().GetFixedDeltaTime();
 }
 
 Transform& Entity::GetTransform() const
@@ -110,7 +136,7 @@ void Entity::SetVisible(const bool value)
 
 BaseEntityRenderer* Entity::CreateRenderer()
 {
-	renderer_ = Game::GetRenderer().CreateEntityRendererInstance();
+	renderer_ = ec_->GetRenderer().CreateEntityRendererInstance();
 	renderer_->entity_ = this;
 	return renderer_.get();
 }

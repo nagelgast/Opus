@@ -6,6 +6,7 @@
 void TextRenderer::Awake()
 {
 	renderer_ = entity_->CreateRenderer();
+	renderer_->in_world_space_ = false;
 }
 
 void TextRenderer::SetText(const std::string& text) const

@@ -27,7 +27,7 @@ void ScreenItem::Initialize(Item& item, const std::vector<InventorySlot*>& slots
 	const auto width = static_cast<float>(kInventorySlotSize * item_->GetSize().width);
 	const auto height = static_cast<float>(kInventorySlotSize * item_->GetSize().height);
 
-	sr_->SetSprite(item_->GetSprite());
+	sr_->SetSprite(item_->GetSprite(), false);
 
 	// TODO Use a global item scale setting
 	GetTransform().SetScale(2, 2);

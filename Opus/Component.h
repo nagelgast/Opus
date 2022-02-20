@@ -5,10 +5,10 @@
 class Collider;
 class Transform;
 
-class Component : public EntitySpawner
+class Component
 {
 public:
-	explicit Component() = default;
+	Component() = default;
 	Component(Component&&) noexcept;
 	
 	Component(const Component&) = default;
@@ -39,13 +39,22 @@ public:
 
 	Transform& GetTransform() const;
 
+	Entity& Create(const std::string& name = std::string()) const;
+	Entity& Create(const Vector2& position, const std::string& name = std::string()) const;
+	Entity& Create(Transform& parent, const std::string& name = std::string()) const;
 	Entity& CreateHere(const std::string& name = std::string()) const;
 	Entity& CreateChild(const std::string& name = std::string()) const;
 
+	template <typename T>
+	T& Create(const std::string& name = std::string()) const { return entity_->Instantiate<T>(name); }
+	template <typename T>
+	T& Create(const Vector2& position, const std::string& name = std::string()) const { return entity_->Instantiate<T>(position, name); }
 	template <typename T = Entity>
-	T& CreateHere(const std::string& name = std::string()) const { return Create<T>(GetTransformPosition(), name); }
+	T& Create(Transform& parent, const std::string& name = std::string()) const { return entity_->Instantiate<T>(parent, name); }
 	template <typename T = Entity>
-	T& CreateChild(const std::string& name = std::string()) const { return Create<T>(GetTransform(), name); }
+	T& CreateHere(const std::string& name = std::string()) const { return entity_->Instantiate<T>(GetTransformPosition(), name); }
+	template <typename T = Entity>
+	T& CreateChild(const std::string& name = std::string()) const { return entity_->Instantiate<T>(GetTransform(), name); }
 private:
 	Vector2 GetTransformPosition() const;
 };

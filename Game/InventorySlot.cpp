@@ -11,7 +11,7 @@ void InventorySlot::Awake()
 	storage_ = Game::GetService<PlayerItemStorage>();
 	
 	highlight_ = &CreateChild();
-	shape_renderer_ = &highlight_->AddComponent(ShapeRenderer(Shape::kSquare, {0, 0, 0, 0.5f}));
+	shape_renderer_ = &highlight_->AddComponent(ShapeRenderer(Shape::kSquare, {0, 0, 0, 0.5f}, false));
 	highlight_->SetVisible(false);
 
 	interactable_ = &AddComponent(Interactable());
