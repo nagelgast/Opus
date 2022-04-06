@@ -22,7 +22,7 @@ void Loot::OnDestroy()
 
 void Loot::SpawnItem() const
 {
-	const auto& wand_base = item_data_->GetBaseType("Driftwood_Wand");
+	const auto& wand_base = item_data_->GetBaseType("Simple_Wand");
 	const auto wand_category = item_data_->GetCategory(wand_base.category);
 	auto item = std::make_unique<Item>(Item{wand_base, wand_category, Rarity::kNormal, {23,325,16,52}});
 

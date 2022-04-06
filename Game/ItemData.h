@@ -20,8 +20,8 @@ public:
 		stats.Add(WeaponStats{5, 9, 700, 140});
 		stats.Add(RequirementStats{0, 0, 0, 14});
 		stats.Add(ImplicitStat{StatGroup::SpellDamage, 8, 12, true});
-		ItemBaseType driftwood_wand{"Driftwood_Wand", "Wands", std::move(stats)};
-		base_types_[driftwood_wand.name] = std::move(driftwood_wand);
+		ItemBaseType simple_wand{"Simple_Wand", "Wands", std::move(stats)};
+		base_types_[simple_wand.name] = std::move(simple_wand);
 
 		const ItemCategory currency{"Currency", 2, 2, {}};
 		categories_["Currency"] = currency;
