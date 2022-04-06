@@ -43,6 +43,7 @@ private:
 	ItemInfoPopup* popup_ = nullptr;
 
 	ScreenItem* pickup_item_ = nullptr;
+	int temp_pickup_index_ = 0;
 
 	PlayerItemStorage* player_inventory_ = nullptr;
 };

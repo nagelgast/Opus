@@ -46,7 +46,7 @@ void InventoryScreen::HandleRelease(const int index)
 	if (hovering_over_multiple_items_) return;
 
 	player_inventory_->HandleInventoryRelease(index, hover_slot_indices_);
-	
+
 	HandleSlotHoverEnter(index);
 }
 
@@ -60,7 +60,15 @@ void InventoryScreen::HandleSlotHoverEnter(const int index)
 		auto pos = pickup_item_->GetTransform().GetPosition();
 		pos.x -= 40;
 		pos.y -= 210;
-		popup_ = &Create<ItemInfoPopup>(pos);
+		// TODO popup should be created at start and only toggle visibility
+		if(popup_)
+		{
+			popup_->entity_->SetVisible(true);
+		}
+		else
+		{
+			popup_ = &Create<ItemInfoPopup>(pos);
+		}
 		popup_->SetItem(pickup_item_->GetItem());
 	}
 
@@ -80,6 +88,7 @@ void InventoryScreen::HandleSlotHoverEnter(const int index)
 					// Set pickup slot here so that you will pick up that item, even if it's not underneath the hovered slot
 					hovering_over_item = true;
 					pickup_item_ = &slot->GetItem();
+					temp_pickup_index_ = slot_index;
 				}
 				else if (pickup_item_ != &slot->GetItem())
 				{
@@ -96,9 +105,10 @@ void InventoryScreen::HandleSlotHoverExit(int index)
 {
 	if (popup_)
 	{
-		popup_->entity_->Destroy();
-		popup_->entity_ = nullptr;
-		popup_ = nullptr;
+		popup_->entity_->SetVisible(false);
+//		popup_->entity_->Destroy();
+//		popup_->entity_ = nullptr;
+//		popup_ = nullptr;
 	}
 	ResetHighlights();
 	hover_slot_indices_.clear();
